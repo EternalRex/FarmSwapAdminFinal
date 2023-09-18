@@ -15,6 +15,7 @@ class _DashBoardPieChartState extends State<DashBoardPieChart> {
   @override
   Widget build(BuildContext context) {
     /*RETURNING A PIE CHART TO THE DASHBOARD PAGE */
+    // ignore: sized_box_for_whitespace
     return Container(
       width: 500,
       child: Row(
@@ -23,6 +24,7 @@ class _DashBoardPieChartState extends State<DashBoardPieChart> {
           SizedBox(
             height: 300,
             width: 200,
+            // ignore: avoid_unnecessary_containers
             child: Container(
               //color: Colors.blue,
               child: PieChart(
@@ -83,6 +85,7 @@ class PieGraphIndicatorWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: PieDataContent.data
           .map(
+            // ignore: sized_box_for_whitespace
             (data) => Container(
               //color: Colors.red,
               height: 100,

@@ -1,4 +1,6 @@
+// ignore: unused_import
 import "package:flutter/material.dart";
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 
 class PricePoint {

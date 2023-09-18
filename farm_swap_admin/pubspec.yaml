@@ -68,6 +68,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/karl_assets/images/
+    - assets/rollaine_assets/icons/
+    - assets/rollaine_assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -80,12 +82,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+     - family: Poppins
+       fonts:
+         - asset: assets/fonts/Poppins-Bold.ttf
+           weight: 700
+         - asset: assets/fonts/Poppins-Medium.ttf
+           weight: 500
+         - asset: assets/fonts/Poppins-Reguilar.ttf
+           weight: 400
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -132,6 +132,7 @@ class _AdminAccount extends State<AdminAccount> {
 /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
             flex: 4,
+            // ignore: avoid_unnecessary_containers
             child: Container(
               /*SETTING THE BACKGROUND OF THE CENTER OF THE PAGE INTO WHITE */
               child: Padding(
