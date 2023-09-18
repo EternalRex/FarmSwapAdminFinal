@@ -42,7 +42,7 @@ class _DashboardState extends State<Dashboard> {
         children: [
 /*FIRST EXPANDED THAT WILL CONTAIN ALL THE NAVIGATION */
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Container(
@@ -135,7 +135,7 @@ class _DashboardState extends State<Dashboard> {
           ),
 /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
-            flex: 4,
+            flex: 6,
             child: Container(
               /*SETTING THE BACKGROUND OF THE CENTER OF THE PAGE INTO WHITE */
               color: Colors.white,
@@ -347,7 +347,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Container(
