@@ -70,7 +70,9 @@ flutter:
     - assets/karl_assets/images/
     - assets/rollaine_assets/icons/
     - assets/rollaine_assets/images/
-    - assets/rollaine_assets/fonts/
+    - assets/rollaine_assets/fonts/Poppins-Bold.ttf
+    - assets/rollaine_assets/fonts/Poppins-Medium.ttf
+    - assets/rollaine_assets/fonts/Poppins-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
