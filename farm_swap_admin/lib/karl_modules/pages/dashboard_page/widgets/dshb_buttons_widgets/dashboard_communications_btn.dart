@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +19,11 @@ class DashCommunicationOptionsBtn extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                RoutesManager.communicationPage,
+              );
+            },
             child: DashBoardTxt(
               myText: "Communication",
               myColor: Colors.black,
