@@ -70,9 +70,6 @@ flutter:
     - assets/karl_assets/images/
     - assets/rollaine_assets/icons/
     - assets/rollaine_assets/images/
-    - assets/rollaine_assets/fonts/Poppins-Bold.ttf
-    - assets/rollaine_assets/fonts/Poppins-Medium.ttf
-    - assets/rollaine_assets/fonts/Poppins-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -88,11 +85,11 @@ flutter:
   fonts:
      - family: Poppins
        fonts:
-         - asset: assets/fonts/Poppins-Bold.ttf
+         - asset: assets/rollaine_assets/fonts/Poppins-Bold.ttf
            weight: 700
-         - asset: assets/fonts/Poppins-Medium.ttf
+         - asset: assets/rollaine_assets/fonts/Poppins-Medium.ttf
            weight: 500
-         - asset: assets/fonts/Poppins-Reguilar.ttf
+         - asset: assets/rollaine_assets/fonts/Poppins-Reguilar.ttf
            weight: 400
   #   - family: Trajan Pro
   #     fonts:
