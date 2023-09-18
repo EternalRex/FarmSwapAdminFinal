@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
-
-class DashUserAccountOptionsBtn extends StatelessWidget {
-  const DashUserAccountOptionsBtn({super.key});
+class DashDisputeOptionsBtn extends StatelessWidget {
+  const DashDisputeOptionsBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +13,13 @@ class DashUserAccountOptionsBtn extends StatelessWidget {
         children: [
           const Image(
             image: AssetImage(
-              "assets/karl_assets/images/userAccounts.png",
+              "assets/karl_assets/images/dispute.png",
             ),
           ),
           TextButton(
             onPressed: () {},
             child: DashBoardTxt(
-              myText: "User Account",
+              myText: "Dispute",
               myColor: Colors.black,
               mySize: 13,
               myFont: GoogleFonts.poppins().fontFamily,

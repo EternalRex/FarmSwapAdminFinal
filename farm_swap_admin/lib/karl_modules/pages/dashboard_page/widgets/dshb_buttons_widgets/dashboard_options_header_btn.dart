@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../constants/Colors/colors.dart';
+import '../../../../../constants/Colors/colors.dart';
 
 class DashPageOptionsTitle extends StatefulWidget {
   const DashPageOptionsTitle({super.key});

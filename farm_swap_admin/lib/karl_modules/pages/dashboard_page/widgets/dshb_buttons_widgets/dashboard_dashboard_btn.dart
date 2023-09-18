@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../../routes/routes.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
-
-class DashCommunicationOptionsBtn extends StatelessWidget {
-  const DashCommunicationOptionsBtn({super.key});
+class DashBoardOptionsBtn extends StatelessWidget {
+  const DashBoardOptionsBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,15 @@ class DashCommunicationOptionsBtn extends StatelessWidget {
         children: [
           const Image(
             image: AssetImage(
-              "assets/karl_assets/images/communications.png",
+              "assets/karl_assets/images/dashboard.png",
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(RoutesManager.dashboard);
+            },
             child: DashBoardTxt(
-              myText: "Communication",
+              myText: "Dashboard",
               myColor: Colors.black,
               mySize: 13,
               myFont: GoogleFonts.poppins().fontFamily,

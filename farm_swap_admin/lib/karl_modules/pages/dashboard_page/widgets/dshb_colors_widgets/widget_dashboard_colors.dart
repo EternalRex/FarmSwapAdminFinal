@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../../../../constants/Colors/colors.dart";
+import '../../../../../constants/Colors/colors.dart';
 
 const Color dashboardOrangeColor = Color(0xFFF9A84D);
 const Color dashbiardStrongOrangeColor = Color(0xFFDA6317);

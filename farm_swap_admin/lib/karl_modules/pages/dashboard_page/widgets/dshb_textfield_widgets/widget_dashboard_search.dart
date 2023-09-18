@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import "widget_dashboard_colors.dart";
+import '../dshb_colors_widgets/widget_dashboard_colors.dart';
 
 class DashBSearchBar extends StatelessWidget {
   const DashBSearchBar({super.key});

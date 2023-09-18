@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
 class DashTransactionsOptionsBtn extends StatelessWidget {
   const DashTransactionsOptionsBtn({super.key});

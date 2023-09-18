@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/Colors/colors.dart';
+import '../../../../../constants/Colors/colors.dart';
 
 class SellingBarGraph extends StatelessWidget {
   const SellingBarGraph({

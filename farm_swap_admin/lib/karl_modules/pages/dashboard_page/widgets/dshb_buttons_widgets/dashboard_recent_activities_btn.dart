@@ -1,17 +1,18 @@
-import "package:flutter/material.dart";
-import "package:google_fonts/google_fonts.dart";
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import "../../../../constants/Colors/colors.dart";
-import "../dashboard_widgets.dart/widget_dashboard_txt.dart";
+import '../../../../../constants/Colors/colors.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-class AdminEditProfileBtn extends StatefulWidget {
-  const AdminEditProfileBtn({super.key});
+class AdminRecentActivitiesBtn extends StatefulWidget {
+  const AdminRecentActivitiesBtn({super.key});
 
   @override
-  State<AdminEditProfileBtn> createState() => _AdminEditProfileBtnState();
+  State<AdminRecentActivitiesBtn> createState() =>
+      _AdminRecentActivitiesBtnState();
 }
 
-class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
+class _AdminRecentActivitiesBtnState extends State<AdminRecentActivitiesBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
       width: 130,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.white, farmSwapTitlegreen],
+          colors: [Colors.white, buttonOrange],
           begin: Alignment.center,
           end: Alignment.center,
           stops: const [0.12, 0.25],
@@ -39,7 +40,7 @@ class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
         child: TextButton(
           onPressed: () {},
           child: DashBoardTxt(
-            myText: "Edit Profile",
+            myText: "Activities",
             myColor: Colors.white,
             mySize: 15,
             myFont: GoogleFonts.poppins().fontFamily,

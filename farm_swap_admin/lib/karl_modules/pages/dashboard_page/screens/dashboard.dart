@@ -1,31 +1,38 @@
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_buttons/dashboard_reports_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../constants/Colors/colors.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_admin_account_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_communications_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_dashboard_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_dispute_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_edit_admin_profile_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_listings_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_logout_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_options_header_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_recent_activities_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_transactions_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_user_account_btn.dart';
-import '../dashboard_page/dashboard_buttons/dashboard_wallet_btn.dart';
-import '../dashboard_page/dashboard_widgets.dart/widget_dashboard_search.dart';
-import '../dashboard_page/dashboard_widgets.dart/widget_dashboard_txt.dart';
+import '../../../../constants/Colors/colors.dart';
+import '../data/testData/DashboardLineGraph/price_point.dart';
+import '../data/testData/DashboardLineGraph/price_point2.dart';
+import '../data/testData/DashboardLineGraph/price_point3.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
+import '../widgets/dshb_graph_widgets/widget_dashboard_barter_bargraph.dart';
+import '../widgets/dshb_graph_widgets/widget_dashboard_piegraph.dart';
+import '../widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
+import '../widgets/dshb_graph_widgets/widget_dashboard_selling_bargraph.dart';
+import '../widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-class AdminAccount extends StatefulWidget {
-  const AdminAccount({super.key});
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
 
   @override
-  State<AdminAccount> createState() => _AdminAccount();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _AdminAccount extends State<AdminAccount> {
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,10 +126,7 @@ class _AdminAccount extends State<AdminAccount> {
                         height: 40,
                       ),
                       /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: DashLogoutOptionBtn(),
-                      ),
+                      DashLogoutOptionBtn(),
                     ],
                   ),
                 ),
@@ -134,6 +138,7 @@ class _AdminAccount extends State<AdminAccount> {
             flex: 4,
             child: Container(
               /*SETTING THE BACKGROUND OF THE CENTER OF THE PAGE INTO WHITE */
+              color: Colors.white,
               child: Padding(
                 /*WRAPPING A SCAFFOLD WITH PADDING SO THAT IT WILL HAVE SOME SPACE
                 FROM THE BORDERS OF THE OTHER 2 DIVISIONS */
@@ -148,7 +153,7 @@ class _AdminAccount extends State<AdminAccount> {
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                     THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
                     title: DashBoardTitleText(
-                      myText: "Admin Account",
+                      myText: "Dashboard",
                       myColor: Colors.black,
                       mySize: 48,
                       myFont: GoogleFonts.poppins().fontFamily,
@@ -156,10 +161,7 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
-                    automaticallyImplyLeading: true,
-                    iconTheme: IconThemeData(
-                      color: buttonOrange,
-                    ),
+                    automaticallyImplyLeading: false,
                     /*IN THE  APPBAR, WE USED THE ACTIONS PROPERTY SO THAT WE CAN PUT
                     A LOT OF WIDGETS IN THE APPBAR, IN HERE IT IS USED SO THAT WE CAN PUT 
                     A TEXT FIELD WIDGET FOR SEARCHING*/
@@ -171,7 +173,7 @@ class _AdminAccount extends State<AdminAccount> {
                         /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
                         HEIGH AND WIDTH OF THE TEXT FIELD */
                         child: SizedBox(
-                          width: 300,
+                          width: 280,
                           height: 30,
                           /*WRAPPING THE SEARCH BAR TEXT FIELD WITH MATERIAL WIDGET
                           SO THAT WE CAN USE THE ELEVATION AND SHADOW COLOR TO PUT SOME NICE
@@ -202,23 +204,136 @@ class _AdminAccount extends State<AdminAccount> {
                       /*A COLUMN THAT WILL HOLD THE WIDGETS OF THE BODY */
                       child: Column(
                         children: [
+                          /*A FIRST ROW CHILDREN THAT WILL HOLD LINE GRAPH AND THE CIRCLE GRAPH AS
+                          FIRST ROWS OF THE BODY */
                           Row(
                             children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  color: Colors.green,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height,
-                                ),
+                              /*LINE GRAPH COLUMN, A COLUMN AS A CHILD OF THE FIRST ROW, THAT IS ASSIGNED TO HOLD THE LINE
+                              GRAPH AND ITS TEXT LABLE "REVENUE" */
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  DashBoardTxt(
+                                      myText: "Revenue",
+                                      myColor: Colors.black87,
+                                      mySize: 30,
+                                      myFont: GoogleFonts.viga().fontFamily,
+                                      myWeight: FontWeight.bold),
+                                  Container(
+                                    width: 380,
+                                    height: 300,
+                                    decoration: const BoxDecoration(boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2,
+                                        offset: Offset(1, 2),
+                                      ),
+                                    ], color: Colors.white),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: DashboardLineChart(
+                                        points: pricePoints,
+                                        points2: pricePoints2,
+                                        points3: pricePoints3,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.red,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height,
-                                ),
+                              const SizedBox(
+                                width: 40,
+                              ),
+                              /*PIE GRAPH COLUMN*/
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  DashBoardTxt(
+                                      myText: "Users",
+                                      myColor: Colors.black87,
+                                      mySize: 30,
+                                      myFont: GoogleFonts.viga().fontFamily,
+                                      myWeight: FontWeight.bold),
+                                  Container(
+                                    width: 380,
+                                    height: 300,
+                                    decoration: const BoxDecoration(boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2,
+                                        offset: Offset(1, 2),
+                                      ),
+                                    ], color: Colors.white),
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 0),
+                                      child: DashBoardPieChart(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          /*SECOND ROW THAT WILL HOLD THE BARGRAPHS */
+                          Row(
+                            children: [
+                              /*HOLDER FOR BARTER BAR GRAPH */
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  DashBoardTxt(
+                                      myText: "Barter Transactions",
+                                      myColor: Colors.black87,
+                                      mySize: 30,
+                                      myFont: GoogleFonts.viga().fontFamily,
+                                      myWeight: FontWeight.bold),
+                                  Container(
+                                    width: 380,
+                                    height: 300,
+                                    decoration: const BoxDecoration(boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2,
+                                        offset: Offset(1, 2),
+                                      ),
+                                    ], color: Colors.white),
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 0),
+                                      child: DashBoardBarChart(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 40,
+                              ),
+                              /*HOLDER FOR SELLING BAR GRAPH */
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  DashBoardTxt(
+                                      myText: "Sale Transactions",
+                                      myColor: Colors.black87,
+                                      mySize: 30,
+                                      myFont: GoogleFonts.viga().fontFamily,
+                                      myWeight: FontWeight.bold),
+                                  Container(
+                                    width: 380,
+                                    height: 300,
+                                    decoration: const BoxDecoration(boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2,
+                                        offset: Offset(1, 2),
+                                      ),
+                                    ], color: Colors.white),
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 0),
+                                      child: SellingBarGraph(),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

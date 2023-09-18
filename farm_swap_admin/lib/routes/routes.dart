@@ -1,10 +1,10 @@
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/admin_signin.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
 import 'package:flutter/material.dart';
 
-import '../karl_modules/pages/admin_signup_page/admin_signup.dart';
+import '../karl_modules/pages/admin_signup_page/screens/admin_signup.dart';
 
 class RoutesManager {
 //VARIABLES THAT WILL HOLD THE LOCATION OR THE ROUTE

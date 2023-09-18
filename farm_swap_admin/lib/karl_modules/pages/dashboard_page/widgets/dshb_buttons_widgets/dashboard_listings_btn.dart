@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-class DashWalletOptions extends StatelessWidget {
-  const DashWalletOptions({super.key});
+class DashListingsOptionsBtn extends StatelessWidget {
+  const DashListingsOptionsBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,13 @@ class DashWalletOptions extends StatelessWidget {
         children: [
           const Image(
             image: AssetImage(
-              "assets/karl_assets/images/wallet.png",
+              "assets/karl_assets/images/listings.png",
             ),
           ),
           TextButton(
             onPressed: () {},
             child: DashBoardTxt(
-              myText: "Wallet",
+              myText: "Listings",
               myColor: Colors.black,
               mySize: 13,
               myFont: GoogleFonts.poppins().fontFamily,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../routes/routes.dart';
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-class DashLogoutOptionBtn extends StatelessWidget {
-  const DashLogoutOptionBtn({super.key});
+class DashWalletOptions extends StatelessWidget {
+  const DashWalletOptions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +12,15 @@ class DashLogoutOptionBtn extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            width: 40,
-          ),
           const Image(
             image: AssetImage(
-              "assets/karl_assets/images/logout.png",
+              "assets/karl_assets/images/wallet.png",
             ),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(RoutesManager.introPage);
-            },
+            onPressed: () {},
             child: DashBoardTxt(
-              myText: "Logout",
+              myText: "Wallet",
               myColor: Colors.black,
               mySize: 13,
               myFont: GoogleFonts.poppins().fontFamily,

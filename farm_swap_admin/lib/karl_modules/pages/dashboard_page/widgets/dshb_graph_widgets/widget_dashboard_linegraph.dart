@@ -1,9 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../testData/DashboardLineGraph/price_point.dart';
-import '../../../testData/DashboardLineGraph/price_point2.dart';
-import '../../../testData/DashboardLineGraph/price_point3.dart';
+import '../../data/testData/DashboardLineGraph/price_point.dart';
+import '../../data/testData/DashboardLineGraph/price_point2.dart';
+import '../../data/testData/DashboardLineGraph/price_point3.dart';
 
 class DashboardLineChart extends StatelessWidget {
   const DashboardLineChart(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dashboard_widgets.dart/widget_dashboard_txt.dart';
 
-class DashDisputeOptionsBtn extends StatelessWidget {
-  const DashDisputeOptionsBtn({super.key});
+import '../../../../../routes/routes.dart';
+import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
+
+class DashLogoutOptionBtn extends StatelessWidget {
+  const DashLogoutOptionBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +13,20 @@ class DashDisputeOptionsBtn extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            width: 40,
+          ),
           const Image(
             image: AssetImage(
-              "assets/karl_assets/images/dispute.png",
+              "assets/karl_assets/images/logout.png",
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(RoutesManager.introPage);
+            },
             child: DashBoardTxt(
-              myText: "Dispute",
+              myText: "Logout",
               myColor: Colors.black,
               mySize: 13,
               myFont: GoogleFonts.poppins().fontFamily,

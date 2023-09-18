@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../../../constants/Colors/colors.dart";
+import '../../../../../../constants/Colors/colors.dart';
 
 /*A DATA CLASS THAT WILL CONTAIN THE DATA OF THE PIE */
 class Data {

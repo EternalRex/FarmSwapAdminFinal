@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "sign_up_text_field.dart";
+import '../widgets/sign_up_text_field.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
