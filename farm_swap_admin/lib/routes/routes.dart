@@ -43,7 +43,7 @@ class RoutesManager {
   static const adminVerification = "/adminverification";
 
   //rollaine routes
-  static const platformPage = '/';
+  static const platformPage = '/reportspage';
   static const numberPage = '/numberpage';
   static const barterPage = '/barterpage';
   static const sellingPage = '/sellingpage';
@@ -112,6 +112,7 @@ class RoutesManager {
           builder: (context) => const AdminLogs(),
         );
 
+      // ignore: unreachable_switch_case
       case reportsPage:
         return MaterialPageRoute(
           builder: (context) => const Reports(),

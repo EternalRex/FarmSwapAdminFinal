@@ -1,6 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/listings_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/user_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class _UserAccount extends State<UserAccount> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Image(
-                            image: AssetImage('assets/images/farmswapLogo.png'),
+                            image: AssetImage('assets/rollaine_assets/images/farmswapLogo.png'),
                             height: 50,
                             width: 50,
                           ),
@@ -108,7 +108,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/dashboard.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/dashboard.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -116,8 +116,11 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
-                              child: const ListingsText(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.dashboard);
+                              },
+                              child: const UserAccountText(
                                 myText: 'Dashboard',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -138,7 +141,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/admin.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/admin.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -146,8 +149,11 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
-                              child: const ListingsText(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminAccount);
+                              },
+                              child: const UserAccountText(
                                 myText: 'Admin Account',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -168,7 +174,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/user.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/user.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -180,7 +186,7 @@ class _UserAccount extends State<UserAccount> {
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.userAccountPage);
                               },
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'User Account',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -201,7 +207,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/listings.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/listings.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -213,7 +219,7 @@ class _UserAccount extends State<UserAccount> {
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.listingsPage);
                               },
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Listings',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -234,7 +240,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/transaction.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/transaction.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -242,8 +248,11 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
-                              child: const ListingsText(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                              },
+                              child: const UserAccountText(
                                 myText: 'Transactions',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -264,7 +273,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/reports.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/reports.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -276,7 +285,7 @@ class _UserAccount extends State<UserAccount> {
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.reportsPage);
                               },
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Reports',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -297,7 +306,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/dispute.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/dispute.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -306,7 +315,7 @@ class _UserAccount extends State<UserAccount> {
                             ),
                             TextButton(
                               onPressed: () {},
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Dispute',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -327,7 +336,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/wallet.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/wallet.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -336,7 +345,7 @@ class _UserAccount extends State<UserAccount> {
                             ),
                             TextButton(
                               onPressed: () {},
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Wallet',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -358,7 +367,7 @@ class _UserAccount extends State<UserAccount> {
                           children: [
                             const Image(
                               image:
-                                  AssetImage('assets/icons/communication.png'),
+                                  AssetImage('assets/rollaine_assets/icons/communication.png'),
                               height: 24,
                               width: 24,
                             ),
@@ -370,7 +379,7 @@ class _UserAccount extends State<UserAccount> {
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.communicationPage);
                               },
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Communication',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -389,7 +398,7 @@ class _UserAccount extends State<UserAccount> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/logout.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/logout.png'),
                               height: 24,
                               width: 24,
                             ),
@@ -398,7 +407,7 @@ class _UserAccount extends State<UserAccount> {
                             ),
                             TextButton(
                               onPressed: () {},
-                              child: const ListingsText(
+                              child: const UserAccountText(
                                 myText: 'Logout',
                                 myColor: Color(0xFF09041B),
                               ),
@@ -536,7 +545,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -745,7 +754,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -950,7 +959,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1159,7 +1168,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1368,7 +1377,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1573,7 +1582,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1782,7 +1791,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1991,7 +2000,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -2196,7 +2205,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),
