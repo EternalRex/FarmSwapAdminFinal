@@ -116,7 +116,10 @@ class _ListingsState extends State<Listings> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.dashboard);
+                              },
                               child: const ListingsText(
                                 myText: 'Dashboard',
                                 myColor: Color(0xFF09041B),
@@ -146,7 +149,10 @@ class _ListingsState extends State<Listings> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminAccount);
+                              },
                               child: const ListingsText(
                                 myText: 'Admin Account',
                                 myColor: Color(0xFF09041B),
@@ -242,7 +248,10 @@ class _ListingsState extends State<Listings> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                              },
                               child: const ListingsText(
                                 myText: 'Transactions',
                                 myColor: Color(0xFF09041B),

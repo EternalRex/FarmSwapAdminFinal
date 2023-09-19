@@ -118,7 +118,10 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.dashboard);
+                              },
                               child: const UserAccountText(
                                 myText: 'Dashboard',
                                 myColor: Color(0xFF09041B),
@@ -148,7 +151,10 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminAccount);
+                              },
                               child: const UserAccountText(
                                 myText: 'Admin Account',
                                 myColor: Color(0xFF09041B),
@@ -244,7 +250,10 @@ class _UserAccount extends State<UserAccount> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                              },
                               child: const UserAccountText(
                                 myText: 'Transactions',
                                 myColor: Color(0xFF09041B),
@@ -538,7 +547,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -747,7 +756,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -952,7 +961,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1162,7 +1171,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1371,7 +1380,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1576,7 +1585,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1786,7 +1795,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/vaugh.png'),
+                                            'assets/rollaine_assets/images/vaugh.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -1995,7 +2004,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/niyumi.png'),
+                                            'assets/rollaine_assets/images/niyumi.png'),
                                         height: 40,
                                         width: 40,
                                       ),
@@ -2200,7 +2209,7 @@ class _UserAccount extends State<UserAccount> {
                                       //Farmer profile
                                       const Image(
                                         image: AssetImage(
-                                            'assets/images/jade.png'),
+                                            'assets/rollaine_assets/images/jade.png'),
                                         height: 40,
                                         width: 40,
                                       ),

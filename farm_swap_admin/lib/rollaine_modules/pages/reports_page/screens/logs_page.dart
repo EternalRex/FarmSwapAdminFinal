@@ -117,7 +117,10 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.dashboard);
+                              },
                               child: const ReportsText(
                                 myText: 'Dashboard',
                                 myColor: Color(0xFF09041B),
@@ -147,7 +150,10 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminAccount);
+                              },
                               child: const ReportsText(
                                 myText: 'Admin Account',
                                 myColor: Color(0xFF09041B),
@@ -243,7 +249,10 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                              },
                               child: const ReportsText(
                                 myText: 'Transactions',
                                 myColor: Color(0xFF09041B),
