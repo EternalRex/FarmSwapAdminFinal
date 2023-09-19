@@ -54,7 +54,7 @@ class _AdminLogs extends State<AdminLogs> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Image(
-                            image: AssetImage('assets/images/farmswapLogo.png'),
+                            image: AssetImage('assets/rollaine_assets/images/farmswapLogo.png'),
                             height: 50,
                             width: 50,
                           ),
@@ -109,7 +109,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/dashboard.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/dashboard.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -139,7 +139,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/admin.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/admin.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -169,7 +169,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/user.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/user.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -202,7 +202,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/listings.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/listings.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -235,7 +235,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/transaction.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/transaction.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -265,7 +265,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/reports.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/reports.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -298,7 +298,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/dispute.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/dispute.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -328,7 +328,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/wallet.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/wallet.png'),
                               height: 20,
                               width: 20,
                             ),
@@ -359,7 +359,7 @@ class _AdminLogs extends State<AdminLogs> {
                           children: [
                             const Image(
                               image:
-                                  AssetImage('assets/icons/communication.png'),
+                                  AssetImage('assets/rollaine_assets/icons/communication.png'),
                               height: 24,
                               width: 24,
                             ),
@@ -390,7 +390,7 @@ class _AdminLogs extends State<AdminLogs> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Image(
-                              image: AssetImage('assets/icons/logout.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/logout.png'),
                               height: 24,
                               width: 24,
                             ),
@@ -562,7 +562,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rian.png'),
+                                            'assets/rollaine_assets/images/rian.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -639,7 +639,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/karl.jpg'),
+                                            'assets/rollaine_assets/images/karl.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -716,7 +716,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/clare.jpg'),
+                                            'assets/rollaine_assets/images/clare.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -793,7 +793,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rollaine.png'),
+                                            'assets/rollaine_assets/images/rollaine.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -870,7 +870,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rian.png'),
+                                            'assets/rollaine_assets/images/rian.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -947,7 +947,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/karl.jpg'),
+                                            'assets/rollaine_assets/images/karl.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1024,7 +1024,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/clare.jpg'),
+                                            'assets/rollaine_assets/images/clare.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1101,7 +1101,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rollaine.png'),
+                                            'assets/rollaine_assets/images/rollaine.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1178,7 +1178,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rian.png'),
+                                            'assets/rollaine_assets/images/rian.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1255,7 +1255,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/karl.jpg'),
+                                            'assets/rollaine_assets/images/karl.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1332,7 +1332,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/clare.jpg'),
+                                            'assets/rollaine_assets/images/clare.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1409,7 +1409,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rollaine.png'),
+                                            'assets/rollaine_assets/images/rollaine.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1486,7 +1486,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rian.png'),
+                                            'assets/rollaine_assets/images/rian.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1563,7 +1563,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/karl.jpg'),
+                                            'assets/rollaine_assets/images/karl.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1640,7 +1640,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/clare.jpg'),
+                                            'assets/rollaine_assets/images/clare.jpg'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1717,7 +1717,7 @@ class _AdminLogs extends State<AdminLogs> {
                                       //Farmer profile
                                       CircleAvatar(
                                         backgroundImage: const AssetImage(
-                                            'assets/images/rollaine.png'),
+                                            'assets/rollaine_assets/images/rollaine.png'),
                                         radius: 20,
                                         backgroundColor: Colors.green.shade100,
                                       ),
@@ -1836,7 +1836,7 @@ class _AdminLogs extends State<AdminLogs> {
                             //Chat button
                             IconButton(
                               onPressed: () {},
-                              icon: Image.asset('assets/icons/chat.png'),
+                              icon: Image.asset('assets/rollaine_assets/icons/chat.png'),
                               iconSize: 23,
                             ),
                             const SizedBox(
@@ -1847,7 +1847,7 @@ class _AdminLogs extends State<AdminLogs> {
                             IconButton(
                               onPressed: () {},
                               icon:
-                                  Image.asset('assets/icons/notification.png'),
+                                  Image.asset('assets/rollaine_assets/icons/notification.png'),
                               iconSize: 24,
                             ),
                           ],
@@ -1879,7 +1879,7 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             const Image(
-                              image: AssetImage('assets/icons/platform.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/platform.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -1912,7 +1912,7 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             const Image(
-                              image: AssetImage('assets/icons/barter.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/barter.png'),
                               height: 23,
                               width: 23,
                             ),
@@ -1945,7 +1945,7 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             const Image(
-                              image: AssetImage('assets/icons/selling.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/selling.png'),
                               height: 22,
                               width: 22,
                             ),
@@ -1978,7 +1978,7 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             const Image(
-                              image: AssetImage('assets/icons/number.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/number.png'),
                               height: 21,
                               width: 21,
                             ),
@@ -2011,7 +2011,7 @@ class _AdminLogs extends State<AdminLogs> {
                               width: 5,
                             ),
                             const Image(
-                              image: AssetImage('assets/icons/logs.png'),
+                              image: AssetImage('assets/rollaine_assets/icons/logs.png'),
                               height: 22,
                               width: 22,
                             ),
