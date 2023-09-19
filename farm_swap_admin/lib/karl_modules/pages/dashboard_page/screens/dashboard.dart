@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -44,20 +45,20 @@ class _DashboardState extends State<Dashboard> {
           Expanded(
             flex: 1,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
                 /*DECORATING THE CONTAINER */
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
                   /*PUTTING BOX SHADOW ON THE CONTAINER */
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey,
+                      color: shadow,
                       blurRadius: 2,
-                      offset: Offset(5, 5),
+                      offset: const Offset(1, 5),
                     ),
                   ],
                 ),
