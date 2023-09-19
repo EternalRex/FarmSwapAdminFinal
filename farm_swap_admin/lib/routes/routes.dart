@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_bio.dart';
+import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_preview_photo.dart';
 import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_uploadphoto.dart';
 import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_verification.dart';
@@ -6,6 +7,9 @@ import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/paymen
 import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/promotion.dart';
 import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/userwallet.dart';
+import 'package:farm_swap_admin/clare_modules/forgot_password/forgot_password.dart';
+import 'package:farm_swap_admin/clare_modules/forgot_password/reset_password.dart';
+import 'package:farm_swap_admin/clare_modules/forgot_password/reset_success_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -31,17 +35,22 @@ class RoutesManager {
   static const adminAccount = "/adminaccount";
   static const adminSignUp = "/adminsignup";
 
-  static const adminTransactionsPayment = "/admintransactionspayment";
-  static const adminTransactionsPromotion = "/admintransactionspromotion";
-  static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
-  static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
-
+  //clare routes
   static const adminSignup = "/adminSignup";
   static const adminSignupSuccess = "/adminSignupSuccess";
   static const adminBio = "/adminbio";
   static const adminUploadPhoto = "/adminuploadphoto";
+  static const adminPreviewPhoto = "/adminpreviewphoto";
   static const adminVerification = "/adminverification";
 
+  static const adminForgotPass = "/adminforgotpass";
+  static const adminResetPass = "/adminresetpass";
+  static const adminResetPassSuccess = "/adminresetpasssuccess";
+
+  static const adminTransactionsPayment = "/admintransactionspayment";
+  static const adminTransactionsPromotion = "/admintransactionspromotion";
+  static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
+  static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
   //rollaine routes
   static const platformPage = '/reportspage';
   static const numberPage = '/numberpage';
@@ -175,9 +184,29 @@ class RoutesManager {
           builder: (context) => const AdminUploadPhoto(),
         );
 
+      case adminPreviewPhoto:
+        return MaterialPageRoute(
+          builder: (context) => const UseruploadPrevScreen(),
+        );
+
       case adminVerification:
         return MaterialPageRoute(
           builder: (context) => const VerifycodeScreen(),
+        );
+
+      case adminForgotPass:
+        return MaterialPageRoute(
+          builder: (context) => const ForgotPassScreen(),
+        );
+
+      case adminResetPass:
+        return MaterialPageRoute(
+          builder: (context) => const ResetpassScreen(),
+        );
+
+      case adminResetPassSuccess:
+        return MaterialPageRoute(
+          builder: (context) => const ResetSuccessScreen(),
         );
       default:
         throw const FormatException("No route");
