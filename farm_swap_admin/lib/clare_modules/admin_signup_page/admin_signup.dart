@@ -18,7 +18,6 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
