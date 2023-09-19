@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/admin_signin.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import '../forgot_password/widgets/admin_signup buttons/admin_signup_buttons.dart';
 
 class ResetSuccessScreen extends StatefulWidget {
