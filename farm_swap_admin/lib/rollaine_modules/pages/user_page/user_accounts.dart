@@ -14,8 +14,6 @@ class UserAccount extends StatefulWidget {
 }
 
 class _UserAccount extends State<UserAccount> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -527,7 +525,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 //Farmer name, identity, details button
                                 Padding(
                                   padding:
@@ -545,7 +543,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -568,7 +566,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -626,7 +624,7 @@ class _UserAccount extends State<UserAccount> {
                                           ],
                                         ),
                                       ),
-                          
+
                                       //Two buttons for sending message
                                       Padding(
                                         padding:
@@ -684,7 +682,7 @@ class _UserAccount extends State<UserAccount> {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                          
+
                                             //Push button
                                             DecoratedBox(
                                               decoration: const BoxDecoration(
@@ -737,7 +735,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -754,7 +752,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -777,7 +775,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -942,7 +940,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -959,7 +957,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -986,7 +984,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -1151,8 +1149,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -1169,7 +1166,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -1192,7 +1189,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -1250,7 +1247,7 @@ class _UserAccount extends State<UserAccount> {
                                           ],
                                         ),
                                       ),
-                          
+
                                       //Two buttons for sending message
                                       Padding(
                                         padding:
@@ -1308,7 +1305,7 @@ class _UserAccount extends State<UserAccount> {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                          
+
                                             //Push button
                                             DecoratedBox(
                                               decoration: const BoxDecoration(
@@ -1361,7 +1358,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -1378,7 +1375,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -1401,7 +1398,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -1566,7 +1563,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -1583,7 +1580,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -1610,7 +1607,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -1775,8 +1772,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -1793,7 +1789,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -1816,7 +1812,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -1874,7 +1870,7 @@ class _UserAccount extends State<UserAccount> {
                                           ],
                                         ),
                                       ),
-                          
+
                                       //Two buttons for sending message
                                       Padding(
                                         padding:
@@ -1932,7 +1928,7 @@ class _UserAccount extends State<UserAccount> {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                          
+
                                             //Push button
                                             DecoratedBox(
                                               decoration: const BoxDecoration(
@@ -1985,7 +1981,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -2002,7 +1998,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -2025,7 +2021,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -2190,7 +2186,7 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
+
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 100, top: 10),
@@ -2207,7 +2203,7 @@ class _UserAccount extends State<UserAccount> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-                          
+
                                       //Farmer name and identity
                                       Column(
                                         children: [
@@ -2234,7 +2230,7 @@ class _UserAccount extends State<UserAccount> {
                                           ),
                                         ],
                                       ),
-                          
+
                                       //Details button
                                       Padding(
                                         padding:
@@ -2399,9 +2395,6 @@ class _UserAccount extends State<UserAccount> {
                                     ],
                                   ),
                                 ),
-                          
-                          
-                                
                               ],
                             ),
                           ),

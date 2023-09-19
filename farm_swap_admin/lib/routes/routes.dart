@@ -132,6 +132,7 @@ class RoutesManager {
           builder: (context) => const Communication(),
         );
 
+      //Transactions routes
       case adminTransactionsPayment:
         return MaterialPageRoute(
           builder: (context) => const PaymentStatusScreen(),
@@ -152,6 +153,7 @@ class RoutesManager {
           builder: (context) => const UserWalletScreen(),
         );
 
+      //sign up process routes
       case adminSignup:
         return MaterialPageRoute(
           builder: (context) => const AdminSignUpScreen(),

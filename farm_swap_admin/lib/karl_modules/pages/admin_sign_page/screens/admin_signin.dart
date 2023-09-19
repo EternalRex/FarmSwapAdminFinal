@@ -200,7 +200,10 @@ class _SignInAdminState extends State<SignInAdmin> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(RoutesManager.adminBio);
+                        },
                         child: Text(
                           "Forget Your Password?",
                           style: TextStyle(
@@ -218,7 +221,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                       TextButton(
                         onPressed: () {
                           Navigator.of(context)
-                              .pushNamed(RoutesManager.adminSignUp);
+                              .pushNamed(RoutesManager.adminSignup);
                         },
                         child: Text(
                           "Sign Up Now!",
