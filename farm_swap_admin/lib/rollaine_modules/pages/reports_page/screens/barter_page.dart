@@ -1,7 +1,18 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/reports_text.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/title_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_logout_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_reports_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_transactions_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/reports_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,379 +55,68 @@ class _Barter extends State<Barter> {
                 ),
 
                 //Column in which there is the navigation options
-                child: Column(
+                child: const Column(
                   children: [
                     //Row for the logo, name, and slogan
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/rollaine_assets/images/farmswapLogo.png'),
-                            height: 50,
-                            width: 50,
-                          ),
-
-                          //Column for FarmSwap title and slogan
-                          Column(
-                            children: [
-                              //FarmSwap title
-                              Text(
-                                'FarmSwap',
-                                style: GoogleFonts.viga(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0.50,
-                                  foreground: Paint()
-                                    ..shader = const LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ).createShader(
-                                      const Rect.fromLTWH(
-                                          0.0, 0.0, 200.0, 70.0),
-                                    ),
-                                ),
-                              ),
-
-                              //FarmSwap slogan
-                              Text(
-                                'Modern Barter Solution',
-                                style: GoogleFonts.inter(
-                                  color: const Color(0xFF09051C),
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 1.0,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsLogoSideMenu(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Dashboard icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/dashboard.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.dashboard);
-                              },
-                              child: const ReportsText(
-                                myText: 'Dashboard',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsDashboardOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Admin Account icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/admin.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminAccount);
-                              },
-                              child: const ReportsText(
-                                myText: 'Admin Account',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsAdminAccountOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //User Account icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/user.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.userAccountPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'User Account',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsUserAccountOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Listings icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/listings.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.listingsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Listings',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsListingsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Transactions icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/transaction.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminTransactionsPayment);
-                              },
-                              child: const ReportsText(
-                                myText: 'Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsTransactionsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Reports icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/reports.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.reportsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Reports',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsReportsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Dispute icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/dispute.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Dispute',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsDisputeOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Wallet icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/wallet.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Wallet',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsWalletOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Communication icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image:
-                                  AssetImage('assets/rollaine_assets/icons/communication.png'),
-                              height: 24,
-                              width: 24,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.communicationPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Communication',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
+                    ReportsCommunicationOptionsBtn(),
+                    Spacer(),
 
                     //Logout icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 20),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/logout.png'),
-                              height: 24,
-                              width: 24,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Logout',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ReportsLogoutOptionsBtn(),
                   ],
                 ),
               ),
