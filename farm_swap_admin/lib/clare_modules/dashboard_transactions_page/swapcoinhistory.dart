@@ -105,7 +105,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.adminAccount);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -136,7 +139,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.userAccountPage);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -167,7 +173,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.listingsPage);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -198,7 +207,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                  RoutesManager.adminTransactionsPayment);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -229,7 +241,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.reportsPage);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -260,7 +275,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              /* Navigator.of(context)
+                                  .pushNamed(RoutesManager.adminDispute);*/
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -291,7 +309,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              /* Navigator.of(context)
+                                  .pushNamed(RoutesManager.wallet);*/
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -322,7 +343,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.communicationPage);
+                            },
                             child: const Row(
                               children: <Widget>[
                                 Image(
@@ -352,7 +376,10 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(RoutesManager.signInPage);
+                          },
                           child: const Row(
                             children: <Widget>[
                               Image(
@@ -419,7 +446,8 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                               height: 24,
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/search.png'),
+                                  image: AssetImage(
+                                      'assets/clare_assets/images/search.png'),
                                 ),
                               ),
                             ),

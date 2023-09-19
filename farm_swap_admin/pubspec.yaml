@@ -68,7 +68,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/karl_assets/images/
+
     - assets/clare_assets/images/
+    - assets/clare_assets/svg/
 
     - assets/rollaine_assets/icons/
     - assets/rollaine_assets/images/

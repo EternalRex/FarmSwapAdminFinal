@@ -2,7 +2,7 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_interface.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_suggestions.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_usability.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_userSatisfaction.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_user_satisfaction.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_comments.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_description.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_suggestions.dart';

@@ -207,7 +207,6 @@ class _UserAccount extends State<UserAccount> {
                               children: [
                                 //Name
                                 UserContentDescriptions(),
-
                                 //Farmer name, identity, details button
                                 UserNames(),
                                 UserNames(),

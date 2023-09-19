@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/clare_modules/admin_signup_page/widgets/admin_signup_textfield_widgets/input/farmswap_textfield.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -5,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../constants/Colors/colors.dart';
 import '../../../../routes/routes.dart';
-import '../widgets/sign_in_txt_field.dart';
 
 class SignInAdmin extends StatefulWidget {
   const SignInAdmin({super.key});
@@ -91,7 +91,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                     height: 20,
                   ),
                   /*CONTAINS TEXT FIELD SO THAT WE CAN MANIPULATE THE WIDTH OF THE EMAIL TEXT FIELD */
-                  SizedBox(
+                  /* SizedBox(
                     height: 57,
                     width: 325,
                     /*HAS A LABEL PROPERTY FOR EMAIL THAT WILL TAKE VALUE FROM THE WIDGET
@@ -100,11 +100,35 @@ class _SignInAdminState extends State<SignInAdmin> {
                       textType: false,
                       label: emailLabel,
                     ),
+                  ),*/
+
+                  //a container for the email textfield
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: FarmSwapTextField(
+                      hintText: "Email",
+                      onPress: () {},
+                      inputIcon: "assets/clare_assets/svg/Message.svg",
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                  //a container for the password textfield
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: FarmSwapTextField(
+                      hintText: "Password",
+                      onPress: () {},
+                      inputIcon: "assets/clare_assets/svg/Lock.svg",
+                      isPassword: true,
+                    ),
                   ),
                   const SizedBox(
                     height: 12,
                   ),
-                  /*CONTAINS TEXT FIELD SO THAT WE CAN MANIPULATE THE WIDTH OF THE PASSWORD TEXT FIELD */
+                  /* /*CONTAINS TEXT FIELD SO THAT WE CAN MANIPULATE THE WIDTH OF THE PASSWORD TEXT FIELD */
                   SizedBox(
                     height: 57,
                     width: 325,
@@ -118,6 +142,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                   const SizedBox(
                     height: 10,
                   ),
+                  */
                   /*LABEL ON CHOOSING TO CONTINUE WITH FACEBOOK OR GOOGLE */
                   Text(
                     "Or continue with",
@@ -200,7 +225,10 @@ class _SignInAdminState extends State<SignInAdmin> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(RoutesManager.adminForgotPass);
+                        },
                         child: Text(
                           "Forget Your Password?",
                           style: TextStyle(
@@ -218,7 +246,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                       TextButton(
                         onPressed: () {
                           Navigator.of(context)
-                              .pushNamed(RoutesManager.adminSignUp);
+                              .pushNamed(RoutesManager.adminSignup);
                         },
                         child: Text(
                           "Sign Up Now!",
