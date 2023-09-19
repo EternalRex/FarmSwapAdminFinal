@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/clare_modules/forgot_password/widgets/card/farmswap_contactcard.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +15,7 @@ class ForgotPassScreen extends StatefulWidget {
 class _ForgotPassScreenState extends State<ForgotPassScreen> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -44,7 +46,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  width: 224,
+                  width: 230,
                   child: Text(
                     'Forgot password?',
                     style: TextStyle(
@@ -75,6 +77,159 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                 const SizedBox(
                   height: 30,
                 ),
+
+                FarmSwapContactCard(
+                  width: 290,
+                  height: 750,
+                  iconPath: "assets/clare_assets/svg/messagechatIcon.svg",
+                  title: "Via sms:",
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        '4235',
+                        style: TextStyle(
+                          color: const Color(0xFF09051C),
+                          fontSize: height * 0.0197,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w400,
+                          height: 1.50,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: height * 0.024),
+                FarmSwapContactCard(
+                  width: 290,
+                  height: 750,
+                  iconPath: "assets/clare_assets/svg/Email.svg",
+                  title: "Via Email:",
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF09051C),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        '@gmail.com',
+                        style: TextStyle(
+                          color: const Color(0xFF09051C),
+                          fontSize: height * 0.0197,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w400,
+                          height: 1.50,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                /*
                 Container(
                   width: 347,
                   height: 105,
@@ -114,6 +269,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                     ],
                   ),
                 ),
+                */
                 const SizedBox(
                   height: 39,
                 ),
