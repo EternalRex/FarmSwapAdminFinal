@@ -57,13 +57,6 @@ class DashBoardTitleText extends StatelessWidget {
         fontSize: mySize,
         fontFamily: myFont,
         fontWeight: myWeight,
-        shadows: const [
-          Shadow(
-            color: Colors.grey,
-            blurRadius: 7,
-            offset: Offset(6, 1),
-          )
-        ],
       ),
     );
   }

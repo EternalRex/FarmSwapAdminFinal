@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
@@ -18,388 +19,432 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
           Expanded(
             flex: 1,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey,
+                      color: shadow,
                       blurRadius: 2,
-                      offset: Offset(5, 5),
+                      offset: const Offset(1, 5),
                     ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Image(
-                          image:
-                              AssetImage("assets/clare_assets/images/logo.png"),
-                          width: 55,
-                          height: 50,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              "FarmSwap",
-                              style: GoogleFonts.viga(
-                                fontSize: 22,
-                                color: const Color(0xFF53E78B),
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Text(
-                              "Modern Barter Solution",
-                              style: GoogleFonts.inter(
-                                fontSize: 9,
-                                color: const Color(0xFF09051C),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Center(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 13, vertical: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {},
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/dashboard.png"),
-                                ),
-                                Text(
-                                  '   Dashboard',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        children: [
+                          const Image(
+                            image: AssetImage(
+                                "assets/clare_assets/images/logo.png"),
+                            width: 35,
+                            height: 30,
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.adminAccount);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/admin.png"),
+                          Column(
+                            children: [
+                              Text(
+                                "FarmSwap",
+                                style: GoogleFonts.viga(
+                                  fontSize: 22,
+                                  letterSpacing: 0.50,
+                                  foreground: Paint()
+                                    ..shader = const LinearGradient(
+                                      colors: <Color>[
+                                        Color(0xFF53E78B),
+                                        Color(0xFF14BE77),
+                                      ],
+                                    ).createShader(
+                                      const Rect.fromLTWH(
+                                          0.0, 0.0, 200.0, 70.0),
+                                    ),
                                 ),
-                                Text(
-                                  '   Admin Accounts',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.userAccountPage);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/users.png"),
-                                ),
-                                Text(
-                                  '   User Accounts',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.listingsPage);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/listings.png"),
-                                ),
-                                Text(
-                                  '   Listings',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                  RoutesManager.adminTransactionsPayment);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/transactions.png"),
-                                ),
-                                Text(
-                                  '   Transactions',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.reportsPage);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/reports.png"),
-                                ),
-                                Text(
-                                  '   Reports',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              /* Navigator.of(context)
-                                  .pushNamed(RoutesManager.adminDispute);*/
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/dispute.png"),
-                                ),
-                                Text(
-                                  '   Dispute',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              /* Navigator.of(context)
-                                  .pushNamed(RoutesManager.wallet);*/
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/wallet.png"),
-                                ),
-                                Text(
-                                  '   Wallet',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.communicationPage);
-                            },
-                            child: const Row(
-                              children: <Widget>[
-                                Image(
-                                  image: AssetImage(
-                                      "assets/clare_assets/images/communication.png"),
-                                ),
-                                Text(
-                                  '   Communication',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF09041B),
-                                    fontSize: 13,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(RoutesManager.signInPage);
-                          },
-                          child: const Row(
-                            children: <Widget>[
-                              Image(
-                                image: AssetImage(
-                                    "assets/clare_assets/images/logout.png"),
                               ),
                               Text(
-                                '   Logout',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF09041B),
-                                  fontSize: 13,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
+                                "Modern Barter Solution",
+                                style: GoogleFonts.inter(
+                                  fontSize: 8,
+                                  color: const Color(0xFF09051C),
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 1.0,
                                 ),
                               ),
                             ],
                           ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {},
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/dashboard.png"),
+                                  ),
+                                  Text(
+                                    '   Dashboard',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminAccount);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/admin.png"),
+                                  ),
+                                  Text(
+                                    '   Admin Accounts',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.userAccountPage);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/users.png"),
+                                  ),
+                                  Text(
+                                    '   User Accounts',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.listingsPage);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/listings.png"),
+                                  ),
+                                  Text(
+                                    '   Listings',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                    RoutesManager.adminTransactionsPayment);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/transactions.png"),
+                                  ),
+                                  Text(
+                                    '   Transactions',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.reportsPage);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/reports.png"),
+                                  ),
+                                  Text(
+                                    '   Reports',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                /* Navigator.of(context)
+                                      .pushNamed(RoutesManager.adminDispute);*/
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/dispute.png"),
+                                  ),
+                                  Text(
+                                    '   Dispute',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                /* Navigator.of(context)
+                                      .pushNamed(RoutesManager.wallet);*/
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/wallet.png"),
+                                  ),
+                                  Text(
+                                    '   Wallet',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.communicationPage);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/communication.png"),
+                                  ),
+                                  Text(
+                                    '   Communication',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.signInPage);
+                              },
+                              child: const Row(
+                                children: <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/clare_assets/images/logout.png"),
+                                  ),
+                                  Text(
+                                    '   Logout',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF09041B),
+                                      fontSize: 13,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
