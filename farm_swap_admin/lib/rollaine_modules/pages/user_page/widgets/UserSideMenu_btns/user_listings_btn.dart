@@ -8,7 +8,7 @@ class UserListingsOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 28),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

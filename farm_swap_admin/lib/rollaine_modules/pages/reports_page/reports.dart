@@ -9,17 +9,17 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_logout_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_reports_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
@@ -44,7 +44,7 @@ class _ReportsState extends State<Reports> {
         children: [
           //First expanded division of a row
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -72,7 +72,7 @@ class _ReportsState extends State<Reports> {
                     ReportsLogoSideMenu(),
                     //15 height spacing
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Dashboard icon and label
@@ -145,7 +145,7 @@ class _ReportsState extends State<Reports> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 6,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -273,7 +273,7 @@ class _ReportsState extends State<Reports> {
 
           //Third expanded division which contains the navigation options of the reports page
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -300,9 +300,9 @@ class _ReportsState extends State<Reports> {
                     //Row for the buttons
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                          horizontal: 5, vertical: 14),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 110),
+                        padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -310,7 +310,7 @@ class _ReportsState extends State<Reports> {
                             ReportsChatOptionsBtn(),
                             //15 height spacing
                             SizedBox(
-                              width: 15,
+                              width: 5,
                             ),
                             //Notification button
                             ReportsNotificationOptionsBtn(),

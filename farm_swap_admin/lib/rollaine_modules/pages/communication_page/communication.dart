@@ -32,7 +32,7 @@ class _Communication extends State<Communication> {
         children: [
           //First expanded division of a row
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -60,7 +60,7 @@ class _Communication extends State<Communication> {
                     CommuLogoSideMenu(),
                     //15 height spacing
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Dashboard icon and label
@@ -130,7 +130,7 @@ class _Communication extends State<Communication> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 8,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(

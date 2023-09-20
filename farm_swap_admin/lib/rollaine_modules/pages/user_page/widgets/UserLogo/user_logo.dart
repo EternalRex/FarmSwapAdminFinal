@@ -7,14 +7,14 @@ class UserLogoSideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Image(
             image: AssetImage('assets/rollaine_assets/images/farmswapLogo.png'),
-            height: 50,
-            width: 50,
+            height: 40,
+            width: 40,
           ),
 
           //Column for FarmSwap title and slogan
@@ -24,7 +24,7 @@ class UserLogoSideMenu extends StatelessWidget {
               Text(
                 'FarmSwap',
                 style: GoogleFonts.viga(
-                  fontSize: 30,
+                  fontSize: 22,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.50,
                   foreground: Paint()
@@ -44,7 +44,7 @@ class UserLogoSideMenu extends StatelessWidget {
                 'Modern Barter Solution',
                 style: GoogleFonts.inter(
                   color: const Color(0xFF09051C),
-                  fontSize: 11,
+                  fontSize: 8,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 1.0,
                 ),

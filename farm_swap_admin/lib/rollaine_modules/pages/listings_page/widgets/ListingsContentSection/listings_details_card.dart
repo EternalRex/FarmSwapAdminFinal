@@ -15,7 +15,7 @@ class ListingsDetailsCard extends StatelessWidget {
         child: Card(
           //Design the card
           child: SizedBox(
-            height: 210,
+            height: 225,
             width: 200,
             child: Padding(
               padding: const EdgeInsets.all(15),
@@ -26,13 +26,13 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Promotion Details',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 17,
+                      fontSize: 11,
                       fontWeight: FontWeight.w700,
                       height: 1.31,
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 8,
                   ),
 
                   //Name of farmer
@@ -40,7 +40,7 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Vaugh Noe Cabusao',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 13,
+                      fontSize: 10,
                       fontWeight: FontWeight.w500,
                       height: 1.31,
                     ),
@@ -51,13 +51,13 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Farmer',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 10,
+                      fontSize: 9,
                       fontWeight: FontWeight.w400,
                       height: 1.31,
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
 
                   //Type of product
@@ -65,7 +65,7 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Product: Onion',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 11,
+                      fontSize: 9.5,
                       fontWeight: FontWeight.w500,
                       height: 1.31,
                     ),
@@ -76,13 +76,13 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Promotion Range: 3 days',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 11,
+                      fontSize: 8,
                       fontWeight: FontWeight.w500,
                       height: 1.31,
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
 
                   //Amount
@@ -90,22 +90,22 @@ class ListingsDetailsCard extends StatelessWidget {
                     'Payment: 50 scs',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFF09041B),
-                      fontSize: 10,
+                      fontSize: 9,
                       fontWeight: FontWeight.w400,
                       height: 1.31,
                     ),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 20,
                   ),
 
                   //These are the 2 buttons in the card
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 3, vertical: 3),
-                    child: Row(
+                    child: Column(
                       mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
+                          MainAxisAlignment.center,
                       children: [
                         //Accept button
                         DecoratedBox(
@@ -149,6 +149,9 @@ class ListingsDetailsCard extends StatelessWidget {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 5,
                         ),
 
                         //Reject button

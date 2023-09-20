@@ -31,7 +31,7 @@ class _UserAccount extends State<UserAccount> {
         children: [
           //First expanded division of a row where the navigation options can be seen
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -59,7 +59,7 @@ class _UserAccount extends State<UserAccount> {
                     UserLogoSideMenu(),
                     //15 height for spacing
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
 
                     //Dashboard icon and label
@@ -132,7 +132,7 @@ class _UserAccount extends State<UserAccount> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 8,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(

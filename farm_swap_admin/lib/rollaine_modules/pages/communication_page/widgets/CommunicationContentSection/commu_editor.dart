@@ -14,7 +14,7 @@ class CommuEditor extends StatelessWidget {
         //Edit button
         Padding(
           padding:
-              const EdgeInsets.only(left: 890, top: 10),
+              const EdgeInsets.only(left: 930, top: 20),
           child: Row(
             children: [
               IconButton(
@@ -93,7 +93,7 @@ class CommuEditor extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 660,
+                width: 710,
               ),
               DecoratedBox(
                 decoration: const BoxDecoration(

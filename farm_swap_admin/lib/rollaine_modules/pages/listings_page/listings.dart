@@ -3,14 +3,14 @@ import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Lis
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_details_card.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsRightMenu_btns/listings_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsRightMenu_btns/listings_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_listings_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_logout_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_reports.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_transactions.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_user_account_btn.dart';
@@ -34,7 +34,7 @@ class _ListingsState extends State<Listings> {
         children: [
           //First expanded division of a row
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -62,7 +62,7 @@ class _ListingsState extends State<Listings> {
                     ListingsLogoSideMenu(),
                     //15 height spacing
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Dashboard icon and label
@@ -135,7 +135,7 @@ class _ListingsState extends State<Listings> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 6,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -231,7 +231,7 @@ class _ListingsState extends State<Listings> {
 
           //Third expanded division which contains the information of a farmer
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -260,14 +260,14 @@ class _ListingsState extends State<Listings> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 10, vertical: 14),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 110),
+                        padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             //Chat button
                             ListingsChatOptionsBtn(),
                             SizedBox(
-                              width: 15,
+                              width: 5,
                             ),
 
                             //Notification button
@@ -277,7 +277,7 @@ class _ListingsState extends State<Listings> {
                       ),
                     ),
                     SizedBox(
-                      height: 80,
+                      height: 60,
                     ),
 
                     //Card for promotion request of farmers

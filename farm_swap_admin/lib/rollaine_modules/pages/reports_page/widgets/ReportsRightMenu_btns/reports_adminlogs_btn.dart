@@ -1,4 +1,4 @@
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/reports_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/right_reports_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class ReportsAdminLogsOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 30),
+      padding: const EdgeInsets.only(right: 28),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -20,7 +20,7 @@ class ReportsAdminLogsOptionsBtn extends StatelessWidget {
                 Navigator.of(context)
                     .pushNamed(RoutesManager.logsPage);
               },
-              child: const ReportsText(
+              child: const RightReportsText(
                 myText: 'Admin Logs',
                 myColor: Color(0xFF09041B),
               ),
