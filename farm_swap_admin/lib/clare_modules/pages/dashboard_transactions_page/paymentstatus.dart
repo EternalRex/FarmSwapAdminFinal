@@ -1,7 +1,10 @@
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/textfield/transaction_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/transactions_buttons/transactions_buttons.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+
+import 'widgets/text/transaction_typography.dart';
 
 class PaymentStatusScreen extends StatefulWidget {
   const PaymentStatusScreen({super.key});
@@ -16,6 +19,7 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
     return Scaffold(
       body: Row(
         children: [
+          //first expanded of the transaction page with left side menu
           Expanded(
             flex: 1,
             child: Padding(
@@ -50,32 +54,8 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                           ),
                           Column(
                             children: [
-                              Text(
-                                "FarmSwap",
-                                style: GoogleFonts.viga(
-                                  fontSize: 22,
-                                  letterSpacing: 0.50,
-                                  foreground: Paint()
-                                    ..shader = const LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ).createShader(
-                                      const Rect.fromLTWH(
-                                          0.0, 0.0, 200.0, 70.0),
-                                    ),
-                                ),
-                              ),
-                              Text(
-                                "Modern Barter Solution",
-                                style: GoogleFonts.inter(
-                                  fontSize: 8,
-                                  color: const Color(0xFF09051C),
-                                  fontWeight: FontWeight.w900,
-                                  letterSpacing: 1.0,
-                                ),
-                              ),
+                              paymentStatusTitle(),
+                              paymentStatusSubTitle(),
                             ],
                           ),
                         ],
@@ -84,373 +64,50 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {},
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/dashboard.png"),
-                                  ),
-                                  Text(
-                                    '   Dashboard',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+
+                    //dashboard buttons in the left side menu
+                    const DashboardTransBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminAccount);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/admin.png"),
-                                  ),
-                                  Text(
-                                    '   Admin Accounts',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const AdminAccTransBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.userAccountPage);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/users.png"),
-                                  ),
-                                  Text(
-                                    '   User Accounts',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const UserAccTransBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.listingsPage);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/listings.png"),
-                                  ),
-                                  Text(
-                                    '   Listings',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const ListingsTransBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(
-                                    RoutesManager.adminTransactionsPayment);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/transactions.png"),
-                                  ),
-                                  Text(
-                                    '   Transactions',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const TransactionsBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.reportsPage);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/reports.png"),
-                                  ),
-                                  Text(
-                                    '   Reports',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const ReportsBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                /* Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminDispute);*/
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/dispute.png"),
-                                  ),
-                                  Text(
-                                    '   Dispute',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const DisputeBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                /* Navigator.of(context)
-                                      .pushNamed(RoutesManager.wallet);*/
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/wallet.png"),
-                                  ),
-                                  Text(
-                                    '   Wallet',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const WalletBttn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.communicationPage);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/communication.png"),
-                                  ),
-                                  Text(
-                                    '   Communication',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const CommunicationBttn(),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.signInPage);
-                              },
-                              child: const Row(
-                                children: <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/clare_assets/images/logout.png"),
-                                  ),
-                                  Text(
-                                    '   Logout',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 13,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const LogoutBttn(),
                   ],
                 ),
               ),
             ),
           ),
+
+          //second expanded of the transaction page
           Expanded(
             flex: 4,
             child: Padding(
@@ -465,47 +122,13 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                     splashColor: const Color(0xFFF9A84D),
                     onPressed: () {},
                   ),
-                  title: const Text(
-                    'Transactions',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF09041B),
-                      fontSize: 48,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                      height: 1.31,
-                    ),
-                  ),
+                  title: transactionTitle(),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  actions: <Widget>[
+                  actions: const <Widget>[
                     Center(
-                      child: SizedBox(
-                        width: 267,
-                        height: 44,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Container(
-                              width: 24,
-                              height: 24,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/clare_assets/images/search.png'),
-                                ),
-                              ),
-                            ),
-                            labelText: 'Search',
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 0.50,
-                              ),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: TransactionTextField(),
                     ),
                   ],
                 ),
@@ -518,15 +141,8 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                       margin: const EdgeInsets.only(
                         right: 750,
                       ),
-                      child: const Text(
-                        'Payments',
-                        style: TextStyle(
-                          color: Color(0xFF09041B),
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 1.31,
-                        ),
+                      child: paymentsText(
+                        text: "Payments",
                       ),
                     ),
                     const SizedBox(
@@ -561,16 +177,8 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                   margin: const EdgeInsets.only(
                                     left: 100,
                                   ),
-                                  child: const Text(
-                                    'Name',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 18,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.31,
-                                    ),
+                                  child: containerText(
+                                    text: "Name",
                                   ),
                                 ),
                                 const SizedBox(
@@ -590,18 +198,13 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                   margin: const EdgeInsets.only(
                                     left: 215,
                                   ),
-                                  child: const Text(
-                                    'Date',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 18,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.31,
-                                    ),
+                                  child: containerText(
+                                    text: "Date",
                                   ),
                                 ),
+
+                                //The data will be inserted here
+                                Container(),
                               ],
                             ),
                             Column(
@@ -613,18 +216,13 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                   margin: const EdgeInsets.only(
                                     left: 215,
                                   ),
-                                  child: const Text(
-                                    'Amount',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF09041B),
-                                      fontSize: 18,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.31,
-                                    ),
+                                  child: containerText(
+                                    text: "Amount",
                                   ),
                                 ),
+
+                                //The data will be inserted here
+                                Container(),
                               ],
                             ),
                           ],
@@ -636,6 +234,8 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
               ),
             ),
           ),
+
+          //the third expanded with right side menu buttons
           Expanded(
             flex: 1,
             child: Padding(
@@ -698,23 +298,15 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                     Navigator.of(context).pushNamed(
                                         RoutesManager.adminTransactionsPayment);
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      Text(
-                                        'Payment',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Color(0xFF09041B),
-                                          fontSize: 13,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.31,
-                                        ),
+                                      rightsidemenuText(
+                                        text: "Payment",
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 15,
                                       ),
-                                      Image(
+                                      const Image(
                                         image: AssetImage(
                                             "assets/clare_assets/images/payments.png"),
                                       ),
@@ -737,25 +329,17 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                         RoutesManager
                                             .adminTransactionsPromotion);
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      Text(
-                                        'Promotion',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Color(0xFF09041B),
-                                          fontSize: 13,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.31,
-                                        ),
+                                      rightsidemenuText(
+                                        text: "Promotion",
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 15,
                                       ),
-                                      Image(
+                                      const Image(
                                         image: AssetImage(
-                                            "assets/clare_assets/images/promotion.png"),
+                                            "assets/clare_assets/images/payments.png"),
                                       ),
                                     ],
                                   ),
@@ -776,25 +360,17 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                         RoutesManager
                                             .adminTransactionsSwapCoins);
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      Text(
-                                        'Swap Coins',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Color(0xFF09041B),
-                                          fontSize: 13,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.31,
-                                        ),
+                                      rightsidemenuText(
+                                        text: "Swap Coins",
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 15,
                                       ),
-                                      Image(
+                                      const Image(
                                         image: AssetImage(
-                                            "assets/clare_assets/images/swap coins.png"),
+                                            "assets/clare_assets/images/payments.png"),
                                       ),
                                     ],
                                   ),
@@ -815,25 +391,17 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                         RoutesManager
                                             .adminTransactionsUserWallet);
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      Text(
-                                        'Wallet',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Color(0xFF09041B),
-                                          fontSize: 13,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.31,
-                                        ),
+                                      rightsidemenuText(
+                                        text: "Wallet",
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 15,
                                       ),
-                                      Image(
+                                      const Image(
                                         image: AssetImage(
-                                            "assets/clare_assets/images/wallet.png"),
+                                            "assets/clare_assets/images/payments.png"),
                                       ),
                                     ],
                                   ),
