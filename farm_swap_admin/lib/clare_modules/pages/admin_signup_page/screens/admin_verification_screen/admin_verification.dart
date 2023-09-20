@@ -1,9 +1,9 @@
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/verification_success_screen.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/verification_success_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter_svg/svg.dart';
-import 'widgets/admin_signup buttons/admin_signup_buttons.dart';
+import '../../widgets/admin_signup buttons/admin_signup_buttons.dart';
 
 class VerifycodeScreen extends StatefulWidget {
   const VerifycodeScreen({super.key});

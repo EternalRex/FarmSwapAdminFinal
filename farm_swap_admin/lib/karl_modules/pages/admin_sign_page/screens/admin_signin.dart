@@ -1,4 +1,4 @@
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/widgets/admin_signup_textfield_widgets/input/farmswap_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:google_fonts/google_fonts.dart";

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_uploadphoto.dart';
-import 'widgets/admin_signup buttons/admin_signup_buttons.dart';
-import 'widgets/admin_signup_textfield_widgets/input/farmswap_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_uploadphoto.dart';
+import '../../widgets/admin_signup buttons/admin_signup_buttons.dart';
+import '../../widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 
 class AdminBio extends StatefulWidget {

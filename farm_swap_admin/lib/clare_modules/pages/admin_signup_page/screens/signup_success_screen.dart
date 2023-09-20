@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:flutter_svg/svg.dart';
-import '../forgot_password/widgets/admin_signup buttons/admin_signup_buttons.dart';
+import 'admin_verification_screen/admin_verification.dart';
+import '../widgets/admin_signup buttons/admin_signup_buttons.dart';
 
-class ResetSuccessScreen extends StatefulWidget {
-  const ResetSuccessScreen({super.key});
+class SignupSuccessScreen extends StatefulWidget {
+  const SignupSuccessScreen({super.key});
 
   @override
-  State<ResetSuccessScreen> createState() => _ResetSuccessScreenState();
+  State<SignupSuccessScreen> createState() => _SignupSuccessScreenState();
 }
 
-class _ResetSuccessScreenState extends State<ResetSuccessScreen> {
+class _SignupSuccessScreenState extends State<SignupSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +56,7 @@ class _ResetSuccessScreenState extends State<ResetSuccessScreen> {
                   height: 5,
                 ),
                 const Text(
-                  'Password reset successful.',
+                  'Your Profile Is Ready To Use',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF09041B),
@@ -69,10 +69,11 @@ class _ResetSuccessScreenState extends State<ResetSuccessScreen> {
                 const SizedBox(
                   height: 100,
                 ),
+
                 //calling class to be used in continue button
                 const FarmSwapPrimaryButton(
                   buttonTitle: "Continue",
-                  nextScreen: SignInAdmin(),
+                  nextScreen: VerifycodeScreen(),
                 ),
               ],
             ),

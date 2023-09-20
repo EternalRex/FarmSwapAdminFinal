@@ -1,16 +1,17 @@
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/text/forgot_pass_text.dart';
 import 'package:flutter/material.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:flutter_svg/svg.dart';
-import '../admin_signup_page/admin_verification.dart';
-import 'widgets/admin_signup buttons/admin_signup_buttons.dart';
+import '../admin_forgot_pass_buttons/forgot_pass_buttons.dart';
 
-class SignupSuccessScreen extends StatefulWidget {
-  const SignupSuccessScreen({super.key});
+class ResetSuccessScreen extends StatefulWidget {
+  const ResetSuccessScreen({super.key});
 
   @override
-  State<SignupSuccessScreen> createState() => _SignupSuccessScreenState();
+  State<ResetSuccessScreen> createState() => _ResetSuccessScreenState();
 }
 
-class _SignupSuccessScreenState extends State<SignupSuccessScreen> {
+class _ResetSuccessScreenState extends State<ResetSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,39 +42,18 @@ class _SignupSuccessScreenState extends State<SignupSuccessScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text(
-                  'Congrats!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF53E78B),
-                    fontSize: 30,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    height: 1.31,
-                  ),
-                ),
+                resetPassSuccessTitle(),
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  'Your Profile Is Ready To Use',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF09041B),
-                    fontSize: 23,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    height: 1.31,
-                  ),
-                ),
+                resetPassSuccessSubTitle(),
                 const SizedBox(
                   height: 100,
                 ),
-
                 //calling class to be used in continue button
-                const FarmSwapPrimaryButton(
+                const ForgotPassButton(
                   buttonTitle: "Continue",
-                  nextScreen: VerifycodeScreen(),
+                  nextScreen: SignInAdmin(),
                 ),
               ],
             ),

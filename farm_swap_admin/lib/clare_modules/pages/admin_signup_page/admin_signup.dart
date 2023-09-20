@@ -1,11 +1,10 @@
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_bio.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/widgets/admin_signup%20buttons/admin_signup_buttons.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/widgets/admin_signup_textfield_widgets/input/farmswap_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_bio_screen/admin_bio.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup%20buttons/admin_signup_buttons.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../constants/farmswap_typography.dart';
+import 'widgets/text/signup_typography.dart';
 
 class AdminSignUpScreen extends StatefulWidget {
   const AdminSignUpScreen({super.key});
@@ -43,7 +42,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                   farmSwapFontsubtitle(
                       text: "Modern Barter Solution", size: height),
                   const SizedBox(height: 15),
-                  farmSwapFont(text: "Sign Up For Free", size: height * 0.024),
+                  farmSwapFont(
+                    text: "Sign Up For Free",
+                    size: 16,
+                  ),
                   const SizedBox(height: 20),
 
                   //a container for the username textfield
@@ -79,6 +81,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     ),
                   ),
                   SizedBox(height: height * 0.024),
+
                   //tick the checkbox for the terms and condition
                   Container(
                     margin: const EdgeInsets.only(left: 510.0),
@@ -97,19 +100,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           },
                           activeColor: Colors.green,
                         ),
-                        const Opacity(
+                        Opacity(
                           opacity: 0.50,
-                          child: Text(
-                            'By signing up, you agree to FarmSwap Terms and Conditions',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                              height: 1.67,
-                            ),
-                          ),
+                          child: signupTermsConditionFont(),
                         ),
                       ],
                     ),
@@ -132,20 +125,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     onTap: () {
                       Navigator.of(context).pushNamed(RoutesManager.signInPage);
                     },
-                    child: Text(
-                      'Already have an account?',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                          color: const Color(0xFF53E78B),
-                          fontSize: height * 0.0147,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                          decorationStyle: TextDecorationStyle.solid,
-                          decorationColor: const Color(0xFF53E78B),
-                        ),
-                      ),
-                    ),
+
+                    //calling the class for the the text
+                    child: const SignupHaveAccountFont(),
                   ),
                 ],
               ),

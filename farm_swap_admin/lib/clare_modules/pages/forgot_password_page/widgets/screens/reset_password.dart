@@ -1,9 +1,10 @@
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/widgets/admin_signup_textfield_widgets/input/farmswap_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/text/forgot_pass_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../forgot_password/reset_success_screen.dart';
-import '../forgot_password/widgets/admin_signup buttons/admin_signup_buttons.dart';
+import 'reset_success_screen.dart';
+import '../admin_forgot_pass_buttons/forgot_pass_buttons.dart';
 
 class ResetpassScreen extends StatefulWidget {
   const ResetpassScreen({super.key});
@@ -44,31 +45,16 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
+                SizedBox(
                   width: 261,
-                  child: Text(
-                    'Reset your password here',
-                    style: TextStyle(
-                      color: Color(0xFF09041B),
-                      fontSize: 25,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                      height: 1.31,
-                    ),
-                  ),
+                  child: resetPassTitle(text: "Reset Password"),
                 ),
                 const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
                   width: 261,
-                  child: Text(
-                    'Select which contact details should we use to reset your password',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      height: 1.81,
-                    ),
-                  ),
+                  child: resetPassSubTitle(),
                 ),
                 const SizedBox(
                   height: 20,
@@ -101,8 +87,9 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 const SizedBox(
                   height: 39,
                 ),
-                //calling class to be used in next button
-                const FarmSwapPrimaryButton(
+
+                //calling class for the next button
+                const ForgotPassButton(
                   buttonTitle: "Next",
                   nextScreen: ResetSuccessScreen(),
                 ),

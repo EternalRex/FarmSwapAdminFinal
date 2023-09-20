@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FarmSwapPrimaryButton extends StatelessWidget {
+class ForgotPassButton extends StatelessWidget {
   final String buttonTitle;
   final Widget nextScreen;
-  const FarmSwapPrimaryButton({
+  const ForgotPassButton({
     super.key,
     required this.buttonTitle,
     required this.nextScreen,
