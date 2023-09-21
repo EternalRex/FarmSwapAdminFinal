@@ -172,7 +172,7 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                         children: [
                                           //Content Title
                                           Text(
-                                            'Barter Transactions Record',
+                                            'Payments',
                                             style:
                                                 Poppins.contentTitle.copyWith(
                                               color: const Color(0xFF09041B),
