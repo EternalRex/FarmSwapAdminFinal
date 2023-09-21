@@ -419,7 +419,7 @@ class __LogoutBttnState extends State<LogoutBttn> {
       padding: const EdgeInsets.only(left: 20, bottom: 20),
       child: Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextButton(
               onPressed: () {
