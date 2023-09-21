@@ -84,17 +84,28 @@ Text resetPassTitle({required String text, String? fontFamily, Color? color}) {
   );
 }
 
-Text resetPassSubTitle({String? text, String? fontFamily, Color? color}) {
-  return const Text(
-    'Enter your new password here.',
-    style: TextStyle(
-      color: Colors.black,
-      fontSize: 12,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w400,
-      height: 1.81,
-    ),
-  );
+class resetPassSubTitle extends StatelessWidget {
+  const resetPassSubTitle({
+    super.key,
+    required this.myText,
+  });
+
+  final String myText;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    return const Text(
+      'Enter your new password here.',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 12,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w400,
+        height: 1.81,
+      ),
+    );
+  }
 }
 
 Text resetPassSuccessTitle({String? text, String? fontFamily, Color? color}) {
