@@ -14,7 +14,7 @@ class _DashboardTransBttnState extends State<DashboardTransBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -26,6 +26,11 @@ class _DashboardTransBttnState extends State<DashboardTransBttn> {
                   const Image(
                     image:
                         AssetImage("assets/clare_assets/images/dashboard.png"),
+                        height: 20,
+                        width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Dashboard",
@@ -52,7 +57,7 @@ class __AdminAccTransBttnState extends State<AdminAccTransBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,6 +70,11 @@ class __AdminAccTransBttnState extends State<AdminAccTransBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/admin.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Admin Account",
@@ -91,7 +101,7 @@ class __UserAccTransBttnState extends State<UserAccTransBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -104,6 +114,11 @@ class __UserAccTransBttnState extends State<UserAccTransBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/users.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "User Account",
@@ -130,7 +145,7 @@ class __ListingsTransBttnState extends State<ListingsTransBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -144,6 +159,11 @@ class __ListingsTransBttnState extends State<ListingsTransBttn> {
                   const Image(
                     image:
                         AssetImage("assets/clare_assets/images/listings.png"),
+                        height: 20,
+                        width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Listings",
@@ -170,7 +190,7 @@ class __TransactionsBttnState extends State<TransactionsBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -185,6 +205,11 @@ class __TransactionsBttnState extends State<TransactionsBttn> {
                   const Image(
                     image: AssetImage(
                         "assets/clare_assets/images/transactions.png"),
+                        height: 20,
+                        width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Transactions",
@@ -211,7 +236,7 @@ class __ReportsBttnState extends State<ReportsBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -224,6 +249,11 @@ class __ReportsBttnState extends State<ReportsBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/reports.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Reports",
@@ -250,7 +280,7 @@ class __DisputeBttnState extends State<DisputeBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -264,6 +294,11 @@ class __DisputeBttnState extends State<DisputeBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/dispute.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Dispute",
@@ -290,7 +325,7 @@ class __WalletBttnState extends State<WalletBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -304,6 +339,11 @@ class __WalletBttnState extends State<WalletBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/wallet.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Wallet",
@@ -330,7 +370,7 @@ class __CommunicationBttnState extends State<CommunicationBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -345,6 +385,11 @@ class __CommunicationBttnState extends State<CommunicationBttn> {
                   const Image(
                     image: AssetImage(
                         "assets/clare_assets/images/communication.png"),
+                        height: 20,
+                        width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Communication",
@@ -371,7 +416,7 @@ class __LogoutBttnState extends State<LogoutBttn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 20, bottom: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -384,6 +429,11 @@ class __LogoutBttnState extends State<LogoutBttn> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage("assets/clare_assets/images/logout.png"),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
                   ),
                   sidemenuText(
                     text: "Logout",

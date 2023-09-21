@@ -1,6 +1,15 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_content_description.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_content_title.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
@@ -11,9 +20,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/reports_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,7 +40,7 @@ class _Barter extends State<Barter> {
         children: [
           //First expanded division of a row
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -60,7 +67,7 @@ class _Barter extends State<Barter> {
                     //Row for the logo, name, and slogan
                     ReportsLogoSideMenu(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Dashboard icon and label
@@ -125,7 +132,7 @@ class _Barter extends State<Barter> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 6,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -192,1010 +199,21 @@ class _Barter extends State<Barter> {
                             ],
                           ),
 
-                          child: SingleChildScrollView(
+                          child: const SingleChildScrollView(
                             child: Column(
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 25),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Content Title
-                                      Text(
-                                        'Barter Transactions Record',
-                                        style: Poppins.contentTitle.copyWith(
-                                          color: const Color(0xFF09041B),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 45, top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Total Barter:',
-                                            style: Poppins.contentText.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 3,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 45, top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '5',
-                                            style: Poppins.contentText.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                          
+                                BarterContentTitle(),
+
                                 //Header
                                 //Name
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 45, right: 45, top: 15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Name',
-                                        style: Poppins.farmerName.copyWith(
-                                          color: const Color.fromARGB(
-                                              179, 9, 4, 27),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 250,
-                                      ),
-                                      Text(
-                                        'Date',
-                                        style: Poppins.farmerName.copyWith(
-                                          color: const Color.fromARGB(
-                                              179, 9, 4, 27),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 150,
-                                      ),
-                                      Text(
-                                        'Barter/s',
-                                        style: Poppins.farmerName.copyWith(
-                                          color: const Color.fromARGB(
-                                              179, 9, 4, 27),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/vaugh.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Vaugh Noe Cabusao',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 110),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 88,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '1',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/niyumi.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Niyumi Misty Mitsugi',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 107),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 92,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '2',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/jade.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 113),
-                                            child: Text(
-                                              'Jade Cabusao',
-                                              style: Poppins.userName.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 177),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 23,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 17,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '3',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                BarterContentDescription(),
 
-
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/vaugh.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Vaugh Noe Cabusao',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 110),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 88,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '1',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
                                 //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/niyumi.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Niyumi Misty Mitsugi',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 107),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 92,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '2',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/jade.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 113),
-                                            child: Text(
-                                              'Jade Cabusao',
-                                              style: Poppins.userName.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 177),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 23,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 17,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '3',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/vaugh.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Vaugh Noe Cabusao',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 110),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 88,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '1',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/niyumi.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Niyumi Misty Mitsugi',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 107),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 92,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '2',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/jade.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 113),
-                                            child: Text(
-                                              'Jade Cabusao',
-                                              style: Poppins.userName.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 177),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 23,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 17,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '3',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/vaugh.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Vaugh Noe Cabusao',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 110),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 88,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '1',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/niyumi.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Niyumi Misty Mitsugi',
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 107),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 92,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 18,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '2',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                          
-                                //Farmer name, date of barter transaction, number of barters
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 45, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      //Farmer profile
-                                      const Image(
-                                        image: AssetImage(
-                                            'assets/rollaine_assets/images/jade.png'),
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                          
-                                      //Farmer name and identity
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 113),
-                                            child: Text(
-                                              'Jade Cabusao',
-                                              style: Poppins.userName.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 177),
-                                            child: Text(
-                                              'Farmer',
-                                              style:
-                                                  Poppins.detailsText.copyWith(
-                                                color: const Color(0xFF09041B),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        width: 23,
-                                      ),
-                          
-                                      //Date
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '8/17/2023',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 17,
-                                      ),
-                          
-                                      //Number barter
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          '3',
-                                          style: Poppins.detailsText.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-
-                                
+                                BarterNames(),
+                                BarterNames(),
+                                BarterNames(),
+                                BarterNames(),
+                                BarterNames(),
                               ],
                             ),
                           ),
@@ -1210,7 +228,7 @@ class _Barter extends State<Barter> {
 
           //Third expanded division which contains the navigation options of the reports page
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -1232,203 +250,58 @@ class _Barter extends State<Barter> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: Column(
+                child: const Column(
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 14),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 110),
+                        padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             //Chat button
-                            IconButton(
-                              onPressed: () {},
-                              icon: Image.asset('assets/rollaine_assets/icons/chat.png'),
-                              iconSize: 23,
+                            ReportsChatOptionsBtn(),
+                            SizedBox(
+                              width: 5,
                             ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-
                             //Notification button
-                            IconButton(
-                              onPressed: () {},
-                              icon:
-                                  Image.asset('assets/rollaine_assets/icons/notification.png'),
-                              iconSize: 24,
-                            ),
+                            ReportsNotificationOptionsBtn(),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 120,
                     ),
 
                     //Platform icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.platformPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Platform Reports',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/platform.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsPlatformOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Barter icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.barterPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Barter Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/barter.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsBarterOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Selling icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.sellingPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Selling Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/selling.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsSellingOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Number of users icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.numberPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Number of Users',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/number.png'),
-                              height: 21,
-                              width: 21,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsNumberOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Admin logs icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.logsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Admin Logs',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/logs.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),

@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
             child: Padding(
               /*WRAPPING A SCAFFOLD WITH PADDING SO THAT IT WILL HAVE SOME SPACE
               FROM THE BORDERS OF THE OTHER 2 DIVISIONS */
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
               /*PUTTING A SCAFFOLD INSIDE THE  CENTER CONTAINER SO THAT WE CAN
               USE THE BODY PROPERTY AND DECLARE SOME COLUMN OR ROWS THAT WILL HAVE
               A CHILDREN PROPERTY WHERE WE CAN PUT A LOT OF WIDGETS HEHEHE */
@@ -146,12 +146,9 @@ class _DashboardState extends State<Dashboard> {
                 appBar: AppBar(
                   /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
-                  title: DashBoardTitleText(
+                  title: const DashBoardTitleText(
                     myText: "Dashboard",
-                    myColor: const Color(0xFF09041B),
-                    mySize: 48,
-                    myFont: GoogleFonts.poppins().fontFamily,
-                    myWeight: FontWeight.w800,
+                    myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
@@ -163,25 +160,15 @@ class _DashboardState extends State<Dashboard> {
                     /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
                     HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
                     Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(10),
                       /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
                       HEIGH AND WIDTH OF THE TEXT FIELD */
                       child: SizedBox(
                         width: 250,
-                        height: 30,
-                        /*WRAPPING THE SEARCH BAR TEXT FIELD WITH MATERIAL WIDGET
-                        SO THAT WE CAN USE THE ELEVATION AND SHADOW COLOR TO PUT SOME NICE
-                        ELEVATED AND SHADOW EFFECT TO OUR SEARCH BAR */
-                        child: Material(
-                          elevation: 5,
-                          shadowColor: Colors.black,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                          IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-                          child: DashBSearchBar(),
-                        ),
+                        height: 15,
+                        /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
+                        IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
+                        child: DashBSearchBar(),
                       ),
                     ),
                     SizedBox(
@@ -209,18 +196,18 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 DashBoardTxt(
                                     myText: "Revenue",
-                                    myColor: Colors.black87,
+                                    myColor: const Color(0xFF09041B),
                                     mySize: 30,
                                     myFont: GoogleFonts.viga().fontFamily,
-                                    myWeight: FontWeight.bold),
+                                    myWeight: FontWeight.w800),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: const BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey,
+                                      color: shadow,
                                       blurRadius: 2,
-                                      offset: Offset(1, 2),
+                                      offset: const Offset(1, 2),
                                     ),
                                   ], color: Colors.white),
                                   child: Padding(
@@ -243,18 +230,18 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 DashBoardTxt(
                                     myText: "Users",
-                                    myColor: Colors.black87,
+                                    myColor: const Color(0xFF09041B),
                                     mySize: 30,
                                     myFont: GoogleFonts.viga().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: const BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey,
+                                      color: shadow,
                                       blurRadius: 2,
-                                      offset: Offset(1, 2),
+                                      offset: const Offset(1, 2),
                                     ),
                                   ], color: Colors.white),
                                   child: const Padding(
@@ -278,18 +265,18 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 DashBoardTxt(
                                     myText: "Barter Transactions",
-                                    myColor: Colors.black87,
+                                    myColor: const Color(0xFF09041B),
                                     mySize: 30,
                                     myFont: GoogleFonts.viga().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: const BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey,
+                                      color: shadow,
                                       blurRadius: 2,
-                                      offset: Offset(1, 2),
+                                      offset: const Offset(1, 2),
                                     ),
                                   ], color: Colors.white),
                                   child: const Padding(
@@ -308,18 +295,18 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 DashBoardTxt(
                                     myText: "Sale Transactions",
-                                    myColor: Colors.black87,
+                                    myColor: const Color(0xFF09041B),
                                     mySize: 30,
                                     myFont: GoogleFonts.viga().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: const BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey,
+                                      color: shadow,
                                       blurRadius: 2,
-                                      offset: Offset(1, 2),
+                                      offset: const Offset(1, 2),
                                     ),
                                   ], color: Colors.white),
                                   child: const Padding(
@@ -364,7 +351,8 @@ class _DashboardState extends State<Dashboard> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -373,10 +361,10 @@ class _DashboardState extends State<Dashboard> {
                           /*PROFILE TEXT */
                           DashBoardTxt(
                             myText: "Profile",
-                            myColor: Colors.black,
+                            myColor: const Color(0xFF09041B),
                             mySize: 15,
                             myFont: GoogleFonts.poppins().fontFamily,
-                            myWeight: FontWeight.bold,
+                            myWeight: FontWeight.w800,
                           ),
                           const SizedBox(
                             width: 34,

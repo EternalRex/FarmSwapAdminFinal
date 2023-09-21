@@ -24,9 +24,9 @@ Text paymentStatusSubTitle({String? text, String? fontFamily, Color? color}) {
   return Text(
     'Modern Barter Solution',
     style: GoogleFonts.inter(
-      fontSize: 8,
       color: const Color(0xFF09051C),
-      fontWeight: FontWeight.w900,
+      fontSize: 8,
+      fontWeight: FontWeight.w700,
       letterSpacing: 1.0,
     ),
   );
@@ -40,7 +40,7 @@ Text sidemenuText({required String text, String? fontFamily, Color? color}) {
       color: Color(0xFF09041B),
       fontSize: 13,
       fontFamily: 'Poppins',
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
     ),
   );
 }
@@ -52,9 +52,9 @@ Text transactionTitle(
     textAlign: TextAlign.center,
     style: TextStyle(
       color: Color(0xFF09041B),
-      fontSize: 48,
+      fontSize: 40,
       fontFamily: 'Poppins',
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w800,
     ),
   );
 }
@@ -81,7 +81,7 @@ Text rightsidemenuText(
       color: Color(0xFF09041B),
       fontSize: 13,
       fontFamily: 'Poppins',
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       height: 1.31,
     ),
   );
