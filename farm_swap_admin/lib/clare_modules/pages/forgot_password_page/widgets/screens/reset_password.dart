@@ -52,9 +52,10 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 261,
-                  child: resetPassSubTitle(),
+                  //Clare ako lang gi butangan ug my text kay naka required man nya error dili ko maka padagan
+                  child: resetPassSubTitle(myText: '',),
                 ),
                 const SizedBox(
                   height: 20,
