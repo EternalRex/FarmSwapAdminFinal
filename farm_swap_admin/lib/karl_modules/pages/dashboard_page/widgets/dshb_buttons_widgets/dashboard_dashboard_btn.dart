@@ -8,28 +8,36 @@ class DashBoardOptionsBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Image(
-            image: AssetImage(
-              "assets/karl_assets/images/dashboard.png",
+    return Padding(
+      padding: const EdgeInsets.only(left: 25),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Image(
+              image: AssetImage(
+                "assets/karl_assets/images/dashboard.png",
+              ),
+              height: 20,
+              width: 20,
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(RoutesManager.dashboard);
-            },
-            child: DashBoardTxt(
-              myText: "Dashboard",
-              myColor: Colors.black,
-              mySize: 13,
-              myFont: GoogleFonts.poppins().fontFamily,
-              myWeight: FontWeight.bold,
+            const SizedBox(
+                width: 3,
+              ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(RoutesManager.dashboard);
+              },
+              child: DashBoardTxt(
+                myText: "Dashboard",
+                myColor: const Color(0xFF09041B),
+                mySize: 13,
+                myFont: GoogleFonts.poppins().fontFamily,
+                myWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

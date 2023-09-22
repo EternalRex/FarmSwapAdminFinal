@@ -1,7 +1,7 @@
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import '../../../../../constants/Colors/colors.dart';
 import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
 class AdminEditProfileBtn extends StatefulWidget {
@@ -18,20 +18,22 @@ class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
       height: 40,
       width: 130,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.white, farmSwapTitlegreen],
-          begin: Alignment.center,
-          end: Alignment.center,
-          stops: const [0.12, 0.25],
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFF53E78B),
+            Color(0xFF14BE77),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(15),
+          Radius.circular(17.50),
         ),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black,
+            color: shadow,
             blurRadius: 5,
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
           ),
         ],
       ),

@@ -25,8 +25,13 @@ class Poppins {
   );
   static TextStyle menuTitle = const TextStyle(
     fontFamily: poppins,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     fontSize: 13,
+  );
+  static TextStyle rightTitle = const TextStyle(
+    fontFamily: poppins,
+    fontWeight: FontWeight.w400,
+    fontSize: 11,
   );
   static TextStyle contentTitle = const TextStyle(
     fontFamily: poppins,

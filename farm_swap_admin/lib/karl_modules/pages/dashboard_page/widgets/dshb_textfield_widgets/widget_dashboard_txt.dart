@@ -1,3 +1,4 @@
+import "package:farm_swap_admin/constants/typography/typography.dart";
 import "package:flutter/material.dart";
 
 /*A TEXT WIDGET USED IN DASHBOARD OPTIONS */
@@ -37,33 +38,18 @@ class DashBoardTitleText extends StatelessWidget {
   const DashBoardTitleText(
       {super.key,
       required this.myText,
-      required this.myColor,
-      required this.mySize,
-      required this.myFont,
-      required this.myWeight});
+      required this.myColor});
 
   final String myText;
   final Color myColor;
-  final double mySize;
-  final String? myFont;
-  final FontWeight myWeight;
+
 
   @override
   Widget build(BuildContext context) {
     return Text(
       myText,
-      style: TextStyle(
+      style: Poppins.pageTitle.copyWith(
         color: myColor,
-        fontSize: mySize,
-        fontFamily: myFont,
-        fontWeight: myWeight,
-        shadows: const [
-          Shadow(
-            color: Colors.grey,
-            blurRadius: 7,
-            offset: Offset(6, 1),
-          )
-        ],
       ),
     );
   }

@@ -1,32 +1,26 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import '../dshb_colors_widgets/widget_dashboard_colors.dart';
-
 class DashBSearchBar extends StatelessWidget {
   const DashBSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(10),
-        border: const UnderlineInputBorder(
+        contentPadding: const EdgeInsets.all(5),
+        filled: true,
+        fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(15),
+            Radius.circular(10),
           ),
+          borderSide: BorderSide.none,
         ),
-        prefixIcon: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.search),
-          color: dashbiardStrongOrangeColor,
-        ),
-        labelText: "Search",
-        labelStyle: TextStyle(
-          color: dashboardOrangeColor,
-          fontSize: 13,
-          fontFamily: GoogleFonts.poppins().fontFamily,
-        ),
+        hintText: 'Search',
+        prefixIcon: const Icon(Icons.search_rounded),
+        prefixIconColor: const Color(0xFFDA6317),
       ),
     );
   }

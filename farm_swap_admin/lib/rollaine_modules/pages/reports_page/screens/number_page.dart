@@ -1,8 +1,28 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/reports_text.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/title_text.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_consumers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_farmers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_newusers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_overallusers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentSection/number_content_title.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_logout_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_reports_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_transactions_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +42,7 @@ class _NumberUsers extends State<NumberUsers> {
         children: [
           //First expanded division of a row
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -44,379 +64,68 @@ class _NumberUsers extends State<NumberUsers> {
                 ),
 
                 //Column in which there is the navigation options
-                child: Column(
+                child: const Column(
                   children: [
                     //Row for the logo, name, and slogan
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/rollaine_assets/images/farmswapLogo.png'),
-                            height: 50,
-                            width: 50,
-                          ),
-
-                          //Column for FarmSwap title and slogan
-                          Column(
-                            children: [
-                              //FarmSwap title
-                              Text(
-                                'FarmSwap',
-                                style: GoogleFonts.viga(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0.50,
-                                  foreground: Paint()
-                                    ..shader = const LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ).createShader(
-                                      const Rect.fromLTWH(
-                                          0.0, 0.0, 200.0, 70.0),
-                                    ),
-                                ),
-                              ),
-
-                              //FarmSwap slogan
-                              Text(
-                                'Modern Barter Solution',
-                                style: GoogleFonts.inter(
-                                  color: const Color(0xFF09051C),
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 1.0,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
+                    ReportsLogoSideMenu(),
+                    SizedBox(
+                      height: 25,
                     ),
 
                     //Dashboard icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/dashboard.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.dashboard);
-                              },
-                              child: const ReportsText(
-                                myText: 'Dashboard',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsDashboardOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Admin Account icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/admin.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminAccount);
-                              },
-                              child: const ReportsText(
-                                myText: 'Admin Account',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsAdminAccountOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //User Account icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/user.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.userAccountPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'User Account',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsUserAccountOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Listings icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/listings.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.listingsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Listings',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsListingsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Transactions icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/transaction.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminTransactionsPayment);
-                              },
-                              child: const ReportsText(
-                                myText: 'Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsTransactionsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Reports icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/reports.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.reportsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Reports',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsReportsOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Dispute icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/dispute.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Dispute',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsDisputeOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Wallet icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/wallet.png'),
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Wallet',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsWalletOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Communication icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image:
-                                  AssetImage('assets/rollaine_assets/icons/communication.png'),
-                              height: 24,
-                              width: 24,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.communicationPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Communication',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
+                    ReportsCommunicationOptionsBtn(),
+                    Spacer(),
 
                     //Logout icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 20),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/logout.png'),
-                              height: 24,
-                              width: 24,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const ReportsText(
-                                myText: 'Logout',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ReportsLogoutOptionsBtn(),
                   ],
                 ),
               ),
@@ -425,7 +134,7 @@ class _NumberUsers extends State<NumberUsers> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 6,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -492,191 +201,27 @@ class _NumberUsers extends State<NumberUsers> {
                             ],
                           ),
 
-                          child: Column(
+                          child: const Column(
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 45, top: 25),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    //Content Title
-                                    Text(
-                                      'Number of Users',
-                                      style: Poppins.contentTitle.copyWith(
-                                        color: const Color(0xFF09041B),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              NumberContentTitle(),
 
                               //Row for 2 expanded container
                               //Row1
                               Row(
                                 children: [
                                   //Expanded container 1
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 45, top: 10),
-                                      child: Container(
-                                        height: 120,
-                                        //Designing the container
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              const BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-
-                                          //Box shadow of the container
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(1, 5),
-                                            ),
-                                          ],
-                                        ),
-
-                                        //Content of container 1
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 15),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Overall Users',
-                                                    style: Poppins.contentText
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 9,
-                                                  ),
-                                                  Text(
-                                                    '75',
-                                                    style: Poppins.digits
-                                                        .copyWith(
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            const LinearGradient(
-                                                          colors: <Color>[
-                                                            Color(0xFF53E78B),
-                                                            Color(0xFF14BE77),
-                                                          ],
-                                                        ).createShader(
-                                                          const Rect.fromLTWH(
-                                                              0.0,
-                                                              0.0,
-                                                              200.0,
-                                                              70.0),
-                                                        ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
+                                  NumberOverallUsers(),
+                                  SizedBox(
                                     height: 50,
                                     width: 50,
                                   ),
 
                                   //Expanded container 2
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 45, top: 10),
-                                      child: Container(
-                                        height: 120,
-                                        //Designing the container
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              const BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-
-                                          //Box shadow of the container
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(1, 5),
-                                            ),
-                                          ],
-                                        ),
-
-                                        //Content of container 2
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 15),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'New Users',
-                                                    style: Poppins.contentText
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 9,
-                                                  ),
-                                                  Text(
-                                                    '10',
-                                                    style: Poppins.digits
-                                                        .copyWith(
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            const LinearGradient(
-                                                          colors: <Color>[
-                                                            Color(0xFF53E78B),
-                                                            Color(0xFF14BE77),
-                                                          ],
-                                                        ).createShader(
-                                                          const Rect.fromLTWH(
-                                                              0.0,
-                                                              0.0,
-                                                              200.0,
-                                                              70.0),
-                                                        ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  NumberNewUsers(),
                                 ],
                               ),
 
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
 
@@ -685,163 +230,14 @@ class _NumberUsers extends State<NumberUsers> {
                               Row(
                                 children: [
                                   //Expanded container 3
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 45, top: 10),
-                                      child: Container(
-                                        height: 120,
-                                        //Designing the container
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              const BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-
-                                          //Box shadow of the container
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(1, 5),
-                                            ),
-                                          ],
-                                        ),
-
-                                        //Content of container 3
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 15),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Farmers',
-                                                    style: Poppins.contentText
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 9,
-                                                  ),
-                                                  Text(
-                                                    '45',
-                                                    style: Poppins.digits
-                                                        .copyWith(
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            const LinearGradient(
-                                                          colors: <Color>[
-                                                            Color(0xFF53E78B),
-                                                            Color(0xFF14BE77),
-                                                          ],
-                                                        ).createShader(
-                                                          const Rect.fromLTWH(
-                                                              0.0,
-                                                              0.0,
-                                                              200.0,
-                                                              70.0),
-                                                        ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
+                                  NumberFarmers(),
+                                  SizedBox(
                                     height: 50,
                                     width: 50,
                                   ),
 
                                   //Expanded container 4
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 45, top: 10),
-                                      child: Container(
-                                        height: 120,
-                                        //Designing the container
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              const BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-
-                                          //Box shadow of the container
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(1, 5),
-                                            ),
-                                          ],
-                                        ),
-
-                                        //Content of container 4
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 15),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Consumers',
-                                                    style: Poppins.contentText
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 9,
-                                                  ),
-                                                  Text(
-                                                    '20',
-                                                    style: Poppins.digits
-                                                        .copyWith(
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            const LinearGradient(
-                                                          colors: <Color>[
-                                                            Color(0xFF53E78B),
-                                                            Color(0xFF14BE77),
-                                                          ],
-                                                        ).createShader(
-                                                          const Rect.fromLTWH(
-                                                              0.0,
-                                                              0.0,
-                                                              200.0,
-                                                              70.0),
-                                                        ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  NumberConsumers(),
                                 ],
                               ),
                             ],
@@ -857,7 +253,7 @@ class _NumberUsers extends State<NumberUsers> {
 
           //Third expanded division which contains the navigation options of the reports page
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
@@ -879,203 +275,58 @@ class _NumberUsers extends State<NumberUsers> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: Column(
+                child: const Column(
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 14),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 110),
+                        padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             //Chat button
-                            IconButton(
-                              onPressed: () {},
-                              icon: Image.asset('assets/rollaine_assets/icons/chat.png'),
-                              iconSize: 23,
+                            ReportsChatOptionsBtn(),
+                            SizedBox(
+                              width: 5,
                             ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-
                             //Notification button
-                            IconButton(
-                              onPressed: () {},
-                              icon:
-                                  Image.asset('assets/rollaine_assets/icons/notification.png'),
-                              iconSize: 24,
-                            ),
+                            ReportsNotificationOptionsBtn(),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 120,
                     ),
 
                     //Platform icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.platformPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Platform Reports',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/platform.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsPlatformOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Barter icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.barterPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Barter Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/barter.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsBarterOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Selling icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.sellingPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Selling Transactions',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/selling.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsSellingOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Number of users icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.numberPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Number of Users',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/number.png'),
-                              height: 21,
-                              width: 21,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    ReportsNumberOptionsBtn(),
+                    SizedBox(
                       height: 15,
                     ),
 
                     //Admin logs icon and label
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.logsPage);
-                              },
-                              child: const ReportsText(
-                                myText: 'Admin Logs',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage('assets/rollaine_assets/icons/logs.png'),
-                              height: 22,
-                              width: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),

@@ -1,15 +1,15 @@
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_bio.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_preview_photo.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_signup.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_uploadphoto.dart';
-import 'package:farm_swap_admin/clare_modules/admin_signup_page/admin_verification.dart';
-import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/paymentstatus.dart';
-import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/promotion.dart';
-import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/swapcoinhistory.dart';
-import 'package:farm_swap_admin/clare_modules/dashboard_transactions_page/userwallet.dart';
-import 'package:farm_swap_admin/clare_modules/forgot_password/forgot_password.dart';
-import 'package:farm_swap_admin/clare_modules/forgot_password/reset_password.dart';
-import 'package:farm_swap_admin/clare_modules/forgot_password/reset_success_screen.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_bio_screen/admin_bio.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_preview_photo.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_uploadphoto.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/paymentstatus.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/swapcoinhistory.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgot_password.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_password.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_success_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -24,7 +24,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/sell
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 
-import '../clare_modules/admin_signup_page/signup_success_screen.dart';
+import '../clare_modules/pages/admin_signup_page/screens/signup_success_screen.dart';
 import '../karl_modules/pages/admin_signup_page/screens/admin_signup.dart';
 
 class RoutesManager {
