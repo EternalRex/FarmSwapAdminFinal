@@ -23,22 +23,6 @@ class ListingsContentDescription extends StatelessWidget {
             ],
           ),
         ),
-
-        //Name
-        Padding(
-          padding: const EdgeInsets.only(left: 45, top: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Name',
-                style: Poppins.farmerName.copyWith(
-                  color: const Color.fromARGB(179, 9, 4, 27),
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

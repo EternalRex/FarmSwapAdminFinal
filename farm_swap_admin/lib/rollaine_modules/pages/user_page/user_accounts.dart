@@ -1,6 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserContentSection/user_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_communication_btn.dart';
@@ -210,7 +211,7 @@ class _UserAccount extends State<UserAccount> {
                                 Row(
                                   children: [
                                     Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 14, vertical: 14),
@@ -222,7 +223,7 @@ class _UserAccount extends State<UserAccount> {
                                             child: Column(
                                               children: [
                                                 Text(
-                                                  'Name',
+                                                  'Users',
                                                   style: Poppins.farmerName
                                                       .copyWith(
                                                     color:
@@ -290,7 +291,7 @@ class _UserAccount extends State<UserAccount> {
                                   ],
                                 ),
                                 //Farmer name, identity, details button
-                                //UserNames(),
+                                const UserNames(),
                               ],
                             ),
                           ),

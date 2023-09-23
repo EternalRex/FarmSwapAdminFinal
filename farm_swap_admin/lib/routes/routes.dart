@@ -10,7 +10,8 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgot_password.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_password.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_success_screen.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
@@ -33,6 +34,7 @@ class RoutesManager {
   static const signInPage = "/signinpage";
   static const dashboard = "/dashboard";
   static const adminAccount = "/adminaccount";
+  static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
 
   //clare routes
@@ -87,6 +89,11 @@ class RoutesManager {
       case adminAccount:
         return MaterialPageRoute(
           builder: (context) => const AdminAccount(),
+        );
+
+      case adminProfile:
+        return MaterialPageRoute(
+          builder: (context) => const AdminEditProfile(),
         );
 
       case adminSignUp:

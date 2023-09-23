@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
@@ -39,7 +40,10 @@ class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
       ),
       child: Center(
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context)
+                    .pushNamed(RoutesManager.adminProfile);
+          },
           child: DashBoardTxt(
             myText: "Edit Profile",
             myColor: Colors.white,
