@@ -209,56 +209,79 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 14, vertical: 14),
                                           child: Container(
-                                            height: 50,
-                                            color: Colors.amber,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  //Farmer profile
-                                                  const Image(
-                                                    image: AssetImage(
-                                                        'assets/rollaine_assets/images/vaugh.png'),
-                                                    height: 40,
-                                                    width: 40,
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 15,
-                                                  ),
-
-                                                  //Farmer name and identity
-                                                  Column(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: const BorderRadius.all(
+                                                Radius.circular(15),
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: shadow,
+                                                  blurRadius: 2,
+                                                  offset: const Offset(1, 5),
+                                                ),
+                                              ],
+                                            ),
+                                            height: 60,
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
-                                                      Text(
-                                                        'Vaugh Noe Cabusao',
-                                                        style: Poppins.userName
-                                                            .copyWith(
-                                                          color: const Color(
-                                                              0xFF09041B),
-                                                        ),
+                                                      //Farmer profile
+                                                      const Image(
+                                                        image: AssetImage(
+                                                            'assets/rollaine_assets/images/vaugh.png'),
+                                                        height: 40,
+                                                        width: 40,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 110),
-                                                        child: Text(
-                                                          'Farmer',
-                                                          style: Poppins
-                                                              .detailsText
-                                                              .copyWith(
-                                                            color: const Color(
-                                                                0xFF09041B),
+                                                      const SizedBox(
+                                                        width: 15,
+                                                      ),
+
+                                                      //Farmer name and identity
+                                                      Column(
+                                                        children: [
+                                                          Text(
+                                                            'Vaugh Noe Cabusao',
+                                                            style: Poppins.userName
+                                                                .copyWith(
+                                                              color: const Color(
+                                                                  0xFF09041B),
+                                                            ),
                                                           ),
-                                                        ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    right: 110),
+                                                            child: Text(
+                                                              'Farmer',
+                                                              style: Poppins
+                                                                  .detailsText
+                                                                  .copyWith(
+                                                                color: const Color(
+                                                                    0xFF09041B),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(width: 470),
+                                                      IconButton(
+                                                        onPressed: () {},
+                                                        icon: const Icon(
+                                                            Icons.edit_square),
+                                                        color: greenNormal,
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
