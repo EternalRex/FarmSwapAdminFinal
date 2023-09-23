@@ -1,7 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/editprofile_description.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -198,8 +197,21 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  //Name
-                                  const EditProfileDescription(),
+                                  //Title
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 50, top: 20),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'My Profile',
+                                          style: Poppins.contentTitle.copyWith(
+                                            color: const Color(0xFF09041B),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
                                   Row(
                                     children: [
@@ -207,11 +219,12 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                         flex: 4,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 14, vertical: 14),
+                                              horizontal: 50, vertical: 14),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(15),
                                               ),
                                               boxShadow: [
@@ -248,7 +261,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                         children: [
                                                           Text(
                                                             'Vaugh Noe Cabusao',
-                                                            style: Poppins.userName
+                                                            style: Poppins
+                                                                .userName
                                                                 .copyWith(
                                                               color: const Color(
                                                                   0xFF09041B),
@@ -271,7 +285,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                           ),
                                                         ],
                                                       ),
-                                                      const SizedBox(width: 470),
+                                                      const SizedBox(
+                                                          width: 400),
                                                       IconButton(
                                                         onPressed: () {},
                                                         icon: const Icon(
@@ -294,47 +309,84 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                         flex: 4,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 14, vertical: 14),
+                                              horizontal: 50, vertical: 14),
                                           child: Container(
-                                            height: 100,
-                                            color: Colors.amber,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  const CircleAvatar(
-                                                    radius: 30,
-                                                    backgroundImage: NetworkImage(
-                                                        "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(15),
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: shadow,
+                                                  blurRadius: 2,
+                                                  offset: const Offset(1, 5),
+                                                ),
+                                              ],
+                                            ),
+                                            height: 400,
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 20, top: 10),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
-                                                      Text(
-                                                        'Erza Scarlet Heartfilia',
-                                                        style: Poppins
-                                                            .contentText
-                                                            .copyWith(
-                                                          color: const Color(
-                                                              0xFF09051C),
-                                                        ),
+                                                      const SizedBox(
+                                                        height: 10,
                                                       ),
-                                                      Text(
-                                                        'Admin',
-                                                        style: Poppins
-                                                            .rightTitle
-                                                            .copyWith(
-                                                          color: const Color(
-                                                              0xFF09051C),
-                                                        ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            'Personal Information',
+                                                            style: Poppins
+                                                                .contentTitle
+                                                                .copyWith(
+                                                              color: const Color(
+                                                                  0xFF09041B),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          width: 400),
+                                                      IconButton(
+                                                        onPressed: () {},
+                                                        icon: const Icon(
+                                                            Icons.edit_square),
+                                                        color: greenNormal,
                                                       ),
                                                     ],
-                                                  )
-                                                ],
-                                              ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 20, top: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          Text(
+                                                            'Name',
+                                                            style: Poppins
+                                                                .contentText
+                                                                .copyWith(
+                                                              color: const Color(
+                                                                  0xFF09041B),
+                                                            ),
+                                                          ),
+                                                          
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
