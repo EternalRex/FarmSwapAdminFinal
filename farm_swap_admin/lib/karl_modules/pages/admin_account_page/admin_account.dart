@@ -372,18 +372,18 @@ class _AdminAccount extends State<AdminAccount> {
                     /*THE NAME OF THE USER */
                     DashBoardTxt(
                       myText: "Erza Scarlet Heartfilia",
-                      myColor: Colors.black,
+                      myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     /*ID OF THE USER */
                     DashBoardTxt(
                       myText: "ID: 10101010",
-                      myColor: Colors.black,
+                      myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     const SizedBox(
                       height: 30,

@@ -1,6 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/editprofile_description.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -328,63 +329,118 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                             height: 400,
                                             child: Column(
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, top: 10),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            'Personal Information',
-                                                            style: Poppins
-                                                                .contentTitle
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
+                                                const EditProfileDescription(),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 10),
+                                                        child: Container(
+                                                          height: 300,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'First Name',
+                                                                  style: Poppins
+                                                                      .contentText
+                                                                      .copyWith(
+                                                                    color: const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        55,
+                                                                        54,
+                                                                        56),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                const TextField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            5),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
-                                                      const SizedBox(
-                                                          width: 400),
-                                                      IconButton(
-                                                        onPressed: () {},
-                                                        icon: const Icon(
-                                                            Icons.edit_square),
-                                                        color: greenNormal,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, top: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            'Name',
-                                                            style: Poppins
-                                                                .contentText
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 10),
+                                                        child: Container(
+                                                          height: 300,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.blue,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Last Name',
+                                                                  style: Poppins
+                                                                      .contentText
+                                                                      .copyWith(
+                                                                    color: const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        55,
+                                                                        54,
+                                                                        56),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                          
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
