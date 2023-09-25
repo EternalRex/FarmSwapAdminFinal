@@ -1,0 +1,56 @@
+import "package:farm_swap_admin/constants/typography/typography.dart";
+import "package:flutter/material.dart";
+
+/*A TEXT WIDGET USED IN DASHBOARD OPTIONS */
+class DisputeTxt extends StatelessWidget {
+  const DisputeTxt({
+    super.key,
+    required this.myText,
+    required this.myColor,
+    required this.mySize,
+    required this.myFont,
+    required this.myWeight,
+  });
+
+  final String myText;
+  final Color myColor;
+  final double mySize;
+  final String? myFont;
+  final FontWeight myWeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      myText,
+      style: TextStyle(
+        color: myColor,
+        fontSize: mySize,
+        fontFamily: myFont,
+        fontWeight: myWeight,
+      ),
+    );
+  }
+}
+
+/*JUST A SEPARATE CLASS OF A TEXT WIDGET SO THAT I CAN USE THIS AS THE TITLE 
+OF DASHBOARD AND USE SOME SHADOW PROPERTIES */
+class DisputeTitleText extends StatelessWidget {
+  const DisputeTitleText(
+      {super.key,
+      required this.myText,
+      required this.myColor});
+
+  final String myText;
+  final Color myColor;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      myText,
+      style: Poppins.pageTitle.copyWith(
+        color: myColor,
+      ),
+    );
+  }
+}

@@ -1,22 +1,23 @@
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
-class DashDisputeOptionsBtn extends StatelessWidget {
-  const DashDisputeOptionsBtn({super.key});
+import '../../../../../routes/routes.dart';
+import '../dispute_text/widget_dispute_txt.dart';
+
+class DisputeLogoutOptionBtn extends StatelessWidget {
+  const DisputeLogoutOptionBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25),
+      padding: const EdgeInsets.only(left: 25, bottom: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Image(
               image: AssetImage(
-                "assets/karl_assets/images/dispute.png",
+                "assets/karl_assets/images/logout.png",
               ),
               height: 20,
               width: 20,
@@ -26,11 +27,10 @@ class DashDisputeOptionsBtn extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.dispute);
+                Navigator.of(context).pushNamed(RoutesManager.introPage);
               },
-              child: DashBoardTxt(
-                myText: "Dispute",
+              child: DisputeTxt(
+                myText: "Logout",
                 myColor: const Color(0xFF09041B),
                 mySize: 13,
                 myFont: GoogleFonts.poppins().fontFamily,

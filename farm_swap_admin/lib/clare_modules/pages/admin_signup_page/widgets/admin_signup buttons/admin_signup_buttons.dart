@@ -38,8 +38,8 @@ class FarmSwapPrimaryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Container(
-          width: 157,
-          height: 57,
+          width: 150,
+          height: 50,
           alignment: Alignment.center,
           child: Text(
             buttonTitle, // Replace 'Button Text' with the text you want to display

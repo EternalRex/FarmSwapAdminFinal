@@ -1,38 +1,33 @@
-import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/addressinfo.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/deactivate_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/personalinfo.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_adminaccount_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_commu_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dashboard_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dispute_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_history_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_listings_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_logout_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_options_header_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_reports_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_request_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_transaction_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_useraccout_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_wallet_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/dispute_history_title.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_search.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_txt.dart';
+import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../../constants/Colors/colors.dart';
 
-class AdminEditProfile extends StatefulWidget {
-  const AdminEditProfile({super.key});
+class Dispute extends StatefulWidget {
+  const Dispute({super.key});
 
   @override
-  State<AdminEditProfile> createState() => _AdminEditProfileState();
+  State<Dispute> createState() => _DisputeState();
 }
 
-class _AdminEditProfileState extends State<AdminEditProfile> {
+class _DisputeState extends State<Dispute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,65 +60,65 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                 child: const Column(
                   children: [
                     /*THE TITLE AND LOGO IN THE PAGE OPTIONS */
-                    DashPageOptionsTitle(),
+                    DisputePageOptionsTitle(),
                     /*30 PXLS SPACE BETWEEN*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL HOLD THE DASHBOARD LOGO AND THE DASHBOARD LABEL */
-                    DashBoardOptionsBtn(),
+                    DisputeDashboardOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE  ADMIN ACCOUNT LOGO AND LABEL*/
-                    DashAdminAccountOptionsBtn(),
+                    DisputeAdminAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE USER ACCOUNTS LOGO AND LABEL */
-                    DashUserAccountOptionsBtn(),
+                    DisputeUserAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE LISTINGS ICON AND LABEL */
-                    DashListingsOptionsBtn(),
+                    DisputeListingsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE TRANSACTIONS ICON AND LABEL */
-                    DashTransactionsOptionsBtn(),
+                    DisputeTransactionsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE REPORTS ICON AND LABEL */
-                    DashReportsOptionsBtn(),
+                    DisputeReportsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE DISPUTE ICON AND LABEL */
-                    DashDisputeOptionsBtn(),
+                    DisputeDisputeOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
-                    DashWalletOptions(),
+                    DisputeWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    DashCommunicationOptionsBtn(),
+                    DisputeCommunicationOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
-                    DashLogoutOptionBtn(),
+                    DisputeLogoutOptionBtn(),
                   ],
                 ),
               ),
@@ -148,8 +143,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                   appBar: AppBar(
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
-                    title: const DashBoardTitleText(
-                      myText: "Edit Profile",
+                    title: const DisputeTitleText(
+                      myText: "Dispute",
                       myColor: Color(0xFF09041B),
                     ),
                     backgroundColor: Colors.transparent,
@@ -170,7 +165,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                           height: 15,
                           /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
                           IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-                          child: DashBSearchBar(),
+                          child: DisputeSearchBar(),
                         ),
                       ),
                     ],
@@ -205,126 +200,78 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  //Title
-                                  const FormTitle(),
+                                  //Name
+                                  const DisputeHistoryTitle(),
 
-                                  const AccountName(),
-
-                                  Row(
+                                  Column(
                                     children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 50, vertical: 14),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(15),
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: shadow,
-                                                  blurRadius: 2,
-                                                  offset: const Offset(1, 5),
-                                                ),
-                                              ],
-                                            ),
-                                            height: 380,
-                                            child: const Column(
-                                              children: [
-                                                EditProfileDescription(),
-                                                PersonalInfo(),
-                                              ],
-                                            ),
+                                      Container(
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(15),
                                           ),
+
+                                          //Box shadow of the container
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: shadow,
+                                              blurRadius: 2,
+                                              offset: const Offset(1, 5),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Overall Users',
+                                                    style: Poppins.contentText
+                                                        .copyWith(
+                                                      color: const Color(
+                                                          0xFF09051C),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 9,
+                                                  ),
+                                                  Text(
+                                                    '75',
+                                                    style:
+                                                        Poppins.digits.copyWith(
+                                                      foreground: Paint()
+                                                        ..shader =
+                                                            const LinearGradient(
+                                                          colors: <Color>[
+                                                            Color(0xFF53E78B),
+                                                            Color(0xFF14BE77),
+                                                          ],
+                                                        ).createShader(
+                                                          const Rect.fromLTWH(
+                                                              0.0,
+                                                              0.0,
+                                                              200.0,
+                                                              70.0),
+                                                        ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 50, vertical: 14),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(15),
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: shadow,
-                                                  blurRadius: 2,
-                                                  offset: const Offset(1, 5),
-                                                ),
-                                              ],
-                                            ),
-                                            height: 280,
-                                            child: const Column(
-                                              children: [
-                                                EditProfileDescription(),
-                                                AddressInfo(),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
-                                  DecoratedBox(
-                                    decoration: const BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          Color(0xFF53E78B),
-                                          Color(0xFF14BE77),
-                                        ],
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5),
-                                      ),
-                                    ),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        disabledForegroundColor: Colors
-                                            .transparent
-                                            .withOpacity(0.38),
-                                        disabledBackgroundColor: Colors
-                                            .transparent
-                                            .withOpacity(0.12),
-                                        shadowColor: Colors.transparent,
-                                      ),
-                                      onPressed: () {},
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 5, bottom: 5),
-                                        child: Text(
-                                          'Update',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 0.50,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -391,17 +338,13 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                       ),
                     ),
                     const SizedBox(
-                      height: 150,
+                      height: 180,
                     ),
-                    const UpdateOptionsBtn(),
+                    const DisputeHistoryOptionsBtn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    const ArchiveOptionsBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const DeactivateOptionsBtn(),
+                    const DisputeRequestOptionsBtn(),
                   ],
                 ),
               ),

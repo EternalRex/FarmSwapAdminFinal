@@ -25,7 +25,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
             "assets/karl_assets/images/admin_signIn_pattern.svg",
             // ignore: deprecated_member_use
             colorBlendMode: BlendMode.screen,
-            height: 500,
+            height: 450,
             width: MediaQuery.of(context).size.width,
           ),
           Center(
@@ -33,15 +33,22 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const Image(
                     image: AssetImage(
                       "assets/clare_assets/images/logo.png",
                     ),
+                    height: 70,
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   farmSwapFontTitle(text: "FarmSwap", size: height),
                   farmSwapFontsubtitle(
                       text: "Modern Barter Solution", size: height),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 25),
                   farmSwapFont(
                     text: "Sign Up For Free",
                     size: 16,
@@ -84,7 +91,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                   //tick the checkbox for the terms and condition
                   Container(
-                    margin: const EdgeInsets.only(left: 510.0),
+                    margin: const EdgeInsets.only(left: 470.0),
                     child: Row(
                       children: [
                         Checkbox(
@@ -109,7 +116,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                   ),
 
                   const SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
 
                   //calling class to be used in create button
@@ -118,16 +125,18 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     nextScreen: AdminBio(),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
 
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(RoutesManager.signInPage);
-                    },
-
                     //calling the class for the the text
-                    child: const SignupHaveAccountFont(),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(RoutesManager.signInPage);
+                      },
+                      child: const SignupHaveAccountFont(),
+                    ),
+                  const SizedBox(
+                    height: 30,
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Text/listings_text.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class ListingsDisputeOptionsBtn extends StatelessWidget {
@@ -23,7 +24,10 @@ class ListingsDisputeOptionsBtn extends StatelessWidget {
               width: 5,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.dispute);
+              },
               child: const ListingsText(
                 myText: 'Dispute',
                 myColor: Color(0xFF09041B),

@@ -1,10 +1,10 @@
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../../../../routes/routes.dart';
+import '../dispute_text/widget_dispute_txt.dart';
 
-class DashDisputeOptionsBtn extends StatelessWidget {
-  const DashDisputeOptionsBtn({super.key});
+class DisputeDashboardOptionsBtn extends StatelessWidget {
+  const DisputeDashboardOptionsBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +16,20 @@ class DashDisputeOptionsBtn extends StatelessWidget {
           children: [
             const Image(
               image: AssetImage(
-                "assets/karl_assets/images/dispute.png",
+                "assets/karl_assets/images/dashboard.png",
               ),
               height: 20,
               width: 20,
             ),
             const SizedBox(
-              height: 3,
-            ),
+                width: 3,
+              ),
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.dispute);
+                Navigator.of(context).pushNamed(RoutesManager.dashboard);
               },
-              child: DashBoardTxt(
-                myText: "Dispute",
+              child: DisputeTxt(
+                myText: "Dashboard",
                 myColor: const Color(0xFF09041B),
                 mySize: 13,
                 myFont: GoogleFonts.poppins().fontFamily,
