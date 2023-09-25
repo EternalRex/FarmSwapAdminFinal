@@ -1,7 +1,8 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/editprofile_description.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -15,8 +16,10 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_b
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AdminEditProfile extends StatefulWidget {
   const AdminEditProfile({super.key});
@@ -287,7 +290,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                         ],
                                                       ),
                                                       const SizedBox(
-                                                          width: 400),
+                                                          width: 401),
                                                       IconButton(
                                                         onPressed: () {},
                                                         icon: const Icon(
@@ -326,7 +329,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                 ),
                                               ],
                                             ),
-                                            height: 400,
+                                            height: 380,
                                             child: Column(
                                               children: [
                                                 const EditProfileDescription(),
@@ -387,6 +390,98 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                                     ),
                                                                   ),
                                                                 ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Email Address',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+                                                                      const TextField(
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                              Radius.circular(5),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Role',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+                                                                      const TextField(
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                              Radius.circular(5),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -405,13 +500,13 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                           height: 300,
                                                           decoration:
                                                               const BoxDecoration(
-                                                            color: Colors.blue,
+                                                            color: Colors.white,
                                                           ),
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
                                                                     .only(
-                                                                    left: 20,
+                                                                    right: 20,
                                                                     top: 10),
                                                             child: Column(
                                                               crossAxisAlignment:
@@ -434,6 +529,66 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                                 const SizedBox(
                                                                   height: 3,
                                                                 ),
+                                                                const TextField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            5),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Phone Number',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+                                                                      const TextField(
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                              Radius.circular(5),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -448,6 +603,304 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                         ),
                                       ),
                                     ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 4,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 50, vertical: 14),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(15),
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: shadow,
+                                                  blurRadius: 2,
+                                                  offset: const Offset(1, 5),
+                                                ),
+                                              ],
+                                            ),
+                                            height: 280,
+                                            child: Column(
+                                              children: [
+                                                const EditProfileDescription(),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 10),
+                                                        child: Container(
+                                                          height: 200,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20,
+                                                                    top: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Country',
+                                                                  style: Poppins
+                                                                      .contentText
+                                                                      .copyWith(
+                                                                    color: const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        55,
+                                                                        54,
+                                                                        56),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                const TextField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            5),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'City',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+                                                                      const TextField(
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                              Radius.circular(5),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 10),
+                                                        child: Container(
+                                                          height: 200,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    right: 20,
+                                                                    top: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Province',
+                                                                  style: Poppins
+                                                                      .contentText
+                                                                      .copyWith(
+                                                                    color: const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        55,
+                                                                        54,
+                                                                        56),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                const TextField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            5),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Zipcode',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+                                                                      const TextField(
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                              Radius.circular(5),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  DecoratedBox(
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Color(0xFF53E78B),
+                                          Color(0xFF14BE77),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5),
+                                      ),
+                                    ),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.transparent,
+                                        disabledForegroundColor: Colors
+                                            .transparent
+                                            .withOpacity(0.38),
+                                        disabledBackgroundColor: Colors
+                                            .transparent
+                                            .withOpacity(0.12),
+                                        shadowColor: Colors.transparent,
+                                      ),
+                                      onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 5, bottom: 5),
+                                        child: Text(
+                                          'Update',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            letterSpacing: 0.50,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
                                   ),
                                 ],
                               ),
@@ -493,7 +946,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                         children: [
                           /*PROFILE TEXT */
                           const SizedBox(
-                            width: 54,
+                            width: 82,
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
@@ -515,34 +968,36 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 150,
                     ),
-                    /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /*PROFILE PICTURE WITH AN IMAGE PICKER SO WE CAN PICK IMAGE */
-                        Stack(
+                    Padding(
+                      padding: const EdgeInsets.only(right: 28),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            const CircleAvatar(
-                              radius: 60,
-                              backgroundImage: NetworkImage(
-                                  "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
-                            ),
-                            /*POSITIONING THE ADD PHOTO ICON INSIDE THE STACK */
-                            Positioned(
-                              width: 100,
-                              bottom: -10,
-                              left: 30,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.add_a_photo),
-                                color: farmSwapSmoothGreen,
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.adminProfile);
+                              },
+                              child: const EditProfileText(
+                                myText: 'Platform Reports',
+                                myColor: Color(0xFF09041B),
                               ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Image(
+                              image: AssetImage(
+                                  'assets/karl_assets/images/update.png'),
+                              height: 23,
+                              width: 23,
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
