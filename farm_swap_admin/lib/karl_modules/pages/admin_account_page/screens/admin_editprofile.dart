@@ -1,8 +1,13 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/addressinfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/deactivate_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/personalinfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -16,7 +21,6 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_b
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -202,111 +206,10 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                               child: Column(
                                 children: [
                                   //Title
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 50, top: 20),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'My Profile',
-                                          style: Poppins.contentTitle.copyWith(
-                                            color: const Color(0xFF09041B),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  const FormTitle(),
 
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 50, vertical: 14),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(15),
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: shadow,
-                                                  blurRadius: 2,
-                                                  offset: const Offset(1, 5),
-                                                ),
-                                              ],
-                                            ),
-                                            height: 60,
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      //Farmer profile
-                                                      const Image(
-                                                        image: AssetImage(
-                                                            'assets/rollaine_assets/images/vaugh.png'),
-                                                        height: 40,
-                                                        width: 40,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 15,
-                                                      ),
+                                  const AccountName(),
 
-                                                      //Farmer name and identity
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            'Vaugh Noe Cabusao',
-                                                            style: Poppins
-                                                                .userName
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 110),
-                                                            child: Text(
-                                                              'Farmer',
-                                                              style: Poppins
-                                                                  .detailsText
-                                                                  .copyWith(
-                                                                color: const Color(
-                                                                    0xFF09041B),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                          width: 401),
-                                                      IconButton(
-                                                        onPressed: () {},
-                                                        icon: const Icon(
-                                                            Icons.edit_square),
-                                                        color: greenNormal,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                   Row(
                                     children: [
                                       Expanded(
@@ -330,273 +233,10 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                               ],
                                             ),
                                             height: 380,
-                                            child: Column(
+                                            child: const Column(
                                               children: [
-                                                const EditProfileDescription(),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 10),
-                                                        child: Container(
-                                                          height: 300,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 20,
-                                                                    top: 10),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  'First Name',
-                                                                  style: Poppins
-                                                                      .contentText
-                                                                      .copyWith(
-                                                                    color: const Color
-                                                                        .fromARGB(
-                                                                        255,
-                                                                        55,
-                                                                        54,
-                                                                        56),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 3,
-                                                                ),
-                                                                const TextField(
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            5),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Email Address',
-                                                                        style: Poppins
-                                                                            .contentText
-                                                                            .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      const TextField(
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(
-                                                                              Radius.circular(5),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Role',
-                                                                        style: Poppins
-                                                                            .contentText
-                                                                            .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      const TextField(
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(
-                                                                              Radius.circular(5),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 10),
-                                                        child: Container(
-                                                          height: 300,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 20,
-                                                                    top: 10),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  'Last Name',
-                                                                  style: Poppins
-                                                                      .contentText
-                                                                      .copyWith(
-                                                                    color: const Color
-                                                                        .fromARGB(
-                                                                        255,
-                                                                        55,
-                                                                        54,
-                                                                        56),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 3,
-                                                                ),
-                                                                const TextField(
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            5),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Phone Number',
-                                                                        style: Poppins
-                                                                            .contentText
-                                                                            .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      const TextField(
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(
-                                                                              Radius.circular(5),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                EditProfileDescription(),
+                                                PersonalInfo(),
                                               ],
                                             ),
                                           ),
@@ -627,227 +267,10 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                               ],
                                             ),
                                             height: 280,
-                                            child: Column(
+                                            child: const Column(
                                               children: [
-                                                const EditProfileDescription(),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 10),
-                                                        child: Container(
-                                                          height: 200,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 20,
-                                                                    top: 10),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  'Country',
-                                                                  style: Poppins
-                                                                      .contentText
-                                                                      .copyWith(
-                                                                    color: const Color
-                                                                        .fromARGB(
-                                                                        255,
-                                                                        55,
-                                                                        54,
-                                                                        56),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 3,
-                                                                ),
-                                                                const TextField(
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            5),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'City',
-                                                                        style: Poppins
-                                                                            .contentText
-                                                                            .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      const TextField(
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(
-                                                                              Radius.circular(5),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 10),
-                                                        child: Container(
-                                                          height: 200,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color: Colors.white,
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 20,
-                                                                    top: 10),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  'Province',
-                                                                  style: Poppins
-                                                                      .contentText
-                                                                      .copyWith(
-                                                                    color: const Color
-                                                                        .fromARGB(
-                                                                        255,
-                                                                        55,
-                                                                        54,
-                                                                        56),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 3,
-                                                                ),
-                                                                const TextField(
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            5),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Zipcode',
-                                                                        style: Poppins
-                                                                            .contentText
-                                                                            .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            3,
-                                                                      ),
-                                                                      const TextField(
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(
-                                                                              Radius.circular(5),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                EditProfileDescription(),
+                                                AddressInfo(),
                                               ],
                                             ),
                                           ),
@@ -970,35 +393,15 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                     const SizedBox(
                       height: 150,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 28),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.adminProfile);
-                              },
-                              child: const EditProfileText(
-                                myText: 'Platform Reports',
-                                myColor: Color(0xFF09041B),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage(
-                                  'assets/karl_assets/images/update.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ],
-                        ),
-                      ),
+                    const UpdateOptionsBtn(),
+                    const SizedBox(
+                      height: 15,
                     ),
+                    const ArchiveOptionsBtn(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const DeactivateOptionsBtn(),
                   ],
                 ),
               ),

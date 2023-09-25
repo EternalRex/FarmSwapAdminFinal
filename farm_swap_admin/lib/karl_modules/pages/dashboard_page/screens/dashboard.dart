@@ -427,7 +427,7 @@ class _DashboardState extends State<Dashboard> {
                       myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     /*ID OF THE USER */
                     DashBoardTxt(
@@ -435,7 +435,7 @@ class _DashboardState extends State<Dashboard> {
                       myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     const SizedBox(
                       height: 30,
