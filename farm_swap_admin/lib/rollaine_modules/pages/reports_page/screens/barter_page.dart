@@ -1,5 +1,5 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_content_description.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
@@ -199,21 +199,100 @@ class _Barter extends State<Barter> {
                             ],
                           ),
 
-                          child: const SingleChildScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                BarterContentTitle(),
+                                const BarterContentTitle(),
 
                                 //Header
                                 //Name
-                                BarterContentDescription(),
+                                //BarterContentDescription(),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Name',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Date',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.green,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Barter/s',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
                                 //Farmer name, date of barter transaction, number of barters
-                                BarterNames(),
-                                BarterNames(),
-                                BarterNames(),
-                                BarterNames(),
-                                BarterNames(),
+                                const BarterNames(),
                               ],
                             ),
                           ),
@@ -254,8 +333,8 @@ class _Barter extends State<Barter> {
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 14),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       child: Padding(
                         padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(

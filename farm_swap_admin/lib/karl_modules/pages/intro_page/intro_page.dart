@@ -35,25 +35,35 @@ class IntroPage extends StatelessWidget {
                 //THE LOGO PICTURE
                 const Image(
                   image: AssetImage(
-                    "assets/karl_assets/images/logo.png",
+                    "assets/karl_assets/images/logo3.png",
                   ),
                 ),
                 //THE FARMSWAP NAME
                 Text(
                   "FarmSwap",
-                  style: TextStyle(
-                    color: farmSwapTitlegreen,
+                  style: GoogleFonts.viga(
                     fontSize: 40,
-                    fontFamily: GoogleFonts.viga().fontFamily,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.50,
+                    foreground: Paint()
+                      ..shader = const LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF53E78B),
+                          Color(0xFF14BE77),
+                        ],
+                      ).createShader(
+                        const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                      ),
                   ),
                 ),
                 //FARMSWAP DESCRIPTION
                 Text(
                   "Modern Barter Solution",
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
+                    color: const Color(0xFF09051C),
                     fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: GoogleFonts.inter().fontFamily,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.0,
                   ),
                 ),
                 const SizedBox(
@@ -71,7 +81,7 @@ class IntroPage extends StatelessWidget {
                       if (state.contains(MaterialState.pressed)) {
                         return farmSwapTitlegreen;
                       } else {
-                        return buttonOrange;
+                        return buttonGreen;
                       }
                     }),
                   ),

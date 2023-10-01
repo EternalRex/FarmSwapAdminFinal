@@ -287,8 +287,8 @@ class __DisputeBttnState extends State<DisputeBttn> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                /* Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminDispute);*/
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.dispute);
               },
               child: Row(
                 children: <Widget>[

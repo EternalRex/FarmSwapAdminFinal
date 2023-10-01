@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_content_description.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_details_card.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_names.dart';
@@ -205,18 +206,71 @@ class _ListingsState extends State<Listings> {
                           ),
 
                           //Column for main content
-                          child: const SingleChildScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 //Content title
-                                ListingsContentDescription(),
-                          
+                                const ListingsContentDescription(),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Name',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Status',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
                                 //Farmer name, identity, details button
-                                ListingsNames(),
-                                ListingsNames(),
-                                ListingsNames(),
-                                ListingsNames(),
-                                ListingsNames(),
+                                const ListingsNames(),
                               ],
                             ),
                           ),
@@ -257,8 +311,8 @@ class _ListingsState extends State<Listings> {
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                       child: Padding(
                         padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(

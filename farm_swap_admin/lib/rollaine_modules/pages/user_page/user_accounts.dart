@@ -1,6 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserContentSection/user_content_descriptions.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserContentSection/user_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -202,17 +202,96 @@ class _UserAccount extends State<UserAccount> {
                           ),
 
                           //Column for main content
-                          child: const SingleChildScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 //Name
-                                UserContentDescriptions(),
+                                //const UserContentDescriptions(),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Users',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Status',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.green,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Sends',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 //Farmer name, identity, details button
-                                UserNames(),
-                                UserNames(),
-                                UserNames(),
-                                UserNames(),
-                                UserNames(),
+                                const UserNames(),
                               ],
                             ),
                           ),

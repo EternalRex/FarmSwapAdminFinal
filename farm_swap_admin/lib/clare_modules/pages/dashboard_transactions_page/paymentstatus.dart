@@ -143,8 +143,8 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -165,14 +165,14 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 65, top: 25),
+                                          left: 45, top: 25),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
                                           //Content Title
                                           Text(
-                                            'Payments',
+                                            'Payments:',
                                             style:
                                                 Poppins.contentTitle.copyWith(
                                               color: const Color(0xFF09041B),
@@ -181,45 +181,90 @@ class _PaymentStatusScreenState extends State<PaymentStatusScreen> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 65, right: 45, top: 15),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Name',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Name',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 250,
-                                          ),
-                                          Text(
-                                            'Date',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Date',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 150,
-                                          ),
-                                          Text(
-                                            'Amount',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.green,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Amount',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           ),

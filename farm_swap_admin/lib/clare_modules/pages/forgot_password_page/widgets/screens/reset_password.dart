@@ -54,10 +54,15 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 ),
                 const SizedBox(
                   width: 261,
+<<<<<<< HEAD
                   child: resetPassSubTitle(
                     myText:
                         "Select which contact details should we use to reset your password",
                   ),
+=======
+                  //Clare ako lang gi butangan ug my text kay naka required man nya error dili ko maka padagan
+                  child: resetPassSubTitle(myText: '',),
+>>>>>>> 4dec5f812e2725b345e7d0f1f15aacbb4108ce6b
                 ),
                 const SizedBox(
                   height: 20,
