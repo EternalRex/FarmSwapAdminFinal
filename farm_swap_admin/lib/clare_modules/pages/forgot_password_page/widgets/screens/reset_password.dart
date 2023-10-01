@@ -52,9 +52,12 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 261,
-                  child: resetPassSubTitle(),
+                  child: resetPassSubTitle(
+                    myText:
+                        "Select which contact details should we use to reset your password",
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
