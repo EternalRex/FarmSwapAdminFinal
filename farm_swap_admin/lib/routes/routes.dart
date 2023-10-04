@@ -1,7 +1,5 @@
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_bio_screen/admin_bio.dart';
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_preview_photo.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_uploadphoto.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/paymentstatus.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
@@ -42,9 +40,7 @@ class RoutesManager {
   //clare routes
   static const adminSignup = "/adminSignup";
   static const adminSignupSuccess = "/adminSignupSuccess";
-  static const adminBio = "/adminbio";
   static const adminUploadPhoto = "/adminuploadphoto";
-  static const adminPreviewPhoto = "/adminpreviewphoto";
   static const adminVerification = "/adminverification";
 
   static const adminForgotPass = "/adminforgotpass";
@@ -55,6 +51,7 @@ class RoutesManager {
   static const adminTransactionsPromotion = "/admintransactionspromotion";
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
+
   //rollaine routes
   static const platformPage = '/reportspage';
   static const numberPage = '/numberpage';
@@ -85,7 +82,7 @@ class RoutesManager {
       //WHEN THE PUSHNAMED USES DASHBOARD PAGE THIS WILL BE USED
       case dashboard:
         return MaterialPageRoute(
-          builder: (context) => const Dashboard(),
+          builder: (context) => Dashboard(),
         );
 
       case adminAccount:
@@ -188,19 +185,9 @@ class RoutesManager {
           builder: (context) => const SignupSuccessScreen(),
         );
 
-      case adminBio:
-        return MaterialPageRoute(
-          builder: (context) => const AdminBio(),
-        );
-
       case adminUploadPhoto:
         return MaterialPageRoute(
           builder: (context) => const AdminUploadPhoto(),
-        );
-
-      case adminPreviewPhoto:
-        return MaterialPageRoute(
-          builder: (context) => const UseruploadPrevScreen(),
         );
 
       case adminVerification:

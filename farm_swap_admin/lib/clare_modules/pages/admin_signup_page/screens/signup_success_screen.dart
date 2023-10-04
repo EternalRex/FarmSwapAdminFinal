@@ -1,6 +1,8 @@
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'admin_verification_screen/admin_verification.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/admin_signup buttons/admin_signup_buttons.dart';
 
 class SignupSuccessScreen extends StatefulWidget {
@@ -71,9 +73,64 @@ class _SignupSuccessScreenState extends State<SignupSuccessScreen> {
                 ),
 
                 //calling class to be used in continue button
-                const FarmSwapPrimaryButton(
+                /* FarmSwapPrimaryButton(
                   buttonTitle: "Continue",
-                  nextScreen: VerifycodeScreen(),
+                  onPress: () {
+                    Navigator.of(context).pushNamed(RoutesManager.signInPage);
+                  },
+                ),
+                */
+
+                //continue button directed to sign in page
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // ignore: sized_box_for_whitespace
+                        Container(
+                          height: 50,
+                          width: 141,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF53E78B), Color(0xFF14BE77)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 5,
+                                offset: const Offset(1, 5),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: TextButton(
+                              onPressed: () {
+                                //PUSHES A ROUTENAME INTO THE ROUTEMANAGER.GENERATE ROUTE
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.signInPage);
+                              },
+                              child: Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontFamily: GoogleFonts.poppins().fontFamily,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

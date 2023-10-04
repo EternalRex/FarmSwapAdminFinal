@@ -3,6 +3,8 @@ import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../admin_signup_page/controllers/sign_up_controller.dart';
+import '../../../admin_signup_page/label/sign_up_label.dart';
 import 'reset_success_screen.dart';
 import '../admin_forgot_pass_buttons/forgot_pass_buttons.dart';
 
@@ -14,6 +16,12 @@ class ResetpassScreen extends StatefulWidget {
 }
 
 class _ResetpassScreenState extends State<ResetpassScreen> {
+  //create object for controller class
+  SignUpController mycontroller = SignUpController();
+
+  //creates the object for the label class
+  SignupLabel mylabel = SignupLabel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +62,11 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 ),
                 const SizedBox(
                   width: 261,
-<<<<<<< HEAD
                   child: resetPassSubTitle(
                     myText:
                         "Select which contact details should we use to reset your password",
                   ),
-=======
                   //Clare ako lang gi butangan ug my text kay naka required man nya error dili ko maka padagan
-                  child: resetPassSubTitle(myText: '',),
->>>>>>> 4dec5f812e2725b345e7d0f1f15aacbb4108ce6b
                 ),
                 const SizedBox(
                   height: 20,
@@ -71,9 +75,8 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: FarmSwapTextField(
-                    hintText: "New Password",
-                    onPress: () {},
-                    inputIcon: "assets/clare_assets/svg/Lock.svg",
+                    controller: mycontroller.password,
+                    label: mylabel.password,
                     isPassword: true,
                   ),
                 ),
@@ -85,9 +88,8 @@ class _ResetpassScreenState extends State<ResetpassScreen> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: FarmSwapTextField(
-                    hintText: "Confirm Password",
-                    onPress: () {},
-                    inputIcon: "assets/clare_assets/svg/Lock.svg",
+                    controller: mycontroller.password,
+                    label: mylabel.password,
                     isPassword: true,
                   ),
                 ),

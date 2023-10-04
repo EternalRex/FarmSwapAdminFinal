@@ -1,34 +1,25 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
+import '../../../../../constants/Colors/farmswap_colors.dart';
 
 // ignore: must_be_immutable
-class FarmSwapTextField extends StatefulWidget {
-  final String hintText;
-  final VoidCallback onPress;
-  String? inputIcon;
-  bool isPassword;
-  bool isNumber;
-
+class FarmSwapTextField extends StatelessWidget {
   FarmSwapTextField({
     super.key,
-    required this.hintText,
-    required this.onPress,
-    this.inputIcon,
-    this.isPassword = false,
-    this.isNumber = false,
+    required this.controller,
+    required this.label,
+    required this.isPassword,
+    this.prefixIcon,
+    this.suffixIcon,
   });
 
-  @override
-  State<FarmSwapTextField> createState() => _FarmSwapTextFieldState();
-}
+  TextEditingController controller;
+  Widget label;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  bool isPassword;
 
-class _FarmSwapTextFieldState extends State<FarmSwapTextField> {
-  bool? viewPassword = false;
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -37,24 +28,20 @@ class _FarmSwapTextFieldState extends State<FarmSwapTextField> {
           selectionColor: FarmSwapGreen.lightGreenHover,
         ),
       ),
-      //Te sizedbox is used to set the width of the textfield
       child: SizedBox(
-        width: 350,
+        width: 300,
         child: TextField(
+          controller: controller,
+          obscureText: isPassword,
           cursorColor: FarmSwapGreen.normalGreen,
-          obscureText: viewPassword! ? false : widget.isPassword,
-          keyboardType: widget.isNumber == true
-              ? TextInputType.number
-              : TextInputType.text,
-          onChanged: (value) => widget.onPress,
           selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
             filled: true,
             fillColor: Colors.white,
-            hintText: widget.hintText,
-            hintStyle: GoogleFonts.poppins(
+            label: label,
+            labelStyle: GoogleFonts.poppins(
               textStyle: const TextStyle(
                 color: Color(0xFF3B3B3B),
                 fontSize: 14,
@@ -62,29 +49,6 @@ class _FarmSwapTextFieldState extends State<FarmSwapTextField> {
                 letterSpacing: 0.50,
               ),
             ),
-            prefixIcon: widget.inputIcon != null
-                ? Container(
-                    padding: const EdgeInsets.all(10),
-                    child: SvgPicture.asset(
-                      widget.inputIcon!,
-                      height: 20,
-                      width: 20,
-                    ),
-                  )
-                : null,
-            suffixIcon: widget.isPassword == true
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        viewPassword = !viewPassword!;
-                      });
-                    },
-                    icon: Icon(
-                      !viewPassword! ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null,
             enabledBorder: OutlineInputBorder(
               borderSide:
                   const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
@@ -103,6 +67,8 @@ class _FarmSwapTextFieldState extends State<FarmSwapTextField> {
               borderSide: const BorderSide(width: 0.50, color: Colors.red),
               borderRadius: BorderRadius.circular(15),
             ),
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
           ),
         ),
       ),

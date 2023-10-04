@@ -1,3 +1,8 @@
+import 'dart:async';
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,7 +26,7 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
           ),
           splashColor: const Color(0xFFF9A84D),
           onPressed: () {
-            Navigator.of(context).pushNamed(RoutesManager.adminBio);
+            Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
           },
         ),
         backgroundColor: Colors.transparent,
@@ -70,105 +75,33 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
                 const SizedBox(
                   height: 30,
                 ),
+
+                //picture
                 Container(
-                  width: 325,
-                  height: 129,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
+                  width: 251,
+                  height: 260,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/clare_assets/images/logo.png'),
+                      fit: BoxFit.contain,
                     ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x115A6CEA),
-                        blurRadius: 50,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                    ],
                   ),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                "assets/clare_assets/images/Gallery.png"),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'From Gallery',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 1.81,
-                        ),
-                      ),
-                    ],
+                ),
+
+                //to be changed
+                IconButton(
+                  onPressed: () {
+                    uploadImage();
+                  },
+                  icon: const Icon(
+                    Icons.add_a_photo,
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
-                  child: Text('or'),
+                  height: 39,
                 ),
-                Container(
-                  width: 325,
-                  height: 129,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x115A6CEA),
-                        blurRadius: 50,
-                        offset: Offset(0, 0),
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                "assets/clare_assets/images/camera.png"),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'Take Photo',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 1.81,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 29,
-                ),
+
+                //next button
                 Container(
                   width: 175,
                   height: 57,
@@ -183,7 +116,7 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed(RoutesManager.adminPreviewPhoto);
+                          .pushNamed(RoutesManager.adminSignupSuccess);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
@@ -206,5 +139,47 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
         ],
       ),
     );
+  }
+
+  //to be changed dont mind this and proceed to continue
+  Future<void> uploadImage() async {
+    try {
+      final FileUploadInputElement input = FileUploadInputElement();
+      input.accept = "image/*";
+      input.click();
+
+      final completer = Completer<String>();
+
+      input.onChange.listen((event) {
+        final file = input.files!.first;
+        final reader = FileReader();
+
+        reader.onLoadEnd.listen((event) {
+          completer.complete(reader.result as String);
+        });
+        reader.readAsDataUrl(file);
+      });
+
+      final downloadUrl = await completer.future;
+
+      //initialized the user uid
+      final userID = FirebaseAuth.instance.currentUser!.uid;
+
+      // Save the download URL to Firestore
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      final CollectionReference collection = firestore.collection('AdminUsers');
+      final DocumentReference document = collection.doc(userID);
+
+      await document.update({
+        'Profile Url':
+            downloadUrl, // Assuming 'ProfileUrl' is the field where you want to save the photo URL.
+      });
+
+      print('Profile image URL has been added to the Firestore document.');
+      print(userID);
+    } catch (e) {
+      print("Profile image has not uploaded successfully");
+    }
   }
 }

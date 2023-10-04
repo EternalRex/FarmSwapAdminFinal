@@ -2,25 +2,17 @@ import 'package:flutter/material.dart';
 
 class FarmSwapPrimaryButton extends StatelessWidget {
   final String buttonTitle;
-  final Widget nextScreen;
+  final VoidCallback onPress;
+
   const FarmSwapPrimaryButton({
     super.key,
     required this.buttonTitle,
-    required this.nextScreen,
+    required this.onPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        // Add your onPressed callback function here
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => nextScreen,
-          ),
-        );
-      },
       style: TextButton.styleFrom(
         minimumSize: const Size(157, 57),
         shape: RoundedRectangleBorder(
@@ -28,6 +20,7 @@ class FarmSwapPrimaryButton extends StatelessWidget {
         ),
         foregroundColor: Colors.white,
       ),
+      onPressed: () {},
       child: Ink(
         decoration: BoxDecoration(
           gradient: const LinearGradient(
