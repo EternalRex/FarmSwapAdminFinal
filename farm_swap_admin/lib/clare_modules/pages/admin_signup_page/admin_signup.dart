@@ -426,7 +426,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                   //create account button
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(
+                      bottom: 15,
+                    ),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -476,8 +478,12 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RoutesManager.signInPage);
+                    },
+                    child: const SignupHaveAccountFont(),
                   ),
                 ],
               ),
