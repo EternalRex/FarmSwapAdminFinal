@@ -1,9 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_account_wrapper.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_account_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -16,28 +14,26 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_wallet_btn.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UserAccount extends StatefulWidget {
-  const UserAccount({super.key});
+class DetailsFarmerPage extends StatefulWidget {
+  const DetailsFarmerPage({super.key});
 
   @override
-  State<UserAccount> createState() => _UserAccount();
+  State<DetailsFarmerPage> createState() => _DetailsFarmerPageState();
 }
 
-class _UserAccount extends State<UserAccount> {
+class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
   final RetrieveFarmerAccounts retrieveFarmerAccounts =
       RetrieveFarmerAccounts();
-  final RetrieveCustomerAccounts retrieveCustomerAccounts =
-      RetrieveCustomerAccounts();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
-          //First expanded division of a row where the navigation options can be seen
           Expanded(
             flex: 1,
             child: Padding(
@@ -137,15 +133,23 @@ class _UserAccount extends State<UserAccount> {
               ),
             ),
           ),
-
-          //Second expanded division that contains the content
           Expanded(
             flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
-                  //Design the page title
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.userAccountPage);
+                    },
+                  ),
                   title: const TitleText(
                     myText: 'User Account',
                     myColor: Color(0xFF09041B),
@@ -187,13 +191,10 @@ class _UserAccount extends State<UserAccount> {
                 body: Row(
                   children: [
                     Expanded(
-                      flex: 2,
                       child: Padding(
-                        //Decorate the expanded area for the main content
                         padding: const EdgeInsets.only(
                             left: 10, right: 10, bottom: 15),
                         child: Container(
-                          //Design of the container
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: const BorderRadius.all(
@@ -209,117 +210,50 @@ class _UserAccount extends State<UserAccount> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 15),
-                                    child: Row(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 50),
+                                      child: Row(
+                                        children: [
+                                          Text('Profile',
+                                              style: Poppins.contentTitle
+                                                  .copyWith(
+                                                      color: const Color(
+                                                          0xFF09051C))),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text('Farmers',
-                                            style: Poppins.contentTitle
-                                                .copyWith(
-                                                    color: const Color(
-                                                        0xFF09051C))),
+                                        FutureBuilder(
+                                          future:
+                                              retrieveFarmerAccounts.getDocsId(),
+                                          builder: (context, snapshot) {
+                                            return Column(
+                                              children: retrieveFarmerAccounts
+                                                  .documentId
+                                                  .map((documentId) {
+                                                return ListTile(
+                                                  title: ReadFarmerDetails(
+                                                      documentId: documentId),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                        future:
-                                            retrieveFarmerAccounts.getDocsId(),
-                                        builder: (context, snapshot) {
-                                          return Column(
-                                            children: retrieveFarmerAccounts
-                                                .documentId
-                                                .map((documentId) {
-                                              return ListTile(
-                                                title: ReadFarmerAccount(
-                                                    documentId: documentId),
-                                              );
-                                            }).toList(),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        //Decorate the expanded area for the main content
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
-                        child: Container(
-                          //Design of the container
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
+                                  ],
+                                ),
+                              ],
                             ),
-
-                            //Box shadow of container
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadow,
-                                blurRadius: 2,
-                                offset: const Offset(1, 5),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 15),
-                                    child: Row(
-                                      children: [
-                                        Text('Consumers',
-                                            style: Poppins.contentTitle
-                                                .copyWith(
-                                                    color: const Color(
-                                                        0xFF09051C))),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                        future: retrieveCustomerAccounts
-                                            .getDocsId(),
-                                        builder: (context, snapshot) {
-                                          return Column(
-                                            children: retrieveCustomerAccounts
-                                                .documentId
-                                                .map((documentId) {
-                                              return ListTile(
-                                                title: ReadCustomerAccount(
-                                                    documentId: documentId),
-                                              );
-                                            }).toList(),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
                           ),
                         ),
                       ),
