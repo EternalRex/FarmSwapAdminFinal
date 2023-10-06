@@ -21,6 +21,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/bart
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/logs_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/number_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/selling_page.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 
@@ -61,6 +62,7 @@ class RoutesManager {
 
   static const reportsPage = '/reportspage';
   static const userAccountPage = '/useraccountpage';
+  static const detailsUserPage = '/detailsuserpage';
   static const listingsPage = '/listingspage';
   static const communicationPage = '/communicationpage';
 
@@ -141,6 +143,11 @@ class RoutesManager {
       case userAccountPage:
         return MaterialPageRoute(
           builder: (context) => const UserAccount(),
+        );
+  
+      case detailsUserPage:
+        return MaterialPageRoute(
+          builder: (context) => const DetailsFarmerPage(),
         );
 
       case listingsPage:
