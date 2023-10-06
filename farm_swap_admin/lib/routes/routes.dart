@@ -1,7 +1,5 @@
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_bio_screen/admin_bio.dart';
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_preview_photo.dart';
+import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_preview_screen/admin_uploadphoto.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/paymentstatus.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
@@ -10,9 +8,11 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgot_password.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_password.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_success_screen.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/communication_page/communication.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/listings.dart';
@@ -21,10 +21,11 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/bart
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/logs_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/number_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/selling_page.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 
-import '../clare_modules/pages/admin_signup_page/screens/signup_success_screen.dart';
+import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import '../karl_modules/pages/admin_signup_page/screens/admin_signup.dart';
 
 class RoutesManager {
@@ -33,14 +34,14 @@ class RoutesManager {
   static const signInPage = "/signinpage";
   static const dashboard = "/dashboard";
   static const adminAccount = "/adminaccount";
+  static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
+  static const dispute = "/dispute";
 
   //clare routes
   static const adminSignup = "/adminSignup";
   static const adminSignupSuccess = "/adminSignupSuccess";
-  static const adminBio = "/adminbio";
   static const adminUploadPhoto = "/adminuploadphoto";
-  static const adminPreviewPhoto = "/adminpreviewphoto";
   static const adminVerification = "/adminverification";
 
   static const adminForgotPass = "/adminforgotpass";
@@ -51,6 +52,7 @@ class RoutesManager {
   static const adminTransactionsPromotion = "/admintransactionspromotion";
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
+
   //rollaine routes
   static const platformPage = '/reportspage';
   static const numberPage = '/numberpage';
@@ -60,6 +62,7 @@ class RoutesManager {
 
   static const reportsPage = '/reportspage';
   static const userAccountPage = '/useraccountpage';
+  static const detailsUserPage = '/detailsuserpage';
   static const listingsPage = '/listingspage';
   static const communicationPage = '/communicationpage';
 
@@ -89,9 +92,19 @@ class RoutesManager {
           builder: (context) => const AdminAccount(),
         );
 
+      case adminProfile:
+        return MaterialPageRoute(
+          builder: (context) => const AdminEditProfile(),
+        );
+
       case adminSignUp:
         return MaterialPageRoute(
           builder: (context) => const SignUp(),
+        );
+
+      case dispute:
+        return MaterialPageRoute(
+          builder: (context) => const Dispute(),
         );
 
       //rollaine pages
@@ -130,6 +143,11 @@ class RoutesManager {
       case userAccountPage:
         return MaterialPageRoute(
           builder: (context) => const UserAccount(),
+        );
+  
+      case detailsUserPage:
+        return MaterialPageRoute(
+          builder: (context) => const DetailsFarmerPage(),
         );
 
       case listingsPage:
@@ -174,19 +192,9 @@ class RoutesManager {
           builder: (context) => const SignupSuccessScreen(),
         );
 
-      case adminBio:
-        return MaterialPageRoute(
-          builder: (context) => const AdminBio(),
-        );
-
       case adminUploadPhoto:
         return MaterialPageRoute(
           builder: (context) => const AdminUploadPhoto(),
-        );
-
-      case adminPreviewPhoto:
-        return MaterialPageRoute(
-          builder: (context) => const UseruploadPrevScreen(),
         );
 
       case adminVerification:

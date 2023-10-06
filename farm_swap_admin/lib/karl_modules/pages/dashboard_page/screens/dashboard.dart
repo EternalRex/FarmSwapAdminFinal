@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
@@ -26,8 +30,9 @@ import '../widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
 import '../widgets/dshb_graph_widgets/widget_dashboard_selling_bargraph.dart';
 import '../widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -36,6 +41,8 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
+
     return Scaffold(
       /*CREATING ONE ROW AND PUTTING 3 EXPANDED, THUS CREATING THREE DIVISIONS IN
       A SINGLE ROW */
@@ -391,55 +398,60 @@ class _DashboardState extends State<Dashboard> {
                     const SizedBox(
                       height: 50,
                     ),
+
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*PROFILE PICTURE WITH AN IMAGE PICKER SO WE CAN PICK IMAGE */
-                        Stack(
-                          children: [
-                            const CircleAvatar(
-                              radius: 60,
-                              backgroundImage: NetworkImage(
-                                  "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
-                            ),
-                            /*POSITIONING THE ADD PHOTO ICON INSIDE THE STACK */
-                            Positioned(
-                              width: 100,
-                              bottom: -10,
-                              left: 30,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.add_a_photo),
-                                color: farmSwapSmoothGreen,
-                              ),
-                            ),
-                          ],
-                        ),
+                        //currently working
+                        Text("No Image"),
+                        //Image.network(
+                        // Display the uploaded image using widget.imageUrl
+                        //widget.imageUrl,
+                        //width: 10,
+                        //height: 10,
+                        //fit: BoxFit.cover,
+                        //),
                       ],
                     ),
                     const SizedBox(
                       height: 15,
                     ),
                     /*THE NAME OF THE USER */
-                    DashBoardTxt(
-                      myText: "Erza Scarlet Heartfilia",
-                      myColor: const Color(0xFF09041B),
-                      mySize: 14,
-                      myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ProfileName(documentId: data),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
                     /*ID OF THE USER */
-                    DashBoardTxt(
-                      myText: "ID: 10101010",
-                      myColor: const Color(0xFF09041B),
-                      mySize: 14,
-                      myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return ProfileId(documentId: data);
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
+
                     /*EDIT PROFILE BUTTON */
                     const AdminEditProfileBtn(),
                     const SizedBox(

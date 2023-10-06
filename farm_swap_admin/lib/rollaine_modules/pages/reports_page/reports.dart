@@ -212,15 +212,15 @@ class _ReportsState extends State<Reports> {
                             ],
                           ),
 
-                          child: const SingleChildScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 //Report content description title
-                                ReportsContentDescription(),
+                                const ReportsContentDescription(),
                           
                                 //Row for 2 expanded container
                                 //Row1
-                                Row(
+                                const Row(
                                   children: [
                                     //Expanded container 1
                                     ReportsUserSatisfaction(),
@@ -232,13 +232,13 @@ class _ReportsState extends State<Reports> {
                                     ReportsUsability(),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                           
                                 //Row for 2 expanded container
                                 //Row 2
-                                Row(
+                                const Row(
                                   children: [
                                     //Expanded container 3
                                     ReportsInterface(),
@@ -252,13 +252,43 @@ class _ReportsState extends State<Reports> {
                                 ),
                           
                                 //Suggestions
-                                ReportsContentSuggestions(),
+                                const ReportsContentSuggestions(),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
                                 //First comment
-                                ReportsComments(),
-                                ReportsComments(),
-                                ReportsComments(),
-                                ReportsComments(),
-                                ReportsComments(),
+                                const ReportsComments(),
                               ],
                             ),
                           ),

@@ -1,4 +1,3 @@
-import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/verification_success_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_swap_admin/routes/routes.dart';
@@ -198,9 +197,9 @@ class _VerifycodeScreenState extends State<VerifycodeScreen> {
                   height: 39,
                 ),
                 //calling class to be used in next button
-                const FarmSwapPrimaryButton(
+                FarmSwapPrimaryButton(
                   buttonTitle: "Next",
-                  nextScreen: VerifySuccessScreen(),
+                  onPress: () {},
                 ),
               ],
             ),

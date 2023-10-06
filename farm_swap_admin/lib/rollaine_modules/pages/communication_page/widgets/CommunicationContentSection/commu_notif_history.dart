@@ -67,7 +67,7 @@ class CommuNotifHistory extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                              width: 50,
+                              width: 150,
                             ),
                             DecoratedBox(
                               decoration: const BoxDecoration(

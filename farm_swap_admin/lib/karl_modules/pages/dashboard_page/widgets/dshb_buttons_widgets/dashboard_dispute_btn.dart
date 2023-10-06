@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
@@ -24,7 +25,10 @@ class DashDisputeOptionsBtn extends StatelessWidget {
               height: 3,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.dispute);
+              },
               child: DashBoardTxt(
                 myText: "Dispute",
                 myColor: const Color(0xFF09041B),

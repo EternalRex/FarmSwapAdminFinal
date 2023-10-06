@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
@@ -17,7 +18,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/SellingContentSection/selling_content_description.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/SellingContentSection/selling_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/SellingContentSection/selling_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
@@ -199,22 +199,100 @@ class _Selling extends State<Selling> {
                             ],
                           ),
 
-                          child: const SingleChildScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                SellingContentTitle(),
-
+                                const SellingContentTitle(),
 
                                 //Header
                                 //Name
-                                SellingContentDescription(),
-                          
+                                //SellingContentDescription(),
+
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.amber,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Name',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Date',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 14),
+                                        child: Container(
+                                          height: 750,
+                                          color: Colors.green,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Sold',
+                                                  style: Poppins.farmerName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
                                 //Farmer name, date of barter transaction, number of barters
-                                SellingNames(),
-                                SellingNames(),
-                                SellingNames(),
-                                SellingNames(),
-                                SellingNames(),
+                                const SellingNames(),
                               ],
                             ),
                           ),
@@ -255,8 +333,8 @@ class _Selling extends State<Selling> {
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 14),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       child: Padding(
                         padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(

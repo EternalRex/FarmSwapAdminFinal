@@ -1,5 +1,9 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_account_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_account_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -23,6 +27,11 @@ class UserAccount extends StatefulWidget {
 }
 
 class _UserAccount extends State<UserAccount> {
+  final RetrieveFarmerAccounts retrieveFarmerAccounts =
+      RetrieveFarmerAccounts();
+  final RetrieveCustomerAccounts retrieveCustomerAccounts =
+      RetrieveCustomerAccounts();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,6 +187,7 @@ class _UserAccount extends State<UserAccount> {
                 body: Row(
                   children: [
                     Expanded(
+                      flex: 2,
                       child: Padding(
                         //Decorate the expanded area for the main content
                         padding: const EdgeInsets.only(
@@ -199,100 +209,117 @@ class _UserAccount extends State<UserAccount> {
                               ),
                             ],
                           ),
-
-                          //Column for main content
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                //Name
-                                //const UserContentDescriptions(),
-
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.amber,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Name',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                          child: Column(
+                            children: [
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, left: 15),
+                                    child: Row(
+                                      children: [
+                                        Text('Farmers',
+                                            style: Poppins.contentTitle
+                                                .copyWith(
+                                                    color: const Color(
+                                                        0xFF09051C))),
+                                      ],
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.blue,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Status',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FutureBuilder(
+                                        future:
+                                            retrieveFarmerAccounts.getDocsId(),
+                                        builder: (context, snapshot) {
+                                          return Column(
+                                            children: retrieveFarmerAccounts
+                                                .documentId
+                                                .map((documentId) {
+                                              return ListTile(
+                                                title: ReadFarmerAccount(
+                                                    documentId: documentId),
+                                              );
+                                            }).toList(),
+                                          );
+                                        },
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.green,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Sends',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                //Farmer name, identity, details button
-                                //UserNames(),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        //Decorate the expanded area for the main content
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Container(
+                          //Design of the container
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
                             ),
+
+                            //Box shadow of container
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 2,
+                                offset: const Offset(1, 5),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, left: 15),
+                                    child: Row(
+                                      children: [
+                                        Text('Consumers',
+                                            style: Poppins.contentTitle
+                                                .copyWith(
+                                                    color: const Color(
+                                                        0xFF09051C))),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FutureBuilder(
+                                        future: retrieveCustomerAccounts
+                                            .getDocsId(),
+                                        builder: (context, snapshot) {
+                                          return Column(
+                                            children: retrieveCustomerAccounts
+                                                .documentId
+                                                .map((documentId) {
+                                              return ListTile(
+                                                title: ReadCustomerAccount(
+                                                    documentId: documentId),
+                                              );
+                                            }).toList(),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),

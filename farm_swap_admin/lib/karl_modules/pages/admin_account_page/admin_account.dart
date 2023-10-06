@@ -1,23 +1,27 @@
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/text/transaction_typography.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account_wrapper/admin_account_wrapper.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../constants/Colors/colors.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
-import '../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
-import '../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
-import '../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../../constants/Colors/colors.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
+import '../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
+import '../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
 class AdminAccount extends StatefulWidget {
   const AdminAccount({super.key});
@@ -27,6 +31,7 @@ class AdminAccount extends StatefulWidget {
 }
 
 class _AdminAccount extends State<AdminAccount> {
+  final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,89 +131,168 @@ class _AdminAccount extends State<AdminAccount> {
 /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
             flex: 4,
-            // ignore: avoid_unnecessary_containers
-            child: Container(
-              /*SETTING THE BACKGROUND OF THE CENTER OF THE PAGE INTO WHITE */
-              child: Padding(
-                /*WRAPPING A SCAFFOLD WITH PADDING SO THAT IT WILL HAVE SOME SPACE
-                FROM THE BORDERS OF THE OTHER 2 DIVISIONS */
-                padding: const EdgeInsets.only(top: 15),
-                /*PUTTING A SCAFFOLD INSIDE THE  CENTER CONTAINER SO THAT WE CAN
-                USE THE BODY PROPERTY AND DECLARE SOME COLUMN OR ROWS THAT WILL HAVE
-                A CHILDREN PROPERTY WHERE WE CAN PUT A LOT OF WIDGETS HEHEHE */
-                child: Scaffold(
-                  /*THIS IS AN APPBAR OF THE CENTER DIVISION THAT HAS THE DASHBOARD TITLE AND THE 
-                  SEARCH BAR */
-                  appBar: AppBar(
-                    /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
-                  THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
-                    title: const DashBoardTitleText(
-                      myText: "Admin Account",
-                      myColor: Color(0xFF09041B),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
                     ),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    automaticallyImplyLeading: false,
-                    /*IN THE  APPBAR, WE USED THE ACTIONS PROPERTY SO THAT WE CAN PUT
-                    A LOT OF WIDGETS IN THE APPBAR, IN HERE IT IS USED SO THAT WE CAN PUT 
-                    A TEXT FIELD WIDGET FOR SEARCHING*/
-                    actions: const [
-                    /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
-                    HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
-                        HEIGH AND WIDTH OF THE TEXT FIELD */
-                        child: SizedBox(
-                          width: 250,
-                          height: 15,
-                          /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                          IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-                          child: DashBSearchBar(),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {},
+                  ),
+                  title: const DashBoardTitleText(
+                    myText: "Admin Account",
+                    myColor: Color(0xFF09041B),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+
+                      //Container for search bar
+                      child: SizedBox(
+                        width: 250,
+                        height: 15,
+                        child: TextField(
+                          style: GoogleFonts.poppins(
+                              color: const Color(0xFFDA6317), height: 1.5),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(5),
+                            filled: true,
+                            fillColor:
+                                const Color(0xFFF9A84D).withOpacity(0.10),
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: 'Search',
+                            prefixIcon: const Icon(Icons.search_rounded),
+                            prefixIconColor: const Color(0xFFDA6317),
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                    ],
-                  ),
-/*START OF THE SECOND EXPANDEDS BODY */
-                  body: SingleChildScrollView(
-                    child: Padding(
-                      /*WRAPPING THE BODY WITH PADDING SO THAT IT WILL NOT TOUCH THE BORDERS OF
-                      OF OTHER EXPANDEDS */
-                      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-                      /*A COLUMN THAT WILL HOLD THE WIDGETS OF THE BODY */
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  color: Colors.green,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  color: Colors.red,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height,
-                                ),
+                    ),
+                  ],
+                ),
+                body: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Container(
+                          height: 500,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 2,
+                                offset: const Offset(1, 5),
                               ),
                             ],
                           ),
-                        ],
+                          child: Column(
+                            children: [
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, left: 15),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 35, top: 25),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              //Content Title
+                                              Text(
+                                                'Admin Users',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 65, right: 45, top: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'Name',
+                                          style: Poppins.farmerName.copyWith(
+                                            color: const Color.fromARGB(
+                                                179, 9, 4, 27),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 300,
+                                        ),
+                                        const SizedBox(
+                                          width: 200,
+                                        ),
+                                        Text(
+                                          'Status',
+                                          style: Poppins.farmerName.copyWith(
+                                            color: const Color.fromARGB(
+                                                179, 9, 4, 27),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              FutureBuilder(
+                                future: getAllAdminAccs.getDocsId(),
+                                builder: (context, snapshot) {
+                                  return Column(
+                                    children: getAllAdminAccs.documentID
+                                        .map((documentId) {
+                                      return ListTile(
+                                        title: ReadAdminAccount(
+                                            documentId: documentId),
+                                      );
+                                    }).toList(),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
           ),
+
           /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
           Expanded(
             flex: 1,
@@ -240,6 +324,9 @@ class _AdminAccount extends State<AdminAccount> {
                       child: Row(
                         children: [
                           /*PROFILE TEXT */
+                          const SizedBox(
+                            width: 5,
+                          ),
                           DashBoardTxt(
                             myText: "Profile",
                             myColor: const Color(0xFF09041B),
@@ -248,7 +335,7 @@ class _AdminAccount extends State<AdminAccount> {
                             myWeight: FontWeight.w800,
                           ),
                           const SizedBox(
-                            width: 36,
+                            width: 34,
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
@@ -305,18 +392,18 @@ class _AdminAccount extends State<AdminAccount> {
                     /*THE NAME OF THE USER */
                     DashBoardTxt(
                       myText: "Erza Scarlet Heartfilia",
-                      myColor: Colors.black,
+                      myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     /*ID OF THE USER */
                     DashBoardTxt(
                       myText: "ID: 10101010",
-                      myColor: Colors.black,
+                      myColor: const Color(0xFF09041B),
                       mySize: 14,
                       myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.bold,
+                      myWeight: FontWeight.w400,
                     ),
                     const SizedBox(
                       height: 30,

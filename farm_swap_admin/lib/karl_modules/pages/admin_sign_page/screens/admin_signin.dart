@@ -1,9 +1,15 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:google_fonts/google_fonts.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import "package:google_fonts/google_fonts.dart";
 
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../clare_modules/pages/admin_signup_page/authentication/sign_up_auth.dart';
+import '../../../../clare_modules/pages/admin_signup_page/controllers/sign_up_controller.dart';
+import '../../../../clare_modules/pages/admin_signup_page/label/sign_up_label.dart';
 import '../../../../constants/Colors/colors.dart';
 import '../../../../routes/routes.dart';
 
@@ -15,12 +21,29 @@ class SignInAdmin extends StatefulWidget {
 }
 
 class _SignInAdminState extends State<SignInAdmin> {
-  /*VARIABLES THAT ARE USED IN THE SINGINTEXT FIELD WIDGET SINCE WE NEED A 
- DIFFERENT LABEL FOR THE TWO TXT FIELDS WE MAKE TWO WIDGETS WITH A TEXT THAT
- CONTAINS THE LABEL AND THEN PASS THIS TO THE LABEL PROPERTY OF OUR TEXT FIELD HERE */
-  Widget emailLabel = const Text("Email");
-  Widget passwordLabel = const Text("Password");
-  TextInputType textType = TextInputType.text;
+  //create object for controller class
+  SignUpController mycontroller = SignUpController();
+
+  //creates the object for the label class
+  SignupLabel mylabel = SignupLabel();
+
+  //CREATE OBJECT OF THE ADMIN AUTH
+  AdminAuth adminAuth = AdminAuth();
+
+  @override
+  void dispose() {
+    mycontroller.email.dispose();
+    mycontroller.password.dispose();
+    super.dispose();
+  }
+
+  bool _isPasswordVisible = true; // Initialize it as false initially.
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +55,7 @@ class _SignInAdminState extends State<SignInAdmin> {
             "assets/karl_assets/images/admin_signIn_pattern.svg",
             // ignore: deprecated_member_use
             colorBlendMode: BlendMode.screen,
-            height: 500,
+            height: 450,
             width: MediaQuery.of(context).size.width,
           ),
           //VERTICALLY CENTERING EVERY ELEMENT OF THE SOON TO BE COLUMN
@@ -48,101 +71,102 @@ class _SignInAdminState extends State<SignInAdmin> {
                     image: AssetImage(
                       "assets/karl_assets/images/logo3.png",
                     ),
+                    height: 100,
                   ),
                   /*FARMSWAP TITLE */
                   Text(
                     "FarmSwap",
-                    style: TextStyle(
-                      color: farmSwapTitlegreen,
+                    style: GoogleFonts.viga(
                       fontSize: 40,
-                      fontFamily: GoogleFonts.viga().fontFamily,
-                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 0.50,
+                      foreground: Paint()
+                        ..shader = const LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF53E78B),
+                            Color(0xFF14BE77),
+                          ],
+                        ).createShader(
+                          const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                        ),
                     ),
                   ),
                   /*FARM SWAP DESCRIPTION */
                   Text(
                     "Modern Barter Solution",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: GoogleFonts.inter().fontFamily,
+                    style: GoogleFonts.inter(
+                      color: const Color(0xFF09051C),
                       fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.0,
                     ),
-                  ),
-                  /*SIZED BOX THAT GIVES SPACE BETWEEN THE DESCRIPTION AND THE
-                LOGIN TITLE */
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  /*LOG IN ACCOUNT TITLE */
-                  Text(
-                    "Login To Your Account",
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 20,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      fontWeight: FontWeight.w900,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  /*GIVES A 20 HEIGHT SPACE BETWEEN THE LOGIN TITLE AND THE EMAIL TEXT BOX */
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  /*CONTAINS TEXT FIELD SO THAT WE CAN MANIPULATE THE WIDTH OF THE EMAIL TEXT FIELD */
-                  /* SizedBox(
-                    height: 57,
-                    width: 325,
-                    /*HAS A LABEL PROPERTY FOR EMAIL THAT WILL TAKE VALUE FROM THE WIDGET
-                    VARIABLES I SET ABOVE, THAT LABEL PROPERTY IS SET FROM THE SING_IN_TEXT_FIELD CLASS*/
-                    child: SignInTxtField(
-                      textType: false,
-                      label: emailLabel,
-                    ),
-                  ),*/
-
-                  //a container for the email textfield
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: FarmSwapTextField(
-                      hintText: "Email",
-                      onPress: () {},
-                      inputIcon: "assets/clare_assets/svg/Message.svg",
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
                   ),
 
-                  //a container for the password textfield
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: FarmSwapTextField(
-                      hintText: "Password",
-                      onPress: () {},
-                      inputIcon: "assets/clare_assets/svg/Lock.svg",
-                      isPassword: true,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  /* /*CONTAINS TEXT FIELD SO THAT WE CAN MANIPULATE THE WIDTH OF THE PASSWORD TEXT FIELD */
                   SizedBox(
-                    height: 57,
-                    width: 325,
-                    /*HAS A LABEL PROPERTY FOR PASSWORD THAT WILL TAKE VALUE FROM THE WIDGET
-                    VARIABLES I SET ABOVE, THAT LABEL PROPERTY IS SET FROM THE SING_IN_TEXT_FIELD CLASS*/
-                    child: SignInTxtField(
-                      textType: true,
-                      label: passwordLabel,
+                    child: Column(
+                      children: <Widget>[
+                        /*SIZED BOX THAT GIVES SPACE BETWEEN THE DESCRIPTION AND THE
+                LOGIN TITLE */
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        /*LOG IN ACCOUNT TITLE */
+                        Text(
+                          "Login To Your Account",
+                          style: TextStyle(
+                            color: const Color(0xFF09041B),
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.poppins().fontFamily,
+                            fontWeight: FontWeight.w900,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                        /*GIVES A 20 HEIGHT SPACE BETWEEN THE LOGIN TITLE AND THE EMAIL TEXT BOX */
+                        const SizedBox(
+                          height: 20,
+                        ),
+
+                        //a container for the email textfield
+                        FarmSwapTextField(
+                          controller: mycontroller.email,
+                          label: mylabel.email,
+                          isPassword: false,
+                          prefixIcon: SvgPicture.asset(
+                            "assets/clare_assets/svg/Message.svg",
+                            height: 20,
+                            width: 20,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        //a container for the password textfield
+                        FarmSwapTextField(
+                          controller: mycontroller.password,
+                          label: mylabel.password,
+                          isPassword: _isPasswordVisible,
+                          prefixIcon: SvgPicture.asset(
+                            "assets/clare_assets/svg/Lock.svg",
+                            height: 20,
+                            width: 20,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: const Color.fromARGB(255, 46, 184, 76),
+                            ),
+                            onPressed: _togglePasswordVisibility,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  */
                   /*LABEL ON CHOOSING TO CONTINUE WITH FACEBOOK OR GOOGLE */
                   Text(
                     "Or continue with",
@@ -153,117 +177,112 @@ class _SignInAdminState extends State<SignInAdmin> {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 25,
                   ),
                   /*VERTICALLY CENTERING THE ROW THAT WILL CONTAIN THE CONTAINERS
                   THAT WILL HOLD THE FACEBOOK AND GOOGLE ICON */
-                  Center(
-                    /*A ROW THAT WILL HOLD THE CONTAINER OF FACEBOOK AND GOOGLE ICON,
-                    WE USED A ROW BECUASE WE WANT TO CONTAIN THE CONTAINERS IN A HORIZONTAL MANNER */
-                    child: Row(
-                      /* HORIZONTALLY CENTERING THE CHILDREN OF THE ROW*/
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /*CONTAINER THAT HOLDS THE FACEBOOK ICON BUTTON */
-                        Container(
-                          height: 57,
-                          width: 152,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 10,
-                                offset: Offset(5, 5),
-                              ),
-                            ],
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(FontAwesomeIcons.facebook),
-                            iconSize: 30,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        /*cCONTAINER THAT HOLDS THE GOOGLE ICON BUTTON */
-                        Container(
-                          height: 57,
-                          width: 152,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 10,
-                                offset: Offset(5, 5),
-                              ),
-                            ],
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(FontAwesomeIcons.google),
-                            iconSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  /*TEXT  */
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(RoutesManager.adminForgotPass);
-                        },
-                        child: Text(
-                          "Forget Your Password?",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                            color: farmSwapTitlegreen,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 470),
+                        child: Column(
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(FontAwesomeIcons.facebook),
+                              label: const Text('Facebook'),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(10),
+                                fixedSize: const Size(160, 45),
+                                textStyle: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w900),
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.blue,
+                                elevation: 15,
+                                shadowColor: shadow,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RoutesManager.adminForgotPass);
+                                },
+                                child: Text(
+                                  "Forgot Your Password?",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily:
+                                        GoogleFonts.poppins().fontFamily,
+                                    color: farmSwapTitlegreen,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(RoutesManager.adminSignup);
-                        },
-                        child: Text(
-                          "Sign Up Now!",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                            color: farmSwapTitlegreen,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 22),
+                        child: Column(
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(FontAwesomeIcons.google),
+                              label: const Text('Google'),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(10),
+                                fixedSize: const Size(160, 45),
+                                textStyle: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w900),
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.red,
+                                elevation: 15,
+                                shadowColor: shadow,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RoutesManager.adminSignup);
+                                },
+                                child: Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily:
+                                        GoogleFonts.poppins().fontFamily,
+                                    color: farmSwapTitlegreen,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Center(
@@ -275,29 +294,26 @@ class _SignInAdminState extends State<SignInAdmin> {
                             height: 50,
                             width: 141,
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.white, farmSwapTitlegreen],
-                                begin: Alignment.center,
-                                end: Alignment.center,
-                                stops: const [0.12, 0.25],
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF53E78B), Color(0xFF14BE77)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
                               ),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black,
+                                  color: shadow,
                                   blurRadius: 5,
-                                  offset: Offset(1, 1),
+                                  offset: const Offset(1, 5),
                                 ),
                               ],
                             ),
                             child: Center(
                               child: TextButton(
                                 onPressed: () {
-                                  /*PUSHES A ROUTENAME INTO THE ROUTEMANAGER.GENERATE ROUTE */
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.dashboard);
+                                  login();
                                 },
                                 child: Text(
                                   "Login",
@@ -323,5 +339,24 @@ class _SignInAdminState extends State<SignInAdmin> {
         ],
       ),
     );
+  }
+
+  void login() async {
+    String email = mycontroller.email.text.trim();
+    String password = mycontroller.password.text;
+
+    //user sign in and directed to dashboard
+    try {
+      User? user = await adminAuth.signInWithEmailAndPassword(email, password);
+
+      if (user != null) {
+        print("User is successfully log in");
+
+        Navigator.of(context).pushNamed(RoutesManager.dashboard);
+      }
+    } catch (e) {
+      //print(e);
+      print("Some error happened in log in");
+    }
   }
 }
