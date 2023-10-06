@@ -54,77 +54,79 @@ class ReadAdminAccount extends StatelessWidget {
                               Text(
                                 " ${data["First Name"]} ",
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 15,
                                 ),
                               ),
                               Text(
                                 "${data["Last Name"]}",
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 15,
                                 ),
                               ),
                             ],
                           ),
                           Text(
-                            " ${data["Address"]} ",
+                            "${data["Address"]}",
                             style: TextStyle(
-                              fontSize: 9,
+                              fontSize: 10,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        width: 200,
+                        width: 500,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            //Accept button
-                            DecoratedBox(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color(0xFF53E78B),
-                                    Color(0xFF14BE77),
-                                  ],
+                      SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              //Accept button
+                              DecoratedBox(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color(0xFF53E78B),
+                                      Color(0xFF14BE77),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(17.50),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(17.50),
-                                ),
-                              ),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  disabledForegroundColor:
-                                      Colors.transparent.withOpacity(0.38),
-                                  disabledBackgroundColor:
-                                      Colors.transparent.withOpacity(0.12),
-                                  shadowColor: Colors.transparent,
-                                ),
-                                onPressed: () {
-                                  // Navigator.of(context)
-                                  //   .pushNamed(RoutesManager.adminActivities);
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    'Activities',
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 0.50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    disabledForegroundColor:
+                                        Colors.transparent.withOpacity(0.38),
+                                    disabledBackgroundColor:
+                                        Colors.transparent.withOpacity(0.12),
+                                    shadowColor: Colors.transparent,
+                                  ),
+                                  onPressed: () {
+                                    // Navigator.of(context)
+                                    //   .pushNamed(RoutesManager.adminActivities);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5),
+                                    child: Text(
+                                      'Activities',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.50,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -72,7 +72,7 @@ class IntroPage extends StatelessWidget {
                 // A BUTTON THAT WHEN CLICKED LEADS TO THE SIGN IN PAGE
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(RoutesManager.signInPage);
+                    Navigator.of(context).pushNamed(RoutesManager.introPage);
                   },
                   //STYLING THE BACKGROUND OF THE BUTTON
                   style: ButtonStyle(
