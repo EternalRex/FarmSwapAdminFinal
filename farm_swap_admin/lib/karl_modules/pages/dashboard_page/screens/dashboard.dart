@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_profile_query/dashboard_profileInfo.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_profile_query/dashboard_query.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,16 +30,15 @@ import '../widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
 import '../widgets/dshb_graph_widgets/widget_dashboard_selling_bargraph.dart';
 import '../widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
-  Dashboard({super.key});
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  String? documentId;
-
   @override
   Widget build(BuildContext context) {
     DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
@@ -401,21 +400,18 @@ class _DashboardState extends State<Dashboard> {
                     ),
 
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*PROFILE PICTURE WITH AN IMAGE PICKER SO WE CAN PICK IMAGE */
-                        FutureBuilder(
-                          future: id.getDocsId(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              String data = snapshot.data!;
-                              return ProfilePhoto(documentId: data);
-                            } else {
-                              return const Text("No data");
-                            }
-                          },
-                        ),
+                        //currently working
+                        Text("No Image"),
+                        //Image.network(
+                        // Display the uploaded image using widget.imageUrl
+                        //widget.imageUrl,
+                        //width: 10,
+                        //height: 10,
+                        //fit: BoxFit.cover,
+                        //),
                       ],
                     ),
                     const SizedBox(
@@ -473,83 +469,3 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-
-/*
-StreamBuilder<User?>(
-                      stream: auth.authStateChanges(),
-                      builder: (context, snapshot) {
-                        final user = snapshot.data;
-                        if (user == null) {
-                          return const Text("No user available");
-                        } else {
-                          //return Text("${user.email}");
-
-                          return Center(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    /*PROFILE PICTURE WITH AN IMAGE PICKER SO WE CAN PICK IMAGE */
-                                    Stack(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage("${user.photoURL}"),
-                                          radius: 60,
-                                        ),
-                                        /*POSITIONING THE ADD PHOTO ICON INSIDE THE STACK */
-                                        Positioned(
-                                          width: 100,
-                                          bottom: -10,
-                                          left: 30,
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(Icons.add_a_photo),
-                                            color: farmSwapSmoothGreen,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                      ],
-                                    ),
-                                    /*
-                                    const SizedBox(
-                                      height: 100,
-                                      width: 100,
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                    */
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    /*THE NAME OF THE USER */
-                                    DashBoardTxt(
-                                      myText: "${user.email}",
-                                      myColor: const Color(0xFF09041B),
-                                      mySize: 14,
-                                      myFont: GoogleFonts.poppins().fontFamily,
-                                      myWeight: FontWeight.w400,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    /*ID OF THE USER */
-                                    DashBoardTxt(
-                                      myText: "ID: ${user.uid}",
-                                      myColor: const Color(0xFF09041B),
-                                      mySize: 10,
-                                      myFont: GoogleFonts.poppins().fontFamily,
-                                      myWeight: FontWeight.w400,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      },
-                    ),
- */

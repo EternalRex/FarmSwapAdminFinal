@@ -212,7 +212,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                               child: TextButton(
                                 onPressed: () {
                                   Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminSignup);
+                                      .pushNamed(RoutesManager.adminForgotPass);
                                 },
                                 child: Text(
                                   "Forgot Your Password?",
@@ -314,11 +314,6 @@ class _SignInAdminState extends State<SignInAdmin> {
                               child: TextButton(
                                 onPressed: () {
                                   login();
-
-                                  /*PUSHES A ROUTENAME INTO THE ROUTEMANAGER.GENERATE ROUTE 
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.dashboard);
-                                      */
                                 },
                                 child: Text(
                                   "Login",

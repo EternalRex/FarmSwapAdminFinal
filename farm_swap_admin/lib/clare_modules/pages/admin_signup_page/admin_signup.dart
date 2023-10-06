@@ -115,12 +115,11 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     text: "Sign Up For Free",
                     size: 16,
                   ),
-                  const SizedBox(height: 20),
                   SizedBox(
                     child: Column(
                       children: <Widget>[
                         const SizedBox(
-                          height: 30,
+                          height: 15,
                         ),
                         //a container for the user role textfield
                         FarmSwapTextField(
@@ -128,7 +127,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           label: mylabel.userrole,
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Profile.svg",
+                            "assets/clare_assets/svg/role.svg",
                             height: 20,
                             width: 20,
                           ),
@@ -174,7 +173,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Profile.svg",
+                                "assets/clare_assets/svg/Calendar.svg",
                                 height: 20,
                                 width: 20,
                               ),
@@ -231,13 +230,25 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
+                        FarmSwapTextField(
+                          controller: mycontroller.address,
+                          label: mylabel.address,
+                          isPassword: false,
+                          prefixIcon: SvgPicture.asset(
+                            "assets/clare_assets/svg/location.svg",
+                            height: 20,
+                            width: 20,
+                          ),
+                        ),
+                        SizedBox(height: height * 0.024),
+
                         //a container for the contact number textfield
                         FarmSwapTextField(
                           controller: mycontroller.contactnum,
                           label: mylabel.contactnumber,
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Profile.svg",
+                            "assets/clare_assets/svg/phonebook.svg",
                             height: 20,
                             width: 20,
                           ),
@@ -284,7 +295,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                               ),
 
                               prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Lock.svg",
+                                "assets/clare_assets/svg/Calendar.svg",
                                 height: 20,
                                 width: 20,
                               ),
@@ -315,25 +326,13 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        FarmSwapTextField(
-                          controller: mycontroller.address,
-                          label: mylabel.address,
-                          isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Profile.svg",
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
                         //birthplace textfield
                         FarmSwapTextField(
                           controller: mycontroller.birthplace,
                           label: mylabel.birthplace,
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Profile.svg",
+                            "assets/clare_assets/svg/location.svg",
                             height: 20,
                             width: 20,
                           ),
@@ -374,17 +373,6 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           ),
                         ),
                         SizedBox(height: height * 0.024),
-
-                        //to be changed
-                        //currently working on...
-                        IconButton(
-                          onPressed: () {
-                            register();
-                          },
-                          icon: const Icon(
-                            Icons.add_a_photo,
-                          ),
-                        ),
 
                         //tick the checkbox for the terms and condition
                         Container(
@@ -457,9 +445,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                             child: Center(
                               child: TextButton(
                                 onPressed: () {
-                                  //register();
-                                  Navigator.of(context).pushNamed(
-                                      RoutesManager.adminUploadPhoto);
+                                  register();
+                                  //Navigator.of(context).pushNamed(
+                                  // RoutesManager.adminUploadPhoto);
                                 },
                                 child: Text(
                                   "Create Account",
@@ -507,44 +495,24 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
       user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         String uid = user.uid;
+
         // Store the User UID in Firestore
-        await uploadImage(uid);
+        // await uploadImage(uid);
+        await storeUidInFirestore(uid);
 
         print("User is successfully created");
-        //Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
+        Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
       }
     } catch (e) {
       print("Some error happened");
     }
   }
 
-  /// This function stores the profileurl as a field in that document.
-  Future<void> uploadImage(uid) async {
-    final FileUploadInputElement input = FileUploadInputElement();
-    input.accept = "image/*";
-    input.click();
-
-    final completer = Completer<String>();
-
-    input.onChange.listen((event) {
-      final file = input.files!.first;
-      final reader = FileReader();
-
-      reader.onLoadEnd.listen((event) {
-        completer.complete(reader.result as String);
-      });
-      reader.readAsDataUrl(file);
-    });
-
-    final downloadUrl = await completer.future;
-    // Store the download URL in Firestore
-    await storeUidInFirestore(uid, downloadUrl);
-  }
-
   /// This function stores the UID as a field in that document.
-  Future<void> storeUidInFirestore(String uid, String profileUrl) async {
+  Future<void> storeUidInFirestore(String uid) async {
     try {
       //String userid = uid;
+      String profile = mycontroller.profile.text;
       String role = mycontroller.role.text;
       String register = regdate.text;
       DateTime registerdate = DateTime.parse(register);
@@ -573,7 +541,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         birthplace: birthplace,
         email: email,
         password: password,
-        profile: profileUrl,
+        profile: profile,
       );
 
       await addAdminUser1.createUser(addAdmin);

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class AdminUserModel {
   AdminUserModel({
     required this.userid,
@@ -42,7 +40,7 @@ class AdminUserModel {
       "Birth Place": birthplace,
       "Email Address": email,
       "Password": password,
-      "Profile Url": profile,
+      "profileUrl": profile,
     };
   }
 }

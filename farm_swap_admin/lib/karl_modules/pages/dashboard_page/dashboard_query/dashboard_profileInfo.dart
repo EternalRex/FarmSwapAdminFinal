@@ -1,7 +1,8 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_profile_query/dashboard_query.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import "package:farm_swap_admin/constants/Colors/colors.dart";
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 
 class ProfilePhoto extends StatelessWidget {
   ProfilePhoto({
@@ -27,7 +28,7 @@ class ProfilePhoto extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage("${data["Profile Url"]}"),
+                backgroundImage: NetworkImage("${data["profileUrl"]}"),
               ),
               /*POSITIONING THE ADD PHOTO ICON INSIDE THE STACK */
               Positioned(
@@ -68,8 +69,13 @@ class ProfileId extends StatelessWidget {
           dynamic data = snapshot.data!.data() as dynamic;
           return Padding(
             padding: const EdgeInsets.all(15),
-            child: Text(
-              "${data["User Id"]}",
+            child: Center(
+              child: Text(
+                "ID: ${data["User Id"]}",
+                style: GoogleFonts.poppins(
+                  fontSize: 10,
+                ),
+              ),
             ),
           );
         }
