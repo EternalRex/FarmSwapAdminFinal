@@ -1,5 +1,11 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
@@ -134,7 +140,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -230,11 +236,12 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                     ),
                                     const SizedBox(height: 10),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         FutureBuilder(
-                                          future:
-                                              retrieveFarmerAccounts.getDocsId(),
+                                          future: retrieveFarmerAccounts
+                                              .getDocsId(),
                                           builder: (context, snapshot) {
                                             return Column(
                                               children: retrieveFarmerAccounts
@@ -252,11 +259,111 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                     ),
                                   ],
                                 ),
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 50),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Farmer Information',
+                                            style:
+                                                Poppins.contentTitle.copyWith(
+                                              color: const Color(0xFF09051C),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              child: Container(
+                //Designing the container
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+
+                  //Box shadow of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadow,
+                      blurRadius: 2,
+                      offset: const Offset(1, 5),
+                    ),
+                  ],
+                ),
+
+                //Column for the chat and notification buttons
+                child: const Column(
+                  children: [
+                    //Row for the buttons
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 14),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 75, top: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            //Chat button
+                            ReportsChatOptionsBtn(),
+                            //15 height spacing
+                            SizedBox(
+                              width: 5,
+                            ),
+                            //Notification button
+                            ReportsNotificationOptionsBtn(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 120,
+                    ),
+
+                    //Platform icon and label
+                    ReportsPlatformOptionsBtn(),
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    //Barter icon and label
+                    ReportsBarterOptionsBtn(),
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    //Selling icon and label
+                    ReportsSellingOptionsBtn(),
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    //Number of users icon and label
+                    ReportsNumberOptionsBtn(),
+                    SizedBox(
+                      height: 15,
                     ),
                   ],
                 ),
