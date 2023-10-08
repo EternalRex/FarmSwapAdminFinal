@@ -400,20 +400,36 @@ class _DashboardState extends State<Dashboard> {
                     ),
 
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
+
+                    /*In this future builder we will get the document id that we get from
+                    the database querry in the dashboardquery file */
                     FutureBuilder(
+                      /*The id was the object we creted above to access the methods inside the dashboard
+                      query file. we call the get docsId() method, meaning  we tell it to execute and
+                      get the document id of the current user */
                       future: id.getDocsId(),
+
+                      /*so this builder means that it will build the context meaning this page
+                      and this class. It will also build the snapshot, which is the object
+                      that we use to acces the data fom getDocsID() method */
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          /*Since the getDocsId is a Future<sting> it will return a the 
+                          documentId but in a futue form so not the actual string so we 
+                          need this snaphot to actually get the string and not the future form*/
                           String data = snapshot.data!;
                           return Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                /*We call the profilephoto class from ourr dashboard profileinfo and then
+                                pass the variable data that has the documentid string form*/
                                 ProfilePhoto(documentId: data),
                               ],
                             ),
                           );
                         } else {
+                          /*If the data is not yet given so it will display no data until data is presented */
                           return const Text("No data");
                         }
                       },
@@ -421,7 +437,9 @@ class _DashboardState extends State<Dashboard> {
                     const SizedBox(
                       height: 15,
                     ),
-                    /*THE NAME OF THE USER */
+
+                    /*THE NAME OF THE USER, This future builder will display the name of the current uer
+                    its ways ae simillar above */
                     FutureBuilder(
                       future: id.getDocsId(),
                       builder: (context, snapshot) {
@@ -440,7 +458,9 @@ class _DashboardState extends State<Dashboard> {
                         }
                       },
                     ),
-                    /*ID OF THE USER */
+
+                    /*ID OF THE USER,This future builder will display the name of the current uer
+                    its ways ae simillar above */
                     FutureBuilder(
                       future: id.getDocsId(),
                       builder: (context, snapshot) {

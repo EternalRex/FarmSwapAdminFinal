@@ -1,10 +1,13 @@
 import "dart:typed_data";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
-import "package:farm_swap_admin/karl_modules/pages/dashboard_page/data/testData/DashboardPieGraph/piegraph.dart";
+
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+
+/*We created this class to be called in the dashboard this will take a value which 
+is the document id we get from our firebase query. That is why this class has a 
+constructor required documentID*/
 
 class ProfilePhoto extends StatefulWidget {
   ProfilePhoto({
@@ -19,19 +22,27 @@ class ProfilePhoto extends StatefulWidget {
 }
 
 class _ProfilePhotoState extends State<ProfilePhoto> {
-//Object of the get document id class
-  final DashboardRetrieveSpecificID myId = DashboardRetrieveSpecificID();
-
   @override
   Widget build(BuildContext context) {
+    /*We create a reference to our firestore collection so that we can acces it*/
     CollectionReference reference =
         FirebaseFirestore.instance.collection('AdminUsers');
+
+    /*Test print the document Id  if it has really a value, we used the word widget here to 
+    access the documentID variable because it is on another class because we are using stateful here */
     print(widget.documentId);
+
     return FutureBuilder<DocumentSnapshot>(
+      /*we are going to access our documents in firebase but first we need to await for
+      the value of document id which will be given from our dasboard where we call this class */
       future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          /*Creating a dynamic variable and store and store the data we get from our querry which
+          we aceessed using the word snapshot */
           dynamic data = snapshot.data!.data() as dynamic;
+
+          /*Display the image */
           final image = CachedNetworkImageProvider("${data["profileUrl"]}");
           return Stack(
             children: [
@@ -50,6 +61,9 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
   }
 }
 
+/*This is the class for displaying the user ID, its ways are simillar to the above class
+only that it does not use the widget word to access the document id because this class is 
+a stateless widget and that it can directly access the constructor varibales */
 class ProfileId extends StatelessWidget {
   const ProfileId({super.key, required this.documentId});
 
@@ -57,9 +71,10 @@ class ProfileId extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /*We create a reference to our firestore collection so that we can acces it*/
     CollectionReference reference =
         FirebaseFirestore.instance.collection('AdminUsers');
-    print(documentId);
+
     return FutureBuilder<DocumentSnapshot>(
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {
@@ -87,6 +102,9 @@ class ProfileId extends StatelessWidget {
   }
 }
 
+/*This is the class for displaying the user ID, its ways are simillar to the above class
+only that it does not use the widget word to access the document id because this class is 
+a stateless widget and that it can directly access the constructor varibales */
 class ProfileName extends StatelessWidget {
   const ProfileName({super.key, required this.documentId});
 
