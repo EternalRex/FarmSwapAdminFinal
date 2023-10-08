@@ -1,5 +1,4 @@
 // ignore_for_file: unreachable_switch_case
-
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
@@ -7,8 +6,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
-import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/reset_password.dart';
-import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/screens/reset_success_screen.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
@@ -46,7 +44,7 @@ class RoutesManager {
   static const adminVerification = "/adminverification";
 
   static const adminForgotPass = "/adminforgotpass";
-  static const forgotpassscreensuccess = "/adminforgotpass";
+  static const resetpassscreensuccess = "/adminresetpasssuccess";
 
   static const adminTransactionsPayment = "/admintransactionspayment";
   static const adminTransactionsPromotion = "/admintransactionspromotion";
@@ -194,15 +192,9 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => const VerifycodeScreen(),
         );
-
       case adminForgotPass:
         return MaterialPageRoute(
           builder: (context) => const ForgotPassScreen(),
-        );
-
-      case forgotpassscreensuccess:
-        return MaterialPageRoute(
-          builder: (context) => const ForgotPassSuccessScreen(),
         );
 
       default:

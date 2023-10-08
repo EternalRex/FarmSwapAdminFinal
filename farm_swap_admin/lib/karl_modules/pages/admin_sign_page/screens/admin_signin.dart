@@ -133,8 +133,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Message.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         const SizedBox(
@@ -148,8 +148,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                           isPassword: _isPasswordVisible,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Lock.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(

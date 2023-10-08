@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:ui';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
@@ -36,10 +35,6 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
   //create object of the admin query
   AddAdminUser addAdminUser1 = AddAdminUser();
-
-  //Variables for Date and Time
-  //DateTime registerdate = DateTime.now();
-  //DateTime birthdate = DateTime.now();
 
   TextEditingController regdate = TextEditingController();
   TextEditingController bdate = TextEditingController();
@@ -128,8 +123,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/role.svg",
-                            height: 20,
-                            width: 20,
+                            height: 10,
+                            width: 10,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -147,9 +142,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                   vertical: 20, horizontal: 30),
                               filled: true,
                               fillColor: Colors.white,
-
                               labelText: "Register Date",
-
                               //border designs
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -174,8 +167,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                               ),
                               prefixIcon: SvgPicture.asset(
                                 "assets/clare_assets/svg/Calendar.svg",
-                                height: 20,
-                                width: 20,
+                                height: 15,
+                                width: 15,
                               ),
                             ),
                             readOnly: true,
@@ -211,8 +204,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Profile.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -224,20 +217,21 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Profile.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
 
+                        //address textfield
                         FarmSwapTextField(
                           controller: mycontroller.address,
                           label: mylabel.address,
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/location.svg",
-                            height: 20,
-                            width: 20,
+                            "assets/clare_assets/svg/Message.svg",
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -248,9 +242,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           label: mylabel.contactnumber,
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/phonebook.svg",
-                            height: 20,
-                            width: 20,
+                            "assets/clare_assets/svg/Message.svg",
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -296,8 +290,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               prefixIcon: SvgPicture.asset(
                                 "assets/clare_assets/svg/Calendar.svg",
-                                height: 20,
-                                width: 20,
+                                height: 15,
+                                width: 15,
                               ),
                             ),
                             readOnly: true,
@@ -333,8 +327,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/location.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
 
@@ -346,8 +340,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: false,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Message.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -359,8 +353,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           isPassword: _isPasswordVisible,
                           prefixIcon: SvgPicture.asset(
                             "assets/clare_assets/svg/Lock.svg",
-                            height: 20,
-                            width: 20,
+                            height: 15,
+                            width: 15,
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(

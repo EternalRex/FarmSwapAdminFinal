@@ -84,8 +84,8 @@ Text resetPassTitle({required String text, String? fontFamily, Color? color}) {
   );
 }
 
-class resetPassSubTitle extends StatelessWidget {
-  const resetPassSubTitle({
+class ResetPassSubTitle extends StatelessWidget {
+  const ResetPassSubTitle({
     super.key,
     required this.myText,
   });
@@ -94,7 +94,6 @@ class resetPassSubTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return const Text(
       'Enter your new password here.',
       style: TextStyle(
