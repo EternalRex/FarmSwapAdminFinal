@@ -129,6 +129,7 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
 
   // Variable to store the selected image data.
   Uint8List? _selectedImage;
+  String? imageUrl;
 
   //a function to select image
   Future<void> selectImage() async {
@@ -137,7 +138,10 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
       input.accept = "image/*";
       input.click();
 
+      /*This is for da  purpose of displaying the image after it was selected */
       final completer = Completer<Uint8List>();
+      /*This is for da saving the image as a string into the databae */
+      //final completer2 = Completer<String>();
 
       input.onChange.listen((event) {
         final file = input.files!.first;
@@ -145,17 +149,22 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
 
         reader.onLoadEnd.listen((event) {
           final dataUrl = reader.result as String;
+          //completer2.complete(reader.result as String);
           final base64String = dataUrl.split(',').last;
           completer.complete(Uint8List.fromList(base64Decode(base64String)));
         });
         reader.readAsDataUrl(file);
       });
 
+      /*variable to be ued for da Uint8 for da display of image here */
       final selectedImage = await completer.future;
+      /*variable to be used for da String that will use to save String url to database */
+      //final myImageUrl = await completer2.future;
 
       // Store the selected image data.
       setState(() {
         _selectedImage = selectedImage;
+        //imageUrl = myImageUrl;
       });
     } catch (e) {
       print("Profile image has not uploaded successfully");

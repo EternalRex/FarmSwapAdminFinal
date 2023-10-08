@@ -400,19 +400,23 @@ class _DashboardState extends State<Dashboard> {
                     ),
 
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //currently working
-                        Text("No Image"),
-                        //Image.network(
-                        // Display the uploaded image using widget.imageUrl
-                        //widget.imageUrl,
-                        //width: 10,
-                        //height: 10,
-                        //fit: BoxFit.cover,
-                        //),
-                      ],
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ProfilePhoto(documentId: data),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
                     const SizedBox(
                       height: 15,
