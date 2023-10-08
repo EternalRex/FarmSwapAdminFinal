@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account_wrapper/read_admin_users.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class ReadAdminAccount extends StatelessWidget {
   ReadAdminAccount({super.key, required this.documentId});
 
