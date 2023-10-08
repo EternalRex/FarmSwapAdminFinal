@@ -94,6 +94,7 @@ class resetPassSubTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return const Text(
       'Enter your new password here.',
       style: TextStyle(

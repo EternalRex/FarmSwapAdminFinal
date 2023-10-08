@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_switch_case
+
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
@@ -5,9 +7,8 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
-import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgot_password.dart';
-import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_password.dart';
-import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/screens/reset_success_screen.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/reset_password.dart';
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/screens/reset_success_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
@@ -45,8 +46,7 @@ class RoutesManager {
   static const adminVerification = "/adminverification";
 
   static const adminForgotPass = "/adminforgotpass";
-  static const adminResetPass = "/adminresetpass";
-  static const adminResetPassSuccess = "/adminresetpasssuccess";
+  static const forgotpassscreensuccess = "/adminforgotpass";
 
   static const adminTransactionsPayment = "/admintransactionspayment";
   static const adminTransactionsPromotion = "/admintransactionspromotion";
@@ -108,7 +108,6 @@ class RoutesManager {
         );
 
       //rollaine pages
-      // ignore: unreachable_switch_case
       case platformPage:
         return MaterialPageRoute(
           builder: (context) => const Reports(),
@@ -134,17 +133,11 @@ class RoutesManager {
           builder: (context) => const AdminLogs(),
         );
 
-      // ignore: unreachable_switch_case
-      case reportsPage:
-        return MaterialPageRoute(
-          builder: (context) => const Reports(),
-        );
-
       case userAccountPage:
         return MaterialPageRoute(
           builder: (context) => const UserAccount(),
         );
-  
+
       case detailsUserPage:
         return MaterialPageRoute(
           builder: (context) => const DetailsFarmerPage(),
@@ -207,15 +200,11 @@ class RoutesManager {
           builder: (context) => const ForgotPassScreen(),
         );
 
-      case adminResetPass:
+      case forgotpassscreensuccess:
         return MaterialPageRoute(
-          builder: (context) => const ResetpassScreen(),
+          builder: (context) => const ForgotPassSuccessScreen(),
         );
 
-      case adminResetPassSuccess:
-        return MaterialPageRoute(
-          builder: (context) => const ResetSuccessScreen(),
-        );
       default:
         throw const FormatException("No route");
     }

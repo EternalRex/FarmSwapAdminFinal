@@ -1,17 +1,18 @@
+import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/buttons/forgot_pass_buttons.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/widgets/text/forgot_pass_text.dart';
-import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../admin_forgot_pass_buttons/forgot_pass_buttons.dart';
 
-class ResetSuccessScreen extends StatefulWidget {
-  const ResetSuccessScreen({super.key});
+class ForgotPassSuccessScreen extends StatefulWidget {
+  const ForgotPassSuccessScreen({super.key});
 
   @override
-  State<ResetSuccessScreen> createState() => _ResetSuccessScreenState();
+  State<ForgotPassSuccessScreen> createState() =>
+      _ForgotPassSuccessScreenState();
 }
 
-class _ResetSuccessScreenState extends State<ResetSuccessScreen> {
+class _ForgotPassSuccessScreenState extends State<ForgotPassSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

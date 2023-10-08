@@ -181,113 +181,121 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                   ],
                 ),
-                body: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
-                        child: Container(
-                          height: 500,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
+                body: SingleChildScrollView(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 15),
+                          child: Container(
+                            height: 700,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadow,
+                                  blurRadius: 2,
+                                  offset: const Offset(1, 5),
+                                ),
+                              ],
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadow,
-                                blurRadius: 2,
-                                offset: const Offset(1, 5),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 15),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 35, top: 25),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              //Content Title
-                                              Text(
-                                                'Admin Users',
-                                                style: Poppins.contentTitle
-                                                    .copyWith(
-                                                  color:
-                                                      const Color(0xFF09041B),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 15),
+                                      child: Row(
+                                        children: [
+                                          //this padding holds the content title
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 35, top: 25),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Admin Users',
+                                                  style: Poppins.contentTitle
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 65, right: 45, top: 15),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          'Name',
-                                          style: Poppins.farmerName.copyWith(
-                                            color: const Color.fromARGB(
-                                                179, 9, 4, 27),
+
+                                    //this padding holds the title header for the future builder
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 65, right: 45, top: 15),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(
+                                            width: 10,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 300,
-                                        ),
-                                        const SizedBox(
-                                          width: 200,
-                                        ),
-                                        Text(
-                                          'Status',
-                                          style: Poppins.farmerName.copyWith(
-                                            color: const Color.fromARGB(
-                                                179, 9, 4, 27),
+                                          Text(
+                                            'Name',
+                                            style: Poppins.farmerName.copyWith(
+                                              color: const Color.fromARGB(
+                                                  179, 9, 4, 27),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(
+                                            width: 300,
+                                          ),
+                                          const SizedBox(
+                                            width: 200,
+                                          ),
+                                          Text(
+                                            'Status',
+                                            style: Poppins.farmerName.copyWith(
+                                              color: const Color.fromARGB(
+                                                  179, 9, 4, 27),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              FutureBuilder(
-                                future: getAllAdminAccs.getDocsId(),
-                                builder: (context, snapshot) {
-                                  return Column(
-                                    children: getAllAdminAccs.documentID
-                                        .map((documentId) {
-                                      return ListTile(
-                                        title: ReadAdminAccount(
-                                            documentId: documentId),
-                                      );
-                                    }).toList(),
-                                  );
-                                },
-                              ),
-                            ],
+                                  ],
+                                ),
+
+                                //this future builder will list all the registered admin users
+                                //Calling the ReadAdminAccount it is the wrapper that holds the users info
+                                //this will display list tile of admin users
+                                FutureBuilder(
+                                  future: getAllAdminAccs.getDocsId(),
+                                  builder: (context, snapshot) {
+                                    return Column(
+                                      children: getAllAdminAccs.documentID
+                                          .map((documentId) {
+                                        return ListTile(
+                                          title: ReadAdminAccount(
+                                              documentId: documentId),
+                                        );
+                                      }).toList(),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
