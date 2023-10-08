@@ -7,6 +7,8 @@ import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/Colors/colors.dart';
+import '../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
+import '../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -30,6 +32,8 @@ class AdminAccount extends StatefulWidget {
 
 class _AdminAccount extends State<AdminAccount> {
   final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
+  DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,10 +333,10 @@ class _AdminAccount extends State<AdminAccount> {
                           horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
-                          /*PROFILE TEXT */
                           const SizedBox(
                             width: 5,
                           ),
+                          /*PROFILE TEXT */
                           DashBoardTxt(
                             myText: "Profile",
                             myColor: const Color(0xFF09041B),
@@ -365,55 +369,84 @@ class _AdminAccount extends State<AdminAccount> {
                     const SizedBox(
                       height: 50,
                     ),
+
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /*PROFILE PICTURE WITH AN IMAGE PICKER SO WE CAN PICK IMAGE */
-                        Stack(
-                          children: [
-                            const CircleAvatar(
-                              radius: 60,
-                              backgroundImage: NetworkImage(
-                                  "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
+
+                    /*In this future builder we will get the document id that we get from
+                    the database querry in the dashboardquery file */
+                    FutureBuilder(
+                      /*The id was the object we creted above to access the methods inside the dashboard
+                      query file. we call the get docsId() method, meaning  we tell it to execute and
+                      get the document id of the current user */
+                      future: id.getDocsId(),
+
+                      /*so this builder means that it will build the context meaning this page
+                      and this class. It will also build the snapshot, which is the object
+                      that we use to acces the data fom getDocsID() method */
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          /*Since the getDocsId is a Future<sting> it will return a the 
+                          documentId but in a futue form so not the actual string so we 
+                          need this snaphot to actually get the string and not the future form*/
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                /*We call the profilephoto class from ourr dashboard profileinfo and then
+                                pass the variable data that has the documentid string form*/
+                                ProfilePhoto(documentId: data),
+                              ],
                             ),
-                            /*POSITIONING THE ADD PHOTO ICON INSIDE THE STACK */
-                            Positioned(
-                              width: 100,
-                              bottom: -10,
-                              left: 30,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.add_a_photo),
-                                color: farmSwapSmoothGreen,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                          );
+                        } else {
+                          /*If the data is not yet given so it will display no data until data is presented */
+                          return const Text("No data");
+                        }
+                      },
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    /*THE NAME OF THE USER */
-                    DashBoardTxt(
-                      myText: "Erza Scarlet Heartfilia",
-                      myColor: const Color(0xFF09041B),
-                      mySize: 14,
-                      myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.w400,
+
+                    /*THE NAME OF THE USER, This future builder will display the name of the current uer
+                    its ways ae simillar above */
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ProfileName(documentId: data),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
-                    /*ID OF THE USER */
-                    DashBoardTxt(
-                      myText: "ID: 10101010",
-                      myColor: const Color(0xFF09041B),
-                      mySize: 14,
-                      myFont: GoogleFonts.poppins().fontFamily,
-                      myWeight: FontWeight.w400,
+
+                    /*ID OF THE USER,This future builder will display the name of the current uer
+                    its ways ae simillar above */
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return ProfileId(documentId: data);
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
+
                     /*EDIT PROFILE BUTTON */
                     const AdminEditProfileBtn(),
                     const SizedBox(

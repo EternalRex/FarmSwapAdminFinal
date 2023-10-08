@@ -132,7 +132,7 @@ class ProfileName extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  " $firstName",
+                  firstName,
                   style: TextStyle(
                     fontFamily: GoogleFonts.poppins().fontFamily,
                     fontSize: 15,
@@ -143,7 +143,7 @@ class ProfileName extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  " $lastName",
+                  lastName,
                   style: TextStyle(
                     fontFamily: GoogleFonts.poppins().fontFamily,
                     fontSize: 15,
