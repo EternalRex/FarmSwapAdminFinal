@@ -9,6 +9,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_details_wrapper/admin_account_details.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
@@ -33,6 +34,7 @@ class RoutesManager {
   static const signInPage = "/signinpage";
   static const dashboard = "/dashboard";
   static const adminAccount = "/adminaccount";
+  static const adminAccountPage = "/adminaccountpage";
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
@@ -88,6 +90,11 @@ class RoutesManager {
       case adminAccount:
         return MaterialPageRoute(
           builder: (context) => const AdminAccount(),
+        );
+
+      case adminAccountPage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminDetails(),
         );
 
       case adminProfile:

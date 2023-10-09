@@ -40,7 +40,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
       A SINGLE ROW */
       body: Row(
         children: [
-/*FIRST EXPANDED THAT WILL CONTAIN ALL THE NAVIGATION */
+          /*FIRST EXPANDED THAT WILL CONTAIN ALL THE NAVIGATION */
           Expanded(
             flex: 1,
             child: Padding(
@@ -129,7 +129,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
               ),
             ),
           ),
-/*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
+
+          /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
             flex: 4,
             // ignore: avoid_unnecessary_containers
@@ -175,7 +176,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                       ),
                     ],
                   ),
-/*START OF THE SECOND EXPANDEDS BODY */
+
+                  /*START OF THE SECOND EXPANDEDS BODY */
                   body: Row(
                     children: [
                       Expanded(
@@ -207,9 +209,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                 children: [
                                   //Title
                                   const FormTitle(),
-
-                                  const AccountName(),
-
+                                  AccountName(),
                                   Row(
                                     children: [
                                       Expanded(
@@ -281,6 +281,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                   const SizedBox(
                                     height: 30,
                                   ),
+
+                                  //update button decoration box
                                   DecoratedBox(
                                     decoration: const BoxDecoration(
                                       gradient: LinearGradient(
@@ -295,6 +297,8 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                         Radius.circular(5),
                                       ),
                                     ),
+
+                                    //update button
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.transparent,

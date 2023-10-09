@@ -43,6 +43,11 @@ class Poppins {
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
+  static TextStyle adminName = const TextStyle(
+    fontFamily: poppins,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+  );
   static TextStyle userName = const TextStyle(
     fontFamily: poppins,
     fontWeight: FontWeight.w500,

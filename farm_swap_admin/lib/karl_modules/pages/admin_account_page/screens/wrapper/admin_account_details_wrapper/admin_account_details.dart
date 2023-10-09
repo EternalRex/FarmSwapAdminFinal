@@ -1,44 +1,44 @@
-import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_wrapper/admin_account_wrapper.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_wrapper/read_admin_users.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
-import "package:flutter/material.dart";
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_details_wrapper/admin_account_details_wrapper.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/admin_account_title_text.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../constants/Colors/colors.dart';
-import '../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
-import '../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
-import '../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../../../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
+import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../admin_account_wrapper/read_admin_users.dart';
 
-class AdminAccount extends StatefulWidget {
-  const AdminAccount({super.key});
+class AdminDetails extends StatefulWidget {
+  const AdminDetails({super.key});
 
   @override
-  State<AdminAccount> createState() => _AdminAccount();
+  State<AdminDetails> createState() => _AdminDetailsState();
 }
 
-class _AdminAccount extends State<AdminAccount> {
-  final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
+class _AdminDetailsState extends State<AdminDetails> {
+  final GetAllAdminAccs retrieveAdminAccounts = GetAllAdminAccs();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*CREATING ONE ROW AND PUTTING 3 EXPANDED, THUS CREATING THREE DIVISIONS IN
-      A SINGLE ROW */
       body: Row(
         children: [
           /*FIRST EXPANDED THAT WILL CONTAIN ALL THE NAVIGATION */
@@ -131,7 +131,7 @@ class _AdminAccount extends State<AdminAccount> {
             ),
           ),
 
-          /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
+          /*SECOND EXPANDED THAT WILL CONTAIN ALL THE DETAILS OF THE ADMIN USERS */
           Expanded(
             flex: 4,
             child: Padding(
@@ -144,10 +144,13 @@ class _AdminAccount extends State<AdminAccount> {
                       color: Color(0xFFDA6317),
                     ),
                     splashColor: const Color(0xFFF9A84D),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.adminAccount);
+                    },
                   ),
-                  title: const DashBoardTitleText(
-                    myText: "Admin Account",
+                  title: const TitleText(
+                    myText: 'Admin Account',
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -184,89 +187,43 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                   ],
                 ),
-                body: SingleChildScrollView(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
-                          child: Container(
-                            height: 700,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: shadow,
-                                  blurRadius: 2,
-                                  offset: const Offset(1, 5),
-                                ),
-                              ],
+                body: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
                             ),
+
+                            //Box shadow of container
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 2,
+                                offset: const Offset(1, 5),
+                              ),
+                            ],
+                          ),
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 Column(
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 15, left: 15),
+                                          top: 15, left: 50),
                                       child: Row(
                                         children: [
-                                          //this padding holds the content title
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 35, top: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Admin Users',
-                                                  style: Poppins.contentTitle
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09041B),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    //this padding holds the title header for the future builder
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 65, right: 45, top: 15),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
                                           Text(
-                                            'Name',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 300,
-                                          ),
-                                          const SizedBox(
-                                            width: 200,
-                                          ),
-                                          Text(
-                                            'Status',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
+                                            'Admin Information',
+                                            style:
+                                                Poppins.contentTitle.copyWith(
+                                              color: const Color(0xFF09051C),
                                             ),
                                           ),
                                         ],
@@ -274,31 +231,56 @@ class _AdminAccount extends State<AdminAccount> {
                                     ),
                                   ],
                                 ),
-
-                                //this future builder will list all the registered admin users
-                                //Calling the ReadAdminAccount it is the wrapper that holds the users info
-                                //this will display list tile of admin users
-                                FutureBuilder(
-                                  future: getAllAdminAccs.getDocsId(),
-                                  builder: (context, snapshot) {
-                                    return Column(
-                                      children: getAllAdminAccs.documentID
-                                          .map((documentId) {
-                                        return ListTile(
-                                          title: ReadAdminAccount(
-                                              documentId: documentId),
-                                        );
-                                      }).toList(),
-                                    );
-                                  },
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 50),
+                                      child: Row(
+                                        children: [
+                                          Text('Profile',
+                                              style: Poppins.contentTitle
+                                                  .copyWith(
+                                                      color: const Color(
+                                                          0xFF09051C))),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        FutureBuilder(
+                                          future:
+                                              retrieveAdminAccounts.getDocsId(),
+                                          builder: (context, snapshot) {
+                                            return Column(
+                                              children: retrieveAdminAccounts
+                                                  .documentID
+                                                  .map((documentId) {
+                                                return ListTile(
+                                                  title: GetAdminAccountDetails(
+                                                      documentId: documentId),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

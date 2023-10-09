@@ -125,8 +125,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                             image: AssetImage(
                               "assets/clare_assets/images/role.png",
                             ),
-                            height: 20,
-                            width: 20,
+                            height: 9,
+                            width: 9,
                           ),
                         ),
                         SizedBox(height: height * 0.024),
@@ -167,8 +167,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                     width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Calendar.svg",
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/Calendar.png",
+                                ),
                                 height: 9,
                                 width: 9,
                               ),
@@ -230,8 +232,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           controller: mycontroller.address,
                           label: mylabel.address,
                           isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/location.svg",
+                          prefixIcon: const Image(
+                            image: AssetImage(
+                              "assets/clare_assets/images/location.png",
+                            ),
                             height: 9,
                             width: 9,
                           ),
@@ -243,8 +247,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           controller: mycontroller.contactnum,
                           label: mylabel.contactnumber,
                           isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/phonebook.svg",
+                          prefixIcon: const Image(
+                            image: AssetImage(
+                              "assets/clare_assets/images/contact.png",
+                            ),
                             height: 9,
                             width: 9,
                           ),
@@ -290,8 +296,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
 
-                              prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Calendar.svg",
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/Calendar.png",
+                                ),
                                 height: 9,
                                 width: 9,
                               ),
@@ -327,14 +335,17 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           controller: mycontroller.birthplace,
                           label: mylabel.birthplace,
                           isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/location.svg",
+                          prefixIcon: const Image(
+                            image: AssetImage(
+                              "assets/clare_assets/images/location.png",
+                            ),
                             height: 9,
                             width: 9,
                           ),
                         ),
 
                         SizedBox(height: height * 0.024),
+
                         //a container for the email textfield
                         FarmSwapTextField(
                           controller: mycontroller.email,

@@ -8,8 +8,8 @@ import "package:google_fonts/google_fonts.dart";
 is the document id we get from our firebase query. That is why this class has a 
 constructor required documentID*/
 
-class ProfilePhoto extends StatefulWidget {
-  ProfilePhoto({
+class ProfilePhotoAccount extends StatefulWidget {
+  const ProfilePhotoAccount({
     super.key,
     required this.documentId,
   });
@@ -17,10 +17,10 @@ class ProfilePhoto extends StatefulWidget {
   final String documentId;
 
   @override
-  State<ProfilePhoto> createState() => _ProfilePhotoState();
+  State<ProfilePhotoAccount> createState() => _ProfilePhotoState();
 }
 
-class _ProfilePhotoState extends State<ProfilePhoto> {
+class _ProfilePhotoState extends State<ProfilePhotoAccount> {
   @override
   Widget build(BuildContext context) {
     /*We create a reference to our firestore collection so that we can acces it*/
@@ -46,7 +46,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
           return Stack(
             children: [
               CircleAvatar(
-                radius: 80,
+                radius: 30,
                 backgroundImage: image,
               ),
             ],
@@ -63,8 +63,8 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
 /*This is the class for displaying the user ID, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
-class ProfileId extends StatelessWidget {
-  const ProfileId({super.key, required this.documentId});
+class ProfileIdAccountName extends StatelessWidget {
+  const ProfileIdAccountName({super.key, required this.documentId});
 
   final String documentId;
 
@@ -104,8 +104,8 @@ class ProfileId extends StatelessWidget {
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
-class ProfileName extends StatelessWidget {
-  const ProfileName({super.key, required this.documentId});
+class ProfileAccountName extends StatelessWidget {
+  const ProfileAccountName({super.key, required this.documentId});
 
   final String documentId;
 
@@ -162,11 +162,11 @@ class ProfileName extends StatelessWidget {
   }
 }
 
-/*This is the class for displaying the user NAME, its ways are simillar to the above class
+/*This is the class for displaying the user ROLE, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
-class ProfileRole extends StatelessWidget {
-  const ProfileRole({super.key, required this.documentId});
+class ProfileAdminRole extends StatelessWidget {
+  const ProfileAdminRole({super.key, required this.documentId});
 
   final String documentId;
 
@@ -191,7 +191,7 @@ class ProfileRole extends StatelessWidget {
               userRole,
               style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
-                fontSize: 15,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
