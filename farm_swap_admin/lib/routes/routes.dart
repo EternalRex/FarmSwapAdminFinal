@@ -8,8 +8,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_details_wrapper/admin_account_details.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
@@ -24,8 +23,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/sell
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
-
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
 import '../karl_modules/pages/admin_signup_page/screens/admin_signup.dart';
 
 class RoutesManager {
@@ -35,6 +34,7 @@ class RoutesManager {
   static const dashboard = "/dashboard";
   static const adminAccount = "/adminaccount";
   static const adminAccountPage = "/adminaccountpage";
+  static const admindetailspage = "/admindetailspage";
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
@@ -92,9 +92,9 @@ class RoutesManager {
           builder: (context) => const AdminAccount(),
         );
 
-      case adminAccountPage:
+      case admindetailspage:
         return MaterialPageRoute(
-          builder: (context) => const AdminDetails(),
+          builder: (context) => AdminUserDetails(),
         );
 
       case adminProfile:

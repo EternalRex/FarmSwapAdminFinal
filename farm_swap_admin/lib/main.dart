@@ -1,7 +1,10 @@
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart';
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,19 +26,32 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      /*SETTING THE INITIAL ROUTER, OR ROUTE THAT WILL FIRST APPEAR USING THE
-      ROUTESMANAGER CLASS AND CALL A PARTICULAR PAGE THAT WE CREATE IN ROUTES.DART CLASS */
-      initialRoute: RoutesManager.introPage,
-      /* USING THE ROUTES MAANGER CLASS AND CALL THE ROUTES MANAGER METHOD SO THAT
-      EVERY TIME THE ROUTES MANAGER SUMMONS A PAGE, THE PAGE NAME WILL BE PUT
-      INSIDE THE GENERATE ROUTE AND THEN USED IN THE SWITCH STATEMENT INSIDE THE 
-      METHOD TO CHOOSE WHICH PAGE TO GO*/
-      onGenerateRoute: RoutesManager.generateRoute,
+    return MultiProvider(
+      providers: [
+        /*Regiistering our provider for Admin Details */
+        ChangeNotifierProvider(
+          create: (context) => AdminDetailsProvider(),
+        ),
+        /*Registering povider for update account dropdown hint */
+        ChangeNotifierProvider(
+          create: (context) => UpdateAdminDropDownHint(),
+        )
+      ],
+      builder: (context, child) {
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          /*SETTING THE INITIAL ROUTER, OR ROUTE THAT WILL FIRST APPEAR USING THE
+        ROUTESMANAGER CLASS AND CALL A PARTICULAR PAGE THAT WE CREATE IN ROUTES.DART CLASS */
+          initialRoute: RoutesManager.introPage,
+          /* USING THE ROUTES MAANGER CLASS AND CALL THE ROUTES MANAGER METHOD SO THAT
+        EVERY TIME THE ROUTES MANAGER SUMMONS A PAGE, THE PAGE NAME WILL BE PUT
+        INSIDE THE GENERATE ROUTE AND THEN USED IN THE SWITCH STATEMENT INSIDE THE 
+        METHOD TO CHOOSE WHICH PAGE TO GO*/
+          onGenerateRoute: RoutesManager.generateRoute,
+        );
+      },
     );
   }
 }
