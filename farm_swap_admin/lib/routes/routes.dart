@@ -102,11 +102,6 @@ class RoutesManager {
           builder: (context) => const AdminEditProfile(),
         );
 
-      case adminSignUp:
-        return MaterialPageRoute(
-          builder: (context) => const SignUp(),
-        );
-
       case dispute:
         return MaterialPageRoute(
           builder: (context) => const Dispute(),

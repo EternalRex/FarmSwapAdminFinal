@@ -138,14 +138,6 @@ class _AdminAccount extends State<AdminAccount> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
-                  leading: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Color(0xFFDA6317),
-                    ),
-                    splashColor: const Color(0xFFF9A84D),
-                    onPressed: () {},
-                  ),
                   title: const DashBoardTitleText(
                     myText: "Admin Account",
                     myColor: Color(0xFF09041B),
