@@ -38,10 +38,12 @@ class ReadFarmerAccount extends StatelessWidget {
             ),
             child: Column(
               children: [
+                //Row where the profile, first name, last name, and details
                 Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
+                      //profile of farmer
                       child: CircleAvatar(
                         backgroundImage: NetworkImage("${data["profileUrl"]}"),
                         radius: 20,
@@ -50,6 +52,7 @@ class ReadFarmerAccount extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
+                    //First name of farmer
                     Text(
                       "${data["firstName"]}",
                       style: Poppins.farmerName.copyWith(
@@ -59,6 +62,7 @@ class ReadFarmerAccount extends StatelessWidget {
                     const SizedBox(
                       width: 3,
                     ),
+                    //Last name of farmer
                     Text(
                       "${data["lastName"]}",
                       style: Poppins.farmerName.copyWith(
@@ -66,6 +70,7 @@ class ReadFarmerAccount extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
+                    //Button for details where you will be redirected to farmer details
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
