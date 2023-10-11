@@ -1,7 +1,9 @@
+import "package:farm_swap_admin/provider/farmer_userId_provider.dart";
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,16 +28,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      /*SETTING THE INITIAL ROUTER, OR ROUTE THAT WILL FIRST APPEAR USING THE
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: ((context) => FarmerUserIdProvider()),
+        ),
+      ],
+      builder: (context, child) {
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          /*SETTING THE INITIAL ROUTER, OR ROUTE THAT WILL FIRST APPEAR USING THE
       ROUTESMANAGER CLASS AND CALL A PARTICULAR PAGE THAT WE CREATE IN ROUTES.DART CLASS */
-      initialRoute: RoutesManager.introPage,
-      /* USING THE ROUTES MAANGER CLASS AND CALL THE ROUTES MANAGER METHOD SO THAT
+          initialRoute: RoutesManager.introPage,
+          /* USING THE ROUTES MAANGER CLASS AND CALL THE ROUTES MANAGER METHOD SO THAT
       EVERY TIME THE ROUTES MANAGER SUMMONS A PAGE, THE PAGE NAME WILL BE PUT
       INSIDE THE GENERATE ROUTE AND THEN USED IN THE SWITCH STATEMENT INSIDE THE 
       METHOD TO CHOOSE WHICH PAGE TO GO*/
-      onGenerateRoute: RoutesManager.generateRoute,
+          onGenerateRoute: RoutesManager.generateRoute,
+        );
+      },
     );
   }
 }

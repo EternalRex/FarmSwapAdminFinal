@@ -1,24 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/provider/farmer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ReadFarmerAccount extends StatelessWidget {
+class ReadFarmerAccount extends StatefulWidget {
   ReadFarmerAccount({super.key, required this.documentId});
 
-  final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
   String documentId;
+  String selectedId = '';
+
+  @override
+  State<ReadFarmerAccount> createState() => _ReadFarmerAccountState();
+}
+
+class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
+  final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
+
+  
 
   @override
   Widget build(BuildContext context) {
     CollectionReference reference =
         FirebaseFirestore.instance.collection('FarmerUsers');
     return FutureBuilder(
-      future: reference.doc(documentId).get(),
+      future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
@@ -101,6 +112,10 @@ class ReadFarmerAccount extends StatelessWidget {
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
+                                setState(() {
+                                  widget.selectedId = "${data["userId"]}";
+                                });
+                                Provider.of<FarmerUserIdProvider>(context, listen: false).setfarmerUserId(widget.selectedId);
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.detailsUserPage);
                               },

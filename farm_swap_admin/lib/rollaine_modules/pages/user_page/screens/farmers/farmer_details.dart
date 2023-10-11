@@ -1,6 +1,8 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/provider/farmer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_userId_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
@@ -17,6 +19,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DetailsFarmerPage extends StatefulWidget {
   const DetailsFarmerPage({super.key});
@@ -26,11 +29,14 @@ class DetailsFarmerPage extends StatefulWidget {
 }
 
 class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
-  final RetrieveFarmerAccounts retrieveFarmerAccounts =
-      RetrieveFarmerAccounts();
+  final RetrieveFarmerUserId retrieveFarmerUserId =
+      RetrieveFarmerUserId();
 
   @override
   Widget build(BuildContext context) {
+
+    String farmerUserId = Provider.of<FarmerUserIdProvider>(context, listen: false).getFarmerUserId();
+
     return Scaffold(
       body: Row(
         children: [
@@ -239,19 +245,16 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                           MainAxisAlignment.start,
                                       children: [
                                         FutureBuilder(
-                                          future: retrieveFarmerAccounts
-                                              .getDocsId(),
+                                          future: retrieveFarmerUserId
+                                              .getDocsId(farmerUserId),
                                           builder: (context, snapshot) {
-                                            return Column(
-                                              children: retrieveFarmerAccounts
-                                                  .documentId
-                                                  .map((documentId) {
-                                                return ListTile(
-                                                  title: ReadFarmerDetails(
-                                                      documentId: documentId),
-                                                );
-                                              }).toList(),
-                                            );
+                                            if (snapshot.hasData) {
+                                              String data = snapshot.data!;
+                                            return ReadFarmerDetails(documentId: data);
+                                            }
+                                            else {
+                                              return const Text('Loading');
+                                            }
                                           },
                                         ),
                                       ],
