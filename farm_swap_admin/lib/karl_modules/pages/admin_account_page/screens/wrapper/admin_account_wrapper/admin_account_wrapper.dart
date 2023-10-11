@@ -98,7 +98,7 @@ class ReadAdminAccount extends StatelessWidget {
                       ),
                       //sizedbox to separate the two sizedbox
                       const SizedBox(
-                        width: 350,
+                        width: 250,
                       ),
                       //sizedbox for the activities button of admin user
                       SizedBox(
