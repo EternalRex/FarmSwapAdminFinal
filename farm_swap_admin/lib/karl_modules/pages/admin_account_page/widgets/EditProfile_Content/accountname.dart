@@ -2,7 +2,7 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:flutter/material.dart';
 
 import '../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../screens/wrapper/admin_account_wrapper/read_admin_users.dart';
+import '../../screens/admin_account_wrapper/read_admin_users.dart';
 import '../account_name/account_name_profileInfo.dart';
 
 // ignore: must_be_immutable

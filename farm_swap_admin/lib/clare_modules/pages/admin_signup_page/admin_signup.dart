@@ -384,7 +384,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         //tick the checkbox for the terms and condition
                         Container(
                           margin: const EdgeInsets.only(
-                            left: 510.0,
+                            left: 470.0,
                           ),
                           child: Row(
                             children: [

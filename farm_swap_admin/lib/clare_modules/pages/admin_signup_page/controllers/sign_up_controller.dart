@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SignUpController {
   TextEditingController userid = TextEditingController();
-  TextEditingController role = TextEditingController();
+  TextEditingController role = TextEditingController(text: "Admin");
   TextEditingController regdate = TextEditingController();
   TextEditingController fname = TextEditingController();
   TextEditingController lname = TextEditingController();

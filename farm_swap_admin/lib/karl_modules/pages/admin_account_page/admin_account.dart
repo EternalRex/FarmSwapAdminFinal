@@ -1,7 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_wrapper/admin_account_wrapper.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_wrapper/read_admin_users.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/admin_account_wrapper.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
@@ -138,14 +138,6 @@ class _AdminAccount extends State<AdminAccount> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
-                  leading: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Color(0xFFDA6317),
-                    ),
-                    splashColor: const Color(0xFFF9A84D),
-                    onPressed: () {},
-                  ),
                   title: const DashBoardTitleText(
                     myText: "Admin Account",
                     myColor: Color(0xFF09041B),
@@ -262,6 +254,7 @@ class _AdminAccount extends State<AdminAccount> {
                                           const SizedBox(
                                             width: 200,
                                           ),
+                                          /*
                                           Text(
                                             'Status',
                                             style: Poppins.farmerName.copyWith(
@@ -269,6 +262,7 @@ class _AdminAccount extends State<AdminAccount> {
                                                   179, 9, 4, 27),
                                             ),
                                           ),
+                                          */
                                         ],
                                       ),
                                     ),

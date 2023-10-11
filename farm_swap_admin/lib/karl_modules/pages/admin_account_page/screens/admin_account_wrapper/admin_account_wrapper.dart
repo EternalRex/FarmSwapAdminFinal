@@ -1,29 +1,48 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/wrapper/admin_account_wrapper/read_admin_users.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ReadAdminAccount extends StatelessWidget {
-  ReadAdminAccount({super.key, required this.documentId});
+class ReadAdminAccount extends StatefulWidget {
+  ReadAdminAccount({
+    super.key,
+    this.documentId,
+  });
 
+  final String? documentId;
+  String selectedId = "";
+
+  @override
+  State<ReadAdminAccount> createState() => _ReadAdminAccountState();
+}
+
+class _ReadAdminAccountState extends State<ReadAdminAccount> {
   final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
+  AdminUserDetails adminDetails = AdminUserDetails();
 
-  String documentId;
   @override
   Widget build(BuildContext context) {
-    CollectionReference reference =
+    //this line will get the admin user collection in the firestore
+    CollectionReference admiRef =
         FirebaseFirestore.instance.collection("AdminUsers");
+
     return FutureBuilder<DocumentSnapshot>(
-        future: reference.doc(documentId).get(),
+        future: admiRef.doc(widget.documentId).get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            dynamic data = snapshot.data!.data() as dynamic;
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+
             final profileImage =
                 CachedNetworkImageProvider("${data["profileUrl"]}");
+
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -189,8 +208,17 @@ class ReadAdminAccount extends StatelessWidget {
                                     shadowColor: Colors.transparent,
                                   ),
                                   onPressed: () {
+                                    setState(() {
+                                      widget.selectedId = "${data["User Id"]}";
+                                    });
+                                    //assign the widget.selectedId to setAdminUserId
+                                    //to bring in other class
+                                    Provider.of<AdminDetailsProvider>(context,
+                                            listen: false)
+                                        .setadminUserId(widget.selectedId);
+                                    //this will navigate to admin details.dart
                                     Navigator.of(context).pushNamed(
-                                        RoutesManager.adminAccountPage);
+                                        RoutesManager.admindetailspage);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -221,7 +249,9 @@ class ReadAdminAccount extends StatelessWidget {
             child: SizedBox(
               height: 10,
               width: 10,
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.lightGreen,
+              ),
             ),
           );
         });

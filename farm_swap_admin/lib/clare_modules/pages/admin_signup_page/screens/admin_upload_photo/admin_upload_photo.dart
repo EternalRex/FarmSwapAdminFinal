@@ -30,7 +30,7 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
           ),
           splashColor: const Color(0xFFF9A84D),
           onPressed: () {
-            Navigator.of(context).pushNamed(RoutesManager.adminSignUp);
+            Navigator.of(context).pushNamed(RoutesManager.adminSignup);
           },
         ),
         backgroundColor: Colors.transparent,
