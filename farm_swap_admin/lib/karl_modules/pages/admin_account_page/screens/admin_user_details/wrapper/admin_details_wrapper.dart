@@ -268,7 +268,7 @@ class _AdminSpecificDetailsWrapperState
                                                   ),
 
                                                   //this second sizedbox expanded hold the admin users information
-                                                  //like first and last name, role and admin user ID
+                                                  //like first and last name, email address and admin user ID
                                                   SizedBox(
                                                     child: Padding(
                                                       padding:
@@ -313,7 +313,7 @@ class _AdminSpecificDetailsWrapperState
                                                               ),
                                                             ],
                                                           ),
-                                                          //this Text holds the admin role
+                                                          //this Text holds the admin email address
                                                           Text(
                                                             "${data["Email Address"]}",
                                                             style: Poppins
@@ -323,13 +323,9 @@ class _AdminSpecificDetailsWrapperState
                                                                   0xFF09041B),
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                            height: 5,
-                                                          ),
-
                                                           //this Text holds the admin user ID
                                                           Text(
-                                                            "${data["User Id"]}",
+                                                            "ID: ${data["User Id"]}",
                                                             style: Poppins
                                                                 .detailsText
                                                                 .copyWith(
@@ -349,12 +345,12 @@ class _AdminSpecificDetailsWrapperState
                                             height: 10,
                                           ),
 
-                                          //another container for other details
+                                          //putting container inside align to center the container
                                           Align(
                                             alignment: Alignment.center,
                                             child: Container(
                                               width: 800,
-                                              height: 400,
+                                              height: 500,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 borderRadius:
@@ -369,8 +365,509 @@ class _AdminSpecificDetailsWrapperState
                                                   ),
                                                 ],
                                               ),
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 5,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 10,
+                                                          vertical: 10),
+                                                      child: Column(
+                                                        children: [
+                                                          //this row holds the admin user details
+                                                          Row(
+                                                            children: [
+                                                              //this is the first expanded that hold the first half of the admin user details
+                                                              Expanded(
+                                                                flex: 2,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          10,
+                                                                      vertical:
+                                                                          10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      //a text that holds the text title for the container role
+                                                                      Text(
+                                                                        'Role',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
 
-                                              //other details that can be updated should be here
+                                                                      //a container that holds the value of the user role
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              const BorderRadius.all(
+                                                                            Radius.circular(5),
+                                                                          ),
+                                                                          border: Border.all(
+                                                                              color: blackLightActive,
+                                                                              strokeAlign: BorderSide.strokeAlignOutside),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                "${data["User Role"]}",
+                                                                                style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10),
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            //text title for the container that holds the full name
+                                                                            Text(
+                                                                              'Full Name',
+                                                                              style: Poppins.contentText.copyWith(
+                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 3,
+                                                                            ),
+
+                                                                            //this container holds the value of first and last name of the admin user
+                                                                            Container(
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: const BorderRadius.all(
+                                                                                  Radius.circular(5),
+                                                                                ),
+                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "${data["First Name"]}",
+                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      " ${data["Last Name"]}",
+                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+
+                                                                      //this padding holds the value contact number
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10),
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            //Retrieve the birth place of farmers
+                                                                            Text(
+                                                                              'Contact Number',
+                                                                              style: Poppins.contentText.copyWith(
+                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Container(
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: const BorderRadius.all(
+                                                                                  Radius.circular(5),
+                                                                                ),
+                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "${data["Contact Number"]}",
+                                                                                      style: Poppins.farmerName.copyWith(
+                                                                                        color: greenNormalHover,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+
+                                                                      //this padding holds the value registration date
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10),
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Registration Date',
+                                                                              style: Poppins.contentText.copyWith(
+                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Container(
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: const BorderRadius.all(
+                                                                                  Radius.circular(5),
+                                                                                ),
+                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      finalRegistrationDate,
+                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+
+                                                              //this is the second expanded that hold half of the admin user details
+                                                              Expanded(
+                                                                flex: 2,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          10,
+                                                                      vertical:
+                                                                          10),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      //sizedbox to align the containers/paddings of second expanded
+                                                                      //to the first expanded containers/paddings
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            95,
+                                                                      ),
+
+                                                                      //this text holds the text title birth date
+                                                                      Text(
+                                                                        'Birth Date',
+                                                                        style: Poppins
+                                                                            .contentText
+                                                                            .copyWith(
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              55,
+                                                                              54,
+                                                                              56),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            3,
+                                                                      ),
+
+                                                                      //and a container that holds the value of birthdate of clicked details
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              const BorderRadius.all(
+                                                                            Radius.circular(5),
+                                                                          ),
+                                                                          border: Border.all(
+                                                                              color: blackLightActive,
+                                                                              strokeAlign: BorderSide.strokeAlignOutside),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                finalBirthdate,
+                                                                                style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+
+                                                                      //this padding holds a column of the text title birthplace
+                                                                      //and a container that holds the value of birthplace of clicked details
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10),
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Birth Place',
+                                                                              style: Poppins.contentText.copyWith(
+                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Container(
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: const BorderRadius.all(
+                                                                                  Radius.circular(5),
+                                                                                ),
+                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "${data["Birth Place"]}",
+                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                            10,
+                                                                      ),
+
+                                                                      //this padding holds a column of the text title address
+                                                                      //and a container that holds the value of address of clicked details
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10),
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Address',
+                                                                              style: Poppins.contentText.copyWith(
+                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 3,
+                                                                            ),
+                                                                            Container(
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: const BorderRadius.all(
+                                                                                  Radius.circular(5),
+                                                                                ),
+                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "${data["Address"]}",
+                                                                                      style: Poppins.farmerName.copyWith(
+                                                                                        color: greenNormalHover,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+
+                                                          const SizedBox(
+                                                            height: 5,
+                                                          ),
+
+                                                          //update details button
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                              bottom: 15,
+                                                            ),
+                                                            child: Center(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  // ignore: sized_box_for_whitespace
+                                                                  Container(
+                                                                    height: 50,
+                                                                    width: 141,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      gradient:
+                                                                          const LinearGradient(
+                                                                        colors: [
+                                                                          Color(
+                                                                              0xFF53E78B),
+                                                                          Color(
+                                                                              0xFF14BE77)
+                                                                        ],
+                                                                        begin: Alignment
+                                                                            .topLeft,
+                                                                        end: Alignment
+                                                                            .bottomRight,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          const BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            15),
+                                                                      ),
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              shadow,
+                                                                          blurRadius:
+                                                                              5,
+                                                                          offset: const Offset(
+                                                                              1,
+                                                                              5),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          TextButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          //navigator here
+                                                                        },
+                                                                        child:
+                                                                            Text(
+                                                                          "Update Details",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontFamily:
+                                                                                GoogleFonts.poppins().fontFamily,
+                                                                            fontSize:
+                                                                                15,
+                                                                            fontWeight:
+                                                                                FontWeight.w900,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
