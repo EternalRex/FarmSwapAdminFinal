@@ -1,8 +1,8 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/provider/farmer_userId_provider.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_userId_query.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details_wrapper.dart';
+import 'package:farm_swap_admin/provider/customer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_userId_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -20,21 +20,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class DetailsFarmerPage extends StatefulWidget {
-  const DetailsFarmerPage({super.key});
+class DetailsCustomerPage extends StatefulWidget {
+  const DetailsCustomerPage({super.key});
 
   @override
-  State<DetailsFarmerPage> createState() => _DetailsFarmerPageState();
+  State<DetailsCustomerPage> createState() => _DetailsCustomerPageState();
 }
 
-class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
-  final RetrieveFarmerUserId retrieveFarmerUserId =
-      RetrieveFarmerUserId();
+class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
+  final RetrieveCustomerUserId retrieveCustomerUserId =
+      RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
-
-    String farmerUserId = Provider.of<FarmerUserIdProvider>(context, listen: false).getFarmerUserId();
+    String customerUserId =
+        Provider.of<CustomerUserIdProvider>(context, listen: false)
+            .getCustomerUserId();
 
     return Scaffold(
       body: Row(
@@ -244,14 +245,14 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                           MainAxisAlignment.start,
                                       children: [
                                         FutureBuilder(
-                                          future: retrieveFarmerUserId
-                                              .getDocsId(farmerUserId),
+                                          future: retrieveCustomerUserId
+                                              .getDocsId(customerUserId),
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData) {
                                               String data = snapshot.data!;
-                                            return ReadFarmerDetails(documentId: data);
-                                            }
-                                            else {
+                                              return ReadCustomerDetails(
+                                                  documentId: data);
+                                            } else {
                                               return const Text('Loading');
                                             }
                                           },

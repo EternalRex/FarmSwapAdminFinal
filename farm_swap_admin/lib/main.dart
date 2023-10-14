@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => FarmerUserIdProvider(),
+        ),
         /*Regiistering our provider for Admin Details */
         ChangeNotifierProvider(
           create: (context) => AdminDetailsProvider(),
