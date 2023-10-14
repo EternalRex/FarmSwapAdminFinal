@@ -1,5 +1,6 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart';
+import "package:farm_swap_admin/provider/customer_userId_provider.dart";
 import "package:farm_swap_admin/provider/farmer_userId_provider.dart";
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
@@ -31,10 +32,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //Registering provider for Farmer details
         ChangeNotifierProvider(
           create: (context) => FarmerUserIdProvider(),
         ),
-        /*Regiistering our provider for Admin Details */
+        //Registering provider for Customer details
+        ChangeNotifierProvider(
+          create: (context) => CustomerUserIdProvider(),
+        ),
+        /*Registering our provider for Admin Details */
         ChangeNotifierProvider(
           create: (context) => AdminDetailsProvider(),
         ),

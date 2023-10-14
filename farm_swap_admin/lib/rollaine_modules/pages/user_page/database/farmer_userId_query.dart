@@ -12,6 +12,7 @@ class RetrieveFarmerUserId {
         .where("userId", isEqualTo: farmerData)
         .get()
         .then(
+          // ignore: avoid_function_literals_in_foreach_calls
           (value) => value.docs.forEach(
             (element) {
               documentId = element.reference.id;

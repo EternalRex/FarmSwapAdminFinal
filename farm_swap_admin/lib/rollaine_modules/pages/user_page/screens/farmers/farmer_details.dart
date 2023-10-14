@@ -28,13 +28,13 @@ class DetailsFarmerPage extends StatefulWidget {
 }
 
 class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
-  final RetrieveFarmerUserId retrieveFarmerUserId =
-      RetrieveFarmerUserId();
+  final RetrieveFarmerUserId retrieveFarmerUserId = RetrieveFarmerUserId();
 
   @override
   Widget build(BuildContext context) {
-
-    String farmerUserId = Provider.of<FarmerUserIdProvider>(context, listen: false).getFarmerUserId();
+    String farmerUserId =
+        Provider.of<FarmerUserIdProvider>(context, listen: false)
+            .getFarmerUserId();
 
     return Scaffold(
       body: Row(
@@ -249,9 +249,9 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData) {
                                               String data = snapshot.data!;
-                                            return ReadFarmerDetails(documentId: data);
-                                            }
-                                            else {
+                                              return ReadFarmerDetails(
+                                                  documentId: data);
+                                            } else {
                                               return const Text('Loading');
                                             }
                                           },

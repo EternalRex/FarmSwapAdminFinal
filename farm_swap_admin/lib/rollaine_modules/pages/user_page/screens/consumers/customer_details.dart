@@ -28,14 +28,17 @@ class DetailsCustomerPage extends StatefulWidget {
 }
 
 class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
+
   final RetrieveCustomerUserId retrieveCustomerUserId =
       RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
+    
     String customerUserId =
         Provider.of<CustomerUserIdProvider>(context, listen: false)
             .getCustomerUserId();
+            print("providerid " + customerUserId);
 
     return Scaffold(
       body: Row(
