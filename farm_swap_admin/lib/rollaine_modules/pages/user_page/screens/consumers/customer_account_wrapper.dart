@@ -1,27 +1,39 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/provider/customer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ReadCustomerAccount extends StatelessWidget {
+class ReadCustomerAccount extends StatefulWidget {
   ReadCustomerAccount({super.key, required this.documentId});
 
+  String documentId;
+  String chosenId = '';
+
+  @override
+  State<ReadCustomerAccount> createState() => _ReadCustomerAccountState();
+}
+
+class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
   final RetrieveCustomerAccounts retrieveCustomerAccounts =
       RetrieveCustomerAccounts();
-  String documentId;
 
   @override
   Widget build(BuildContext context) {
     CollectionReference reference =
         FirebaseFirestore.instance.collection('CustomerUsers');
     return FutureBuilder(
-      future: reference.doc(documentId).get(),
+      future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+          final customerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -43,7 +55,7 @@ class ReadCustomerAccount extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage("${data["profileUrl"]}"),
+                        backgroundImage: customerProfile,
                         radius: 20,
                       ),
                     ),
@@ -95,7 +107,14 @@ class ReadCustomerAccount extends StatelessWidget {
                                     Colors.transparent.withOpacity(0.12),
                                 shadowColor: Colors.transparent,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  widget.chosenId = "${data["userId"]}";
+                                });
+                                print("Customer id" + widget.chosenId);
+                                Provider.of<CustomerUserIdProvider>(context, listen: false).setcustomerUserId(widget.chosenId);
+                                Navigator.of(context).pushNamed(RoutesManager.detailsCustomerPage);
+                              },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 5),

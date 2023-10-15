@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
@@ -33,6 +34,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+          final farmerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -56,7 +58,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                       padding: const EdgeInsets.all(5.0),
                       //profile of farmer
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage("${data["profileUrl"]}"),
+                        backgroundImage: farmerProfile,
                         radius: 20,
                       ),
                     ),
@@ -117,7 +119,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                                 });
                                 Provider.of<FarmerUserIdProvider>(context, listen: false).setfarmerUserId(widget.selectedId);
                                 Navigator.of(context)
-                                    .pushNamed(RoutesManager.detailsUserPage);
+                                    .pushNamed(RoutesManager.detailsFarmerPage);
                               },
                               child: Padding(
                                 padding:

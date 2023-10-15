@@ -2,28 +2,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class ReadFarmerDetails extends StatelessWidget {
-  ReadFarmerDetails({super.key, required this.documentId});
+class ReadCustomerDetails extends StatelessWidget {
+  ReadCustomerDetails({super.key, required this.documentId});
 
-  final RetrieveFarmerAccounts retrieveFarmerAccounts =
-      RetrieveFarmerAccounts();
+  final RetrieveCustomerAccounts retrieveCustomerAccounts =
+      RetrieveCustomerAccounts();
   String documentId;
 
   @override
   Widget build(BuildContext context) {
     CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+        FirebaseFirestore.instance.collection('CustomerUsers');
     return FutureBuilder(
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
-          final farmerImage =
+          final customerImage =
               CachedNetworkImageProvider("${data["profileUrl"]}");
           final documentImage = CachedNetworkImageProvider("${data[""]}");
           final idImage = CachedNetworkImageProvider("${data[""]}");
@@ -31,7 +31,6 @@ class ReadFarmerDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                //Container sa details na gi retrieve kay farmer
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -46,71 +45,51 @@ class ReadFarmerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  //Row kung asa nasud ang username, role ug userId
                   child: Row(
                     children: [
                       Expanded(
-                        flex: 4,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          //Retrieve the username of farmer
-                                          Text(
-                                            "${data["username"]}",
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          //Retrieve the role of the farmer
-                                          Text(
-                                            "${data["userRole"]}",
-                                            style: Poppins.userName.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          //Retrieve the user id of farmer
-                                          Text(
-                                            "${data["userId"]}",
-                                            style: Poppins.detailsText.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      //Retrieve the profile of farmer
-                                      child: CircleAvatar(
-                                        backgroundImage: farmerImage,
-                                        radius: 50,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                "${data["username"]}",
+                                style: Poppins.farmerName.copyWith(
+                                  color: const Color(0xFF09041B),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "${data["userRole"]}",
+                                style: Poppins.userName.copyWith(
+                                  color: const Color(0xFF09041B),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              //Retrieve the user id of farmer
+                              Text(
+                                "${data["userId"]}",
+                                style: Poppins.detailsText.copyWith(
+                                  color: const Color(0xFF09041B),
+                                ),
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundImage: customerImage,
+                            radius: 50,
                           ),
                         ),
                       ),
@@ -120,7 +99,6 @@ class ReadFarmerDetails extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                //Container where the personal details of farmer is found
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -147,7 +125,6 @@ class ReadFarmerDetails extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 2,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
@@ -155,7 +132,6 @@ class ReadFarmerDetails extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          //Retrieve first name and last name of farmer
                                           Text(
                                             'Status',
                                             style: Poppins.contentText.copyWith(
@@ -803,7 +779,6 @@ class ReadFarmerDetails extends StatelessWidget {
             ),
           );
         }
-        //Katong part na before ma display ang gi retrieve na data kay mag loading sa siya
         return const Center(
           child: SizedBox(
             height: 20,

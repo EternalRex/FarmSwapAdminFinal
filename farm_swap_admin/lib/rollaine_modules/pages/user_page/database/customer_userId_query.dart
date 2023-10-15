@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RetrieveFarmerUserId {
+class RetrieveCustomerUserId {
   String? documentId;
 
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<String?> getDocsId(String data) async {
-    String farmerData = data;
+    String customerData = data;
     await db
-        .collection("FarmerUsers")
-        .where("userId", isEqualTo: farmerData)
+        .collection("CustomerUsers")
+        .where("userId", isEqualTo: customerData)
         .get()
         .then(
           // ignore: avoid_function_literals_in_foreach_calls
