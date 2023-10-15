@@ -28,17 +28,15 @@ class DetailsCustomerPage extends StatefulWidget {
 }
 
 class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
-
-  final RetrieveCustomerUserId retrieveCustomerUserId =
-      RetrieveCustomerUserId();
+  final RetrieveCustomerUserId retrieveCustomerUserId = RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
-    
     String customerUserId =
-        Provider.of<CustomerUserIdProvider>(context, listen: false)
-            .getCustomerUserId();
-            print("providerid " + customerUserId);
+        Provider.of<CustomerUserIdProvider>(context, listen: false).getCustomerUserId();
+    Provider.of<CustomerUserIdProvider>(context, listen: false).customerUserId;
+    print("providerid " + customerUserId);
+    print("providerid " + customerUserId);
 
     return Scaffold(
       body: Row(
@@ -157,8 +155,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                     ),
                     splashColor: const Color(0xFFF9A84D),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(RoutesManager.userAccountPage);
+                      Navigator.of(context).pushNamed(RoutesManager.userAccountPage);
                     },
                   ),
                   //title sa page
@@ -178,13 +175,11 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                         width: 250,
                         height: 15,
                         child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
+                          style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
+                            fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -204,8 +199,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
+                        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -228,33 +222,27 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                                 Column(
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 20, left: 25),
+                                      padding: const EdgeInsets.only(top: 20, left: 25),
                                       //Row kung asa ang title sa content below ane
                                       child: Row(
                                         children: [
                                           Text('Profile',
                                               style: Poppins.contentTitle
-                                                  .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C))),
+                                                  .copyWith(color: const Color(0xFF09051C))),
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 10),
                                     //Column kung asa ma show na area ang mga gi retrieve na details gikan sa farmers
                                     Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         FutureBuilder(
-                                          future: retrieveCustomerUserId
-                                              .getDocsId(customerUserId),
+                                          future: retrieveCustomerUserId.getDocsId(customerUserId),
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData) {
                                               String data = snapshot.data!;
-                                              return ReadCustomerDetails(
-                                                  documentId: data);
+                                              return ReadCustomerDetails(documentId: data);
                                             } else {
                                               return const Text('Loading');
                                             }

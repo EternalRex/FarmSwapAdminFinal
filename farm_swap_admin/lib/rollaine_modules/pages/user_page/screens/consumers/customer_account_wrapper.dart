@@ -21,13 +21,11 @@ class ReadCustomerAccount extends StatefulWidget {
 }
 
 class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
-  final RetrieveCustomerAccounts retrieveCustomerAccounts =
-      RetrieveCustomerAccounts();
+  final RetrieveCustomerAccounts retrieveCustomerAccounts = RetrieveCustomerAccounts();
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection('CustomerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('CustomerUsers');
     return FutureBuilder(
       future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
@@ -101,23 +99,22 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
+                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
                                 setState(() {
                                   widget.chosenId = "${data["userId"]}";
                                 });
+                                //widget.chosenId = "${data["userId"]}";
                                 print("Customer id" + widget.chosenId);
-                                Provider.of<CustomerUserIdProvider>(context, listen: false).setcustomerUserId(widget.chosenId);
+                                Provider.of<CustomerUserIdProvider>(context, listen: false)
+                                    .setcustomerUserId(widget.chosenId);
                                 Navigator.of(context).pushNamed(RoutesManager.detailsCustomerPage);
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                padding: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
                                   'Details',
                                   style: GoogleFonts.poppins(

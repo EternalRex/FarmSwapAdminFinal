@@ -63,7 +63,7 @@ class RoutesManager {
 
   static const reportsPage = '/reportspage';
   static const userAccountPage = '/useraccountpage';
-  static const detailsFarmerPage = '/detailscustomerpage';
+  static const detailsFarmerPage = '/detailsfarmerpage';
   static const detailsCustomerPage = '/detailscustomerpage';
   static const listingsPage = '/listingspage';
   static const communicationPage = '/communicationpage';
