@@ -1,7 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/provider/customer_userId_provider.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_userId_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_userid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
