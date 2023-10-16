@@ -63,66 +63,66 @@ class _AdminAccount extends State<AdminAccount> {
                   ],
                 ),
                 /*A COLUMN THAT WILL HOLD THE NAVIGATIONS OPTIONS */
-                child: const Column(
+                child: Column(
                   children: [
                     /*THE TITLE AND LOGO IN THE PAGE OPTIONS */
-                    DashPageOptionsTitle(),
+                    const DashPageOptionsTitle(),
                     /*30 PXLS SPACE BETWEEN*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL HOLD THE DASHBOARD LOGO AND THE DASHBOARD LABEL */
-                    DashBoardOptionsBtn(),
+                    const DashBoardOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE  ADMIN ACCOUNT LOGO AND LABEL*/
-                    DashAdminAccountOptionsBtn(),
+                    const DashAdminAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE USER ACCOUNTS LOGO AND LABEL */
-                    DashUserAccountOptionsBtn(),
+                    const DashUserAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE LISTINGS ICON AND LABEL */
-                    DashListingsOptionsBtn(),
+                    const DashListingsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE TRANSACTIONS ICON AND LABEL */
-                    DashTransactionsOptionsBtn(),
+                    const DashTransactionsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE REPORTS ICON AND LABEL */
-                    DashReportsOptionsBtn(),
+                    const DashReportsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE DISPUTE ICON AND LABEL */
-                    DashDisputeOptionsBtn(),
+                    const DashDisputeOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
-                    DashWalletOptions(),
+                    const DashWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    DashCommunicationOptionsBtn(),
+                    const DashCommunicationOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    Spacer(),
+                    const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DashLogoutOptionBtn(),
                   ],
@@ -154,13 +154,11 @@ class _AdminAccount extends State<AdminAccount> {
                         width: 250,
                         height: 15,
                         child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
+                          style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
+                            fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -181,8 +179,7 @@ class _AdminAccount extends State<AdminAccount> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
+                          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                           child: Container(
                             height: 700,
                             decoration: BoxDecoration(
@@ -203,24 +200,19 @@ class _AdminAccount extends State<AdminAccount> {
                                 Column(
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 15),
+                                      padding: const EdgeInsets.only(top: 15, left: 15),
                                       child: Row(
                                         children: [
                                           //this padding holds the content title
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 35, top: 25),
+                                            padding: const EdgeInsets.only(left: 35, top: 25),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'Admin Users',
-                                                  style: Poppins.contentTitle
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09041B),
+                                                  style: Poppins.contentTitle.copyWith(
+                                                    color: const Color(0xFF09041B),
                                                   ),
                                                 ),
                                               ],
@@ -232,11 +224,9 @@ class _AdminAccount extends State<AdminAccount> {
 
                                     //this padding holds the title header for the future builder
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 65, right: 45, top: 15),
+                                      padding: const EdgeInsets.only(left: 65, right: 45, top: 15),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           const SizedBox(
                                             width: 10,
@@ -244,8 +234,7 @@ class _AdminAccount extends State<AdminAccount> {
                                           Text(
                                             'Name',
                                             style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
+                                              color: const Color.fromARGB(179, 9, 4, 27),
                                             ),
                                           ),
                                           const SizedBox(
@@ -276,11 +265,9 @@ class _AdminAccount extends State<AdminAccount> {
                                   future: getAllAdminAccs.getDocsId(),
                                   builder: (context, snapshot) {
                                     return Column(
-                                      children: getAllAdminAccs.documentID
-                                          .map((documentId) {
+                                      children: getAllAdminAccs.documentID.map((documentId) {
                                         return ListTile(
-                                          title: ReadAdminAccount(
-                                              documentId: documentId),
+                                          title: ReadAdminAccount(documentId: documentId),
                                         );
                                       }).toList(),
                                     );
@@ -324,8 +311,7 @@ class _AdminAccount extends State<AdminAccount> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(
