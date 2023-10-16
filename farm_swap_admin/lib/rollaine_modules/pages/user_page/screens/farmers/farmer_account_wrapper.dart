@@ -23,12 +23,9 @@ class ReadFarmerAccount extends StatefulWidget {
 class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
   final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
 
-  
-
   @override
   Widget build(BuildContext context) {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
     return FutureBuilder(
       future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
@@ -107,23 +104,20 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
+                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
                                 setState(() {
                                   widget.selectedId = "${data["userId"]}";
                                 });
-                                Provider.of<FarmerUserIdProvider>(context, listen: false).setfarmerUserId(widget.selectedId);
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.detailsFarmerPage);
+                                Provider.of<FarmerUserIdProvider>(context, listen: false)
+                                    .setfarmerUserId(widget.selectedId);
+                                Navigator.of(context).pushNamed(RoutesManager.detailsFarmerPage);
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                padding: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
                                   'Details',
                                   style: GoogleFonts.poppins(

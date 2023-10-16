@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
         /*Registering povider for update account dropdown hint */
         ChangeNotifierProvider(
           create: (context) => UpdateAdminDropDownHint(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => FarmerUserIdProvider()),
       ],
       builder: (context, child) {
         return const MaterialApp(

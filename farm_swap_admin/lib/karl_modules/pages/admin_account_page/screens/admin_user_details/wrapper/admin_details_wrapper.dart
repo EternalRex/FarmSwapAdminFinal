@@ -33,12 +33,10 @@ class AdminSpecificDetailsWrapper extends StatefulWidget {
   //DateTime? _dateTime;
 
   @override
-  State<AdminSpecificDetailsWrapper> createState() =>
-      _AdminSpecificDetailsWrapperState();
+  State<AdminSpecificDetailsWrapper> createState() => _AdminSpecificDetailsWrapperState();
 }
 
-class _AdminSpecificDetailsWrapperState
-    extends State<AdminSpecificDetailsWrapper> {
+class _AdminSpecificDetailsWrapperState extends State<AdminSpecificDetailsWrapper> {
   //this objects is for third expanded
   final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
@@ -46,8 +44,7 @@ class _AdminSpecificDetailsWrapperState
   @override
   Widget build(BuildContext context) {
     //creates a reference to our database firestore
-    CollectionReference adminRef =
-        FirebaseFirestore.instance.collection("AdminUsers");
+    CollectionReference adminRef = FirebaseFirestore.instance.collection("AdminUsers");
     return Scaffold(
       body: Row(
         children: [
@@ -73,66 +70,66 @@ class _AdminSpecificDetailsWrapperState
                   ],
                 ),
                 /*A COLUMN THAT WILL HOLD THE NAVIGATIONS OPTIONS */
-                child: const Column(
+                child: Column(
                   children: [
                     /*THE TITLE AND LOGO IN THE PAGE OPTIONS */
-                    DashPageOptionsTitle(),
+                    const DashPageOptionsTitle(),
                     /*30 PXLS SPACE BETWEEN*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL HOLD THE DASHBOARD LOGO AND THE DASHBOARD LABEL */
-                    DashBoardOptionsBtn(),
+                    const DashBoardOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE  ADMIN ACCOUNT LOGO AND LABEL*/
-                    DashAdminAccountOptionsBtn(),
+                    const DashAdminAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE USER ACCOUNTS LOGO AND LABEL */
-                    DashUserAccountOptionsBtn(),
+                    const DashUserAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE LISTINGS ICON AND LABEL */
-                    DashListingsOptionsBtn(),
+                    const DashListingsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE TRANSACTIONS ICON AND LABEL */
-                    DashTransactionsOptionsBtn(),
+                    const DashTransactionsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE REPORTS ICON AND LABEL */
-                    DashReportsOptionsBtn(),
+                    const DashReportsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE DISPUTE ICON AND LABEL */
-                    DashDisputeOptionsBtn(),
+                    const DashDisputeOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
-                    DashWalletOptions(),
+                    const DashWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    DashCommunicationOptionsBtn(),
+                    const DashCommunicationOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    Spacer(),
+                    const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DashLogoutOptionBtn(),
                   ],
@@ -155,8 +152,7 @@ class _AdminSpecificDetailsWrapperState
                     ),
                     splashColor: const Color(0xFFF9A84D),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(RoutesManager.adminAccount);
+                      Navigator.of(context).pushNamed(RoutesManager.adminAccount);
                     },
                   ),
                   title: const DashBoardTitleText(
@@ -172,8 +168,7 @@ class _AdminSpecificDetailsWrapperState
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
+                          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                           child: Container(
                             height: 700,
                             decoration: BoxDecoration(
@@ -199,31 +194,23 @@ class _AdminSpecificDetailsWrapperState
                                 FutureBuilder<DocumentSnapshot>(
                                   future: adminRef.doc(widget.documentID).get(),
                                   builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      dynamic data =
-                                          snapshot.data!.data() as dynamic;
+                                    if (snapshot.connectionState == ConnectionState.done) {
+                                      dynamic data = snapshot.data!.data() as dynamic;
 
                                       //convert the timestamp into datetime
                                       //birthdate is now initialize
                                       //then set the dateformat
-                                      Timestamp datatimestamp =
-                                          data["Birth Date"];
-                                      DateTime birthdate =
-                                          datatimestamp.toDate();
+                                      Timestamp datatimestamp = data["Birth Date"];
+                                      DateTime birthdate = datatimestamp.toDate();
                                       String finalBirthdate =
-                                          DateFormat('yyy-MM-dd')
-                                              .format(birthdate);
+                                          DateFormat('yyy-MM-dd').format(birthdate);
 
                                       //then for the registration date convert sad into date time
                                       //initialize then set the dateformat
-                                      Timestamp registerdateTM =
-                                          data["Registration Date"];
-                                      DateTime registerDate =
-                                          registerdateTM.toDate();
+                                      Timestamp registerdateTM = data["Registration Date"];
+                                      DateTime registerDate = registerdateTM.toDate();
                                       String finalRegistrationDate =
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(registerDate);
+                                          DateFormat('yyyy-MM-dd').format(registerDate);
 
                                       return Column(
                                         children: [
@@ -235,8 +222,7 @@ class _AdminSpecificDetailsWrapperState
                                               height: 145,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius:
-                                                    const BorderRadius.all(
+                                                borderRadius: const BorderRadius.all(
                                                   Radius.circular(10),
                                                 ),
                                                 boxShadow: [
@@ -248,20 +234,16 @@ class _AdminSpecificDetailsWrapperState
                                                 ],
                                               ),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   //this first sizedbox holds the profile Url of the admin users
                                                   //this will also display the picture of the admin users
                                                   SizedBox(
                                                     child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const EdgeInsets.all(8.0),
                                                       child: CircleAvatar(
                                                         backgroundImage:
-                                                            NetworkImage(
-                                                                "${data["profileUrl"]}"),
+                                                            NetworkImage("${data["profileUrl"]}"),
                                                         radius: 50,
                                                       ),
                                                     ),
@@ -271,43 +253,30 @@ class _AdminSpecificDetailsWrapperState
                                                   //like first and last name, email address and admin user ID
                                                   SizedBox(
                                                     child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const EdgeInsets.all(8.0),
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
+                                                            CrossAxisAlignment.center,
                                                         children: [
                                                           //this row holds the first name and last name of the admin users
                                                           Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                                MainAxisAlignment.center,
                                                             crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
+                                                                CrossAxisAlignment.center,
                                                             children: [
                                                               Text(
                                                                 "${data["First Name"]} ",
-                                                                style: Poppins
-                                                                    .adminName
-                                                                    .copyWith(
-                                                                  color: const Color(
-                                                                      0xFF09041B),
+                                                                style: Poppins.adminName.copyWith(
+                                                                  color: const Color(0xFF09041B),
                                                                   fontSize: 15,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 "${data["Last Name"]}",
-                                                                style: Poppins
-                                                                    .adminName
-                                                                    .copyWith(
-                                                                  color: const Color(
-                                                                      0xFF09041B),
+                                                                style: Poppins.adminName.copyWith(
+                                                                  color: const Color(0xFF09041B),
                                                                   fontSize: 15,
                                                                 ),
                                                               ),
@@ -316,21 +285,15 @@ class _AdminSpecificDetailsWrapperState
                                                           //this Text holds the admin email address
                                                           Text(
                                                             "${data["Email Address"]}",
-                                                            style: Poppins
-                                                                .userName
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
+                                                            style: Poppins.userName.copyWith(
+                                                              color: const Color(0xFF09041B),
                                                             ),
                                                           ),
                                                           //this Text holds the admin user ID
                                                           Text(
                                                             "ID: ${data["User Id"]}",
-                                                            style: Poppins
-                                                                .detailsText
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
+                                                            style: Poppins.detailsText.copyWith(
+                                                              color: const Color(0xFF09041B),
                                                             ),
                                                           ),
                                                         ],
@@ -353,8 +316,7 @@ class _AdminSpecificDetailsWrapperState
                                               height: 500,
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius:
-                                                    const BorderRadius.all(
+                                                borderRadius: const BorderRadius.all(
                                                   Radius.circular(10),
                                                 ),
                                                 boxShadow: [
@@ -370,10 +332,8 @@ class _AdminSpecificDetailsWrapperState
                                                   Expanded(
                                                     flex: 5,
                                                     child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10,
-                                                          vertical: 10),
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 10, vertical: 10),
                                                       child: Column(
                                                         children: [
                                                           //this row holds the admin user details
@@ -383,85 +343,82 @@ class _AdminSpecificDetailsWrapperState
                                                               Expanded(
                                                                 flex: 2,
                                                                 child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          10,
-                                                                      vertical:
-                                                                          10),
+                                                                  padding:
+                                                                      const EdgeInsets.symmetric(
+                                                                          horizontal: 10,
+                                                                          vertical: 10),
                                                                   child: Column(
                                                                     crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
+                                                                        CrossAxisAlignment.start,
                                                                     children: [
                                                                       //a text that holds the text title for the container role
                                                                       Text(
                                                                         'Role',
-                                                                        style: Poppins
-                                                                            .contentText
+                                                                        style: Poppins.contentText
                                                                             .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
+                                                                          color:
+                                                                              const Color.fromARGB(
+                                                                                  255, 55, 54, 56),
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            3,
+                                                                        height: 3,
                                                                       ),
 
                                                                       //a container that holds the value of the user role
                                                                       Container(
-                                                                        height:
-                                                                            50,
-                                                                        decoration:
-                                                                            BoxDecoration(
+                                                                        height: 50,
+                                                                        decoration: BoxDecoration(
                                                                           borderRadius:
-                                                                              const BorderRadius.all(
+                                                                              const BorderRadius
+                                                                                  .all(
                                                                             Radius.circular(5),
                                                                           ),
                                                                           border: Border.all(
-                                                                              color: blackLightActive,
-                                                                              strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              color:
+                                                                                  blackLightActive,
+                                                                              strokeAlign: BorderSide
+                                                                                  .strokeAlignOutside),
                                                                         ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .all(
-                                                                              8.0),
-                                                                          child:
-                                                                              Row(
+                                                                        child: Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.all(
+                                                                                  8.0),
+                                                                          child: Row(
                                                                             children: [
                                                                               Text(
                                                                                 "${data["User Role"]}",
-                                                                                style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                style: Poppins
+                                                                                    .farmerName
+                                                                                    .copyWith(
+                                                                                        color:
+                                                                                            greenNormalHover),
                                                                               ),
                                                                             ],
                                                                           ),
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            10,
+                                                                        height: 10,
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                                top: 10),
+                                                                        child: Column(
                                                                           crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                              CrossAxisAlignment
+                                                                                  .start,
                                                                           children: [
                                                                             //text title for the container that holds the full name
                                                                             Text(
                                                                               'Full Name',
-                                                                              style: Poppins.contentText.copyWith(
-                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              style: Poppins
+                                                                                  .contentText
+                                                                                  .copyWith(
+                                                                                color: const Color
+                                                                                    .fromARGB(255,
+                                                                                    55, 54, 56),
                                                                               ),
                                                                             ),
                                                                             const SizedBox(
@@ -471,23 +428,42 @@ class _AdminSpecificDetailsWrapperState
                                                                             //this container holds the value of first and last name of the admin user
                                                                             Container(
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: const BorderRadius.all(
-                                                                                  Radius.circular(5),
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius:
+                                                                                    const BorderRadius
+                                                                                        .all(
+                                                                                  Radius.circular(
+                                                                                      5),
                                                                                 ),
-                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                                border: Border.all(
+                                                                                    color:
+                                                                                        blackLightActive,
+                                                                                    strokeAlign:
+                                                                                        BorderSide
+                                                                                            .strokeAlignOutside),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                padding:
+                                                                                    const EdgeInsets
+                                                                                        .all(8.0),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     Text(
                                                                                       "${data["First Name"]}",
-                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                              color:
+                                                                                                  greenNormalHover),
                                                                                     ),
                                                                                     Text(
                                                                                       " ${data["Last Name"]}",
-                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                              color:
+                                                                                                  greenNormalHover),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -497,26 +473,28 @@ class _AdminSpecificDetailsWrapperState
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            10,
+                                                                        height: 10,
                                                                       ),
 
                                                                       //this padding holds the value contact number
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                                top: 10),
+                                                                        child: Column(
                                                                           crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                              CrossAxisAlignment
+                                                                                  .start,
                                                                           children: [
                                                                             //Retrieve the birth place of farmers
                                                                             Text(
                                                                               'Contact Number',
-                                                                              style: Poppins.contentText.copyWith(
-                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              style: Poppins
+                                                                                  .contentText
+                                                                                  .copyWith(
+                                                                                color: const Color
+                                                                                    .fromARGB(255,
+                                                                                    55, 54, 56),
                                                                               ),
                                                                             ),
                                                                             const SizedBox(
@@ -524,20 +502,34 @@ class _AdminSpecificDetailsWrapperState
                                                                             ),
                                                                             Container(
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: const BorderRadius.all(
-                                                                                  Radius.circular(5),
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius:
+                                                                                    const BorderRadius
+                                                                                        .all(
+                                                                                  Radius.circular(
+                                                                                      5),
                                                                                 ),
-                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                                border: Border.all(
+                                                                                    color:
+                                                                                        blackLightActive,
+                                                                                    strokeAlign:
+                                                                                        BorderSide
+                                                                                            .strokeAlignOutside),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                padding:
+                                                                                    const EdgeInsets
+                                                                                        .all(8.0),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     Text(
                                                                                       "${data["Contact Number"]}",
-                                                                                      style: Poppins.farmerName.copyWith(
-                                                                                        color: greenNormalHover,
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                        color:
+                                                                                            greenNormalHover,
                                                                                       ),
                                                                                     ),
                                                                                   ],
@@ -548,25 +540,27 @@ class _AdminSpecificDetailsWrapperState
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            10,
+                                                                        height: 10,
                                                                       ),
 
                                                                       //this padding holds the value registration date
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                                top: 10),
+                                                                        child: Column(
                                                                           crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                              CrossAxisAlignment
+                                                                                  .start,
                                                                           children: [
                                                                             Text(
                                                                               'Registration Date',
-                                                                              style: Poppins.contentText.copyWith(
-                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              style: Poppins
+                                                                                  .contentText
+                                                                                  .copyWith(
+                                                                                color: const Color
+                                                                                    .fromARGB(255,
+                                                                                    55, 54, 56),
                                                                               ),
                                                                             ),
                                                                             const SizedBox(
@@ -574,19 +568,34 @@ class _AdminSpecificDetailsWrapperState
                                                                             ),
                                                                             Container(
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: const BorderRadius.all(
-                                                                                  Radius.circular(5),
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius:
+                                                                                    const BorderRadius
+                                                                                        .all(
+                                                                                  Radius.circular(
+                                                                                      5),
                                                                                 ),
-                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                                border: Border.all(
+                                                                                    color:
+                                                                                        blackLightActive,
+                                                                                    strokeAlign:
+                                                                                        BorderSide
+                                                                                            .strokeAlignOutside),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                padding:
+                                                                                    const EdgeInsets
+                                                                                        .all(8.0),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     Text(
                                                                                       finalRegistrationDate,
-                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                              color:
+                                                                                                  greenNormalHover),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -604,94 +613,90 @@ class _AdminSpecificDetailsWrapperState
                                                               Expanded(
                                                                 flex: 2,
                                                                 child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          10,
-                                                                      vertical:
-                                                                          10),
+                                                                  padding:
+                                                                      const EdgeInsets.symmetric(
+                                                                          horizontal: 10,
+                                                                          vertical: 10),
                                                                   child: Column(
                                                                     crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
+                                                                        CrossAxisAlignment.start,
                                                                     children: [
                                                                       //sizedbox to align the containers/paddings of second expanded
                                                                       //to the first expanded containers/paddings
                                                                       const SizedBox(
-                                                                        height:
-                                                                            95,
+                                                                        height: 95,
                                                                       ),
 
                                                                       //this text holds the text title birth date
                                                                       Text(
                                                                         'Birth Date',
-                                                                        style: Poppins
-                                                                            .contentText
+                                                                        style: Poppins.contentText
                                                                             .copyWith(
-                                                                          color: const Color
-                                                                              .fromARGB(
-                                                                              255,
-                                                                              55,
-                                                                              54,
-                                                                              56),
+                                                                          color:
+                                                                              const Color.fromARGB(
+                                                                                  255, 55, 54, 56),
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            3,
+                                                                        height: 3,
                                                                       ),
 
                                                                       //and a container that holds the value of birthdate of clicked details
                                                                       Container(
-                                                                        height:
-                                                                            50,
-                                                                        decoration:
-                                                                            BoxDecoration(
+                                                                        height: 50,
+                                                                        decoration: BoxDecoration(
                                                                           borderRadius:
-                                                                              const BorderRadius.all(
+                                                                              const BorderRadius
+                                                                                  .all(
                                                                             Radius.circular(5),
                                                                           ),
                                                                           border: Border.all(
-                                                                              color: blackLightActive,
-                                                                              strokeAlign: BorderSide.strokeAlignOutside),
+                                                                              color:
+                                                                                  blackLightActive,
+                                                                              strokeAlign: BorderSide
+                                                                                  .strokeAlignOutside),
                                                                         ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .all(
-                                                                              8.0),
-                                                                          child:
-                                                                              Row(
+                                                                        child: Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.all(
+                                                                                  8.0),
+                                                                          child: Row(
                                                                             children: [
                                                                               Text(
                                                                                 finalBirthdate,
-                                                                                style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                style: Poppins
+                                                                                    .farmerName
+                                                                                    .copyWith(
+                                                                                        color:
+                                                                                            greenNormalHover),
                                                                               ),
                                                                             ],
                                                                           ),
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            10,
+                                                                        height: 10,
                                                                       ),
 
                                                                       //this padding holds a column of the text title birthplace
                                                                       //and a container that holds the value of birthplace of clicked details
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                                top: 10),
+                                                                        child: Column(
                                                                           crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                              CrossAxisAlignment
+                                                                                  .start,
                                                                           children: [
                                                                             Text(
                                                                               'Birth Place',
-                                                                              style: Poppins.contentText.copyWith(
-                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              style: Poppins
+                                                                                  .contentText
+                                                                                  .copyWith(
+                                                                                color: const Color
+                                                                                    .fromARGB(255,
+                                                                                    55, 54, 56),
                                                                               ),
                                                                             ),
                                                                             const SizedBox(
@@ -699,19 +704,34 @@ class _AdminSpecificDetailsWrapperState
                                                                             ),
                                                                             Container(
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: const BorderRadius.all(
-                                                                                  Radius.circular(5),
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius:
+                                                                                    const BorderRadius
+                                                                                        .all(
+                                                                                  Radius.circular(
+                                                                                      5),
                                                                                 ),
-                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                                border: Border.all(
+                                                                                    color:
+                                                                                        blackLightActive,
+                                                                                    strokeAlign:
+                                                                                        BorderSide
+                                                                                            .strokeAlignOutside),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                padding:
+                                                                                    const EdgeInsets
+                                                                                        .all(8.0),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     Text(
                                                                                       "${data["Birth Place"]}",
-                                                                                      style: Poppins.farmerName.copyWith(color: greenNormalHover),
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                              color:
+                                                                                                  greenNormalHover),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -721,26 +741,28 @@ class _AdminSpecificDetailsWrapperState
                                                                         ),
                                                                       ),
                                                                       const SizedBox(
-                                                                        height:
-                                                                            10,
+                                                                        height: 10,
                                                                       ),
 
                                                                       //this padding holds a column of the text title address
                                                                       //and a container that holds the value of address of clicked details
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10),
-                                                                        child:
-                                                                            Column(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                                top: 10),
+                                                                        child: Column(
                                                                           crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
+                                                                              CrossAxisAlignment
+                                                                                  .start,
                                                                           children: [
                                                                             Text(
                                                                               'Address',
-                                                                              style: Poppins.contentText.copyWith(
-                                                                                color: const Color.fromARGB(255, 55, 54, 56),
+                                                                              style: Poppins
+                                                                                  .contentText
+                                                                                  .copyWith(
+                                                                                color: const Color
+                                                                                    .fromARGB(255,
+                                                                                    55, 54, 56),
                                                                               ),
                                                                             ),
                                                                             const SizedBox(
@@ -748,20 +770,34 @@ class _AdminSpecificDetailsWrapperState
                                                                             ),
                                                                             Container(
                                                                               height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: const BorderRadius.all(
-                                                                                  Radius.circular(5),
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius:
+                                                                                    const BorderRadius
+                                                                                        .all(
+                                                                                  Radius.circular(
+                                                                                      5),
                                                                                 ),
-                                                                                border: Border.all(color: blackLightActive, strokeAlign: BorderSide.strokeAlignOutside),
+                                                                                border: Border.all(
+                                                                                    color:
+                                                                                        blackLightActive,
+                                                                                    strokeAlign:
+                                                                                        BorderSide
+                                                                                            .strokeAlignOutside),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                padding:
+                                                                                    const EdgeInsets
+                                                                                        .all(8.0),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     Text(
                                                                                       "${data["Address"]}",
-                                                                                      style: Poppins.farmerName.copyWith(
-                                                                                        color: greenNormalHover,
+                                                                                      style: Poppins
+                                                                                          .farmerName
+                                                                                          .copyWith(
+                                                                                        color:
+                                                                                            greenNormalHover,
                                                                                       ),
                                                                                     ),
                                                                                   ],
@@ -784,75 +820,56 @@ class _AdminSpecificDetailsWrapperState
 
                                                           //update details button
                                                           Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
+                                                            padding: const EdgeInsets.only(
                                                               bottom: 15,
                                                             ),
                                                             child: Center(
                                                               child: Row(
                                                                 mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
+                                                                    MainAxisAlignment.center,
                                                                 children: [
                                                                   // ignore: sized_box_for_whitespace
                                                                   Container(
                                                                     height: 50,
                                                                     width: 141,
-                                                                    decoration:
-                                                                        BoxDecoration(
+                                                                    decoration: BoxDecoration(
                                                                       gradient:
                                                                           const LinearGradient(
                                                                         colors: [
-                                                                          Color(
-                                                                              0xFF53E78B),
-                                                                          Color(
-                                                                              0xFF14BE77)
+                                                                          Color(0xFF53E78B),
+                                                                          Color(0xFF14BE77)
                                                                         ],
-                                                                        begin: Alignment
-                                                                            .topLeft,
-                                                                        end: Alignment
-                                                                            .bottomRight,
+                                                                        begin: Alignment.topLeft,
+                                                                        end: Alignment.bottomRight,
                                                                       ),
                                                                       borderRadius:
-                                                                          const BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            15),
+                                                                          const BorderRadius.all(
+                                                                        Radius.circular(15),
                                                                       ),
                                                                       boxShadow: [
                                                                         BoxShadow(
-                                                                          color:
-                                                                              shadow,
-                                                                          blurRadius:
-                                                                              5,
-                                                                          offset: const Offset(
-                                                                              1,
-                                                                              5),
+                                                                          color: shadow,
+                                                                          blurRadius: 5,
+                                                                          offset:
+                                                                              const Offset(1, 5),
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    child:
-                                                                        Center(
-                                                                      child:
-                                                                          TextButton(
-                                                                        onPressed:
-                                                                            () {
+                                                                    child: Center(
+                                                                      child: TextButton(
+                                                                        onPressed: () {
                                                                           //navigator here
                                                                         },
-                                                                        child:
-                                                                            Text(
+                                                                        child: Text(
                                                                           "Update Details",
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontFamily:
-                                                                                GoogleFonts.poppins().fontFamily,
-                                                                            fontSize:
-                                                                                15,
+                                                                          style: TextStyle(
+                                                                            fontFamily: GoogleFonts
+                                                                                    .poppins()
+                                                                                .fontFamily,
+                                                                            fontSize: 15,
                                                                             fontWeight:
                                                                                 FontWeight.w900,
-                                                                            color:
-                                                                                Colors.white,
+                                                                            color: Colors.white,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -915,8 +932,7 @@ class _AdminSpecificDetailsWrapperState
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(

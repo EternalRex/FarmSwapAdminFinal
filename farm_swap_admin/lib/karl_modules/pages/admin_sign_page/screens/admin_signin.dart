@@ -1,5 +1,6 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/functions/update_online_status.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -153,9 +154,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isPasswordVisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
+                              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                               color: const Color.fromARGB(255, 46, 184, 76),
                             ),
                             onPressed: _togglePasswordVisibility,
@@ -194,8 +193,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.all(10),
                                 fixedSize: const Size(160, 45),
-                                textStyle: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w900),
+                                textStyle:
+                                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                                 backgroundColor: Colors.white,
                                 foregroundColor: Colors.blue,
                                 elevation: 15,
@@ -211,15 +210,13 @@ class _SignInAdminState extends State<SignInAdmin> {
                               padding: const EdgeInsets.only(top: 20),
                               child: TextButton(
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminForgotPass);
+                                  Navigator.of(context).pushNamed(RoutesManager.adminForgotPass);
                                 },
                                 child: Text(
                                   "Forgot Your Password?",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
+                                    fontFamily: GoogleFonts.poppins().fontFamily,
                                     color: farmSwapTitlegreen,
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
@@ -241,8 +238,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.all(10),
                                 fixedSize: const Size(160, 45),
-                                textStyle: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w900),
+                                textStyle:
+                                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                                 backgroundColor: Colors.white,
                                 foregroundColor: Colors.red,
                                 elevation: 15,
@@ -258,15 +255,13 @@ class _SignInAdminState extends State<SignInAdmin> {
                               padding: const EdgeInsets.only(top: 20),
                               child: TextButton(
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminSignup);
+                                  Navigator.of(context).pushNamed(RoutesManager.adminSignup);
                                 },
                                 child: Text(
                                   "Sign Up",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
+                                    fontFamily: GoogleFonts.poppins().fontFamily,
                                     color: farmSwapTitlegreen,
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
@@ -318,8 +313,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                                 child: Text(
                                   "Login",
                                   style: TextStyle(
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
+                                    fontFamily: GoogleFonts.poppins().fontFamily,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white,
@@ -341,6 +335,9 @@ class _SignInAdminState extends State<SignInAdmin> {
     );
   }
 
+/*An object of the Status Update Class */
+  UpdateOnlineStatus onlineStatus = UpdateOnlineStatus();
+
   void login() async {
     String email = mycontroller.email.text.trim();
     String password = mycontroller.password.text;
@@ -348,15 +345,15 @@ class _SignInAdminState extends State<SignInAdmin> {
     //user sign in and directed to dashboard
     try {
       User? user = await adminAuth.signInWithEmailAndPassword(email, password);
-
       if (user != null) {
-        print("User is successfully log in");
-
+        /*Calling the method in the status update class and pass the id of the current login
+        user and true that means the user has login */
+        onlineStatus.updateOnlineStatus(FirebaseAuth.instance.currentUser!.uid, true);
         Navigator.of(context).pushNamed(RoutesManager.dashboard);
       }
     } catch (e) {
       //print(e);
-      print("Some error happened in log in");
+      throw ("Some error happened in log in");
     }
   }
 }

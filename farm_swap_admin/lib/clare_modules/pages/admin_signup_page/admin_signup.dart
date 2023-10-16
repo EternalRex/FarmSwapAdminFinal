@@ -103,8 +103,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     height: 20,
                   ),
                   farmSwapFontTitle(text: "FarmSwap", size: height),
-                  farmSwapFontsubtitle(
-                      text: "Modern Barter Solution", size: height),
+                  farmSwapFontsubtitle(text: "Modern Barter Solution", size: height),
                   const SizedBox(height: 25),
                   farmSwapFont(
                     text: "Sign Up For Free",
@@ -137,34 +136,29 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           child: TextField(
                             controller: regdate,
                             cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle:
-                                BoxHeightStyle.includeLineSpacingBottom,
+                            selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
                             decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                               filled: true,
                               fillColor: Colors.white,
                               labelText: "Register Date",
                               //border designs
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Color(0xFFF4F4F4)),
+                                borderSide: const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.50,
-                                    color: Color.fromARGB(255, 50, 202, 108)),
+                                    width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               prefixIcon: const Image(
@@ -186,12 +180,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               if (pickedDate != null) {
                                 //print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                                 //print(formattedDate);
                                 setState(() {
-                                  regdate.text =
-                                      formattedDate; // Update the text in the controller
+                                  regdate.text = formattedDate; // Update the text in the controller
                                 });
                               } else {
                                 print("Date is not selected");
@@ -263,11 +255,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           child: TextField(
                             controller: bdate,
                             cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle:
-                                BoxHeightStyle.includeLineSpacingBottom,
+                            selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
                             decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                               filled: true,
                               fillColor: Colors.white,
 
@@ -275,24 +266,20 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               //border designs
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Color(0xFFF4F4F4)),
+                                borderSide: const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.50,
-                                    color: Color.fromARGB(255, 50, 202, 108)),
+                                    width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
 
@@ -315,12 +302,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               if (pickedDate != null) {
                                 //print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                                 //print(formattedDate);
                                 setState(() {
-                                  bdate.text =
-                                      formattedDate; // Update the text in the controller
+                                  bdate.text = formattedDate; // Update the text in the controller
                                 });
                               } else {
                                 print("Date is not selected");
@@ -371,9 +356,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isPasswordVisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
+                              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                               color: const Color.fromARGB(255, 46, 184, 76),
                             ),
                             onPressed: _togglePasswordVisibility,
@@ -459,8 +442,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 child: Text(
                                   "Create Account",
                                   style: TextStyle(
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
+                                    fontFamily: GoogleFonts.poppins().fontFamily,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white,
@@ -549,6 +531,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         email: email,
         password: password,
         profile: profile,
+        online: true,
       );
 
       await addAdminUser1.createUser(addAdmin);
