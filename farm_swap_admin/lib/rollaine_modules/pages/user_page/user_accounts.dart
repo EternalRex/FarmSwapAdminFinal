@@ -1,7 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_account_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_account_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
@@ -209,6 +209,7 @@ class _UserAccount extends State<UserAccount> {
                               ),
                             ],
                           ),
+                          //Title for the expanded kung asa masud ang maretrieve na users specifically sa farmers na side
                           child: Column(
                             children: [
                               Column(
@@ -227,6 +228,7 @@ class _UserAccount extends State<UserAccount> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
+                                  //Mao ni na part sa code kung asa siya ang mo tawag sa mga na register na farmers sa application
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -278,48 +280,52 @@ class _UserAccount extends State<UserAccount> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, left: 15),
-                                    child: Row(
+                          //Title for the expanded kung asa masud ang maretrieve na users specifically sa consumers na side
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 15),
+                                      child: Row(
+                                        children: [
+                                          Text('Consumers',
+                                              style: Poppins.contentTitle
+                                                  .copyWith(
+                                                      color: const Color(
+                                                          0xFF09051C))),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    //Mao ni na part sa code kung asa siya ang mo tawag sa mga na register na consumers sa application
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text('Consumers',
-                                            style: Poppins.contentTitle
-                                                .copyWith(
-                                                    color: const Color(
-                                                        0xFF09051C))),
+                                        FutureBuilder(
+                                          future: retrieveCustomerAccounts
+                                              .getDocsId(),
+                                          builder: (context, snapshot) {
+                                            return Column(
+                                              children: retrieveCustomerAccounts
+                                                  .documentId
+                                                  .map((documentId) {
+                                                return ListTile(
+                                                  title: ReadCustomerAccount(
+                                                      documentId: documentId),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                        future: retrieveCustomerAccounts
-                                            .getDocsId(),
-                                        builder: (context, snapshot) {
-                                          return Column(
-                                            children: retrieveCustomerAccounts
-                                                .documentId
-                                                .map((documentId) {
-                                              return ListTile(
-                                                title: ReadCustomerAccount(
-                                                    documentId: documentId),
-                                              );
-                                            }).toList(),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

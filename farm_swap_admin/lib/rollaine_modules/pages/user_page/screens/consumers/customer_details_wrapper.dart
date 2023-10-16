@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_account_query.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,10 +23,20 @@ class ReadCustomerDetails extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+
+          Timestamp birthtimestamp = data["birthDate"];
+          DateTime birthDate = birthtimestamp.toDate();
+          String customerbirthdate = "${birthDate.month}/${birthDate.day}/${birthDate.year}";
+
+          Timestamp registertimestamp = data["registrationDate"];
+          DateTime registerDate = registertimestamp.toDate();
+          String registerbirthdate = "${registerDate.month}/${registerDate.day}/${registerDate.year}";
+
           final customerImage =
               CachedNetworkImageProvider("${data["profileUrl"]}");
           final documentImage = CachedNetworkImageProvider("${data[""]}");
           final idImage = CachedNetworkImageProvider("${data[""]}");
+
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -48,36 +58,59 @@ class ReadCustomerDetails extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
+                        flex: 3,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
-                          child: Column(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                "${data["username"]}",
-                                style: Poppins.farmerName.copyWith(
-                                  color: const Color(0xFF09041B),
-                                ),
+                              const SizedBox(
+                                width: 80,
+                              ),
+                              Column(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: customerImage,
+                                    radius: 50,
+                                  ),
+                                ],
                               ),
                               const SizedBox(
-                                height: 5,
+                                width: 50,
                               ),
-                              Text(
-                                "${data["userRole"]}",
-                                style: Poppins.userName.copyWith(
-                                  color: const Color(0xFF09041B),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              //Retrieve the user id of farmer
-                              Text(
-                                "${data["userId"]}",
-                                style: Poppins.detailsText.copyWith(
-                                  color: const Color(0xFF09041B),
-                                ),
+                              //Retrieve username of consumers
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${data["username"]}",
+                                    style: Poppins.farmerName.copyWith(
+                                      color: const Color(0xFF09041B),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  //Retrieve role of consumers
+                                  Text(
+                                    "${data["userRole"]}",
+                                    style: Poppins.userName.copyWith(
+                                      color: const Color(0xFF09041B),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  //Retrieve the user id of consumer
+                                  Text(
+                                    "${data["userId"]}",
+                                    style: Poppins.detailsText.copyWith(
+                                      color: const Color(0xFF09041B),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -87,9 +120,19 @@ class ReadCustomerDetails extends StatelessWidget {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundImage: customerImage,
-                            radius: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Swap Coins:',
+                                style: Poppins.contentText
+                                    .copyWith(color: const Color(0xFF09041B)),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text("${data["swapCoins"]}"),
+                            ],
                           ),
                         ),
                       ),
@@ -154,12 +197,19 @@ class ReadCustomerDetails extends StatelessWidget {
                                                   strokeAlign: BorderSide
                                                       .strokeAlignOutside),
                                             ),
-                                            //Row kung asa masud ang first name ug last name
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(8.0),
+                                            //Row kung asa masud ang status ni farmer
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Row(
                                                 children: [
-                                                  Text(''),
+                                                  Text(
+                                                    "${data["accountStatus"]}",
+                                                    style: Poppins.farmerName
+                                                        .copyWith(
+                                                      color: greenNormalHover,
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -174,7 +224,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve contact number of farmers
+                                                //Retrieve name which is the first name and last name of consumers
                                                 Text(
                                                   'Name',
                                                   style: Poppins.contentText
@@ -242,7 +292,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve contact number of farmers
+                                                //Retrieve contact number of consumers
                                                 Text(
                                                   'Contact Number',
                                                   style: Poppins.contentText
@@ -298,7 +348,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve birth date of farmers
+                                                //Retrieve birth date of consumers
                                                 Text(
                                                   'Birth Date',
                                                   style: Poppins.contentText
@@ -329,7 +379,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthDate"]}",
+                                                          customerbirthdate,
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -358,7 +408,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            //Retrieve email address of farmers
+                                            //Retrieve registration date when consumers register in the application
                                             'Registration Date',
                                             style: Poppins.contentText.copyWith(
                                               color: const Color.fromARGB(
@@ -386,7 +436,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   Text(
-                                                    "${data["registrationDate"]}",
+                                                    registerbirthdate,
                                                     style: Poppins.farmerName
                                                         .copyWith(
                                                             color:
@@ -406,7 +456,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve address of farmers
+                                                //Retrieve email address of consumers
                                                 Text(
                                                   'Email Address',
                                                   style: Poppins.contentText
@@ -461,7 +511,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve address of farmers
+                                                //Retrieve address of consumers
                                                 Text(
                                                   'Address',
                                                   style: Poppins.contentText
@@ -516,7 +566,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve the birth place of farmers
+                                                //Retrieve the birth place of consumers
                                                 Text(
                                                   'Birth Place',
                                                   style: Poppins.contentText
@@ -634,9 +684,14 @@ class ReadCustomerDetails extends StatelessWidget {
                                       child: Container(
                                         height: 200,
                                         color: greenLight,
-                                        child: CircleAvatar(
-                                          backgroundImage: documentImage,
-                                          radius: 50,
+                                        child: SizedBox(
+                                          height: 100,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Image.network(
+                                              "${data["idUrl"]}",
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -746,11 +801,11 @@ class ReadCustomerDetails extends StatelessWidget {
                                                               top: 5,
                                                               bottom: 5),
                                                       child: Text(
-                                                        'Archive',
+                                                        'Update',
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.white,
-                                                          fontSize: 10,
+                                                          fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           letterSpacing: 0.50,
