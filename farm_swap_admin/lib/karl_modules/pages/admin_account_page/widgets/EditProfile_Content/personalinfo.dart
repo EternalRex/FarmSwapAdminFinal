@@ -1,10 +1,16 @@
-import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:flutter/material.dart';
+import 'personalInfo_Class.dart';
 
+// ignore: must_be_immutable
 class PersonalInfo extends StatelessWidget {
-  const PersonalInfo({
+  PersonalInfo({
     super.key,
   });
+
+  final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
+  DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
 
   @override
   Widget build(BuildContext context) {
@@ -13,256 +19,38 @@ class PersonalInfo extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Padding(
-            padding:
-                const EdgeInsets
-                    .symmetric(
-                    horizontal: 10,
-                    vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Container(
-              height: 300,
-              decoration:
-                  const BoxDecoration(
+              height: 550,
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets
-                        .only(
-                        left: 20,
-                        top: 10),
-                child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment
-                          .start,
-                  children: [
-                    Text(
-                      'First Name',
-                      style: Poppins
-                          .contentText
-                          .copyWith(
-                        color: const Color
-                            .fromARGB(
-                            255,
-                            55,
-                            54,
-                            56),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    const TextField(
-                      decoration:
-                          InputDecoration(
-                        border:
-                            OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius
-                                  .all(
-                            Radius.circular(
-                                5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets
-                              .only(
-                              top:
-                                  10),
-                      child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment
-                                .start,
-                        children: [
-                          Text(
-                            'Email Address',
-                            style: Poppins
-                                .contentText
-                                .copyWith(
-                              color: const Color
-                                  .fromARGB(
-                                  255,
-                                  55,
-                                  54,
-                                  56),
-                            ),
-                          ),
-                          const SizedBox(
-                            height:
-                                3,
-                          ),
-                          const TextField(
-                            decoration:
-                                InputDecoration(
-                              border:
-                                  OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets
-                              .only(
-                              top:
-                                  10),
-                      child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment
-                                .start,
-                        children: [
-                          Text(
-                            'Role',
-                            style: Poppins
-                                .contentText
-                                .copyWith(
-                              color: const Color
-                                  .fromARGB(
-                                  255,
-                                  55,
-                                  54,
-                                  56),
-                            ),
-                          ),
-                          const SizedBox(
-                            height:
-                                3,
-                          ),
-                          const TextField(
-                            decoration:
-                                InputDecoration(
-                              border:
-                                  OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                padding: const EdgeInsets.only(
+                  left: 15,
+                  top: 5,
                 ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding:
-                const EdgeInsets
-                    .symmetric(
-                    horizontal: 10,
-                    vertical: 10),
-            child: Container(
-              height: 300,
-              decoration:
-                  const BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets
-                        .only(
-                        right: 20,
-                        top: 10),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment
-                          .start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Last Name',
-                      style: Poppins
-                          .contentText
-                          .copyWith(
-                        color: const Color
-                            .fromARGB(
-                            255,
-                            55,
-                            54,
-                            56),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    const TextField(
-                      decoration:
-                          InputDecoration(
-                        border:
-                            OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius
-                                  .all(
-                            Radius.circular(
-                                5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets
-                              .only(
-                              top:
-                                  10),
-                      child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment
-                                .start,
-                        children: [
-                          Text(
-                            'Phone Number',
-                            style: Poppins
-                                .contentText
-                                .copyWith(
-                              color: const Color
-                                  .fromARGB(
-                                  255,
-                                  55,
-                                  54,
-                                  56),
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                //calling the class to display the edit profile information
+                                EditPersonalInfo(documentId: data),
+                              ],
                             ),
-                          ),
-                          const SizedBox(
-                            height:
-                                3,
-                          ),
-                          const TextField(
-                            decoration:
-                                InputDecoration(
-                              border:
-                                  OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                          );
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
                     ),
                   ],
                 ),

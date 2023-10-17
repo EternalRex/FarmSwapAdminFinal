@@ -1,16 +1,14 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:google_fonts/google_fonts.dart";
-
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../../../clare_modules/pages/admin_signup_page/authentication/sign_up_auth.dart';
 import '../../../../clare_modules/pages/admin_signup_page/controllers/sign_up_controller.dart';
 import '../../../../clare_modules/pages/admin_signup_page/label/sign_up_label.dart';
-import '../../../../constants/Colors/colors.dart';
 import '../../../../routes/routes.dart';
 
 class SignInAdmin extends StatefulWidget {
@@ -220,8 +218,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                                     fontSize: 12,
                                     fontFamily:
                                         GoogleFonts.poppins().fontFamily,
-                                    color: farmSwapTitlegreen,
-                                    fontWeight: FontWeight.w500,
+                                    color: FarmSwapGreen.darkGreenActive,
+                                    fontWeight: FontWeight.w700,
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
@@ -236,7 +234,9 @@ class _SignInAdminState extends State<SignInAdmin> {
                           children: [
                             ElevatedButton.icon(
                               onPressed: () {},
-                              icon: const Icon(FontAwesomeIcons.google),
+                              icon: SvgPicture.asset(
+                                "assets/clare_assets/svg/google.svg",
+                              ),
                               label: const Text('Google'),
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.all(10),
@@ -244,7 +244,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                                 textStyle: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w900),
                                 backgroundColor: Colors.white,
-                                foregroundColor: Colors.red,
+                                foregroundColor:
+                                    const Color.fromARGB(255, 85, 84, 84),
                                 elevation: 15,
                                 shadowColor: shadow,
                                 shape: const RoundedRectangleBorder(
@@ -267,8 +268,8 @@ class _SignInAdminState extends State<SignInAdmin> {
                                     fontSize: 12,
                                     fontFamily:
                                         GoogleFonts.poppins().fontFamily,
-                                    color: farmSwapTitlegreen,
-                                    fontWeight: FontWeight.w500,
+                                    color: FarmSwapGreen.darkGreenActive,
+                                    fontWeight: FontWeight.w700,
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
@@ -282,7 +283,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                   const SizedBox(
                     height: 20,
                   ),
-
+                  //this padding contains the log in button where in it calls the log in method to authenticate
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Center(

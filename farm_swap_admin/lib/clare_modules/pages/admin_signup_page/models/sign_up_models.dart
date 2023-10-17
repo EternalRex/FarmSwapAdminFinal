@@ -12,6 +12,7 @@ class AdminUserModel {
     required this.email,
     required this.password,
     required this.profile,
+    required this.accountstatus,
   });
 
   String userid;
@@ -26,6 +27,7 @@ class AdminUserModel {
   String email;
   String password;
   String profile;
+  String accountstatus;
 
   toJson() {
     return {
@@ -41,6 +43,7 @@ class AdminUserModel {
       "Email Address": email,
       "Password": password,
       "profileUrl": profile,
+      "Account Status": accountstatus,
     };
   }
 }

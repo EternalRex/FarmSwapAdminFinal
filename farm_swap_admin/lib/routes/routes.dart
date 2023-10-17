@@ -25,7 +25,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.d
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
-import '../karl_modules/pages/admin_signup_page/screens/admin_signup.dart';
 
 class RoutesManager {
 //VARIABLES THAT WILL HOLD THE LOCATION OR THE ROUTE

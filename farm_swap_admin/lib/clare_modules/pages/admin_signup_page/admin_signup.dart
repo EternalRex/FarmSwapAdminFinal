@@ -41,6 +41,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
   @override
   void dispose() {
+    mycontroller.accountstatus.dispose();
     mycontroller.role.dispose();
     regdate.dispose();
     mycontroller.fname.dispose();
@@ -116,21 +117,6 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        //a container for the user role textfield
-                        FarmSwapTextField(
-                          controller: mycontroller.role,
-                          label: mylabel.userrole,
-                          isPassword: false,
-                          prefixIcon: const Image(
-                            image: AssetImage(
-                              "assets/clare_assets/images/role.png",
-                            ),
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
                         //a sizedbox for the registration date textfield
                         SizedBox(
                           width: 300,
@@ -201,7 +187,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the first name textfield
+                        //a textfield for the first name
                         FarmSwapTextField(
                           controller: mycontroller.fname,
                           label: mylabel.fname,
@@ -214,7 +200,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the last name textfield
+                        //a textfield for the last name
                         FarmSwapTextField(
                           controller: mycontroller.lname,
                           label: mylabel.lname,
@@ -242,7 +228,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the contact number textfield
+                        //a texfield for the contact number
                         FarmSwapTextField(
                           controller: mycontroller.contactnum,
                           label: mylabel.contactnumber,
@@ -257,7 +243,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the birth date textfield
+                        //a sizedbox for the birth date textfield
                         SizedBox(
                           width: 300,
                           child: TextField(
@@ -346,7 +332,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                         SizedBox(height: height * 0.024),
 
-                        //a container for the email textfield
+                        //a textfield for the email
                         FarmSwapTextField(
                           controller: mycontroller.email,
                           label: mylabel.email,
@@ -359,7 +345,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the password textfield
+                        //a textfield for the password
                         FarmSwapTextField(
                           controller: mycontroller.password,
                           label: mylabel.password,
@@ -419,7 +405,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     height: 10,
                   ),
 
-                  //create account button
+                  /**a padding where it holds the create account button 
+                   * and it calls the register function 
+                  to save the sign up data to firestore
+                  */
                   Padding(
                     padding: const EdgeInsets.only(
                       bottom: 15,
@@ -474,6 +463,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     ),
                   ),
 
+                  //this textbutton will navigate to sign in page if user click the already have an account
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(RoutesManager.signInPage);
@@ -519,6 +509,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
   Future<void> storeUidInFirestore(String uid) async {
     try {
       //String userid = uid;
+      String status = mycontroller.accountstatus.text;
       String profile = mycontroller.profile.text;
       String role = mycontroller.role.text;
       String register = regdate.text;
@@ -549,6 +540,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         email: email,
         password: password,
         profile: profile,
+        accountstatus: status,
       );
 
       await addAdminUser1.createUser(addAdmin);

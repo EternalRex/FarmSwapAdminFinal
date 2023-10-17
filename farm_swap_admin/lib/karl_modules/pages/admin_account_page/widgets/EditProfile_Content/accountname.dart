@@ -36,7 +36,7 @@ class AccountName extends StatelessWidget {
                   ),
                 ],
               ),
-              height: 80,
+              height: 90,
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -115,8 +115,8 @@ class AccountName extends StatelessWidget {
                                 },
                               ),
 
-                              //CURRENT ADMIN USER ROLE
-                              /*THE ROLE OF THE USER, This future builder will display the role of the current uer
+                              //CURRENT ADMIN USER ID
+                              /*THE ID OF THE USER, This future builder will display the role of the current uer
                               its ways ae simillar above */
                               FutureBuilder(
                                 future: id.getDocsId(),
@@ -128,7 +128,7 @@ class AccountName extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          ProfileAdminRole(documentId: data),
+                                          ProfileId(documentId: data),
                                         ],
                                       ),
                                     );
@@ -139,7 +139,9 @@ class AccountName extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(width: 440),
+                          const SizedBox(
+                            width: 300,
+                          ),
                           IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.edit_square),

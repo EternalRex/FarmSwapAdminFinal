@@ -254,15 +254,6 @@ class _AdminAccount extends State<AdminAccount> {
                                           const SizedBox(
                                             width: 200,
                                           ),
-                                          /*
-                                          Text(
-                                            'Status',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
-                                            ),
-                                          ),
-                                          */
                                         ],
                                       ),
                                     ),
@@ -370,19 +361,9 @@ class _AdminAccount extends State<AdminAccount> {
                     /*In this future builder we will get the document id that we get from
                     the database querry in the dashboardquery file */
                     FutureBuilder(
-                      /*The id was the object we creted above to access the methods inside the dashboard
-                      query file. we call the get docsId() method, meaning  we tell it to execute and
-                      get the document id of the current user */
                       future: id.getDocsId(),
-
-                      /*so this builder means that it will build the context meaning this page
-                      and this class. It will also build the snapshot, which is the object
-                      that we use to acces the data fom getDocsID() method */
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          /*Since the getDocsId is a Future<sting> it will return a the 
-                          documentId but in a futue form so not the actual string so we 
-                          need this snaphot to actually get the string and not the future form*/
                           String data = snapshot.data!;
                           return Center(
                             child: Row(
