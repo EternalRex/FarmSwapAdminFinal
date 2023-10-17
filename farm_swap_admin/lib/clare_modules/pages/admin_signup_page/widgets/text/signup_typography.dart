@@ -1,3 +1,4 @@
+import "package:farm_swap_admin/constants/Colors/farmswap_colors.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
@@ -12,13 +13,13 @@ class SignupHaveAccountFont extends StatelessWidget {
       'Already have an account?',
       textAlign: TextAlign.center,
       style: GoogleFonts.poppins(
-        textStyle: const TextStyle(
-          color: Color(0xFF53E78B),
+        textStyle: TextStyle(
+          color: FarmSwapGreen.darkGreenActive,
           fontSize: 12,
           fontWeight: FontWeight.w500,
           decoration: TextDecoration.underline,
           decorationStyle: TextDecorationStyle.solid,
-          decorationColor: Color(0xFF53E78B),
+          decorationColor: FarmSwapGreen.darkGreenActive,
         ),
       ),
     );

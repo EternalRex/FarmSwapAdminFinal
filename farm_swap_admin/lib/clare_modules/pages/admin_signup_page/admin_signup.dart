@@ -41,6 +41,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
   @override
   void dispose() {
+    mycontroller.accountstatus.dispose();
     mycontroller.role.dispose();
     regdate.dispose();
     mycontroller.fname.dispose();
@@ -103,7 +104,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     height: 20,
                   ),
                   farmSwapFontTitle(text: "FarmSwap", size: height),
-                  farmSwapFontsubtitle(text: "Modern Barter Solution", size: height),
+                  farmSwapFontsubtitle(
+                      text: "Modern Barter Solution", size: height),
                   const SizedBox(height: 25),
                   farmSwapFont(
                     text: "Sign Up For Free",
@@ -115,50 +117,40 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        //a container for the user role textfield
-                        FarmSwapTextField(
-                          controller: mycontroller.role,
-                          label: mylabel.userrole,
-                          isPassword: false,
-                          prefixIcon: const Image(
-                            image: AssetImage(
-                              "assets/clare_assets/images/role.png",
-                            ),
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
                         //a sizedbox for the registration date textfield
                         SizedBox(
                           width: 300,
                           child: TextField(
                             controller: regdate,
                             cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
+                            selectionHeightStyle:
+                                BoxHeightStyle.includeLineSpacingBottom,
                             decoration: InputDecoration(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 30),
                               filled: true,
                               fillColor: Colors.white,
                               labelText: "Register Date",
                               //border designs
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Color(0xFFF4F4F4)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
+                                    width: 0.50,
+                                    color: Color.fromARGB(255, 50, 202, 108)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               prefixIcon: const Image(
@@ -180,10 +172,12 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               if (pickedDate != null) {
                                 //print(pickedDate);
-                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
                                 //print(formattedDate);
                                 setState(() {
-                                  regdate.text = formattedDate; // Update the text in the controller
+                                  regdate.text =
+                                      formattedDate; // Update the text in the controller
                                 });
                               } else {
                                 print("Date is not selected");
@@ -193,7 +187,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the first name textfield
+                        //a textfield for the first name
                         FarmSwapTextField(
                           controller: mycontroller.fname,
                           label: mylabel.fname,
@@ -206,7 +200,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the last name textfield
+                        //a textfield for the last name
                         FarmSwapTextField(
                           controller: mycontroller.lname,
                           label: mylabel.lname,
@@ -234,7 +228,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the contact number textfield
+                        //a texfield for the contact number
                         FarmSwapTextField(
                           controller: mycontroller.contactnum,
                           label: mylabel.contactnumber,
@@ -249,16 +243,17 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the birth date textfield
+                        //a sizedbox for the birth date textfield
                         SizedBox(
                           width: 300,
                           child: TextField(
                             controller: bdate,
                             cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
+                            selectionHeightStyle:
+                                BoxHeightStyle.includeLineSpacingBottom,
                             decoration: InputDecoration(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 30),
                               filled: true,
                               fillColor: Colors.white,
 
@@ -266,20 +261,24 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               //border designs
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Color(0xFFF4F4F4)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
+                                    width: 0.50,
+                                    color: Color.fromARGB(255, 50, 202, 108)),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 0.50, color: Colors.red),
+                                borderSide: const BorderSide(
+                                    width: 0.50, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),
                               ),
 
@@ -302,10 +301,12 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                               if (pickedDate != null) {
                                 //print(pickedDate);
-                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
                                 //print(formattedDate);
                                 setState(() {
-                                  bdate.text = formattedDate; // Update the text in the controller
+                                  bdate.text =
+                                      formattedDate; // Update the text in the controller
                                 });
                               } else {
                                 print("Date is not selected");
@@ -331,7 +332,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
                         SizedBox(height: height * 0.024),
 
-                        //a container for the email textfield
+                        //a textfield for the email
                         FarmSwapTextField(
                           controller: mycontroller.email,
                           label: mylabel.email,
@@ -344,7 +345,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a container for the password textfield
+                        //a textfield for the password
                         FarmSwapTextField(
                           controller: mycontroller.password,
                           label: mylabel.password,
@@ -356,7 +357,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               color: const Color.fromARGB(255, 46, 184, 76),
                             ),
                             onPressed: _togglePasswordVisibility,
@@ -402,7 +405,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     height: 10,
                   ),
 
-                  //create account button
+                  /**a padding where it holds the create account button 
+                   * and it calls the register function 
+                  to save the sign up data to firestore
+                  */
                   Padding(
                     padding: const EdgeInsets.only(
                       bottom: 15,
@@ -442,7 +448,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 child: Text(
                                   "Create Account",
                                   style: TextStyle(
-                                    fontFamily: GoogleFonts.poppins().fontFamily,
+                                    fontFamily:
+                                        GoogleFonts.poppins().fontFamily,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white,
@@ -456,6 +463,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     ),
                   ),
 
+                  //this textbutton will navigate to sign in page if user click the already have an account
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(RoutesManager.signInPage);
@@ -501,6 +509,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
   Future<void> storeUidInFirestore(String uid) async {
     try {
       //String userid = uid;
+      String status = mycontroller.accountstatus.text;
       String profile = mycontroller.profile.text;
       String role = mycontroller.role.text;
       String register = regdate.text;
@@ -531,6 +540,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         email: email,
         password: password,
         profile: profile,
+        accountstatus: status,
         online: true,
       );
 

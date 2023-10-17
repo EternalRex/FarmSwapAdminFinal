@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/database/retrieve_DocumentID.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/widgets/uploadPhoto_Text.dart';
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
@@ -51,12 +52,13 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  width: 290,
                   child: UploadPhotoText(),
                 ),
                 const SizedBox(
-                  width: 264,
                   child: UploadPhotoText1(),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
 
                 Column(
@@ -69,18 +71,47 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
                         width: 300,
                         height: 300,
                       ),
-                    IconButton(
+                    ElevatedButton.icon(
                       onPressed: () {
                         //calling the function to select an image and preview
                         selectImage();
                       },
                       icon: const Icon(
-                        Icons.add_a_photo,
-                        color: Colors.black,
-                        size: 20,
+                        Icons.upload,
+                      ),
+                      label: const Text(
+                        'Choose a photo to upload',
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(10),
+                        fixedSize: const Size(
+                          190,
+                          30,
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                        ),
+                        backgroundColor: Colors.lightBlue,
+                        foregroundColor: Colors.black,
+                        elevation: 15,
+                        shadowColor: shadow,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              5,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 //next button
                 Container(
@@ -97,11 +128,6 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
                   child: ElevatedButton(
                     onPressed: () {
                       uploadImage();
-                      // Navigator.of(context).pushReplacement(
-                      // MaterialPageRoute(
-                      // builder: (context) => const SignupSuccessScreen(),
-                      //),
-                      //);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,

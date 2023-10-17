@@ -64,7 +64,7 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                       //this is the sizedox for the image, lastname,firstname,
                       //and location for the admin user
                       SizedBox(
-                        width: 250,
+                        width: 350,
                         child: Row(
                           children: [
                             //this padding holds the profile image of the admin
@@ -79,10 +79,10 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                             //this column holds the admin users info
                             //like firstname, lastname and address
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 //first column that holds the admin user firstname and username
                                 SizedBox(
-                                  width: 100,
                                   child: Row(
                                     children: [
                                       Text(
@@ -101,13 +101,10 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                                   ),
                                 ),
                                 //second column that holds the admin user address
-                                SizedBox(
-                                  width: 100,
-                                  child: Text(
-                                    "${data["Address"]}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                    ),
+                                Text(
+                                  "${data["Address"]}",
+                                  style: const TextStyle(
+                                    fontSize: 10,
                                   ),
                                 ),
                               ],
@@ -126,7 +123,6 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              //Accept button
                               DecoratedBox(
                                 decoration: const BoxDecoration(
                                   gradient: LinearGradient(

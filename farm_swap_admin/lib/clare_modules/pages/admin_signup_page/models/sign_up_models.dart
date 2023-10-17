@@ -12,6 +12,7 @@ class AdminUserModel {
     required this.email,
     required this.password,
     required this.profile,
+    required this.accountstatus,
     required this.online,
   });
 
@@ -27,6 +28,7 @@ class AdminUserModel {
   String email;
   String password;
   String profile;
+  String accountstatus;
   bool online;
 
   toJson() {
@@ -43,6 +45,7 @@ class AdminUserModel {
       "Email Address": email,
       "Password": password,
       "profileUrl": profile,
+      "Account Status": accountstatus,
       "Online": online,
     };
   }

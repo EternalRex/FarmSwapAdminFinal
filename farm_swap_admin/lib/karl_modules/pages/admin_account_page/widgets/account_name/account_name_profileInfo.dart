@@ -1,5 +1,13 @@
+import "dart:async";
+import "dart:convert";
+import "dart:html";
+import "dart:typed_data";
+
 import "package:cached_network_image/cached_network_image.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
+import "package:farm_swap_admin/clare_modules/pages/admin_signup_page/database/retrieve_DocumentID.dart";
+import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart";
+import "package:firebase_storage/firebase_storage.dart";
 
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -46,8 +54,21 @@ class _ProfilePhotoState extends State<ProfilePhotoAccount> {
           return Stack(
             children: [
               CircleAvatar(
-                radius: 30,
+                radius: 40,
                 backgroundImage: image,
+              ),
+              Positioned(
+                top: 48,
+                left: 50,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.add_circle_rounded,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    selectUploadImage();
+                  },
+                ),
               ),
             ],
           );
@@ -58,13 +79,119 @@ class _ProfilePhotoState extends State<ProfilePhotoAccount> {
       },
     );
   }
+
+  // Variable to store the selected image data.
+  Uint8List? _selectedImage;
+  String? imageUrl;
+
+  //a function to select image and upload image to database
+  Future<void> selectUploadImage() async {
+    try {
+      final FileUploadInputElement input = FileUploadInputElement();
+      input.accept = "image/*";
+      input.click();
+
+      /*This is for da  purpose of displaying the image after it was selected */
+      final completer = Completer<Uint8List>();
+      /*This is for da saving the image as a string into the databae */
+      //final completer2 = Completer<String>();
+
+      input.onChange.listen((event) {
+        final file = input.files!.first;
+        final reader = FileReader();
+
+        reader.onLoadEnd.listen((event) {
+          final dataUrl = reader.result as String;
+          //completer2.complete(reader.result as String);
+          final base64String = dataUrl.split(',').last;
+          completer.complete(Uint8List.fromList(base64Decode(base64String)));
+        });
+        reader.readAsDataUrl(file);
+      });
+
+      /*variable to be used for da Uint8 for da display of image here */
+      final selectedImage = await completer.future;
+
+      /**
+      if selected image is not null it will call the 
+      uploadImage to save the string url to database
+       */
+      // ignore: unnecessary_null_comparison
+      if (selectedImage != null) {
+        _selectedImage = selectedImage;
+        await uploadImage();
+      } else {
+        print("Image selection failed.");
+      }
+    } catch (e) {
+      print("Profile image has not uploaded successfully");
+    }
+  }
+
+  //a function to upload the image
+  Future<void> uploadImage() async {
+    try {
+      if (_selectedImage == null) {
+        // Handle the case where no image is selected.
+        return;
+      }
+
+      // Initialize Firebase Firestore
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      final CollectionReference collection = firestore.collection('AdminUsers');
+
+      // Create an instance of DashboardRetrieveSpecificID
+      final dashboardRetrieve = RetrieveDocID();
+
+      // Retrieve the document ID using the getDocsId method
+      final String documentId = await dashboardRetrieve.getDocsId();
+
+      // Generate a unique filename
+      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      final fileName = 'images/$timestamp.jpg';
+
+      // Upload the image to Firebase Storage
+      final storage = FirebaseStorage.instance;
+      final Reference storageReference = storage.ref().child(fileName);
+
+      try {
+        // Upload the image
+        final UploadTask uploadTask = storageReference.putData(_selectedImage!);
+        final TaskSnapshot taskSnapshot = await uploadTask;
+        final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+
+        // Pass the download URL to the "Dashboard" page
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const AdminEditProfile(),
+          ),
+        );
+
+        // Define the data to be added to the Firestore document
+        final Map<String, dynamic> data = {
+          'profileUrl': downloadUrl,
+        };
+
+        // Update the 'ProfileUrl' field in the Firestore document
+        await collection.doc(documentId).update(data);
+
+        print(
+            'Profile image URL has been updated in the Firestore document with ID: $documentId');
+      } catch (e) {
+        print("Profile image has not uploaded successfully: $e");
+      }
+    } catch (e) {
+      print("Upload Image Failed!");
+    }
+  }
 }
 
 /*This is the class for displaying the user ID, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
-class ProfileIdAccountName extends StatelessWidget {
-  const ProfileIdAccountName({super.key, required this.documentId});
+class ProfileId extends StatelessWidget {
+  const ProfileId({super.key, required this.documentId});
 
   final String documentId;
 
@@ -80,10 +207,9 @@ class ProfileIdAccountName extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
           return Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(6),
             child: Center(
               child: SizedBox(
-                width: 200,
                 child: Text(
                   "ID: ${data["User Id"]}",
                   style: GoogleFonts.poppins(
@@ -135,7 +261,7 @@ class ProfileAccountName extends StatelessWidget {
                   firstName,
                   style: TextStyle(
                     fontFamily: GoogleFonts.poppins().fontFamily,
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -146,7 +272,7 @@ class ProfileAccountName extends StatelessWidget {
                   lastName,
                   style: TextStyle(
                     fontFamily: GoogleFonts.poppins().fontFamily,
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
