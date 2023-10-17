@@ -2,22 +2,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_account_query.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class ReadFarmerDetails extends StatelessWidget {
-  ReadFarmerDetails({super.key, required this.documentId});
+class ReadCustomerDetails extends StatelessWidget {
+  ReadCustomerDetails({super.key, required this.documentId});
 
-  final RetrieveFarmerAccounts retrieveFarmerAccounts =
-      RetrieveFarmerAccounts();
+  final RetrieveCustomerAccounts retrieveCustomerAccounts =
+      RetrieveCustomerAccounts();
   String documentId;
 
   @override
   Widget build(BuildContext context) {
     CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+        FirebaseFirestore.instance.collection('CustomerUsers');
     return FutureBuilder(
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {
@@ -26,21 +26,21 @@ class ReadFarmerDetails extends StatelessWidget {
 
           Timestamp birthtimestamp = data["birthDate"];
           DateTime birthDate = birthtimestamp.toDate();
-          String farmerbirthdate = "${birthDate.month}/${birthDate.day}/${birthDate.year}";
+          String customerbirthdate = "${birthDate.month}/${birthDate.day}/${birthDate.year}";
 
           Timestamp registertimestamp = data["registrationDate"];
           DateTime registerDate = registertimestamp.toDate();
           String registerbirthdate = "${registerDate.month}/${registerDate.day}/${registerDate.year}";
 
-          final farmerImage =
+          final customerImage =
               CachedNetworkImageProvider("${data["profileUrl"]}");
           final documentImage = CachedNetworkImageProvider("${data[""]}");
           final idImage = CachedNetworkImageProvider("${data[""]}");
+
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                //Container sa details na gi retrieve kay farmer
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -55,13 +55,13 @@ class ReadFarmerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  //Row kung asa nasud ang username, role ug userId
                   child: Row(
                     children: [
                       Expanded(
                         flex: 3,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -71,7 +71,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               Column(
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: farmerImage,
+                                    backgroundImage: customerImage,
                                     radius: 50,
                                   ),
                                 ],
@@ -79,7 +79,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               const SizedBox(
                                 width: 50,
                               ),
-                              //Retrieve the username of farmer
+                              //Retrieve username of consumers
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +93,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  //Retrieve the role of the farmer
+                                  //Retrieve role of consumers
                                   Text(
                                     "${data["userRole"]}",
                                     style: Poppins.userName.copyWith(
@@ -103,7 +103,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  //Retrieve the user id of farmer
+                                  //Retrieve the user id of consumer
                                   Text(
                                     "${data["userId"]}",
                                     style: Poppins.detailsText.copyWith(
@@ -119,27 +119,22 @@ class ReadFarmerDetails extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            //Retrieve the profile of farmer
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Swap Coins:',
-                                  style: Poppins.contentText
-                                      .copyWith(color: const Color(0xFF09041B)),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "${data["swapCoins"]}",
-                                  style: Poppins.farmerName.copyWith(
-                                    color: greenNormalHover,
-                                  ),
-                                ),
-                              ],
-                            )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Swap Coins:',
+                                style: Poppins.contentText
+                                    .copyWith(color: const Color(0xFF09041B)),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text("${data["swapCoins"]}"),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -147,7 +142,6 @@ class ReadFarmerDetails extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                //Container where the personal details of farmer is found
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -174,7 +168,6 @@ class ReadFarmerDetails extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 2,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
@@ -182,7 +175,6 @@ class ReadFarmerDetails extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          //Retrieve status of farmer
                                           Text(
                                             'Status',
                                             style: Poppins.contentText.copyWith(
@@ -205,7 +197,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                   strokeAlign: BorderSide
                                                       .strokeAlignOutside),
                                             ),
-                                            //Row kung asa masud ang status
+                                            //Row kung asa masud ang status ni farmer
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -232,7 +224,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve name which is the first name and last name of farmer
+                                                //Retrieve name which is the first name and last name of consumers
                                                 Text(
                                                   'Name',
                                                   style: Poppins.contentText
@@ -300,7 +292,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve contact number of farmers
+                                                //Retrieve contact number of consumers
                                                 Text(
                                                   'Contact Number',
                                                   style: Poppins.contentText
@@ -356,7 +348,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve birth date of farmers
+                                                //Retrieve birth date of consumers
                                                 Text(
                                                   'Birth Date',
                                                   style: Poppins.contentText
@@ -387,7 +379,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          farmerbirthdate,
+                                                          customerbirthdate,
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -416,7 +408,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            //Retrieve registration date when farmers register in the application
+                                            //Retrieve registration date when consumers register in the application
                                             'Registration Date',
                                             style: Poppins.contentText.copyWith(
                                               color: const Color.fromARGB(
@@ -464,7 +456,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve email address of farmers
+                                                //Retrieve email address of consumers
                                                 Text(
                                                   'Email Address',
                                                   style: Poppins.contentText
@@ -519,7 +511,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve address of farmers
+                                                //Retrieve address of consumers
                                                 Text(
                                                   'Address',
                                                   style: Poppins.contentText
@@ -574,7 +566,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                //Retrieve the birth place of farmers
+                                                //Retrieve the birth place of consumers
                                                 Text(
                                                   'Birth Place',
                                                   style: Poppins.contentText
@@ -692,9 +684,14 @@ class ReadFarmerDetails extends StatelessWidget {
                                       child: Container(
                                         height: 200,
                                         color: greenLight,
-                                        child: CircleAvatar(
-                                          backgroundImage: documentImage,
-                                          radius: 50,
+                                        child: SizedBox(
+                                          height: 100,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Image.network(
+                                              "${data["idUrl"]}",
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -837,7 +834,6 @@ class ReadFarmerDetails extends StatelessWidget {
             ),
           );
         }
-        //Katong part na before ma display ang gi retrieve na data kay mag loading sa siya
         return const Center(
           child: SizedBox(
             height: 20,

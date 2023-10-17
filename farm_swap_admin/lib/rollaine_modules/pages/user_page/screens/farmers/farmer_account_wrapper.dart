@@ -1,27 +1,37 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmer_account_query.dart';
+import 'package:farm_swap_admin/provider/farmer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ReadFarmerAccount extends StatelessWidget {
+class ReadFarmerAccount extends StatefulWidget {
   ReadFarmerAccount({super.key, required this.documentId});
 
-  final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
   String documentId;
+  String selectedId = '';
+
+  @override
+  State<ReadFarmerAccount> createState() => _ReadFarmerAccountState();
+}
+
+class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
+  final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
     return FutureBuilder(
-      future: reference.doc(documentId).get(),
+      future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+          final farmerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -45,7 +55,7 @@ class ReadFarmerAccount extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       //profile of farmer
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage("${data["profileUrl"]}"),
+                        backgroundImage: farmerProfile,
                         radius: 20,
                       ),
                     ),
@@ -94,19 +104,20 @@ class ReadFarmerAccount extends StatelessWidget {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
+                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.detailsUserPage);
+                                setState(() {
+                                  widget.selectedId = "${data["userId"]}";
+                                });
+                                Provider.of<FarmerUserIdProvider>(context, listen: false)
+                                    .setfarmerUserId(widget.selectedId);
+                                Navigator.of(context).pushNamed(RoutesManager.detailsFarmerPage);
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                padding: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
                                   'Details',
                                   style: GoogleFonts.poppins(

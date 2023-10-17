@@ -1,6 +1,7 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/functions/update_online_status.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -342,6 +343,9 @@ class _SignInAdminState extends State<SignInAdmin> {
     );
   }
 
+/*An object of the Status Update Class */
+  UpdateOnlineStatus onlineStatus = UpdateOnlineStatus();
+
   void login() async {
     String email = mycontroller.email.text.trim();
     String password = mycontroller.password.text;
@@ -349,15 +353,16 @@ class _SignInAdminState extends State<SignInAdmin> {
     //user sign in and directed to dashboard
     try {
       User? user = await adminAuth.signInWithEmailAndPassword(email, password);
-
       if (user != null) {
-        print("User is successfully log in");
-
+        /*Calling the method in the status update class and pass the id of the current login
+        user and true that means the user has login */
+        onlineStatus.updateOnlineStatus(
+            FirebaseAuth.instance.currentUser!.uid, true);
         Navigator.of(context).pushNamed(RoutesManager.dashboard);
       }
     } catch (e) {
       //print(e);
-      print("Some error happened in log in");
+      throw ("Some error happened in log in");
     }
   }
 }
