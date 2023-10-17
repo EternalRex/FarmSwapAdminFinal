@@ -866,11 +866,17 @@ class ReadFarmerDetails extends StatelessWidget {
     );
   }
 
+  /*This function is defined with the name selectButtonToUpdate, and it takes a BuildContext argument, 
+  which is used to determine where the dialog should be displayed in the widget tree.*/
   void selectButtonToUpdate(BuildContext context) {
+
+    //Used to display a dialog box, typically an AlertDialog, on the screen
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
+
+          //Title of the showDialog
           title: Text(
             'Update Account',
             style: Poppins.contentTitle.copyWith(
@@ -889,6 +895,8 @@ class ReadFarmerDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
+
+                    //Archive button
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -939,6 +947,8 @@ class ReadFarmerDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
+
+                    //Suspend button
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -989,6 +999,8 @@ class ReadFarmerDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
+
+                    //Deduction button
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -1042,6 +1054,8 @@ class ReadFarmerDetails extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
+
+                            //Save button
                             child: Row(
                               children: [
                                 DecoratedBox(
@@ -1096,6 +1110,8 @@ class ReadFarmerDetails extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
+
+                            //Cancel button
                             child: Row(
                               children: [
                                 DecoratedBox(

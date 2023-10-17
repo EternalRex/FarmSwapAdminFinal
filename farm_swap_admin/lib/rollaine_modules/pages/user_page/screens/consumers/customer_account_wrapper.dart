@@ -13,7 +13,10 @@ import 'package:provider/provider.dart';
 class ReadCustomerAccount extends StatefulWidget {
   ReadCustomerAccount({super.key, required this.documentId});
 
+  //Variable na document id nga String
   String documentId;
+
+  //Variable na chosen id nga String
   String chosenId = '';
 
   @override
@@ -25,13 +28,23 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
 
   @override
   Widget build(BuildContext context) {
+
+    //Creates a reference to a Firestore collection named 'CustomerUsers' using the FirebaseFirestore instance
     CollectionReference reference = FirebaseFirestore.instance.collection('CustomerUsers');
+
+    //Fetch data from Firestore and then build a widget based on the retrieved data
     return FutureBuilder(
+
+      //Retrieves a specific document from the 'CustomerUsers' collection using the doc method
       future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+
+          //Loads an image from the URL specified in the profileUrl field in the Firestore document data
           final customerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
+
+          //Container for the Customer's name and details
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -52,6 +65,8 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
+
+                      //Profile photo
                       child: CircleAvatar(
                         backgroundImage: customerProfile,
                         radius: 20,
@@ -60,6 +75,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                     const SizedBox(
                       width: 8,
                     ),
+                    //First name
                     Text(
                       "${data["firstName"]}",
                       style: Poppins.farmerName.copyWith(
@@ -69,6 +85,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                     const SizedBox(
                       width: 3,
                     ),
+                    //Last name
                     Text(
                       "${data["lastName"]}",
                       style: Poppins.farmerName.copyWith(
@@ -81,7 +98,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          //Accept button
+                          //Details button
                           DecoratedBox(
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
@@ -104,10 +121,16 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
+
+                                //Update the state of the widget with the selected user's ID
                                 setState(() {
                                   widget.chosenId = "${data["userId"]}";
                                 });
+
+                                //Uses the Provider package to set the user ID in a state management provider
                                 Provider.of<CustomerUserIdProvider>(context, listen: false).setcustomerUserId(widget.chosenId);
+
+                                //Navigates to a different screen
                                 Navigator.of(context).pushNamed(RoutesManager.detailsCustomerPage);
                               },
                               child: Padding(

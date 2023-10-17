@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RetrieveFarmerAccounts {
+
+  //Declares a list named documentId that will store a collection of strings, specifically document IDs retrieved from Firestore
   List<String> documentId = [];
 
+  //Creates an instance of the FirebaseFirestore class named db
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
+  //Provides a method (getDocsId) for fetching document IDs from the 'FarmerUsers' collection in Firestore and storing them in the documentId list
   Future getDocsId() async {
     await db.collection('FarmerUsers').get().then(
           // ignore: avoid_function_literals_in_foreach_calls

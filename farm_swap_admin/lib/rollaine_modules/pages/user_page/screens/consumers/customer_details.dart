@@ -28,10 +28,15 @@ class DetailsCustomerPage extends StatefulWidget {
 }
 
 class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
+
+  //Creates an instance of the RetrieveCustomerUserId class and makes it accessible through the retrieveCustomerUserId variable
   final RetrieveCustomerUserId retrieveCustomerUserId = RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
+    
+    /*//Retrieves the farmer user's ID from a state management 
+    provider (FarmerUserIdProvider) using the Provider package*/
     String customerUserId =
         Provider.of<CustomerUserIdProvider>(context, listen: false)
             .getCustomerUserId();

@@ -28,10 +28,14 @@ class DetailsFarmerPage extends StatefulWidget {
 }
 
 class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
+
+  //Creates an instance of the RetrieveFarmerUserId class and makes it accessible through the retrieveCFarmerUserId variable
   final RetrieveFarmerUserId retrieveFarmerUserId = RetrieveFarmerUserId();
 
   @override
   Widget build(BuildContext context) {
+
+    //Retrieves the farmer user's ID from a state management provider (FarmerUserIdProvider) using the Provider package
     String farmerUserId =
         Provider.of<FarmerUserIdProvider>(context, listen: false)
             .getFarmerUserId();
@@ -243,6 +247,9 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+
+                                        /*manage an asynchronous operation (data retrieval) and update the 
+                                        user interface based on the result of that operation*/
                                         FutureBuilder(
                                           future: retrieveFarmerUserId
                                               .getDocsId(farmerUserId),

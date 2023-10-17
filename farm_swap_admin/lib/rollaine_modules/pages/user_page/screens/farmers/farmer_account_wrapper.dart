@@ -13,7 +13,10 @@ import 'package:provider/provider.dart';
 class ReadFarmerAccount extends StatefulWidget {
   ReadFarmerAccount({super.key, required this.documentId});
 
+  //Variable na document id nga String
   String documentId;
+
+  //Variable na selected id nga String
   String selectedId = '';
 
   @override
@@ -25,13 +28,23 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
 
   @override
   Widget build(BuildContext context) {
+
+    //Creates a reference to a Firestore collection named 'FarmerUsers' using the FirebaseFirestore instance
     CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
+
+    //Fetch data from Firestore and then build a widget based on the retrieved data
     return FutureBuilder(
+
+      //Retrieves a specific document from the 'FarmerUsers' collection using the doc method
       future: reference.doc(widget.documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
+
+          //Loads an image from the URL specified in the profileUrl field in the Firestore document data
           final farmerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
+
+          //Container for the Farmer's name and details
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -86,7 +99,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          //Accept button
+                          //Details button
                           DecoratedBox(
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
@@ -109,11 +122,17 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                                 shadowColor: Colors.transparent,
                               ),
                               onPressed: () {
+
+                                //Update the state of the widget with the selected user's ID
                                 setState(() {
                                   widget.selectedId = "${data["userId"]}";
                                 });
+
+                                //Uses the Provider package to set the user ID in a state management provider
                                 Provider.of<FarmerUserIdProvider>(context, listen: false)
                                     .setfarmerUserId(widget.selectedId);
+                                
+                                //Navigates to a different screen
                                 Navigator.of(context).pushNamed(RoutesManager.detailsFarmerPage);
                               },
                               child: Padding(
