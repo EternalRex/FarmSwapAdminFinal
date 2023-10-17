@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 const String poppins = 'Poppins';
 
 class Poppins {
+  static TextStyle number = const TextStyle(
+    fontFamily: poppins,
+    fontWeight: FontWeight.w800,
+    fontSize: 80,
+  );
   static TextStyle pageTitle = const TextStyle(
     fontFamily: poppins,
     fontWeight: FontWeight.w800,

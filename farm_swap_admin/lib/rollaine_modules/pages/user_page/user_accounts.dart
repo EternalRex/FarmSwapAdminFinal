@@ -27,8 +27,10 @@ class UserAccount extends StatefulWidget {
 }
 
 class _UserAccount extends State<UserAccount> {
-  final RetrieveFarmerAccounts retrieveFarmerAccounts = RetrieveFarmerAccounts();
-  final RetrieveCustomerAccounts retrieveCustomerAccounts = RetrieveCustomerAccounts();
+  final RetrieveFarmerAccounts retrieveFarmerAccounts =
+      RetrieveFarmerAccounts();
+  final RetrieveCustomerAccounts retrieveCustomerAccounts =
+      RetrieveCustomerAccounts();
 
   @override
   Widget build(BuildContext context) {
@@ -160,11 +162,13 @@ class _UserAccount extends State<UserAccount> {
                         width: 250,
                         height: 15,
                         child: TextField(
-                          style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
+                          style: GoogleFonts.poppins(
+                              color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
-                            fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
+                            fillColor:
+                                const Color(0xFFF9A84D).withOpacity(0.10),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -194,6 +198,7 @@ class _UserAccount extends State<UserAccount> {
                         ),
                         /*This container  holds every content in this expanded*/
                         child: Container(
+                          height: 510,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: const BorderRadius.all(
@@ -210,48 +215,56 @@ class _UserAccount extends State<UserAccount> {
                           ),
                           /*This column will hold the farmers title and the overall data collected from the database
                           that is being put in a long oval */
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15, left: 15),
-                                    child: Row(
-                                      children: [
-                                        /*Farmers Title */
-                                        Text(
-                                          'Farmers',
-                                          style: Poppins.contentTitle.copyWith(
-                                            color: const Color(0xFF09051C),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 15),
+                                      child: Row(
+                                        children: [
+                                          /*Farmers Title */
+                                          Text(
+                                            'Farmers',
+                                            style:
+                                                Poppins.contentTitle.copyWith(
+                                              color: const Color(0xFF09051C),
+                                            ),
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    //Mao ni na part sa code kung asa siya ang mo tawag sa mga na register na farmers sa application
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        /*Displays the farmer users in a list style */
+                                        FutureBuilder(
+                                          future: retrieveFarmerAccounts
+                                              .getDocsId(),
+                                          builder: (context, snapshot) {
+                                            return Column(
+                                              children: retrieveFarmerAccounts
+                                                  .documentId
+                                                  .map((documentId) {
+                                                return ListTile(
+                                                  title: ReadFarmerAccount(
+                                                      documentId: documentId),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  //Mao ni na part sa code kung asa siya ang mo tawag sa mga na register na farmers sa application
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      /*Displays the farmer users in a list style */
-                                      FutureBuilder(
-                                        future: retrieveFarmerAccounts.getDocsId(),
-                                        builder: (context, snapshot) {
-                                          return Column(
-                                            children:
-                                                retrieveFarmerAccounts.documentId.map((documentId) {
-                                              return ListTile(
-                                                title: ReadFarmerAccount(documentId: documentId),
-                                              );
-                                            }).toList(),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -261,9 +274,11 @@ class _UserAccount extends State<UserAccount> {
                       flex: 2,
                       child: Padding(
                         //Decorate the expanded area for the main content
-                        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        /*This container  holds every content in this expanded*/
                         child: Container(
-                          //Design of the container
+                          height: 510,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: const BorderRadius.all(
@@ -279,45 +294,53 @@ class _UserAccount extends State<UserAccount> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15, left: 15),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Consumers',
-                                          style: Poppins.contentTitle.copyWith(
-                                            color: const Color(0xFF09051C),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 15),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Consumers',
+                                            style:
+                                                Poppins.contentTitle.copyWith(
+                                              color: const Color(0xFF09051C),
+                                            ),
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        FutureBuilder(
+                                          future: retrieveCustomerAccounts
+                                              .getDocsId(),
+                                          builder: (context, snapshot) {
+                                            return Column(
+                                              children: retrieveCustomerAccounts
+                                                  .documentId
+                                                  .map((documentId) {
+                                                return ListTile(
+                                                  title: ReadCustomerAccount(
+                                                      documentId: documentId),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                        future: retrieveCustomerAccounts.getDocsId(),
-                                        builder: (context, snapshot) {
-                                          return Column(
-                                            children: retrieveCustomerAccounts.documentId
-                                                .map((documentId) {
-                                              return ListTile(
-                                                title: ReadCustomerAccount(documentId: documentId),
-                                              );
-                                            }).toList(),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

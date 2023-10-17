@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,32 +11,40 @@ import 'package:google_fonts/google_fonts.dart';
 class ReadFarmerDetails extends StatelessWidget {
   ReadFarmerDetails({super.key, required this.documentId});
 
+  //Naa tay object para maka access sa methods diri sa RetrieveFarmerAccounts na class
   final RetrieveFarmerAccounts retrieveFarmerAccounts =
       RetrieveFarmerAccounts();
+
+  //Variable na document id nga String
   String documentId;
 
   @override
   Widget build(BuildContext context) {
+    //mag create ug reference sa database firestore
     CollectionReference reference =
         FirebaseFirestore.instance.collection('FarmerUsers');
+
     return FutureBuilder(
+      /*In this part kay gigagmit ang value sa documentid na variable para ma access tong document nga
+      naa nakasud ang document id nga parehas sa value ni documentid*/
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           dynamic data = snapshot.data!.data() as dynamic;
 
-          Timestamp birthtimestamp = data["birthDate"];
-          DateTime birthDate = birthtimestamp.toDate();
-          String farmerbirthdate = "${birthDate.month}/${birthDate.day}/${birthDate.year}";
+          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
+          //Timestamp birthtimestamp = data["birthDate"];
+          //DateTime birthDate = birthtimestamp.toDate();
+          //String farmerbirthdate = "${birthDate.month}/${birthDate.day}/${birthDate.year}";
 
-          Timestamp registertimestamp = data["registrationDate"];
-          DateTime registerDate = registertimestamp.toDate();
-          String registerbirthdate = "${registerDate.month}/${registerDate.day}/${registerDate.year}";
+          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
+          //Timestamp registertimestamp = data["registrationDate"];
+          //DateTime registerDate = registertimestamp.toDate();
+          //String registerbirthdate = "${registerDate.month}/${registerDate.day}/${registerDate.year}";
 
           final farmerImage =
               CachedNetworkImageProvider("${data["profileUrl"]}");
-          final documentImage = CachedNetworkImageProvider("${data[""]}");
-          final idImage = CachedNetworkImageProvider("${data[""]}");
+
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -55,6 +64,7 @@ class ReadFarmerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   //Row kung asa nasud ang username, role ug userId
                   child: Row(
                     children: [
@@ -70,6 +80,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               ),
                               Column(
                                 children: [
+                                  //Profile image of the farmer
                                   CircleAvatar(
                                     backgroundImage: farmerImage,
                                     radius: 50,
@@ -119,27 +130,28 @@ class ReadFarmerDetails extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            //Retrieve the profile of farmer
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Swap Coins:',
-                                  style: Poppins.contentText
-                                      .copyWith(color: const Color(0xFF09041B)),
+                          padding: const EdgeInsets.all(8.0),
+                          //Retrieve the profile of farmer
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Swap Coins:',
+                                style: Poppins.contentText
+                                    .copyWith(color: const Color(0xFF09041B)),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "${data["swapCoins"]}",
+                                style: Poppins.farmerName.copyWith(
+                                  color: greenNormalHover,
                                 ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "${data["swapCoins"]}",
-                                  style: Poppins.farmerName.copyWith(
-                                    color: greenNormalHover,
-                                  ),
-                                ),
-                              ],
-                            )),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -162,6 +174,8 @@ class ReadFarmerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  //Second row of consumer details
                   child: Row(
                     children: [
                       Expanded(
@@ -174,7 +188,6 @@ class ReadFarmerDetails extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 2,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
@@ -387,7 +400,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          farmerbirthdate,
+                                                          "${data["birthDate"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -444,7 +457,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   Text(
-                                                    registerbirthdate,
+                                                    "${data["registrationDate"]}",
                                                     style: Poppins.farmerName
                                                         .copyWith(
                                                             color:
@@ -653,6 +666,8 @@ class ReadFarmerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  //Third row of consumer details kung asa ang iya mga gi pasa na document photos
                   child: Row(
                     children: [
                       Expanded(
@@ -670,6 +685,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                           horizontal: 10, vertical: 10),
                                       child: Row(
                                         children: [
+                                          //Attachments
                                           Text(
                                             'Attachments',
                                             style: Poppins.contentText.copyWith(
@@ -689,13 +705,11 @@ class ReadFarmerDetails extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
+
+                                      //Container for document requirement
                                       child: Container(
                                         height: 200,
                                         color: greenLight,
-                                        child: CircleAvatar(
-                                          backgroundImage: documentImage,
-                                          radius: 50,
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -704,13 +718,11 @@ class ReadFarmerDetails extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
+
+                                      //Container for id requirement
                                       child: Container(
                                         height: 200,
                                         color: greenLight,
-                                        child: CircleAvatar(
-                                          backgroundImage: idImage,
-                                          radius: 50,
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -746,7 +758,7 @@ class ReadFarmerDetails extends StatelessWidget {
                         flex: 5,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                              horizontal: 8, vertical: 8),
                           child: Column(
                             children: [
                               Row(
@@ -762,6 +774,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 10),
+                                            //Update button wherein you can archive, suspend, and deduct swap coins
                                             child: Row(
                                               children: [
                                                 DecoratedBox(
@@ -797,7 +810,9 @@ class ReadFarmerDetails extends StatelessWidget {
                                                       shadowColor:
                                                           Colors.transparent,
                                                     ),
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      selectButtonToUpdate(context);
+                                                    },
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -844,6 +859,295 @@ class ReadFarmerDetails extends StatelessWidget {
             width: 20,
             child: CircularProgressIndicator(
               color: Color(0xFF14BE77),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void selectButtonToUpdate(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Update Account',
+            style: Poppins.contentTitle.copyWith(
+              color: const Color(0xFF09041B),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: SizedBox(
+            height: 260,
+            width: 250,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DecoratedBox(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF00B4D8),
+                                Color(0xFF0077B6),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              disabledForegroundColor:
+                                  Colors.transparent.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.transparent.withOpacity(0.12),
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                'Archive',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.50,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DecoratedBox(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFFF0182C),
+                                Color(0xFFD1001F),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              disabledForegroundColor:
+                                  Colors.transparent.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.transparent.withOpacity(0.12),
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                'Suspend',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.50,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DecoratedBox(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFFFFB347),
+                                Color(0xFFFA9C1B),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              disabledForegroundColor:
+                                  Colors.transparent.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.transparent.withOpacity(0.12),
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                'Deduction',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.50,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: Row(
+                              children: [
+                                DecoratedBox(
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF53E78B),
+                                        Color(0xFF14BE77),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      disabledForegroundColor:
+                                          Colors.transparent.withOpacity(0.38),
+                                      disabledBackgroundColor:
+                                          Colors.transparent.withOpacity(0.12),
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    onPressed: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        'Save',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: 0.50,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: Row(
+                              children: [
+                                DecoratedBox(
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF88807B),
+                                        Color(0xFF787276),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      disabledForegroundColor:
+                                          Colors.transparent.withOpacity(0.38),
+                                      disabledBackgroundColor:
+                                          Colors.transparent.withOpacity(0.12),
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(RoutesManager.detailsFarmerPage);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        'Cancel',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: 0.50,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         );

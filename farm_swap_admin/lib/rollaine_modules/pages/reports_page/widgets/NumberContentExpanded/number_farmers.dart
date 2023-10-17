@@ -1,11 +1,47 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:flutter/material.dart';
 
-class NumberFarmers extends StatelessWidget {
+class NumberFarmers extends StatefulWidget {
   const NumberFarmers({
     super.key,
   });
+
+  @override
+  State<NumberFarmers> createState() => _NumberFarmersState();
+}
+
+class _NumberFarmersState extends State<NumberFarmers> {
+
+  int totalFarmerUsers = 0;
+
+  //Use the fetchFarmerUsers method to fetch the document snapshots in the 'FarmerUsers' collection and calculate the farmer users
+  Future<void> fetchFarmerUsers() async {
+    try {
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      //Creates a CollectionReference named usersCollection, which is a reference to the Firestore collection named 'FarmerUsers'
+      final CollectionReference usersCollection = firestore.collection('FarmerUsers');
+
+      //Fetches the data from the 'FarmerUsers' collection using the get method, which retrieves all documents within the collection
+      final QuerySnapshot usersSnapshot = await usersCollection.get();
+
+      //This code is to update the totalFarmerUsers variable with the count of documents in the usersSnapshot
+      setState(() {
+        totalFarmerUsers = usersSnapshot.size;
+      });
+    } catch (e) {
+      print('Error fetching user count: $e');
+    }
+  }
+
+  //Initiates the process of fetching data about farmer users.
+  @override
+  void initState() {
+    super.initState();
+    fetchFarmerUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +50,7 @@ class NumberFarmers extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 45, top: 10),
         child: Container(
-          height: 120,
+          height: 190,
           //Designing the container
           decoration: BoxDecoration(
             color: Colors.white,
@@ -37,22 +73,22 @@ class NumberFarmers extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       'Farmers',
-                      style: Poppins.contentText.copyWith(
+                      style: Poppins.commuTitle.copyWith(
                         color: const Color(0xFF09051C),
                       ),
                     ),
-                    const SizedBox(
-                      height: 9,
-                    ),
                     Text(
-                      '45',
-                      style: Poppins.digits.copyWith(
+                      '$totalFarmerUsers',
+                      style: Poppins.number.copyWith(
                         foreground: Paint()
                           ..shader = const LinearGradient(
                             colors: <Color>[
