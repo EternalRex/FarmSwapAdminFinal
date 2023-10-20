@@ -3,11 +3,14 @@ import "package:farm_swap_admin/constants/Colors/colors_rollaine.dart";
 import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/drop_down_update/personlaInfo_update_retrieveID.dart";
 import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart";
 import "package:farm_swap_admin/routes/routes.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:provider/provider.dart";
 import '../../../../../../constants/typography/typography.dart';
+import "../../screens/admin_account_logs/database/admin_logs_insert.dart";
+import '../../screens/admin_archived_account/widgets/retrieve_Archived_DocID.dart';
 import "../../screens/admin_user_details/widgets/update_Textfield.dart";
 
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
@@ -73,7 +76,7 @@ class EditPersonalInfo extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                            top: 10,
+                            top: 2,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +123,7 @@ class EditPersonalInfo extends StatelessWidget {
                           width: 20,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 2),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -683,8 +686,18 @@ class EditPersonalInfo extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: TextButton(
-                                        onPressed: () {
-                                          //navigator here
+                                        onPressed: () async {
+                                          // Create an instance of RetrieveArchivedDocId
+                                          RetrieveArchivedDocId retriever =
+                                              RetrieveArchivedDocId();
+
+                                          // Call the updateFieldAndNavigate method to update Firestore and navigate
+                                          await retriever
+                                              .updateFieldAndNavigate();
+
+                                          // Now you can navigate to another page here, for example:
+                                          Navigator.of(context).pushNamed(
+                                              RoutesManager.archiveaccountpage);
                                         },
                                         child: Text(
                                           "Archive Account",
@@ -1604,6 +1617,10 @@ class EditPersonalInfo extends StatelessWidget {
         });
   }
 
+  //Object for the admin logs model used to save admin logs to db
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+  final email = FirebaseAuth.instance.currentUser!.email;
+
   //creating a function called updated firstname field to update the first name from the database
   Future<void> updateFirstNameField(
       BuildContext context, String? updatedata, String userid) async {
@@ -1617,6 +1634,10 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"First Name": updatedata};
+
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_First_Name", DateTime.now());
 
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
@@ -1635,6 +1656,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Last Name": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni last name */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Last_Name", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1653,6 +1677,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Address": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni address */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Address", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1670,6 +1697,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Contact Number": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni contact number */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Contact_Number", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1687,6 +1717,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Birth Place": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni birthplace */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Birthplace", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1704,6 +1737,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Email Address": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni email */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Email", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1721,6 +1757,9 @@ class EditPersonalInfo extends StatelessWidget {
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Password": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni password */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Password", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -1755,6 +1794,9 @@ class EditPersonalInfo extends StatelessWidget {
         .collection('AdminUsers')
         .doc(updateRetrieve.mydocid);
     final updateFiled = {"Birth Date": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update birthdate */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Birthdate", DateTime.now());
     await documentref.update(updateFiled);
     Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
@@ -1781,6 +1823,9 @@ class EditPersonalInfo extends StatelessWidget {
         .collection('AdminUsers')
         .doc(updateRetrieve.mydocid);
     final updateFiled = {"Registration Date": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update registration date */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Registration_Date", DateTime.now());
     await documentref.update(updateFiled);
     Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }

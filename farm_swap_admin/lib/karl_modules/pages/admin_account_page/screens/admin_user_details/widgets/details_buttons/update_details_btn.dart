@@ -2,8 +2,8 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Te
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class ArchiveOptionsBtn extends StatelessWidget {
-  const ArchiveOptionsBtn({
+class UpdateAdminUserOption extends StatelessWidget {
+  const UpdateAdminUserOption({
     super.key,
   });
 
@@ -17,11 +17,10 @@ class ArchiveOptionsBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.archiveaccountpage);
+                Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
               },
               child: const EditProfileText(
-                myText: 'Archive Account',
+                myText: 'Update Account',
                 myColor: Color(0xFF09041B),
               ),
             ),
@@ -29,7 +28,7 @@ class ArchiveOptionsBtn extends StatelessWidget {
               width: 5,
             ),
             const Image(
-              image: AssetImage('assets/karl_assets/images/archive.png'),
+              image: AssetImage('assets/karl_assets/images/update.png'),
               height: 23,
               width: 23,
             ),

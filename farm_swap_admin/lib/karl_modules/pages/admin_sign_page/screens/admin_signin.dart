@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
@@ -11,6 +12,9 @@ import '../../../../clare_modules/pages/admin_signup_page/authentication/sign_up
 import '../../../../clare_modules/pages/admin_signup_page/controllers/sign_up_controller.dart';
 import '../../../../clare_modules/pages/admin_signup_page/label/sign_up_label.dart';
 import '../../../../routes/routes.dart';
+import '../../admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
+import '../../admin_account_page/screens/admin_archived_account/widgets/retrieve_Archived_DocID.dart';
+import '../widgets/retrieve_DocID.dart';
 
 class SignInAdmin extends StatefulWidget {
   const SignInAdmin({super.key});
@@ -33,6 +37,7 @@ class _SignInAdminState extends State<SignInAdmin> {
   void dispose() {
     mycontroller.email.dispose();
     mycontroller.password.dispose();
+    mycontroller.userid.dispose();
     super.dispose();
   }
 
@@ -343,6 +348,9 @@ class _SignInAdminState extends State<SignInAdmin> {
     );
   }
 
+  //Object for the admin logs model used to save admin logs to db
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+
 /*An object of the Status Update Class */
   UpdateOnlineStatus onlineStatus = UpdateOnlineStatus();
 
@@ -350,19 +358,56 @@ class _SignInAdminState extends State<SignInAdmin> {
     String email = mycontroller.email.text.trim();
     String password = mycontroller.password.text;
 
-    //user sign in and directed to dashboard
     try {
       User? user = await adminAuth.signInWithEmailAndPassword(email, password);
       if (user != null) {
-        /*Calling the method in the status update class and pass the id of the current login
-        user and true that means the user has login */
-        onlineStatus.updateOnlineStatus(
-            FirebaseAuth.instance.currentUser!.uid, true);
-        Navigator.of(context).pushNamed(RoutesManager.dashboard);
+        // Get the document ID
+        String documentID = await RetrieveDocId().getDocsId();
+
+        // Check the account status
+        String accountStatus = await checkAccountStatus(documentID);
+
+        //if the accountstatus is equal to Archived it will navigate to archived page
+        if (accountStatus == "Archived") {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushNamed(RoutesManager.archiveaccountpage);
+        } else {
+          // Update online status and navigate to the dashboard
+          onlineStatus.updateOnlineStatus(user.uid, true);
+          // Create an instance of RetrieveUnArchivedDocId i just reuse the class
+          RetrieveUnArchiveDocId retriever = RetrieveUnArchiveDocId();
+
+          // when text button clicked it will update the field into active status
+          await retriever.updateFieldAndNavigate();
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushNamed(RoutesManager.dashboard);
+        }
       }
     } catch (e) {
-      //print(e);
       throw ("Some error happened in log in");
     }
+  }
+
+  /*
+  This function will check the account status if it exists it will 
+  return the accountStatus which is naa nay value nya ipasa sa log in  na function
+  */
+  Future<String> checkAccountStatus(String documentID) async {
+    // Query Firestore to check the account status
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(documentID)
+        .get();
+
+    if (doc.exists) {
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        String accountStatus = data['Account Status'] ?? "";
+        return accountStatus;
+      }
+    }
+
+    // If the document doesn't exist or the field is missing, return an empty string
+    return "";
   }
 }

@@ -10,6 +10,7 @@ import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotp
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
@@ -25,6 +26,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_archived_account/screen/acrhived_account.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
 
 class RoutesManager {
@@ -35,9 +38,12 @@ class RoutesManager {
   static const adminAccount = "/adminaccount";
   static const adminAccountPage = "/adminaccountpage";
   static const admindetailspage = "/admindetailspage";
+  static const archiveaccountpage = "/archiveaccountpage";
+  static const adminactivityspage = "/adminactivityspage";
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
+  static const chatpage = "/chatpage";
 
   //clare routes
   static const adminSignup = "/adminSignup";
@@ -96,6 +102,16 @@ class RoutesManager {
       case admindetailspage:
         return MaterialPageRoute(
           builder: (context) => AdminUserDetails(),
+        );
+
+      case adminactivityspage:
+        return MaterialPageRoute(
+          builder: (context) => AdminLogsID(),
+        );
+
+      case archiveaccountpage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminArchivedAccount(),
         );
 
       case adminProfile:
@@ -204,7 +220,9 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => const ForgotPassScreen(),
         );
-
+      //chat page route
+      case chatpage:
+        return MaterialPageRoute(builder: (context) => const ChatPage());
       default:
         throw const FormatException("No route");
     }

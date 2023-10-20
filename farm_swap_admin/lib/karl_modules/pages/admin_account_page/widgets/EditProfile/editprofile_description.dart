@@ -1,4 +1,3 @@
-import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +11,9 @@ class EditProfileDescription extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding:
-              const EdgeInsets.only(
-                  left: 20, top: 20),
+          padding: const EdgeInsets.only(left: 20, top: 20),
           child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 10,
@@ -26,22 +22,11 @@ class EditProfileDescription extends StatelessWidget {
                 children: [
                   Text(
                     'Personal Information',
-                    style: Poppins
-                        .contentTitle
-                        .copyWith(
-                      color: const Color(
-                          0xFF09041B),
+                    style: Poppins.contentTitle.copyWith(
+                      color: const Color(0xFF09041B),
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                  width: 385),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                    Icons.edit_square),
-                color: greenNormal,
               ),
             ],
           ),

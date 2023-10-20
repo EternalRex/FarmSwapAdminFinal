@@ -1,9 +1,8 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class ArchiveOptionsBtn extends StatelessWidget {
-  const ArchiveOptionsBtn({
+class DeactivateAccountBtn extends StatelessWidget {
+  const DeactivateAccountBtn({
     super.key,
   });
 
@@ -17,11 +16,10 @@ class ArchiveOptionsBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.archiveaccountpage);
+                //deactivate page
               },
               child: const EditProfileText(
-                myText: 'Archive Account',
+                myText: 'Deactivate Account',
                 myColor: Color(0xFF09041B),
               ),
             ),
@@ -29,7 +27,7 @@ class ArchiveOptionsBtn extends StatelessWidget {
               width: 5,
             ),
             const Image(
-              image: AssetImage('assets/karl_assets/images/archive.png'),
+              image: AssetImage('assets/karl_assets/images/deactivate.png'),
               height: 23,
               width: 23,
             ),
