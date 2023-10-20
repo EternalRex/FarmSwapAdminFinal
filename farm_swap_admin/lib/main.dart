@@ -8,6 +8,8 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
+import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart";
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
@@ -43,6 +45,9 @@ class MyApp extends StatelessWidget {
         /*Registering our provider for Admin Details */
         ChangeNotifierProvider(
           create: (context) => AdminDetailsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AdminActivityProvider(),
         ),
         /*Registering povider for update account dropdown hint */
         ChangeNotifierProvider(

@@ -7,10 +7,13 @@ import "package:cached_network_image/cached_network_image.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:farm_swap_admin/clare_modules/pages/admin_signup_page/database/retrieve_DocumentID.dart";
 import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_storage/firebase_storage.dart";
 
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+
+import "../../screens/admin_account_logs/database/admin_logs_insert.dart";
 
 /*We created this class to be called in the dashboard this will take a value which 
 is the document id we get from our firebase query. That is why this class has a 
@@ -159,6 +162,13 @@ class _ProfilePhotoState extends State<ProfilePhotoAccount> {
         final UploadTask uploadTask = storageReference.putData(_selectedImage!);
         final TaskSnapshot taskSnapshot = await uploadTask;
         final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        //Object for the admin logs model used to save admin logs to db
+        AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+        final email = FirebaseAuth.instance.currentUser!.email;
+
+        /*So mag kuha ni siya sa admin logs nya iyang description kay ni profile phot0 */
+        adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+            "Update_Profile_Photo", DateTime.now());
 
         // Pass the download URL to the "Dashboard" page
         // ignore: use_build_context_synchronously

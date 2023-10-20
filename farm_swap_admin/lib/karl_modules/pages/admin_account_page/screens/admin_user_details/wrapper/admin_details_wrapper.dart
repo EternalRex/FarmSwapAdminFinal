@@ -4,35 +4,39 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/drop_down_update/update_retrieve_docID.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/widgets/update_Textfield.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../admin_account_logs/database/admin_logs_insert.dart';
 import '../../admin_account_wrapper/read_admin_users.dart';
 import '../provider/update_dropdown_details_provider.dart';
+import '../widgets/details_buttons/archive__details_btn.dart';
+import '../widgets/details_buttons/deactivate__details_btn.dart';
+import '../widgets/details_buttons/update_details_btn.dart';
 
 // ignore: must_be_immutable
 class AdminSpecificDetailsWrapper extends StatefulWidget {
-  const AdminSpecificDetailsWrapper({super.key, required this.documentID});
+  const AdminSpecificDetailsWrapper({
+    super.key,
+    required this.documentID,
+  });
   final String documentID;
   //DateTime? _dateTime;
 
@@ -1098,7 +1102,6 @@ class _AdminSpecificDetailsWrapperState
               ),
             ),
           ),
-
           /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
           Expanded(
             flex: 1,
@@ -1129,19 +1132,9 @@ class _AdminSpecificDetailsWrapperState
                           horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
-                          const SizedBox(
-                            width: 5,
-                          ),
                           /*PROFILE TEXT */
-                          DashBoardTxt(
-                            myText: "Profile",
-                            myColor: const Color(0xFF09041B),
-                            mySize: 15,
-                            myFont: GoogleFonts.poppins().fontFamily,
-                            myWeight: FontWeight.w800,
-                          ),
                           const SizedBox(
-                            width: 34,
+                            width: 82,
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
@@ -1163,93 +1156,17 @@ class _AdminSpecificDetailsWrapperState
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 150,
                     ),
-
-                    /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-
-                    /*In this future builder we will get the document id that we get from
-                    the database querry in the dashboardquery file */
-                    FutureBuilder(
-                      /*The id was the object we creted above to access the methods inside the dashboard
-                      query file. we call the get docsId() method, meaning  we tell it to execute and
-                      get the document id of the current user */
-                      future: id.getDocsId(),
-
-                      /*so this builder means that it will build the context meaning this page
-                      and this class. It will also build the snapshot, which is the object
-                      that we use to acces the data fom getDocsID() method */
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          /*Since the getDocsId is a Future<sting> it will return a the 
-                          documentId but in a futue form so not the actual string so we 
-                          need this snaphot to actually get the string and not the future form*/
-                          String data = snapshot.data!;
-                          return Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                /*We call the profilephoto class from ourr dashboard profileinfo and then
-                                pass the variable data that has the documentid string form*/
-                                ProfilePhoto(documentId: data),
-                              ],
-                            ),
-                          );
-                        } else {
-                          /*If the data is not yet given so it will display no data until data is presented */
-                          return const Text("No data");
-                        }
-                      },
-                    ),
+                    const UpdateAdminUserOption(),
                     const SizedBox(
                       height: 15,
                     ),
-
-                    /*THE NAME OF THE USER, This future builder will display the name of the current uer
-                    its ways ae simillar above */
-                    FutureBuilder(
-                      future: id.getDocsId(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          String data = snapshot.data!;
-                          return Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ProfileName(documentId: data),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return const Text("No data");
-                        }
-                      },
-                    ),
-
-                    /*ID OF THE USER,This future builder will display the name of the current uer
-                    its ways ae simillar above */
-                    FutureBuilder(
-                      future: id.getDocsId(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          String data = snapshot.data!;
-                          return ProfileId(documentId: data);
-                        } else {
-                          return const Text("No data");
-                        }
-                      },
-                    ),
+                    const ArchiveAccountBtn(),
                     const SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
-
-                    /*EDIT PROFILE BUTTON */
-                    const AdminEditProfileBtn(),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    /*ADMIN RECENT ACTIVITIES BUTTON */
-                    const AdminRecentActivitiesBtn(),
+                    const DeactivateAccountBtn(),
                   ],
                 ),
               ),
@@ -1260,12 +1177,17 @@ class _AdminSpecificDetailsWrapperState
     );
   }
 
+  //Object for the admin logs model used to save admin logs to db
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+  final email = FirebaseAuth.instance.currentUser!.email;
+
   String? updatedValue;
   String? selectedValue;
   UpdateRetriveDocId updateRetrieve = UpdateRetriveDocId();
   Widget updateLabel = const Text("Type here");
   TextEditingController updateController = TextEditingController();
 
+  //this method is for for storing data to the selected field then passing to function to update
   void selectfieldUpdate(String passeduid) {
     showDialog(
         context: context,
@@ -1980,12 +1902,16 @@ class _AdminSpecificDetailsWrapperState
 
     final updateFiled = {"First Name": updatedata};
 
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_First_Name", DateTime.now());
+
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function updateLastNameField is the same process as what the other function does
@@ -1996,6 +1922,9 @@ class _AdminSpecificDetailsWrapperState
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Last Name": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni last name */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Last_Name", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -2013,6 +1942,9 @@ class _AdminSpecificDetailsWrapperState
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Address": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni address */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Address", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -2030,6 +1962,9 @@ class _AdminSpecificDetailsWrapperState
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Contact Number": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni contact number */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Contact_Number", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -2046,6 +1981,9 @@ class _AdminSpecificDetailsWrapperState
         .doc(updateRetrieve.mydocid);
 
     final updateFiled = {"Birth Place": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni birthplace */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Birthplace", DateTime.now());
     /*
     after the updated data is being naay sud ma update na na siya adtu sa database 
     then navigate to admin user details of the specific admin
@@ -2097,6 +2035,11 @@ class _AdminSpecificDetailsWrapperState
         .collection('AdminUsers')
         .doc(updateRetrieve.mydocid);
     final updateFiled = {"Birth Date": updatedata};
+
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update birthdate */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Birthdate", DateTime.now());
+
     await documentref.update(updateFiled);
     Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
   }
@@ -2109,6 +2052,9 @@ class _AdminSpecificDetailsWrapperState
         .collection('AdminUsers')
         .doc(updateRetrieve.mydocid);
     final updateFiled = {"Registration Date": updatedata};
+    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update registration date */
+    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+        "Update_Detail_Registration_Date", DateTime.now());
     await documentref.update(updateFiled);
     Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
   }

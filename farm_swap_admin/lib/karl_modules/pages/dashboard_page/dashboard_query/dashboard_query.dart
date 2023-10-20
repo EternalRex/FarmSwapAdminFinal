@@ -26,7 +26,6 @@ current user uid then get the id of that document and store it in the docId vari
         .then((value) => value.docs.forEach((element) {
               docId = element.reference.id;
             }));
-    print(docId);
     return docId;
   }
 }

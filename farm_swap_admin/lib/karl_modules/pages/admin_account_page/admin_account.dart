@@ -154,11 +154,13 @@ class _AdminAccount extends State<AdminAccount> {
                         width: 250,
                         height: 15,
                         child: TextField(
-                          style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
+                          style: GoogleFonts.poppins(
+                              color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
-                            fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
+                            fillColor:
+                                const Color(0xFFF9A84D).withOpacity(0.10),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -179,7 +181,8 @@ class _AdminAccount extends State<AdminAccount> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 15),
                           child: Container(
                             height: 700,
                             decoration: BoxDecoration(
@@ -200,19 +203,24 @@ class _AdminAccount extends State<AdminAccount> {
                                 Column(
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 15, left: 15),
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 15),
                                       child: Row(
                                         children: [
                                           //this padding holds the content title
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 35, top: 25),
+                                            padding: const EdgeInsets.only(
+                                                left: 35, top: 25),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'Admin Users',
-                                                  style: Poppins.contentTitle.copyWith(
-                                                    color: const Color(0xFF09041B),
+                                                  style: Poppins.contentTitle
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
                                                   ),
                                                 ),
                                               ],
@@ -224,9 +232,11 @@ class _AdminAccount extends State<AdminAccount> {
 
                                     //this padding holds the title header for the future builder
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 65, right: 45, top: 15),
+                                      padding: const EdgeInsets.only(
+                                          left: 65, right: 45, top: 15),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           const SizedBox(
                                             width: 10,
@@ -234,7 +244,8 @@ class _AdminAccount extends State<AdminAccount> {
                                           Text(
                                             'Name',
                                             style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(179, 9, 4, 27),
+                                              color: const Color.fromARGB(
+                                                  179, 9, 4, 27),
                                             ),
                                           ),
                                           const SizedBox(
@@ -256,9 +267,11 @@ class _AdminAccount extends State<AdminAccount> {
                                   future: getAllAdminAccs.getDocsId(),
                                   builder: (context, snapshot) {
                                     return Column(
-                                      children: getAllAdminAccs.documentID.map((documentId) {
+                                      children: getAllAdminAccs.documentID
+                                          .map((documentId) {
                                         return ListTile(
-                                          title: ReadAdminAccount(documentId: documentId),
+                                          title: ReadAdminAccount(
+                                              documentId: documentId),
                                         );
                                       }).toList(),
                                     );
@@ -302,7 +315,8 @@ class _AdminAccount extends State<AdminAccount> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -415,7 +429,7 @@ class _AdminAccount extends State<AdminAccount> {
                       height: 30,
                     ),
                     /*ADMIN RECENT ACTIVITIES BUTTON */
-                    const AdminRecentActivitiesBtn(),
+                    AdminRecentActivitiesBtn(),
                   ],
                 ),
               ),

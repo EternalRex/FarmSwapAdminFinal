@@ -1,11 +1,18 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart';
 import '../dshb_textfield_widgets/widget_dashboard_txt.dart';
 
+// ignore: must_be_immutable
 class AdminRecentActivitiesBtn extends StatefulWidget {
-  const AdminRecentActivitiesBtn({super.key});
+  AdminRecentActivitiesBtn({super.key});
+
+  String selectedId = "";
 
   @override
   State<AdminRecentActivitiesBtn> createState() =>
@@ -15,6 +22,8 @@ class AdminRecentActivitiesBtn extends StatefulWidget {
 class _AdminRecentActivitiesBtnState extends State<AdminRecentActivitiesBtn> {
   @override
   Widget build(BuildContext context) {
+    //this uid will be used to activities button
+    final userID = FirebaseAuth.instance.currentUser!.uid;
     return Container(
       height: 40,
       width: 130,
@@ -40,7 +49,18 @@ class _AdminRecentActivitiesBtnState extends State<AdminRecentActivitiesBtn> {
       ),
       child: Center(
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              widget.selectedId = userID;
+            });
+            //assign the widget.selectedId to setAdminUserId
+            //to bring in other class
+            Provider.of<AdminActivityProvider>(context, listen: false)
+                .setadminUserId(widget.selectedId);
+            //this will navigate to admin details.dart
+            Navigator.of(context).pushNamed(RoutesManager.adminactivityspage);
+            //Navigator.of(context).pushNamed(RoutesManager.adminactivityspage);
+          },
           child: DashBoardTxt(
             myText: "Activities",
             myColor: Colors.white,
