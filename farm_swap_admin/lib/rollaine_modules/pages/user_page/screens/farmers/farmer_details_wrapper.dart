@@ -186,6 +186,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
+                                    flex: 2,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),

@@ -9,6 +9,8 @@ class ReadCustomerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
+
+      //Represents a query to the Firestore database to fetch all documents from the 'CustomerUsers' collection.
       future: FirebaseFirestore.instance.collection('CustomerUsers').get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -27,6 +29,8 @@ class ReadCustomerImage extends StatelessWidget {
             child: Text('No photos found'),
           );
         } else {
+
+          //Displays a gallery of photos from Firestore
           final documents = snapshot.data!.docs;
           final photoUrls = documents
               .map((doc) => (doc.data()
@@ -34,6 +38,8 @@ class ReadCustomerImage extends StatelessWidget {
               .expand((element) => element)
               .map((item) => item as String)
               .toList();
+
+          //Uses photo_view to allow users to interact with and enlarge the photos.
           return PhotoViewGallery.builder(
               itemCount: photoUrls.length,
               builder: (context, index) {
