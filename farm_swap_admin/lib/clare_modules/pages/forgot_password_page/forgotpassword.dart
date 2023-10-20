@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../routes/routes.dart';
+import '../../../karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'widgets/Text/forgot_pass_subtext.dart';
 
 class ForgotPassScreen extends StatefulWidget {
@@ -165,6 +166,11 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
     return result.docs.isNotEmpty;
   }
 
+  //Object for the admin logs model used to save admin logs to db
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+
+  final email = FirebaseAuth.instance.currentUser!.email;
+
   //this calls the function doesEmailExist
   //and if email exist it shows the dialog box
   void checkEmail() async {
@@ -191,6 +197,12 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
               actions: [
                 TextButton(
                   onPressed: () {
+                    /*So mag kuha ni siya sa admin logs nya iyang description kay ni password reset */
+                    adminLogs.createAdminLogs(
+                        email,
+                        FirebaseAuth.instance.currentUser!.uid,
+                        "Password_Reset",
+                        DateTime.now());
                     //when ok textbutton pressed this dialog box will navigate to the sign in page
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                       return const SignInAdmin();

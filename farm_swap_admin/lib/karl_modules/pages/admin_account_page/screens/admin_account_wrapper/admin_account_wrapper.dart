@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../admin_account_logs/provider/adminlogs_provider.dart';
+
 // ignore: must_be_immutable
 class ReadAdminAccount extends StatefulWidget {
   ReadAdminAccount({
@@ -147,8 +149,17 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                                     shadowColor: Colors.transparent,
                                   ),
                                   onPressed: () {
-                                    // Navigator.of(context)
-                                    //   .pushNamed(RoutesManager.adminActivities);
+                                    setState(() {
+                                      widget.selectedId = "${data["User Id"]}";
+                                    });
+                                    //assign the widget.selectedId to setAdminUserId
+                                    //to bring in other class
+                                    Provider.of<AdminActivityProvider>(context,
+                                            listen: false)
+                                        .setadminUserId(widget.selectedId);
+                                    //this will navigate to admin details.dart
+                                    Navigator.of(context).pushNamed(
+                                        RoutesManager.adminactivityspage);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(

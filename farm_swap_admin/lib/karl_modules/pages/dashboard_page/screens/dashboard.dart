@@ -356,7 +356,8 @@ class _DashboardState extends State<Dashboard> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -479,7 +480,7 @@ class _DashboardState extends State<Dashboard> {
                       height: 30,
                     ),
                     /*ADMIN RECENT ACTIVITIES BUTTON */
-                    const AdminRecentActivitiesBtn(),
+                    AdminRecentActivitiesBtn(),
                   ],
                 ),
               ),

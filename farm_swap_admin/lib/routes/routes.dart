@@ -25,6 +25,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_archived_account/screen/acrhived_account.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
 
 class RoutesManager {
@@ -35,6 +37,8 @@ class RoutesManager {
   static const adminAccount = "/adminaccount";
   static const adminAccountPage = "/adminaccountpage";
   static const admindetailspage = "/admindetailspage";
+  static const archiveaccountpage = "/archiveaccountpage";
+  static const adminactivityspage = "/adminactivityspage";
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
@@ -96,6 +100,16 @@ class RoutesManager {
       case admindetailspage:
         return MaterialPageRoute(
           builder: (context) => AdminUserDetails(),
+        );
+
+      case adminactivityspage:
+        return MaterialPageRoute(
+          builder: (context) => AdminLogsID(),
+        );
+
+      case archiveaccountpage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminArchivedAccount(),
         );
 
       case adminProfile:

@@ -9,6 +9,7 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../../karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'authentication/sign_up_auth.dart';
 import 'controllers/sign_up_controller.dart';
 import 'database/sign_up_query.dart';
@@ -479,6 +480,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     );
   }
 
+  //Object for the admin logs model used to save admin logs to db
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+
   //when register is called it uploads the image url
   void register() async {
     String email = mycontroller.email.text.trim();
@@ -496,6 +500,10 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         // Store the User UID in Firestore
         // await uploadImage(uid);
         await storeUidInFirestore(uid);
+
+        /*So mag kuha ni siya sa admin logs nya iyang description kay ni create account */
+        adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
+            "Create_Account", DateTime.now());
 
         print("User is successfully created");
         Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
