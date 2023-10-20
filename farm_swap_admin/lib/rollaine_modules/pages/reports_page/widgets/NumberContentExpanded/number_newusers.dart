@@ -14,47 +14,88 @@ class NumberNewUsers extends StatefulWidget {
 
 class _NumberNewUsersState extends State<NumberNewUsers> {
 
+  //Initializes a variable totalNewUsers to keep track of the total number of newly registered users
   int totalNewUsers = 0;
 
-  //Use the fetchNewUsers method to fetch the document snapshots of two collections and calculate the number of newly added users in both collections
   Future<void> fetchNewUsers() async {
     try {
+
+      //Initializes the Firestore instance
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      //These lines create references to two Firestore collections, collection1 and collection2
+      //Initialize references to two Firestore collections: 'FarmerUsers' and 'CustomerUsers'. 
       final CollectionReference collection1 = firestore.collection('FarmerUsers');
       final CollectionReference collection2 = firestore.collection('CustomerUsers');
 
-      //Executing these two lines of code, you'll have the data from both collection1 and collection2 available in the respective collection1Snapshot and collection2Snapshot variables
-      final QuerySnapshot collection1Snapshot = await collection1.get();
-      final QuerySnapshot collection2Snapshot = await collection2.get();
-
+      //Gets the current date and time and assigns it to a DateTime variable named today.
       final DateTime today = DateTime.now();
-      // Threshold in days for "new" users.
-      const int registrationThreshold = 7;
 
-      //This code counts the number of documents in collection1 where the registration date is within a certain time frame (determined by registrationThreshold)
-      final int newUsersCollection1 = collection1Snapshot.docs.where((doc) {
-        final DateTime registrationDate = (doc.data() as Map) ['registrationDate'].toDate();
-        final Duration difference = today.difference(registrationDate);
-        return difference.inDays <= registrationThreshold;
-      }).length;
-      final int newUsersCollection2 = collection2Snapshot.docs.where((doc) {
-        final DateTime registrationDate = (doc.data() as Map) ['registrationDate'].toDate();
-        final Duration difference = today.difference(registrationDate);
-        return difference.inDays <= registrationThreshold;
-      }).length;
+      //Used to keep track of the count of newly registered users
+      int newUsers = 0;
 
-      //The new users are summed up and stored in the totalNewUsers
+      /*fetchAndCountNewUsers function for the first collection ('collection1') and 
+      waiting for the result. After the function completes, it uses a .then() callback 
+      to add the count returned by fetchAndCountNewUsers to the newUsers variable*/
+      await fetchAndCountNewUsers(collection1, today).then((count) {
+        newUsers += count;
+      });
+
+      /*fetchAndCountNewUsers function for the second collection ('collection2') and 
+      waiting for the result. After the function completes, it uses a .then() callback 
+      to add the count returned by fetchAndCountNewUsers to the newUsers variable*/
+      await fetchAndCountNewUsers(collection2, today).then((count) {
+        newUsers += count;
+      });
+
+      //Update the Flutter widget's state
       setState(() {
-        totalNewUsers = newUsersCollection1 + newUsersCollection2;
+        totalNewUsers = newUsers;
       });
     } catch (e) {
       print('Error fetching new users count: $e');
     }
   }
 
-  //Initiates the fetching of new users' count, presumably to populate the widget's initial state with this data
+  Future<int> fetchAndCountNewUsers(CollectionReference collection, DateTime today) async {
+
+    //Fetches the documents from the specified Firestore collection (collection) using the get method.
+    final QuerySnapshot collectionSnapshot = await collection.get();
+
+    //Used to keep track of the count of newly registered users within the collection
+    int newUsers = 0;
+
+    /*Each iteration processes one Firestore document, and doc 
+    represents the current document being processed.*/
+    for (QueryDocumentSnapshot doc in collectionSnapshot.docs) {
+
+      //Extracts the data from the Firestore document
+      final data = doc.data() as dynamic;
+
+      //Extracts the "registrationDate" field from the data
+      final Timestamp timestamp = data["registrationDate"];
+
+      //This DateTime object represents the registration date of the user stored in Firestore.
+      final DateTime registrationDate =timestamp.toDate();
+
+      /*The code calculates the duration between the current date (today) and the user's 
+      registration date (registrationDate). */
+      final Duration difference = today.difference(registrationDate);
+
+      //It's determining if the user's registration occurred within the last 7 days.
+      if (difference.inDays <= 7) {
+
+        //Increments the newUsers count by 1.
+        newUsers++;
+      }
+    }
+
+    /*Returns the value of the newUsers variable, which represents the count of newly 
+    registered users within the Firestore collection*/
+    return newUsers;
+  }
+
+  /*Responsible for initiating the process of fetching and counting new users when 
+  the widget is first inserted into the widget tree.*/
   @override
   void initState() {
     super.initState();

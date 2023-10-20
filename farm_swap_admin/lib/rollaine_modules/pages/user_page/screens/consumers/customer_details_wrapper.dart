@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_images_wrapper.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class ReadCustomerDetails extends StatelessWidget {
@@ -33,14 +35,10 @@ class ReadCustomerDetails extends StatelessWidget {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
-          //Timestamp birthtimestamp = data["birthDate"];
-          //DateTime birthDate = birthtimestamp.toDate();
-          //String customerbirthdate = DateFormat('yyy-MM-dd').format(birthDate);
-
-          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
-          //Timestamp registertimestamp = data["registrationDate"];
-          //DateTime registerDate = registertimestamp.toDate();
-          //String registerbirthdate = DateFormat('yyy-MM-dd').format(registerDate);
+          Timestamp registertimestamp = data["registrationDate"];
+          DateTime registerDate = registertimestamp.toDate();
+          String registerbirthdate =
+              DateFormat('MM/dd/yyy').format(registerDate);
 
           final customerImage =
               CachedNetworkImageProvider("${data["profileUrl"]}");
@@ -459,7 +457,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   Text(
-                                                    "${data["registrationDate"]}",
+                                                    registerbirthdate,
                                                     style: Poppins.farmerName
                                                         .copyWith(
                                                             color:
@@ -700,37 +698,18 @@ class ReadCustomerDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Expanded(
-                                    flex: 2,
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                      padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
 
                                       //Container for document requirement
-                                      child: Container(
-                                        height: 200,
-                                        color: greenLight,
-                                        child: const SizedBox(
-                                          height: 100,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(5),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
-                                      
-                                      //Container for id requirement
-                                      child: Container(
-                                        height: 200,
-                                        color: greenLight,
+                                      child: SizedBox(
+                                        height: 800,
+                                        width: 500,
+                                        child: ReadCustomerImage(),
                                       ),
                                     ),
                                   ),
@@ -879,13 +858,11 @@ class ReadCustomerDetails extends StatelessWidget {
   /*This function is defined with the name selectButtonToUpdate, and it takes a BuildContext argument, 
   which is used to determine where the dialog should be displayed in the widget tree.*/
   void selectButtonToUpdate(BuildContext context) {
-
     //Used to display a dialog box, typically an AlertDialog, on the screen
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-
           //Title of the showDialog
           title: Text(
             'Update Account',
@@ -957,7 +934,7 @@ class ReadCustomerDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
-                    
+
                     //Suspend button
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -1148,7 +1125,8 @@ class ReadCustomerDetails extends StatelessWidget {
                                       shadowColor: Colors.transparent,
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushNamed(RoutesManager.detailsCustomerPage);
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.detailsCustomerPage);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(

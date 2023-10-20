@@ -1,7 +1,7 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart';
-import "package:farm_swap_admin/provider/customer_userId_provider.dart";
-import "package:farm_swap_admin/provider/farmer_userId_provider.dart";
+import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/farmer_userId_provider.dart';
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
