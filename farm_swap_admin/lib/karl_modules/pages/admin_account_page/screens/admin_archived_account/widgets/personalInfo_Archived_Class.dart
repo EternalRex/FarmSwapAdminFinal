@@ -103,7 +103,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         userRole,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -149,7 +149,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         emailAddress,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -204,7 +204,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         firstName,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -250,7 +250,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         lastName,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -305,7 +305,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         contactNum,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -351,7 +351,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         "${data["Address"]}",
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -405,7 +405,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         finalBirthdate,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -455,7 +455,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         birthPlace,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -511,7 +511,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         finalRegistrationDate,
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -560,7 +560,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                       Text(
                                         "${data["Password"]}",
                                         style: Poppins.farmerName.copyWith(
-                                          color: greenNormalHover,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -578,6 +578,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                       height: 20,
                     ),
 
+                    //This padding is for unarchived account
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 15,
@@ -589,7 +590,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                             // ignore: sized_box_for_whitespace
                             Container(
                               height: 50,
-                              width: 200,
+                              width: 230,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   begin: Alignment(0.99, -0.15),
@@ -627,7 +628,7 @@ class EditPersonalInfoArchived extends StatelessWidget {
                                         .pushNamed(RoutesManager.adminProfile);
                                   },
                                   child: Text(
-                                    "Unarchive Account",
+                                    "Reactivate Account",
                                     style: TextStyle(
                                       fontFamily:
                                           GoogleFonts.poppins().fontFamily,

@@ -1,13 +1,13 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:flutter/material.dart';
-
-import '../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../screens/admin_account_wrapper/read_admin_users.dart';
-import '../account_name/account_name_profileInfo.dart';
+import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
+import '../../../widgets/account_name/account_name_profileInfo.dart';
+import '../../admin_account_wrapper/read_admin_users.dart';
+import 'account_name_profileInfo.dart';
 
 // ignore: must_be_immutable
-class AccountName extends StatelessWidget {
-  AccountName({
+class AccountNameArchived extends StatelessWidget {
+  AccountNameArchived({
     super.key,
   });
 
@@ -71,7 +71,8 @@ class AccountName extends StatelessWidget {
                                     children: [
                                       /*We call the profilephoto class from ourr dashboard profileinfo and then
                                 pass the variable data that has the documentid string form*/
-                                      ProfilePhotoAccount(documentId: data),
+                                      ProfilePhotoAccountArchived(
+                                          documentId: data),
                                     ],
                                   ),
                                 );

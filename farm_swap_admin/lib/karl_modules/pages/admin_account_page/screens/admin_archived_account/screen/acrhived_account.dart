@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/archived_account_class.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/personalinfo_Archived.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
@@ -9,7 +7,6 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Ed
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/personalinfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -25,6 +22,7 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_t
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/accountname.dart';
 import '../widgets/archived_account_documentID.dart';
 
 class AdminArchivedAccount extends StatefulWidget {
@@ -44,7 +42,7 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
       A SINGLE ROW */
       body: Row(
         children: [
-          /*FIRST EXPANDED THAT WILL CONTAIN ALL THE NAVIGATION */
+          /*FIRST EXPANDED NO VALUE PARA LANG JUD MATUNGA SI 2ND EXPANDED */
           Expanded(
             flex: 1,
             child: Padding(
@@ -52,83 +50,10 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
               child: Container(
                 /*DECORATING THE CONTAINER */
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  /*PUTTING BOX SHADOW ON THE CONTAINER */
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
-                    ),
-                  ],
-                ),
-                /*A COLUMN THAT WILL HOLD THE NAVIGATIONS OPTIONS */
-                child: Column(
-                  children: [
-                    /*THE TITLE AND LOGO IN THE PAGE OPTIONS */
-                    const DashPageOptionsTitle(),
-                    /*30 PXLS SPACE BETWEEN*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL HOLD THE DASHBOARD LOGO AND THE DASHBOARD LABEL */
-                    const DashBoardOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE  ADMIN ACCOUNT LOGO AND LABEL*/
-                    const DashAdminAccountOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE USER ACCOUNTS LOGO AND LABEL */
-                    const DashUserAccountOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE LISTINGS ICON AND LABEL */
-                    const DashListingsOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE TRANSACTIONS ICON AND LABEL */
-                    const DashTransactionsOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE REPORTS ICON AND LABEL */
-                    const DashReportsOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE DISPUTE ICON AND LABEL */
-                    const DashDisputeOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
-                    const DashWalletOptions(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    const DashCommunicationOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
-                    const Spacer(),
-                    /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
-                    DashLogoutOptionBtn(),
-                  ],
                 ),
               ),
             ),
@@ -152,23 +77,11 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
                   SEARCH BAR */
 
                   appBar: AppBar(
-                    leading: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Color(0xFFDA6317),
-                      ),
-                      splashColor: const Color(0xFFF9A84D),
-                      onPressed: () {
-                        /* Navigator.of(context)
-                            .pushNamed(RoutesManager.dashboard);
-                      */
-                      },
-                    ),
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
                     title: const DashBoardTitleText(
                       myText: "Account Archived",
-                      myColor: Color(0xFF09041B),
+                      myColor: Colors.red,
                     ),
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
@@ -211,7 +124,7 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
                                   /*THIS calls the class that will display the current user admin profile picture, 
                                   full name and user ID
                                    */
-                                  AccountName(),
+                                  AccountNameArchived(),
                                   Row(
                                     children: [
                                       Expanded(
@@ -274,72 +187,17 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
             ),
           ),
 
-          /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
+          /*THIRD EXPANDED NO VALUE PARA LANG JUD MATUNGA SI 2ND EXPANDED */
           Expanded(
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  /*PUTTING BOX SHADOW ON THE CONTAINER */
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
-                    ),
-                  ],
-                ),
-                /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
-                child: Column(
-                  children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          /*PROFILE TEXT */
-                          const SizedBox(
-                            width: 82,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 150,
-                    ),
-                    const UpdateOptionsBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const ArchiveOptionsBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const DeactivateOptionsBtn(),
-                  ],
                 ),
               ),
             ),
