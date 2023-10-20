@@ -10,6 +10,7 @@ import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotp
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
@@ -38,6 +39,7 @@ class RoutesManager {
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
+  static const chatpage = "/chatpage";
 
   //clare routes
   static const adminSignup = "/adminSignup";
@@ -204,7 +206,9 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => const ForgotPassScreen(),
         );
-
+      //chat page route
+      case chatpage:
+        return MaterialPageRoute(builder: (context) => const ChatPage());
       default:
         throw const FormatException("No route");
     }
