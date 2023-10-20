@@ -2,6 +2,7 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_quer
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
@@ -376,7 +377,9 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(RoutesManager.chatpage);
+                            },
                             icon: Icon(
                               CupertinoIcons.envelope,
                               color: farmSwapTitlegreen,
