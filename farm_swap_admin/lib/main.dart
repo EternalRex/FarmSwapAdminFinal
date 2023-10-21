@@ -9,6 +9,7 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
 import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart";
+import "karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Archived_provider.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AdminActivityProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AdminSpecificArchivedProvider(),
         ),
         /*Registering povider for update account dropdown hint */
         ChangeNotifierProvider(

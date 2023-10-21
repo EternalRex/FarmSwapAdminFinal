@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class ArchiveAccountBtn extends StatelessWidget {
@@ -16,7 +17,8 @@ class ArchiveAccountBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                //navigate to archive page
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.specificadminarchived);
               },
               child: const EditProfileText(
                 myText: 'Archive Account',

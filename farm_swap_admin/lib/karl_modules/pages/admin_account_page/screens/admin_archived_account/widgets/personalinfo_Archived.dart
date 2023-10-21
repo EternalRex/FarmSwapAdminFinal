@@ -22,6 +22,7 @@ class PersonalInfoArchived extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Container(
               height: 550,
+              width: 400,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),

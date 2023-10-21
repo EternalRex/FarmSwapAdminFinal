@@ -1,12 +1,12 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/personalinfo_Archived.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/deactivate_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/personalinfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -19,18 +19,23 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_b
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AdminEditProfile extends StatefulWidget {
-  const AdminEditProfile({super.key});
+import '../../admin_archived_account/widgets/archived_account_documentID.dart';
+
+class SpecificAdminArchivedAccount extends StatefulWidget {
+  const SpecificAdminArchivedAccount({
+    super.key,
+  });
 
   @override
-  State<AdminEditProfile> createState() => _AdminEditProfileState();
+  State<SpecificAdminArchivedAccount> createState() =>
+      _SpecAdminArchivedAccountState();
 }
 
-class _AdminEditProfileState extends State<AdminEditProfile> {
+class _SpecAdminArchivedAccountState
+    extends State<SpecificAdminArchivedAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,6 +149,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                 child: Scaffold(
                   /*THIS IS AN APPBAR OF THE CENTER DIVISION THAT HAS THE DASHBOARD TITLE AND THE 
                   SEARCH BAR */
+
                   appBar: AppBar(
                     leading: IconButton(
                       icon: const Icon(
@@ -152,14 +158,15 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                       ),
                       splashColor: const Color(0xFFF9A84D),
                       onPressed: () {
-                        Navigator.of(context)
+                        /* Navigator.of(context)
                             .pushNamed(RoutesManager.dashboard);
+                      */
                       },
                     ),
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
                     title: const DashBoardTitleText(
-                      myText: "Edit Profile",
+                      myText: "Account Archived",
                       myColor: Color(0xFF09041B),
                     ),
                     backgroundColor: Colors.transparent,
@@ -210,7 +217,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                         flex: 4,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 50,
+                                            horizontal: 10,
                                             vertical: 14,
                                           ),
                                           child: Container(
@@ -228,14 +235,17 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                 ),
                                               ],
                                             ),
-                                            height: 630,
+                                            height: 720,
                                             child: Column(
                                               children: [
                                                 //calling the class that displays the title header
                                                 const EditProfileDescription(),
 
-                                                //calling the class that has the datas of admin user details
-                                                PersonalInfo(),
+                                                //calling the class that displays the account status and the user details
+                                                ArchivedStatus(),
+
+                                                //calling the class that displays user details
+                                                //SpecificInfoArchived(),
                                               ],
                                             ),
                                           ),
@@ -323,6 +333,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                     const SizedBox(
                       height: 15,
                     ),
+                    const ArchiveOptionsBtn(),
                     const SizedBox(
                       height: 15,
                     ),
