@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_address_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_images_wrapper.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -543,33 +544,28 @@ class ReadFarmerDetails extends StatelessWidget {
                                                 const SizedBox(
                                                   height: 3,
                                                 ),
-                                                Container(
-                                                  height: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                      Radius.circular(5),
+                                                SingleChildScrollView(
+                                                  child: Container(
+                                                    height: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          const BorderRadius.all(
+                                                        Radius.circular(5),
+                                                      ),
+                                                      border: Border.all(
+                                                          color: blackLightActive,
+                                                          strokeAlign: BorderSide
+                                                              .strokeAlignOutside),
                                                     ),
-                                                    border: Border.all(
-                                                        color: blackLightActive,
-                                                        strokeAlign: BorderSide
-                                                            .strokeAlignOutside),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "${data["address"]}",
-                                                          style: Poppins
-                                                              .farmerName
-                                                              .copyWith(
-                                                                  color:
-                                                                      greenNormalHover),
-                                                        ),
-                                                      ],
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          RetrieveFarmerAddress()
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

@@ -6,12 +6,14 @@ import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:geocoding/geocoding.dart";
 import "package:provider/provider.dart";
 
 import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart";
 import "karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Archived_provider.dart";
 
 Future<void> main() async {
+  GeocodingPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
