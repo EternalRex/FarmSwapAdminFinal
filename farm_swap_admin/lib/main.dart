@@ -13,7 +13,6 @@ import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provide
 import "karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Archived_provider.dart";
 
 Future<void> main() async {
-  GeocodingPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
