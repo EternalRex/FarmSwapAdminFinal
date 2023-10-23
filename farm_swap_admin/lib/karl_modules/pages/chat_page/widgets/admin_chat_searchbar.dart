@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdminChatSearchBar extends StatelessWidget {
-  const AdminChatSearchBar({super.key});
+  const AdminChatSearchBar({super.key, required this.controller});
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       style: GoogleFonts.poppins(color: const Color(0xFFDA6317), height: 1.5),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(5),
@@ -20,8 +23,8 @@ class AdminChatSearchBar extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         hintText: 'Search',
-        prefixIcon: const Icon(Icons.search_rounded),
-        prefixIconColor: const Color(0xFFDA6317),
+        //prefixIcon: const Icon(Icons.search_rounded),
+        //prefixIconColor: const Color(0xFFDA6317),
       ),
     );
   }

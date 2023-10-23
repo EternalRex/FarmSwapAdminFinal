@@ -79,7 +79,7 @@ class _AdminActualChatState extends State<AdminActualChat> {
             ),
           ),
           Expanded(
-              flex: 4,
+              flex: 5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                 child: Container(
@@ -106,7 +106,7 @@ class _AdminActualChatState extends State<AdminActualChat> {
                       widget.receiverEmail,
                     ),
                     body: Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      padding: const EdgeInsets.all(12),
                       child: Column(
                         children: [
                           Expanded(
@@ -174,9 +174,9 @@ actual qurry is in the querry class*/
             finalDate,
             style: const TextStyle(fontSize: 8, color: Colors.grey),
           ),
-          AdminChatBubble(
-            content: data["content"],
-          ),
+          (data["senderId"] == _firebaseAuth.currentUser!.uid)
+              ? AdminChatSenderBubble(content: data["content"])
+              : AdminChatReceiverBubble(content: data["content"])
         ],
       ),
     );
