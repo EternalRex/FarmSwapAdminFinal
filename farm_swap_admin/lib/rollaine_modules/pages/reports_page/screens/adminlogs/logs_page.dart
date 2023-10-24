@@ -1,7 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/LogsContentSection/logs_content_title.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/LogsContentSection/logs_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
@@ -23,6 +22,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class AdminLogs extends StatefulWidget {
   const AdminLogs({super.key});
@@ -32,6 +32,8 @@ class AdminLogs extends StatefulWidget {
 }
 
 class _AdminLogs extends State<AdminLogs> {
+  final db = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,10 +181,12 @@ class _AdminLogs extends State<AdminLogs> {
                 body: Row(
                   children: [
                     Expanded(
+                      flex: 4,
                       child: Padding(
                         padding: const EdgeInsets.only(
                             left: 10, right: 10, bottom: 15),
                         child: Container(
+                          height: 510,
                           //Design of the container
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -199,128 +203,64 @@ class _AdminLogs extends State<AdminLogs> {
                             ],
                           ),
 
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                const LogsContentTitle(),
-
-                                //Column for main content
-                                //Name
-                                //LogsContentDescription(),
-
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.amber,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Name',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                          child: Column(
+                            children: [
+                              const Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 15, left: 15),
+                                    child: Row(
+                                      children: [
+                                        LogsContentTitle(),
+                                      ],
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.blue,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Date',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.green,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Time',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.green,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Activity',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: 400,
+                                  width: 500,
+                                  child: StreamBuilder<QuerySnapshot>(
+                                    stream: db
+                                        .collection('AdminLogs')
+                                        .orderBy('Activity Date')
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return const Text('Loading...');
+                                      } else {
+                                        final docs = snapshot.data!.docs;
+                                        return ListView.builder(
+                                          itemCount: docs.length,
+                                          itemBuilder: (context, index) {
+                                            final document = docs[index];
+                                            Timestamp dateTimestamp =
+                                                document['Activity Date'];
+                                            DateTime dateTime =
+                                                dateTimestamp.toDate();
+                                            String dateFinal = DateFormat(
+                                                    'MM/DD/yyyy HH:mm:ss')
+                                                .format(dateTime);
+                                            return ListTile(
+                                              title: Text(
+                                                  '${document['Admin Email']}'
+                                                  '$dateFinal'
+                                                  '${document['Admin Activity']}'),
+                                            );
+                                          },
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
-
-                                //Farmer name, date of barter transaction, number of barters
-                                const LogsNames(),
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ),

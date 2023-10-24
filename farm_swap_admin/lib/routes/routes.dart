@@ -19,7 +19,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/communication_page/commun
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/listings.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/reports.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/barter_page.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/logs_page.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/adminlogs/logs_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/number_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/selling_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details.dart';

@@ -549,11 +549,13 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     height: 50,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
-                                                          const BorderRadius.all(
+                                                          const BorderRadius
+                                                              .all(
                                                         Radius.circular(5),
                                                       ),
                                                       border: Border.all(
-                                                          color: blackLightActive,
+                                                          color:
+                                                              blackLightActive,
                                                           strokeAlign: BorderSide
                                                               .strokeAlignOutside),
                                                     ),

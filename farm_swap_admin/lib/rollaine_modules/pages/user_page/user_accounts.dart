@@ -32,6 +32,9 @@ class _UserAccount extends State<UserAccount> {
   final RetrieveCustomerAccounts retrieveCustomerAccounts =
       RetrieveCustomerAccounts();
 
+  TextEditingController searchController = TextEditingController();
+  String searchValue = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,26 +162,54 @@ class _UserAccount extends State<UserAccount> {
 
                       //Container for search bar
                       child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                        width: 280,
+                        height: 50,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 230,
+                              height: 100,
+                              child: TextField(
+                                style: GoogleFonts.poppins(
+                                    color: const Color(0xFFDA6317),
+                                    height: 1.5),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(5),
+                                  filled: true,
+                                  fillColor:
+                                      const Color(0xFFF9A84D).withOpacity(0.10),
+                                  border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: 'Search',
+                                ),
                               ),
-                              borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
+                            Container(
+                              height: 50,
+                              width: 40,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFDA6317),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: const SizedBox(
+                                  width: 30,
+                                  height: 50,
+                                  child: Icon(
+                                    Icons.search_rounded,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
