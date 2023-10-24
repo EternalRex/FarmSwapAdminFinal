@@ -1,5 +1,6 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart';
+import "package:farm_swap_admin/rollaine_modules/pages/reports_page/provider/admin_logs_provider.dart";
 import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/provider/farmer_userId_provider.dart';
 import "package:farm_swap_admin/routes/routes.dart";
@@ -46,6 +47,10 @@ class MyApp extends StatelessWidget {
         /*Registering our provider for Admin Details */
         ChangeNotifierProvider(
           create: (context) => AdminDetailsProvider(),
+        ),
+        /*Registering our provider for Admin Logs */
+        ChangeNotifierProvider(
+          create: (context) => AdminLogsProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => AdminActivityProvider(),

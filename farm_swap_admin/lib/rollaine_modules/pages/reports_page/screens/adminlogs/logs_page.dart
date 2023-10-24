@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/LogsContentSection/logs_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
@@ -153,105 +154,262 @@ class _AdminLogs extends State<AdminLogs> {
 
                       //Container for search bar
                       child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                        width: 280,
+                        height: 50,
+                        child: Row(
+                          children: [
+
+                            /*The code creates a search bar with an input field for 
+                            text input and a search button with a magnifying glass icon. 
+                            Users can type their search queries in the input field and 
+                            click the search button to initiate a search action.*/
+                            SizedBox(
+                              width: 230,
+                              height: 100,
+                              child: TextField(
+                                style: GoogleFonts.poppins(
+                                    color: const Color(0xFFDA6317),
+                                    height: 1.5),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(5),
+                                  filled: true,
+                                  fillColor:
+                                      const Color(0xFFF9A84D).withOpacity(0.10),
+                                  border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: 'Search',
+                                ),
                               ),
-                              borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
+                            Container(
+                              height: 50,
+                              width: 40,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFDA6317),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: const SizedBox(
+                                  width: 30,
+                                  height: 50,
+                                  child: Icon(
+                                    Icons.search_rounded,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                body: Row(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
-                        child: Container(
-                          height: 510,
-                          //Design of the container
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                            //Box shadow of container
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadow,
-                                blurRadius: 2,
-                                offset: const Offset(1, 5),
+                body: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 15),
+                          child: Container(
+                            height: 510,
+                            //Design of the container
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
                               ),
-                            ],
-                          ),
+                              //Box shadow of container
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadow,
+                                  blurRadius: 2,
+                                  offset: const Offset(1, 5),
+                                ),
+                              ],
+                            ),
 
-                          child: Column(
-                            children: [
-                              const Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 15, left: 15),
-                                    child: Row(
-                                      children: [
-                                        LogsContentTitle(),
-                                      ],
+                            child: Column(
+                              children: [
+                                const Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 15, bottom: 10),
+                                      child: Row(
+                                        children: [
+                                          LogsContentTitle(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                /*Arranges some text elements and empty spaces in a row, for a header*/
+                                Container(
+                                  width: 780,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color: greenLight,
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: shadow,
+                                          blurRadius: 2,
+                                          offset: const Offset(0, 1),
+                                        ),
+                                      ]),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 60,
+                                      ),
+                                      Text(
+                                        'User',
+                                        style: Poppins.adminName.copyWith(
+                                          color: const Color(0xFF09041B),
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 200,
+                                      ),
+                                      Text(
+                                        'Date and Time',
+                                        style: Poppins.adminName.copyWith(
+                                          color: const Color(0xFF09041B),
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 180,
+                                      ),
+                                      Text(
+                                        "Action",
+                                        style: Poppins.adminName.copyWith(
+                                          color: const Color(0xFF09041B),
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+
+                                //creates a simple rectangular container with white background color and rounded corners.
+                                Container(
+                                  width: 780,
+                                  height: 385,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
                                     ),
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  height: 400,
-                                  width: 500,
+
+                                  //Used to build a UI that automatically updates as new data is streamed in from the Firestore database.
                                   child: StreamBuilder<QuerySnapshot>(
+
+                                    /*listens to changes in the 'AdminLogs' collection, orders the data by the 'Activity Date' field, 
+                                    and listens for snapshots (real-time updates) in the data.*/
                                     stream: db
                                         .collection('AdminLogs')
                                         .orderBy('Activity Date')
                                         .snapshots(),
                                     builder: (context, snapshot) {
                                       if (!snapshot.hasData) {
-                                        return const Text('Loading...');
+                                        return const CircularProgressIndicator();
                                       } else {
                                         final docs = snapshot.data!.docs;
+
+                                        //Display the documents in a scrollable list.
                                         return ListView.builder(
                                           itemCount: docs.length,
                                           itemBuilder: (context, index) {
+
+                                            //Retrieves a document at a specific index from the docs list.
                                             final document = docs[index];
+
+                                            //Extracts a timestamp called 'Activity Date' from the document.
                                             Timestamp dateTimestamp =
                                                 document['Activity Date'];
+                                            
+                                            //Converts this timestamp to a DateTime object.
                                             DateTime dateTime =
                                                 dateTimestamp.toDate();
+
+                                            //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format 
                                             String dateFinal = DateFormat(
-                                                    'MM/DD/yyyy HH:mm:ss')
+                                                    'MM/dd/yyyy   HH:mm:ss')
                                                 .format(dateTime);
+
                                             return ListTile(
-                                              title: Text(
-                                                  '${document['Admin Email']}'
-                                                  '$dateFinal'
-                                                  '${document['Admin Activity']}'),
+                                              title: Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      '${document['Admin Email']}',
+                                                      style: Poppins.adminName
+                                                          .copyWith(
+                                                        color: const Color(
+                                                            0xFF09051B),
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 30,
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      dateFinal,
+                                                      style: Poppins.adminName
+                                                          .copyWith(
+                                                        color: const Color(
+                                                            0xFF09051B),
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 50,
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      '${document['Admin Activity']}',
+                                                      style: Poppins.adminName
+                                                          .copyWith(
+                                                        color: const Color(
+                                                            0xFF09051B),
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             );
                                           },
                                         );
@@ -259,13 +417,13 @@ class _AdminLogs extends State<AdminLogs> {
                                     },
                                   ),
                                 ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
