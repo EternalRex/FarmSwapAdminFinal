@@ -10,6 +10,7 @@ import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotp
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Archived.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_notification_page/screen/admin_notification_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -46,6 +47,7 @@ class RoutesManager {
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
   static const chatpage = "/chatpage";
+  static const notificationAdminPage = "/adminnotification";
 
   //clare routes
   static const adminSignup = "/adminSignup";
@@ -226,6 +228,16 @@ class RoutesManager {
       case adminForgotPass:
         return MaterialPageRoute(
           builder: (context) => const ForgotPassScreen(),
+        );
+      case chatpage:
+        return MaterialPageRoute(
+          builder: (context) => const ChatPage(),
+        );
+
+//admin notification page
+      case notificationAdminPage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminNotificationScreen(),
         );
       //chat page route
       case chatpage:
