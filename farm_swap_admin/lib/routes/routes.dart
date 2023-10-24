@@ -241,7 +241,10 @@ class RoutesManager {
         );
       //chat page route
       case chatpage:
-        return MaterialPageRoute(builder: (context) => const ChatPage());
+        return MaterialPageRoute(
+          builder: (context) => const ChatPage(),
+        );
+
       default:
         throw const FormatException("No route");
     }

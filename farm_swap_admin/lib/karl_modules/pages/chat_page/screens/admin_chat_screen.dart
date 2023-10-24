@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/admin_actual_chat.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/admin_chat_searchBar.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/chat_display_text.dart';
@@ -43,8 +42,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             child: SizedBox(
               width: 250,
               height: 15,
-              /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                        IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
+              /*Contains the search bar*/
               child: Row(
                 children: [
                   SizedBox(
@@ -54,7 +52,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                       controller: searchController,
                     ),
                   ),
-                  /*Seach functionality */
+                  /*Search functionality */
                   IconButton(
                     onPressed: () {
                       setState(() {
