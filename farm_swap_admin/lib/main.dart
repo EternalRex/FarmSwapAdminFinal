@@ -1,7 +1,9 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/update_dropdown_details_provider.dart';
-import "package:farm_swap_admin/provider/customer_userId_provider.dart";
-import "package:farm_swap_admin/provider/farmer_userId_provider.dart";
+import "package:farm_swap_admin/rollaine_modules/pages/reports_page/provider/admin_logs_provider.dart";
+import "package:farm_swap_admin/rollaine_modules/provider/admin_notifiIncrementer_provider.dart";
+import "package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart";
+import "package:farm_swap_admin/rollaine_modules/provider/farmer_userId_provider.dart";
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
@@ -46,6 +48,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AdminDetailsProvider(),
         ),
+        /*Registering our provider for Admin Logs */
+        ChangeNotifierProvider(
+          create: (context) => AdminLogsProvider(),
+        ),
         ChangeNotifierProvider(
           create: (context) => AdminActivityProvider(),
         ),
@@ -56,7 +62,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UpdateAdminDropDownHint(),
         ),
-        ChangeNotifierProvider(create: (context) => FarmerUserIdProvider()),
+        ChangeNotifierProvider(
+          create: (context) => FarmerUserIdProvider(),
+        ),
+        /*Registering provider  for notification incrementer*/
+        ChangeNotifierProvider(
+          create: (context) => AdminNotificationProvider(),
+        ),
       ],
       builder: (context, child) {
         return const MaterialApp(

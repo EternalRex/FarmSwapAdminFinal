@@ -9,8 +9,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_requests_reactivation/admin_requests_reactivate.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Deactivate.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Archived.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -20,7 +19,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/communication_page/commun
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/listings.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/reports.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/barter_page.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/logs_page.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/adminlogs/logs_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/number_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/selling_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details.dart';
@@ -48,6 +47,7 @@ class RoutesManager {
   static const adminSignUp = "/adminsignup";
   static const dispute = "/dispute";
   static const chatpage = "/chatpage";
+  static const notificationAdminPage = "/adminnotification";
 
   //clare routes
   static const adminSignup = "/adminSignup";
@@ -234,9 +234,22 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => const ForgotPassScreen(),
         );
+      case chatpage:
+        return MaterialPageRoute(
+          builder: (context) => const ChatPage(),
+        );
+
+//admin notification page
+      case notificationAdminPage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminNotificationScreen(),
+        );
       //chat page route
       case chatpage:
-        return MaterialPageRoute(builder: (context) => const ChatPage());
+        return MaterialPageRoute(
+          builder: (context) => const ChatPage(),
+        );
+
       default:
         throw const FormatException("No route");
     }

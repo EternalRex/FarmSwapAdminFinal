@@ -1,6 +1,7 @@
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_bell_btn/dhsb_notif.dart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import "package:flutter/material.dart";
@@ -362,8 +363,7 @@ class _DashboardState extends State<Dashboard> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -392,13 +392,16 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
+                          const DashboardNotifBtn(),
+                          /*IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(RoutesManager.notificationAdminPage);
+                            },
                             icon: Icon(
                               CupertinoIcons.bell,
                               color: farmSwapTitlegreen,
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),

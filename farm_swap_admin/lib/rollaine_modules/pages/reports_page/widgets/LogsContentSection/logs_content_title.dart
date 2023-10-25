@@ -10,7 +10,7 @@ class LogsContentTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          const EdgeInsets.only(left: 65, top: 25),
+          const EdgeInsets.only(left: 5, top: 25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

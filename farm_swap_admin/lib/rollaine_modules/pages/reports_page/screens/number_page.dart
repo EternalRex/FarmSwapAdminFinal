@@ -204,6 +204,9 @@ class _NumberUsers extends State<NumberUsers> {
                           child: const Column(
                             children: [
                               NumberContentTitle(),
+                              SizedBox(
+                                height: 20,
+                              ),
 
                               //Row for 2 expanded container
                               //Row1

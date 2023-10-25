@@ -1,6 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/provider/customer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_userid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
@@ -28,10 +28,15 @@ class DetailsCustomerPage extends StatefulWidget {
 }
 
 class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
+
+  //Creates an instance of the RetrieveCustomerUserId class and makes it accessible through the retrieveCustomerUserId variable
   final RetrieveCustomerUserId retrieveCustomerUserId = RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
+    
+    /*//Retrieves the farmer user's ID from a state management 
+    provider (FarmerUserIdProvider) using the Provider package*/
     String customerUserId =
         Provider.of<CustomerUserIdProvider>(context, listen: false)
             .getCustomerUserId();

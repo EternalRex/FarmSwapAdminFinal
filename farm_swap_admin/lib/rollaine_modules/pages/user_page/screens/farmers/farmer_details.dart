@@ -1,6 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/provider/farmer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/farmer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_userid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
@@ -28,10 +28,14 @@ class DetailsFarmerPage extends StatefulWidget {
 }
 
 class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
+
+  //Creates an instance of the RetrieveFarmerUserId class and makes it accessible through the retrieveCFarmerUserId variable
   final RetrieveFarmerUserId retrieveFarmerUserId = RetrieveFarmerUserId();
 
   @override
   Widget build(BuildContext context) {
+
+    //Retrieves the farmer user's ID from a state management provider (FarmerUserIdProvider) using the Provider package
     String farmerUserId =
         Provider.of<FarmerUserIdProvider>(context, listen: false)
             .getFarmerUserId();
@@ -243,6 +247,9 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+
+                                        /*manage an asynchronous operation (data retrieval) and update the 
+                                        user interface based on the result of that operation*/
                                         FutureBuilder(
                                           future: retrieveFarmerUserId
                                               .getDocsId(farmerUserId),

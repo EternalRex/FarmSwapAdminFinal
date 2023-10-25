@@ -17,6 +17,10 @@ class AdminChatScreen extends StatefulWidget {
 }
 
 class _AdminChatScreenState extends State<AdminChatScreen> {
+  /*Search functionality properties */
+  TextEditingController searchController = TextEditingController();
+  String searchValue = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,22 +32,43 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           myText: "Admin Chat",
           myColor: Colors.black,
         ),
-        actions: const [
+        actions: [
           /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
                     HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
                       HEIGH AND WIDTH OF THE TEXT FIELD */
             child: SizedBox(
               width: 250,
               height: 15,
-              /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                        IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-              child: AdminChatSearchBar(),
+              /*Contains the search bar*/
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 200,
+                    height: 100,
+                    child: AdminChatSearchBar(
+                      controller: searchController,
+                    ),
+                  ),
+                  /*Search functionality */
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        searchValue = searchController.text;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.search,
+                      color: Color(0xFFDA6317),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 30,
           ),
         ],
@@ -83,9 +108,101 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
     String and dynamic, to look the same in the firebase strcuture */
     Map<String, dynamic> users = document.data() as Map<String, dynamic>;
     bool isOnline = users["Online"];
-    /*Check if the documents that we accessed has an eamil that is not simillar to the current users email
+/*Only the specific account searched will display*/
+    if (searchValue.isNotEmpty) {
+      if (users["First Name"] == searchValue ||
+          users["Last Name"] == searchValue ||
+          users["Email Address"] == searchValue) {
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30),
+              ),
+              /*PUTTING BOX SHADOW ON THE CONTAINER */
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(1, 5),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider("${users["profileUrl"]}"),
+                  radius: 30,
+                ),
+                const SizedBox(
+                  width: 13,
+                ),
+                SizedBox(
+                  width: 100,
+                  child: ChatAllDisplayUserTexts(text: "${users["First Name"]}"),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                SizedBox(
+                  width: 130,
+                  child: ChatAllDisplayUserTexts(text: "${users["Last Name"]}"),
+                ),
+                const SizedBox(
+                  width: 13,
+                ),
+                SizedBox(
+                  width: 250,
+                  child: ChatAllDisplayUserTexts(text: "${users["Email Address"]}"),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                (isOnline == true)
+                    ? Text(
+                        "Online",
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          color: Colors.green,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      )
+                    : Text(
+                        "Offline",
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          color: Colors.red,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+              ],
+            ),
+          ),
+          /*When tapping that particular row of user we will send that users id and email
+        address to the next screen which is the AsminActual Screen */
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return AdminActualChat(
+                    receiverId: users["User Id"],
+                    receiverFname: users["First Name"],
+                    receiverLname: users["Last Name"],
+                    receiverImage: users["profileUrl"],
+                    isOnline: users["Online"],
+                    receiverEmail: users["Email Address"],
+                  );
+                },
+              ),
+            );
+          },
+        );
+      }
+    }
+    /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
     because we will not display the current user here only those other users*/
-    if (FirebaseAuth.instance.currentUser!.email != users['Email Address']) {
+    else if (FirebaseAuth.instance.currentUser!.email != users['Email Address']) {
       /*The actual display and styling is done here inside the listile */
       return ListTile(
         /*Pull outing the data from the firestore document and designing how it will look in the ui*/
@@ -173,8 +290,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           );
         },
       );
-    } else {
-      return Container();
     }
+    return Container();
   }
 }
