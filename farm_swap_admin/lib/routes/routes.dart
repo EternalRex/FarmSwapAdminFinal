@@ -9,7 +9,6 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Archived.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -29,7 +28,10 @@ import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_deactivate_account/screen/deactivate_account.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_requests_reactivation/admin_requests_reactivate.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Deactivate.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
+import '../karl_modules/pages/admin_notification_page/screen/admin_notification_screen.dart';
 
 class RoutesManager {
 //VARIABLES THAT WILL HOLD THE LOCATION OR THE ROUTE
