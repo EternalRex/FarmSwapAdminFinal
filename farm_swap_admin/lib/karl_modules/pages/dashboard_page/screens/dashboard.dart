@@ -20,6 +20,7 @@ import '../widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
+import '../widgets/dshb_buttons_widgets/dashboard_requests_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
@@ -127,6 +128,10 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
                     const DashCommunicationOptionsBtn(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const DashRequestsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
@@ -378,7 +383,8 @@ class _DashboardState extends State<Dashboard> {
                           /*MESSAGE BUTTON */
                           IconButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed(RoutesManager.chatpage);
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.chatpage);
                             },
                             icon: Icon(
                               CupertinoIcons.envelope,

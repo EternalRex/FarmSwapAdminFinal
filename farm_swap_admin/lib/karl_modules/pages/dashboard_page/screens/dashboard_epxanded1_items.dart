@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_requests_btn.dart';
 import 'package:flutter/material.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
@@ -79,6 +80,10 @@ class _DashBoardExpanded1ItemState extends State<DashBoardExpanded1Item> {
         ),
         /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
         const DashCommunicationOptionsBtn(),
+        const SizedBox(
+          height: 15,
+        ),
+        const DashRequestsOptionsBtn(),
         /*30 SPACE BEFORE NEXT OPTION*/
         const Spacer(),
         /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */

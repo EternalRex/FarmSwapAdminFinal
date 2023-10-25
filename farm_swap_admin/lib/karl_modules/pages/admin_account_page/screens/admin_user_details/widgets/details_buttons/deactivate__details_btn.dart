@@ -1,4 +1,5 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class DeactivateAccountBtn extends StatelessWidget {
@@ -16,7 +17,8 @@ class DeactivateAccountBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                //deactivate page
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.specificadmindeact);
               },
               child: const EditProfileText(
                 myText: 'Deactivate Account',

@@ -13,7 +13,6 @@ import '../../../../clare_modules/pages/admin_signup_page/controllers/sign_up_co
 import '../../../../clare_modules/pages/admin_signup_page/label/sign_up_label.dart';
 import '../../../../routes/routes.dart';
 import '../../admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
-import '../../admin_account_page/screens/admin_archived_account/widgets/retrieve_Archived_DocID.dart';
 import '../widgets/retrieve_DocID.dart';
 
 class SignInAdmin extends StatefulWidget {
@@ -367,18 +366,13 @@ class _SignInAdminState extends State<SignInAdmin> {
         // Check the account status
         String accountStatus = await checkAccountStatus(documentID);
 
-        //if the accountstatus is equal to Archived it will navigate to archived page
-        if (accountStatus == "Archived") {
+        //if the accountstatus is equal to requesting it will navigate to deactivate page
+        if (accountStatus == "Requesting") {
           // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(RoutesManager.archiveaccountpage);
+          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
         } else {
           // Update online status and navigate to the dashboard
           onlineStatus.updateOnlineStatus(user.uid, true);
-          // Create an instance of RetrieveUnArchivedDocId i just reuse the class
-          RetrieveUnArchiveDocId retriever = RetrieveUnArchiveDocId();
-
-          // when text button clicked it will update the field into active status
-          await retriever.updateFieldAndNavigate();
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(RoutesManager.dashboard);
         }

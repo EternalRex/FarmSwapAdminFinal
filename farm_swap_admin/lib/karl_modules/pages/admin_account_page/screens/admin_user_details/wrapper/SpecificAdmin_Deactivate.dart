@@ -3,11 +3,11 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/ad
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'SpecificAdmin_Archived_Wrapper.dart';
+import 'SpecificAdmin_Deactivate_Wrapper.dart';
 
 // ignore: must_be_immutable
-class SpecificAdminArchived extends StatelessWidget {
-  SpecificAdminArchived({super.key});
+class SpecificAdminDeactivate extends StatelessWidget {
+  SpecificAdminDeactivate({super.key});
 
   String _userID = "";
 
@@ -26,10 +26,10 @@ class SpecificAdminArchived extends StatelessWidget {
               String data = snapshot.data!;
               //if the data has id
               //the documentID which is naa nay data
-              //pass into admin specific archived wrapper
-              return AdminSpecificArchivedWrapper(documentID: data);
+              //pass into admin specific deactivate wrapper
+              return SpecificAdminDeactivateWrapper(documentID: data);
             } else {
-              return const Text("Loading...");
+              return const Text("Loading");
             }
           },
         ),

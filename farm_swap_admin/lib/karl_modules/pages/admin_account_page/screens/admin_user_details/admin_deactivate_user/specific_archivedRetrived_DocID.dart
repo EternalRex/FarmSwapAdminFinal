@@ -1,24 +1,23 @@
 // ignore: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UpdateRetriveDocId {
+class ArchivedRetriveDocId {
   String mydocid = "";
 
-  Future<String> getUpdateDocId(String userid) async {
-    String myuserid = userid;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
+  Future<String> getUpdateDocId(String userId) async {
     CollectionReference reference =
         FirebaseFirestore.instance.collection('AdminUsers');
     QuerySnapshot query =
-        await reference.where('User Id', isEqualTo: myuserid).get();
+        await reference.where('User Id', isEqualTo: userId).get();
 
     if (query.docs.isNotEmpty) {
       DocumentSnapshot documentSnapshot = query.docs.first;
-      mydocid = documentSnapshot.id;
+      return documentSnapshot.id;
     } else {
-      print("No document found for user ID: $myuserid");
       throw ("Failed id retrieval");
     }
-    return mydocid;
   }
 }

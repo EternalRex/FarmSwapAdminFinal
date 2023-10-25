@@ -7,8 +7,8 @@ import '../../../../../../../constants/typography/typography.dart';
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
 // ignore: must_be_immutable
-class ArchivedAccountDisplay extends StatelessWidget {
-  const ArchivedAccountDisplay({
+class DeactivateAccountDisplay extends StatelessWidget {
+  const DeactivateAccountDisplay({
     super.key,
     required this.documentId,
   });
@@ -60,17 +60,12 @@ class ArchivedAccountDisplay extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Status",
+                                    "Status : ",
                                     style: Poppins.farmerName
                                         .copyWith(color: blackNormal),
                                   ),
                                   const SizedBox(
-                                    width: 25,
-                                  ),
-                                  const Icon(
-                                    Icons.circle,
-                                    color: Color(0xFFFF9800),
-                                    size: 10,
+                                    width: 20,
                                   ),
                                   Text(
                                     " ${data["Account Status"]}",

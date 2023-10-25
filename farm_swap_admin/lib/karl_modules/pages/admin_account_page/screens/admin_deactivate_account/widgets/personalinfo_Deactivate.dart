@@ -1,11 +1,11 @@
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/archived_account_class.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:flutter/material.dart';
-import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../admin_account_wrapper/read_admin_users.dart';
+import 'personalInfo_Deactivate_Class.dart';
 
 // ignore: must_be_immutable
-class ArchivedStatus extends StatelessWidget {
-  ArchivedStatus({
+class PersonalInfoDeact extends StatelessWidget {
+  PersonalInfoDeact({
     super.key,
   });
 
@@ -19,18 +19,17 @@ class ArchivedStatus extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 2,
-              vertical: 2,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Container(
-              height: 85,
+              height: 550,
+              width: 400,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 15,
+                  top: 5,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +41,10 @@ class ArchivedStatus extends StatelessWidget {
                           String data = snapshot.data!;
                           return Center(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 //calling the class to display the edit profile information
-                                ArchivedAccountDisplay(documentId: data),
+                                EditPersonalInfoDeact(documentId: data),
                               ],
                             ),
                           );

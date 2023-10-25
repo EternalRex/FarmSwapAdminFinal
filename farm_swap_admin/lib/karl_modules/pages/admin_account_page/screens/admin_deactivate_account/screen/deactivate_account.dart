@@ -1,40 +1,22 @@
-import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/personalinfo_Archived.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/personalinfo_Deactivate.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/deactivate_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/accountname.dart';
-import '../widgets/archived_account_documentID.dart';
+import '../widgets/deactivate_account_documentID.dart';
 
-class AdminArchivedAccount extends StatefulWidget {
-  const AdminArchivedAccount({
+class AdminDeactivateAccount extends StatefulWidget {
+  const AdminDeactivateAccount({
     super.key,
   });
 
   @override
-  State<AdminArchivedAccount> createState() => _AdminArchivedAccountState();
+  State<AdminDeactivateAccount> createState() => _AdminDeactivateAccountState();
 }
 
-class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
+class _AdminDeactivateAccountState extends State<AdminDeactivateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +31,9 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
                 /*DECORATING THE CONTAINER */
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
                 ),
@@ -80,7 +62,7 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
                     title: const DashBoardTitleText(
-                      myText: "Account Archived",
+                      myText: "Account Deactivated",
                       myColor: Colors.red,
                     ),
                     backgroundColor: Colors.transparent,
@@ -156,10 +138,10 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
                                                 const EditProfileDescription(),
 
                                                 //calling the class that displays the account status and the user details
-                                                ArchivedStatus(),
+                                                DeactivatedStatus(),
 
                                                 //calling the class that displays user details
-                                                PersonalInfoArchived(),
+                                                PersonalInfoDeact(),
                                               ],
                                             ),
                                           ),
@@ -193,9 +175,9 @@ class _AdminArchivedAccountState extends State<AdminArchivedAccount> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
                 ),

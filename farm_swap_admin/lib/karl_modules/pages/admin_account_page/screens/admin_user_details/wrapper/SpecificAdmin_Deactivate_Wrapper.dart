@@ -2,16 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/drop_down_update/update_retrieve_docID.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Archived_provider.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/widgets/update_Textfield.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
@@ -27,14 +23,14 @@ import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet
 import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import '../../admin_account_logs/database/admin_logs_insert.dart';
 import '../../admin_account_wrapper/read_admin_users.dart';
-import '../provider/update_dropdown_details_provider.dart';
+import '../admin_deactivate_user/specific_ReactivateRetrived_DocID.dart';
 import '../widgets/details_buttons/archive__details_btn.dart';
 import '../widgets/details_buttons/deactivate__details_btn.dart';
 import '../widgets/details_buttons/update_details_btn.dart';
 
 // ignore: must_be_immutable
-class AdminSpecificDetailsWrapper extends StatefulWidget {
-  AdminSpecificDetailsWrapper({
+class SpecificAdminDeactivateWrapper extends StatefulWidget {
+  SpecificAdminDeactivateWrapper({
     super.key,
     required this.documentID,
   });
@@ -43,12 +39,12 @@ class AdminSpecificDetailsWrapper extends StatefulWidget {
   //DateTime? _dateTime;
 
   @override
-  State<AdminSpecificDetailsWrapper> createState() =>
-      _AdminSpecificDetailsWrapperState();
+  State<SpecificAdminDeactivateWrapper> createState() =>
+      _AdminSpecificDeactivateWrapperState();
 }
 
-class _AdminSpecificDetailsWrapperState
-    extends State<AdminSpecificDetailsWrapper> {
+class _AdminSpecificDeactivateWrapperState
+    extends State<SpecificAdminDeactivateWrapper> {
   //this objects is for third expanded
   final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
@@ -170,7 +166,7 @@ class _AdminSpecificDetailsWrapperState
                     },
                   ),
                   title: const DashBoardTitleText(
-                    myText: "Admin User Profile",
+                    myText: "Admin User Deactivate Account",
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -445,21 +441,16 @@ class _AdminSpecificDetailsWrapperState
                                                                             Row(
                                                                           children: [
                                                                             Text(
-                                                                              "Status",
+                                                                              "Status : ",
                                                                               style: Poppins.farmerName.copyWith(color: blackNormal),
                                                                             ),
                                                                             const SizedBox(
-                                                                              width: 25,
-                                                                            ),
-                                                                            const Icon(
-                                                                              Icons.circle,
-                                                                              color: Colors.green,
-                                                                              size: 10,
+                                                                              width: 14,
                                                                             ),
                                                                             Text(
                                                                               "${data["Account Status"]}",
                                                                               style: Poppins.farmerName.copyWith(
-                                                                                color: greenNormalHover,
+                                                                                color: Colors.orange,
                                                                               ),
                                                                             ),
                                                                           ],
@@ -924,7 +915,7 @@ class _AdminSpecificDetailsWrapperState
                                                             height: 10,
                                                           ),
 
-                                                          //sizedbox for update details and archive account buttons
+                                                          //sizedbox for archive account buttons
                                                           SizedBox(
                                                             child: Row(
                                                               mainAxisAlignment:
@@ -936,71 +927,6 @@ class _AdminSpecificDetailsWrapperState
                                                               children: [
                                                                 const SizedBox(
                                                                   height: 3,
-                                                                ),
-                                                                //update details button
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                    bottom: 15,
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        // ignore: sized_box_for_whitespace
-                                                                        Container(
-                                                                          height:
-                                                                              50,
-                                                                          width:
-                                                                              141,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            gradient:
-                                                                                const LinearGradient(
-                                                                              colors: [
-                                                                                Color(0xFF53E78B),
-                                                                                Color(0xFF14BE77)
-                                                                              ],
-                                                                              begin: Alignment.topLeft,
-                                                                              end: Alignment.bottomRight,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                const BorderRadius.all(
-                                                                              Radius.circular(15),
-                                                                            ),
-                                                                            boxShadow: [
-                                                                              BoxShadow(
-                                                                                color: shadow,
-                                                                                blurRadius: 5,
-                                                                                offset: const Offset(1, 5),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                TextButton(
-                                                                              onPressed: () {
-                                                                                selectfieldUpdate("${data["User Id"]}");
-                                                                              },
-                                                                              child: Text(
-                                                                                "Update Details",
-                                                                                style: TextStyle(
-                                                                                  fontFamily: GoogleFonts.poppins().fontFamily,
-                                                                                  fontSize: 15,
-                                                                                  fontWeight: FontWeight.w900,
-                                                                                  color: Colors.white,
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
                                                                 ),
 
                                                                 const SizedBox(
@@ -1026,7 +952,7 @@ class _AdminSpecificDetailsWrapperState
                                                                           height:
                                                                               50,
                                                                           width:
-                                                                              141,
+                                                                              230,
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             gradient:
@@ -1057,18 +983,17 @@ class _AdminSpecificDetailsWrapperState
                                                                               onPressed: () async {
                                                                                 setState(() {
                                                                                   widget.selectedId = "${data["User Id"]}";
+                                                                                  print(widget.selectedId);
                                                                                 });
-                                                                                //assign the widget.selectedId to setAdminUserId
-                                                                                //to bring in other class
-                                                                                Provider.of<AdminSpecificArchivedProvider>(context, listen: false).setadminUserId(widget.selectedId);
 
-                                                                                //create logs here
+                                                                                //create logs here where the account status filed will be set to active
+                                                                                await updateField("Requesting", widget.selectedId);
 
-                                                                                //this will navigate to specific admin archived page
-                                                                                Navigator.of(context).pushNamed(RoutesManager.specificadminarchived);
+                                                                                //this will navigate to admin details.dart
+                                                                                Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
                                                                               },
                                                                               child: Text(
-                                                                                "Archive Account",
+                                                                                "Reactivate Account",
                                                                                 style: TextStyle(
                                                                                   fontFamily: GoogleFonts.poppins().fontFamily,
                                                                                   fontSize: 15,
@@ -1170,11 +1095,11 @@ class _AdminSpecificDetailsWrapperState
                     const SizedBox(
                       height: 150,
                     ),
-                    const UpdateAdminUserOption(),
+                    const UpdateAdminBtn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    const ArchiveAccountBtn(),
+                    const ArchiveAdminBtn(),
                     const SizedBox(
                       height: 15,
                     ),
@@ -1189,885 +1114,41 @@ class _AdminSpecificDetailsWrapperState
     );
   }
 
+//create a varaible for the current user in making admin logs
+  final email = FirebaseAuth.instance.currentUser!.email;
+  final userID = FirebaseAuth.instance.currentUser!.uid;
+
   //Object for the admin logs model used to save admin logs to db
   AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
-  final email = FirebaseAuth.instance.currentUser!.email;
 
-  String? updatedValue;
-  String? selectedValue;
-  UpdateRetriveDocId updateRetrieve = UpdateRetriveDocId();
-  Widget updateLabel = const Text("Type here");
-  TextEditingController updateController = TextEditingController();
+// Function to update a field in a document which is the account status
+  Future<void> updateField(String? updatedata, String userId) async {
+    // Create an instance of the class to retrieve the document ID
+    ReactivateRetrieveDocId updateRetrieve = ReactivateRetrieveDocId();
 
-  //this method is for for storing data to the selected field then passing to function to update
-  void selectfieldUpdate(String passeduid) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: const Text(
-                "Choose Field to Update.",
-              ),
-              content: DropdownButton<String>(
-                value: selectedValue,
-                items: [
-                  //first menu item first name
-                  DropdownMenuItem(
-                    value: "firstName",
-                    child: GestureDetector(
-                        child: const Text(
-                          "First Name",
-                        ),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Enter First Name"),
-                                  content: UpdateTextfield(
-                                    label: updateLabel,
-                                    updateControllerField: updateController,
-                                    textType: false,
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //Update field button
-                                            DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF53E78B),
-                                                    Color(0xFF14BE77),
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(17.50),
-                                                ),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  disabledForegroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.38),
-                                                  disabledBackgroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.12),
-                                                  shadowColor:
-                                                      Colors.transparent,
-                                                ),
-                                                onPressed: () {
-                                                  updatedValue =
-                                                      updateController.text;
-                                                  updateFirstNameField(
-                                                      updatedValue, passeduid);
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 5),
-                                                  child: Text(
-                                                    'Update Field',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 0.50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
-                  ),
+    // Call the function to get the document ID
+    await updateRetrieve.getUpdateDocId(userId);
 
-                  //second menu item last name
-                  DropdownMenuItem(
-                    value: "lastName",
-                    child: GestureDetector(
-                        child: const Text(
-                          "Last Name",
-                        ),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Enter Last Name"),
-                                  content: UpdateTextfield(
-                                    label: updateLabel,
-                                    updateControllerField: updateController,
-                                    textType: false,
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //Update field button
-                                            DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF53E78B),
-                                                    Color(0xFF14BE77),
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(17.50),
-                                                ),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  disabledForegroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.38),
-                                                  disabledBackgroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.12),
-                                                  shadowColor:
-                                                      Colors.transparent,
-                                                ),
-                                                onPressed: () {
-                                                  updatedValue =
-                                                      updateController.text;
-                                                  updateLastNameField(
-                                                      updatedValue, passeduid);
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 5),
-                                                  child: Text(
-                                                    'Update Field',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 0.50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
-                  ),
-
-                  //third menu item contact number
-                  DropdownMenuItem(
-                    value: "contactNumber",
-                    child: GestureDetector(
-                        child: const Text(
-                          "Contact Number",
-                        ),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Enter Contact Number"),
-                                  content: UpdateTextfield(
-                                    label: updateLabel,
-                                    updateControllerField: updateController,
-                                    textType: false,
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //Update field button
-                                            DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF53E78B),
-                                                    Color(0xFF14BE77),
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(17.50),
-                                                ),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  disabledForegroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.38),
-                                                  disabledBackgroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.12),
-                                                  shadowColor:
-                                                      Colors.transparent,
-                                                ),
-                                                onPressed: () {
-                                                  updatedValue =
-                                                      updateController.text;
-                                                  updateContactNumberField(
-                                                      updatedValue, passeduid);
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 5),
-                                                  child: Text(
-                                                    'Update Field',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 0.50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
-                  ),
-
-                  //third menu item address
-                  DropdownMenuItem(
-                    value: "address",
-                    child: GestureDetector(
-                        child: const Text(
-                          "Address",
-                        ),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Enter Address"),
-                                  content: UpdateTextfield(
-                                    label: updateLabel,
-                                    updateControllerField: updateController,
-                                    textType: false,
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //Update field button
-                                            DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF53E78B),
-                                                    Color(0xFF14BE77),
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(17.50),
-                                                ),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  disabledForegroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.38),
-                                                  disabledBackgroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.12),
-                                                  shadowColor:
-                                                      Colors.transparent,
-                                                ),
-                                                onPressed: () {
-                                                  updatedValue =
-                                                      updateController.text;
-                                                  updateAddressField(
-                                                      updatedValue, passeduid);
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 5),
-                                                  child: Text(
-                                                    'Update Field',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 0.50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
-                  ),
-
-                  //fourth menu item birthdate
-                  DropdownMenuItem(
-                    value: "birthdate",
-                    child: GestureDetector(
-                      child: const Text("Birth Date"),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text("Select Birthdate"),
-                              content: SizedBox(
-                                height: 30,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      child: GestureDetector(
-                                        child: ElevatedButton.icon(
-                                          onPressed: () {
-                                            _selectDateBirth(passeduid);
-                                          },
-                                          icon: const Icon(
-                                            Icons.calendar_month,
-                                          ),
-                                          label: const Text(
-                                            'Select Date',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.all(10),
-                                            fixedSize: const Size(
-                                              180,
-                                              20,
-                                            ),
-                                            textStyle: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            backgroundColor: Colors.lightBlue,
-                                            foregroundColor: Colors.black,
-                                            elevation: 15,
-                                            shadowColor: shadow,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(
-                                                  5,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                SizedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        //Update field button
-                                        DecoratedBox(
-                                          decoration: const BoxDecoration(
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                              colors: [
-                                                Color(0xFF53E78B),
-                                                Color(0xFF14BE77),
-                                              ],
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(17.50),
-                                            ),
-                                          ),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              disabledForegroundColor: Colors
-                                                  .transparent
-                                                  .withOpacity(0.38),
-                                              disabledBackgroundColor: Colors
-                                                  .transparent
-                                                  .withOpacity(0.12),
-                                              shadowColor: Colors.transparent,
-                                            ),
-                                            onPressed: () {
-                                              updateBirthdate(
-                                                  birthdate, passeduid);
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5, bottom: 5),
-                                              child: Text(
-                                                'Update Field',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 0.50,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-
-                  //fifth menu item birth place
-                  DropdownMenuItem(
-                    value: "birthplace",
-                    child: GestureDetector(
-                        child: const Text(
-                          "Birth Place",
-                        ),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Enter Birth Place"),
-                                  content: UpdateTextfield(
-                                    label: updateLabel,
-                                    updateControllerField: updateController,
-                                    textType: false,
-                                  ),
-                                  actions: [
-                                    SizedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //Update field button
-                                            DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF53E78B),
-                                                    Color(0xFF14BE77),
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(17.50),
-                                                ),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  disabledForegroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.38),
-                                                  disabledBackgroundColor:
-                                                      Colors.transparent
-                                                          .withOpacity(0.12),
-                                                  shadowColor:
-                                                      Colors.transparent,
-                                                ),
-                                                onPressed: () {
-                                                  updatedValue =
-                                                      updateController.text;
-                                                  updateBirthplaceField(
-                                                      updatedValue, passeduid);
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 5),
-                                                  child: Text(
-                                                    'Update Field',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      letterSpacing: 0.50,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
-                  ),
-
-                  //sixth menu item registration date
-                  DropdownMenuItem(
-                    value: "registrationdate",
-                    child: GestureDetector(
-                      child: const Text("Registration Date"),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text("Select Registration Date"),
-                              content: SizedBox(
-                                height: 30,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      child: GestureDetector(
-                                        child: ElevatedButton.icon(
-                                          onPressed: () {
-                                            _selectDateReg(passeduid);
-                                          },
-                                          icon: const Icon(
-                                            Icons.calendar_month,
-                                          ),
-                                          label: const Text(
-                                            'Select Date',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.all(10),
-                                            fixedSize: const Size(
-                                              180,
-                                              20,
-                                            ),
-                                            textStyle: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w900,
-                                            ),
-                                            backgroundColor: Colors.lightBlue,
-                                            foregroundColor: Colors.black,
-                                            elevation: 15,
-                                            shadowColor: shadow,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(
-                                                  5,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                SizedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        //Update field button
-                                        DecoratedBox(
-                                          decoration: const BoxDecoration(
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                              colors: [
-                                                Color(0xFF53E78B),
-                                                Color(0xFF14BE77),
-                                              ],
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(17.50),
-                                            ),
-                                          ),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              disabledForegroundColor: Colors
-                                                  .transparent
-                                                  .withOpacity(0.38),
-                                              disabledBackgroundColor: Colors
-                                                  .transparent
-                                                  .withOpacity(0.12),
-                                              shadowColor: Colors.transparent,
-                                            ),
-                                            onPressed: () {
-                                              updateRegistrationDate(
-                                                  registerdate, passeduid);
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5, bottom: 5),
-                                              child: Text(
-                                                'Update Field',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 0.50,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-                onChanged: (value) {
-                  selectedValue = value;
-                  Provider.of<UpdateAdminDropDownHint>(context, listen: false)
-                      .setHint(value!);
-                },
-              ));
-        });
-  }
-
-  //creating a function called updated firstname field to update the first name from the database
-  Future<void> updateFirstNameField(String? updatedata, String userid) async {
-    //calling the getUpdateddocID function from the class UpdateRetrieve
-    await updateRetrieve.getUpdateDocId(userid);
-
-    /*Tapo didto gihapon sa  UpdateFirstNameRetriveDocId na clas ang kanang function na atong bag e gi call
-    mo return nag string value which is ang documentid nga iyang gi butang sa variable nga mydocid*/
-    final documentref = FirebaseFirestore.instance
+    // Create a document reference
+    final documentRef = FirebaseFirestore.instance
         .collection('AdminUsers')
         .doc(updateRetrieve.mydocid);
 
-    final updateFiled = {"First Name": updatedata};
+    // Define the data to update which is the account status
+    final updateData = {
+      'Account Status': updatedata,
+    };
 
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_First_Name", DateTime.now());
+    // Create an admin log with the description Reactivate_Admin_Account
+    // adminLogs.createAdminLogs(
+    //   email, userID, "Reactivate_Admin_Account", DateTime.now());
 
-    /*
-    after the updated data is being naay sud ma update na na siya adtu sa database 
-    then navigate to admin user details of the specific admin
-    */
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
-  }
-
-  //the function updateLastNameField is the same process as what the other function does
-  Future<void> updateLastNameField(String? updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-
-    final updateFiled = {"Last Name": updatedata};
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni last name */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Last_Name", DateTime.now());
-    /*
-    after the updated data is being naay sud ma update na na siya adtu sa database 
-    then navigate to admin user details of the specific admin
-    */
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
-  }
-
-  //the function updateAddressField is the same process as what the other function does
-  Future<void> updateAddressField(String? updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-
-    final updateFiled = {"Address": updatedata};
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni address */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Address", DateTime.now());
-    /*
-    after the updated data is being naay sud ma update na na siya adtu sa database 
-    then navigate to admin user details of the specific admin
-    */
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
-  }
-
-  //the function updateContactNumberField is the same process as what the other function does
-  Future<void> updateContactNumberField(
-      String? updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-
-    final updateFiled = {"Contact Number": updatedata};
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni contact number */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Contact_Number", DateTime.now());
-    /*
-    after the updated data is being naay sud ma update na na siya adtu sa database 
-    then navigate to admin user details of the specific admin
-    */
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
-  }
-
-  //the function updateBirthplace field is the same process as what the other function does
-  Future<void> updateBirthplaceField(String? updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-
-    final updateFiled = {"Birth Place": updatedata};
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni birthplace */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Birthplace", DateTime.now());
-    /*
-    after the updated data is being naay sud ma update na na siya adtu sa database 
-    then navigate to admin user details of the specific admin
-    */
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
-  }
-
-  //create a variable date time for the register date nad birthdate
-  DateTime registerdate = DateTime.now();
-  DateTime birthdate = DateTime.now();
-
-  /*Function for selecting a birth date */
-  Future<void> _selectDateBirth(String userid) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: birthdate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2050),
-    );
-
-    if (pickedDate != null && pickedDate != birthdate) {
-      setState(() {
-        birthdate = pickedDate;
-      });
+    try {
+      // Update the Firestore document with the new data
+      await documentRef.update(updateData);
+      print("Document updated successfully.");
+    } catch (e) {
+      print("Error while updating document: $e");
     }
-  }
-
-  /*Function for selecting a registration date */
-  Future<void> _selectDateReg(String userid) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: registerdate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2050),
-    );
-
-    if (pickedDate != null && pickedDate != registerdate) {
-      setState(() {
-        registerdate = pickedDate;
-      });
-    }
-  }
-
-  /*Function for updating birthdate*/
-  Future<void> updateBirthdate(DateTime updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-    final updateFiled = {"Birth Date": updatedata};
-
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update birthdate */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Birthdate", DateTime.now());
-
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
-  }
-
-  /*Function for updating registration date */
-  Future<void> updateRegistrationDate(
-      DateTime updatedata, String userid) async {
-    await updateRetrieve.getUpdateDocId(userid);
-    final documentref = FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(updateRetrieve.mydocid);
-    final updateFiled = {"Registration Date": updatedata};
-    /*So mag kuha ni siya sa admin logs nya iyang description kay ni update registration date */
-    adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-        "Update_Detail_Registration_Date", DateTime.now());
-    await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
   }
 }

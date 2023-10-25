@@ -1,6 +1,6 @@
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/provider/admin_details_provider.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/query/get_admin_id.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details_wrapper.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/admin_details_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

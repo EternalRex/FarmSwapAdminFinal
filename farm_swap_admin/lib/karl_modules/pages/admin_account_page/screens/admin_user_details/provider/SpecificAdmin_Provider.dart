@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AdminSpecificArchivedProvider with ChangeNotifier {
+class AdminSpecificDeactivateProvider with ChangeNotifier {
   /*I need a string property that will carry the value of the 
   userid whenever i click the uer id button */
   String adminuserid = "";

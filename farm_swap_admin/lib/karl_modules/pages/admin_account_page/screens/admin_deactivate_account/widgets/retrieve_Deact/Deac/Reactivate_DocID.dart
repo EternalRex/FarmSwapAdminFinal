@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../admin_account_logs/database/admin_logs_insert.dart';
+import '../../../../admin_account_logs/database/admin_logs_insert.dart';
 
 //Object for the admin logs model used to save admin logs to db
 AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
 
-class RetrieveArchivedDocId {
+class RetrieveDeactivateDocId {
   String documentID = "";
   FirebaseFirestore db = FirebaseFirestore.instance;
   String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -24,23 +23,23 @@ class RetrieveArchivedDocId {
     return documentID;
   }
 
-  Future<void> updateFieldAndNavigate() async {
+  Future<void> updateFieldAndNavigateDeactivate() async {
     // Call the getDocsId method to retrieve the document ID
     String docId = await getDocsId();
 
-    //this will create a log of the user which is archive account
+    //this will create a log of the user which is deactivate account
     adminLogs.createAdminLogs(
-        userEmail, userId, "Account_Archived", DateTime.now());
+        userEmail, userId, "Account_Deactivated", DateTime.now());
 
     // Update a field in the Firestore document using the retrieved document ID
     await db.collection('AdminUsers').doc(docId).update({
-      'Account Status': 'Archived',
+      'Account Status': 'Deactivate',
       // Add more fields to update as needed
     });
   }
 }
 
-class RetrieveUnArchiveDocId {
+class RetrieveReactivateDocId {
   String documentID = "";
   FirebaseFirestore db = FirebaseFirestore.instance;
   String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -58,17 +57,17 @@ class RetrieveUnArchiveDocId {
     return documentID;
   }
 
-  Future<void> updateFieldAndNavigate() async {
+  Future<void> updateFieldAndNavigateReactivate() async {
     // Call the getDocsId method to retrieve the document ID
     String docId = await getDocsId();
 
-    //this will create a log of the user which is unarchive account
+    //this will create a log of the user which is reactivate account
     adminLogs.createAdminLogs(
-        userEmail, userId, "Account_Unarchived", DateTime.now());
+        userEmail, userId, "Request_Reactivation", DateTime.now());
 
     // Update a field in the Firestore document using the retrieved document ID
     await db.collection('AdminUsers').doc(docId).update({
-      'Account Status': 'Active',
+      'Account Status': 'Requesting',
     });
   }
 }

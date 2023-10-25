@@ -16,3 +16,16 @@ class GetAllAdminAccs {
         );
   }
 }
+
+class GetAllAdminRequests {
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  Future<List<Map<String, dynamic>>> getDocs() async {
+    final querySnapshot = await _db
+        .collection("AdminUsers")
+        .where("Account Status", isEqualTo: "Requesting")
+        .get();
+
+    return querySnapshot.docs.map((doc) => doc.data()).toList();
+  }
+}

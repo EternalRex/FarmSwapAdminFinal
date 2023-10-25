@@ -6,7 +6,7 @@ import '../../admin_account_logs/database/admin_logs_insert.dart';
 //Object for the admin logs model used to save admin logs to db
 AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
 
-class RetrieveArchivedDocId {
+class RetrieveDeactDocId {
   String documentID = "";
   FirebaseFirestore db = FirebaseFirestore.instance;
   String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -30,11 +30,11 @@ class RetrieveArchivedDocId {
 
     //this will create a log of the user which is archive account
     adminLogs.createAdminLogs(
-        userEmail, userId, "Account_Archived", DateTime.now());
+        userEmail, userId, "Account_Deactivated", DateTime.now());
 
     // Update a field in the Firestore document using the retrieved document ID
     await db.collection('AdminUsers').doc(docId).update({
-      'Account Status': 'Archived',
+      'Account Status': 'Deactivate',
       // Add more fields to update as needed
     });
   }

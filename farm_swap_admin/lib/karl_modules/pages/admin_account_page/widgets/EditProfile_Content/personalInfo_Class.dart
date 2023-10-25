@@ -10,7 +10,7 @@ import "package:intl/intl.dart";
 import "package:provider/provider.dart";
 import '../../../../../../constants/typography/typography.dart';
 import "../../screens/admin_account_logs/database/admin_logs_insert.dart";
-import '../../screens/admin_archived_account/widgets/retrieve_Archived_DocID.dart';
+import '../../screens/admin_deactivate_account/widgets/retrieve_Deact/Deac/Reactivate_DocID.dart';
 import "../../screens/admin_user_details/widgets/update_Textfield.dart";
 
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
@@ -663,7 +663,7 @@ class EditPersonalInfo extends StatelessWidget {
                                   // ignore: sized_box_for_whitespace
                                   Container(
                                     height: 50,
-                                    width: 141,
+                                    width: 190,
                                     decoration: BoxDecoration(
                                       gradient: const LinearGradient(
                                         begin: Alignment(0.99, -0.15),
@@ -688,19 +688,20 @@ class EditPersonalInfo extends StatelessWidget {
                                       child: TextButton(
                                         onPressed: () async {
                                           // Create an instance of RetrieveArchivedDocId
-                                          RetrieveArchivedDocId retriever =
-                                              RetrieveArchivedDocId();
+                                          RetrieveDeactivateDocId retriever =
+                                              RetrieveDeactivateDocId();
 
                                           // Call the updateFieldAndNavigate method to update Firestore and navigate
                                           await retriever
-                                              .updateFieldAndNavigate();
+                                              .updateFieldAndNavigateDeactivate();
 
                                           // Now you can navigate to another page here, for example:
                                           Navigator.of(context).pushNamed(
-                                              RoutesManager.archiveaccountpage);
+                                              RoutesManager
+                                                  .deactivateaccountpage);
                                         },
                                         child: Text(
-                                          "Archive Account",
+                                          "Deactivate Account",
                                           style: TextStyle(
                                             fontFamily: GoogleFonts.poppins()
                                                 .fontFamily,
@@ -1664,7 +1665,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function updateAddressField is the same process as what the other function does
@@ -1685,7 +1686,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function updateContactNumberField is the same process as what the other function does
@@ -1705,7 +1706,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function updateBirthplace field is the same process as what the other function does
@@ -1725,7 +1726,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function update email address field is the same process as what the other function does
@@ -1745,7 +1746,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //the function update password field is the same process as what the other function does
@@ -1765,7 +1766,7 @@ class EditPersonalInfo extends StatelessWidget {
     then navigate to admin user details of the specific admin
     */
     await documentref.update(updateFiled);
-    Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+    Navigator.of(context).pushNamed(RoutesManager.adminProfile);
   }
 
   //create a variable date time for the register date nad birthdate

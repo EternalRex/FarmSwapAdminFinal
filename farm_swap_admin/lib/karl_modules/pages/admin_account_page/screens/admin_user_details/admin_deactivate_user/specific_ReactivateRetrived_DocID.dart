@@ -2,7 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UpdateRetriveDocId {
+// Function to retrieve the document ID based on a user ID
+class ReactivateRetrieveDocId {
+  String mydocid = "";
+
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<String> getUpdateDocId(String userId) async {
@@ -13,9 +16,11 @@ class UpdateRetriveDocId {
 
     if (query.docs.isNotEmpty) {
       DocumentSnapshot documentSnapshot = query.docs.first;
-      return documentSnapshot.id;
+      mydocid = documentSnapshot.id; // Set the document ID here
+      print("Document ID: $mydocid");
+      return mydocid;
     } else {
-      throw ("Failed id retrieval");
+      throw ("Failed to retrieve document ID");
     }
   }
 }

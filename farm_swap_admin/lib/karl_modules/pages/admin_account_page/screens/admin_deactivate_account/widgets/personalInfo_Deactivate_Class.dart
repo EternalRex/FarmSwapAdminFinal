@@ -1,6 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:farm_swap_admin/constants/Colors/colors_rollaine.dart";
-import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_archived_account/widgets/retrieve_Archived_DocID.dart";
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/retrieve_Deact/Deac/Reactivate_DocID.dart';
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -11,8 +11,8 @@ import '../../../../../../constants/typography/typography.dart';
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
 // ignore: must_be_immutable
-class EditPersonalInfoArchived extends StatelessWidget {
-  EditPersonalInfoArchived({
+class EditPersonalInfoDeact extends StatelessWidget {
+  EditPersonalInfoDeact({
     super.key,
     required this.documentId,
   });
@@ -614,18 +614,19 @@ class EditPersonalInfoArchived extends StatelessWidget {
                               child: Center(
                                 child: TextButton(
                                   onPressed: () async {
-                                    // Create an instance of RetrieveArchivedDocId
-                                    RetrieveUnArchiveDocId retriever =
-                                        RetrieveUnArchiveDocId();
+                                    // Create an instance of RetrieveReactivateDocId
+                                    RetrieveReactivateDocId retriever =
+                                        RetrieveReactivateDocId();
 
                                     /**
                                      * when text button clicked it will update the field into active status
                                      */
-                                    await retriever.updateFieldAndNavigate();
+                                    await retriever
+                                        .updateFieldAndNavigateReactivate();
 
                                     // then it will navigate to update page
-                                    Navigator.of(context)
-                                        .pushNamed(RoutesManager.adminProfile);
+                                    Navigator.of(context).pushNamed(
+                                        RoutesManager.deactivateaccountpage);
                                   },
                                   child: Text(
                                     "Reactivate Account",

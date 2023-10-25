@@ -31,7 +31,7 @@ class AdminLogsSpecificWrapper extends StatefulWidget {
     this.documentID,
   });
   final String? documentID;
-  String selectedId = "";
+
   @override
   State<AdminLogsSpecificWrapper> createState() =>
       _AdminLogsSpecificWrapperState();
@@ -662,7 +662,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                           ),
                                                                           const SizedBox(
                                                                             width:
-                                                                                50,
+                                                                                25,
                                                                           ),
                                                                           Expanded(
                                                                             flex:

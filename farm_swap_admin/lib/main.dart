@@ -7,9 +7,8 @@ import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-
 import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart";
-import "karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Archived_provider.dart";
+import 'karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AdminActivityProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => AdminSpecificArchivedProvider(),
+          create: (context) => AdminSpecificDeactivateProvider(),
         ),
         /*Registering povider for update account dropdown hint */
         ChangeNotifierProvider(
@@ -64,7 +63,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           /*SETTING THE INITIAL ROUTER, OR ROUTE THAT WILL FIRST APPEAR USING THE
         ROUTESMANAGER CLASS AND CALL A PARTICULAR PAGE THAT WE CREATE IN ROUTES.DART CLASS */
-          initialRoute: RoutesManager.introPage,
+          initialRoute: RoutesManager.signInPage,
           /* USING THE ROUTES MAANGER CLASS AND CALL THE ROUTES MANAGER METHOD SO THAT
         EVERY TIME THE ROUTES MANAGER SUMMONS A PAGE, THE PAGE NAME WILL BE PUT
         INSIDE THE GENERATE ROUTE AND THEN USED IN THE SWITCH STATEMENT INSIDE THE 

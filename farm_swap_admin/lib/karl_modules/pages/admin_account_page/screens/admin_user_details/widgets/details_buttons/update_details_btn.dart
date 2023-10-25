@@ -2,8 +2,8 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Te
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class UpdateAdminUserOption extends StatelessWidget {
-  const UpdateAdminUserOption({
+class UpdateAdminBtn extends StatelessWidget {
+  const UpdateAdminBtn({
     super.key,
   });
 

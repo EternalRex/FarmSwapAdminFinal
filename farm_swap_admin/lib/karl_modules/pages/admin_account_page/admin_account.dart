@@ -18,6 +18,7 @@ import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.da
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
+import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_requests_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
@@ -121,6 +122,10 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
                     const DashCommunicationOptionsBtn(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const DashRequestsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */

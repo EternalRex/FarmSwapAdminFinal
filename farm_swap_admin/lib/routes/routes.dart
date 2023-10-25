@@ -9,7 +9,8 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Archived.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_requests_reactivation/admin_requests_reactivate.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/SpecificAdmin_Deactivate.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
@@ -28,7 +29,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.d
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
-import '../karl_modules/pages/admin_account_page/screens/admin_archived_account/screen/acrhived_account.dart';
+import '../karl_modules/pages/admin_account_page/screens/admin_deactivate_account/screen/deactivate_account.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
 
 class RoutesManager {
@@ -39,8 +40,9 @@ class RoutesManager {
   static const adminAccount = "/adminaccount";
   static const adminAccountPage = "/adminaccountpage";
   static const admindetailspage = "/admindetailspage";
-  static const archiveaccountpage = "/archiveaccountpage";
-  static const specificadminarchived = "/specificadminarchived";
+  static const deactivateaccountpage = "/deactivateaccountpage";
+  static const specificadmindeact = "/specificadmindeact";
+  static const requestreactivation = "/requestreactivation";
   static const adminactivityspage = "/adminactivityspage";
   static const adminProfile = "/adminprofile";
   static const adminSignUp = "/adminsignup";
@@ -106,9 +108,9 @@ class RoutesManager {
           builder: (context) => AdminUserDetails(),
         );
 
-      case specificadminarchived:
+      case specificadmindeact:
         return MaterialPageRoute(
-          builder: (context) => SpecificAdminArchived(),
+          builder: (context) => SpecificAdminDeactivate(),
         );
 
       case adminactivityspage:
@@ -116,9 +118,14 @@ class RoutesManager {
           builder: (context) => AdminLogsID(),
         );
 
-      case archiveaccountpage:
+      case deactivateaccountpage:
         return MaterialPageRoute(
-          builder: (context) => const AdminArchivedAccount(),
+          builder: (context) => const AdminDeactivateAccount(),
+        );
+
+      case requestreactivation:
+        return MaterialPageRoute(
+          builder: (context) => RequestReactivationLists(),
         );
 
       case adminProfile:

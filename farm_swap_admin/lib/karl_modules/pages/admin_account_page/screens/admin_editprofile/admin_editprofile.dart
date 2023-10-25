@@ -2,7 +2,6 @@ import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/deactivate_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
@@ -323,10 +322,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const DeactivateOptionsBtn(),
+                    const ArchiveOptionsBtn(),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
@@ -8,8 +10,8 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../admin_account_logs/provider/adminlogs_provider.dart';
+import '../admin_user_details/drop_down_update/update_retrieve_docID.dart';
 
 // ignore: must_be_immutable
 class ReadAdminAccount extends StatefulWidget {
@@ -214,18 +216,77 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                                         Colors.transparent.withOpacity(0.12),
                                     shadowColor: Colors.transparent,
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     setState(() {
                                       widget.selectedId = "${data["User Id"]}";
                                     });
-                                    //assign the widget.selectedId to setAdminUserId
-                                    //to bring in other class
-                                    Provider.of<AdminDetailsProvider>(context,
-                                            listen: false)
-                                        .setadminUserId(widget.selectedId);
-                                    //this will navigate to admin details.dart
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager.admindetailspage);
+                                    // Retrieve the document ID and check the account status
+                                    String docId = widget.selectedId;
+                                    String accountStatus =
+                                        await checkAccountStatus(docId);
+
+                                    if (accountStatus == "Active") {
+                                      // Handle active account
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+
+                                      // Navigate to the details page for active accounts
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.admindetailspage);
+                                    } else if (accountStatus == "Deactivate") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      // Navigate to the specific "deactivate" page
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.specificadmindeact);
+                                    } else if (accountStatus == "Requesting") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Note!"),
+                                            content: const Text(
+                                                "Account is requesting for reactivation!\nClick proceed to see request."),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text("Proceed"),
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                  // Navigate to the specific "deactivate" page
+                                                  Navigator.of(context)
+                                                      .pushNamed(RoutesManager
+                                                          .requestreactivation);
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: const Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else if (accountStatus == "Decline") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      // Navigate to the specific "deactivate" page
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.specificadmindeact);
+                                    } else {
+                                      // Handle other cases or display an error message
+                                      print(
+                                          "Unknown account status: $accountStatus");
+                                    }
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -262,5 +323,33 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
             ),
           );
         });
+  }
+
+  UpdateRetriveDocId updateRetrieve = UpdateRetriveDocId();
+
+  /*
+  This function will check the account status if it exists it will 
+  return the accountStatus which is naa nay value nya ipasa sa log in  na function
+  */
+  Future<String> checkAccountStatus(String userid) async {
+    // Retrieve the document ID
+    await updateRetrieve.getUpdateDocId(userid);
+
+    // Query Firestore to check the account status
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(updateRetrieve.mydocid)
+        .get();
+
+    if (doc.exists) {
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        String accountStatus = data['Account Status'] ?? "";
+        return accountStatus;
+      }
+    }
+
+    // If the document doesn't exist or the field is missing, return an empty string
+    return "";
   }
 }
