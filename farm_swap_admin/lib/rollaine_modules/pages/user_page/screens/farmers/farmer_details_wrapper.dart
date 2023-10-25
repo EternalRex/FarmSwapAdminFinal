@@ -941,7 +941,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Color(0xFFF0182C),
+                                Color.fromARGB(255, 240, 121, 24),
                                 Color(0xFFD1001F),
                               ],
                             ),
@@ -994,7 +994,7 @@ class ReadFarmerDetails extends StatelessWidget {
                               end: Alignment.bottomRight,
                               colors: [
                                 Color(0xFFFFB347),
-                                Color(0xFFFA9C1B),
+                                Color.fromARGB(255, 250, 124, 27),
                               ],
                             ),
                             borderRadius: BorderRadius.all(
@@ -1032,62 +1032,6 @@ class ReadFarmerDetails extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-
-                            //Save button
-                            child: Row(
-                              children: [
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Save',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
                       Row(
                         children: [
                           Padding(
