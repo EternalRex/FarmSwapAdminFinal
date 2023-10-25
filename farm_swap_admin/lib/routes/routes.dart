@@ -173,12 +173,12 @@ class RoutesManager {
 
       case detailsFarmerPage:
         return MaterialPageRoute(
-          builder: (context) => const DetailsFarmerPage(),
+          builder: (context) => DetailsFarmerPage(),
         );
 
       case detailsCustomerPage:
         return MaterialPageRoute(
-          builder: (context) => const DetailsCustomerPage(),
+          builder: (context) => DetailsCustomerPage(),
         );
 
       case listingsPage:

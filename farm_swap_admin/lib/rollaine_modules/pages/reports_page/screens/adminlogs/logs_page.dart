@@ -360,6 +360,8 @@ class _AdminLogs extends State<AdminLogs> {
                                             return ListTile(
                                               title: Row(
                                                 children: [
+
+                                                  //Expanded for Admin Email
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(
@@ -377,6 +379,8 @@ class _AdminLogs extends State<AdminLogs> {
                                                   const SizedBox(
                                                     width: 30,
                                                   ),
+
+                                                  //Expanded for Date and Time
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(
@@ -394,6 +398,8 @@ class _AdminLogs extends State<AdminLogs> {
                                                   const SizedBox(
                                                     width: 50,
                                                   ),
+
+                                                  //Expanded for Admin Activity
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(

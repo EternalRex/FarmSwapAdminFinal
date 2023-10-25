@@ -76,54 +76,54 @@ class _AdminAccount extends State<AdminAccount> {
                     const DashBoardOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE  ADMIN ACCOUNT LOGO AND LABEL*/
                     const DashAdminAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE USER ACCOUNTS LOGO AND LABEL */
                     const DashUserAccountOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE LISTINGS ICON AND LABEL */
                     const DashListingsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE TRANSACTIONS ICON AND LABEL */
                     const DashTransactionsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE REPORTS ICON AND LABEL */
                     const DashReportsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE DISPUTE ICON AND LABEL */
                     const DashDisputeOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
                     const DashWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
                     const DashCommunicationOptionsBtn(),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     const DashRequestsOptionsBtn(),
                     /*30 SPACE BEFORE NEXT OPTION*/
