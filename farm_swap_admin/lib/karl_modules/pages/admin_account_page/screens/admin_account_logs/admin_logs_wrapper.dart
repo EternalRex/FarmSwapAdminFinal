@@ -456,7 +456,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                             child: Row(
                                                               children: [
                                                                 const SizedBox(
-                                                                  width: 50,
+                                                                  width: 100,
                                                                 ),
                                                                 Text(
                                                                   "User",
@@ -470,7 +470,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                   ),
                                                                 ),
                                                                 const SizedBox(
-                                                                  width: 230,
+                                                                  width: 160,
                                                                 ),
                                                                 Text(
                                                                   "Date and Time",
@@ -484,7 +484,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                   ),
                                                                 ),
                                                                 const SizedBox(
-                                                                  width: 150,
+                                                                  width: 200,
                                                                 ),
                                                                 Text(
                                                                   "Action",
@@ -614,7 +614,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                             .toDate();
                                                                     String
                                                                         dateFinal =
-                                                                        DateFormat('yyyy-MM-DD HH:mm:ss')
+                                                                        DateFormat('yyyy-MM-dd HH:mm:ss')
                                                                             .format(dateTime);
 
                                                                     /**
@@ -645,7 +645,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                           ),
                                                                           const SizedBox(
                                                                             width:
-                                                                                30,
+                                                                                15,
                                                                           ),
                                                                           Expanded(
                                                                             flex:
@@ -662,7 +662,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                           ),
                                                                           const SizedBox(
                                                                             width:
-                                                                                25,
+                                                                                10,
                                                                           ),
                                                                           Expanded(
                                                                             flex:

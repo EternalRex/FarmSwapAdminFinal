@@ -43,7 +43,7 @@ class PersonalInfoDeact extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                //calling the class to display the edit profile information
+                                //calling the class to display the deactivation page information
                                 EditPersonalInfoDeact(documentId: data),
                               ],
                             ),

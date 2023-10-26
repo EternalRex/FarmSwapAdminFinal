@@ -1,4 +1,4 @@
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/deactivate_account_class.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/deactivate_accountStatus_class.dart';
 import 'package:flutter/material.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../admin_account_wrapper/read_admin_users.dart';
@@ -44,8 +44,10 @@ class DeactivatedStatus extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                //calling the class to display the edit profile information
-                                DeactivateAccountDisplay(documentId: data),
+                                /**calling the class to display the account status of current user
+                                */
+                                DeactivateAccountStatusDisplay(
+                                    documentId: data),
                               ],
                             ),
                           );

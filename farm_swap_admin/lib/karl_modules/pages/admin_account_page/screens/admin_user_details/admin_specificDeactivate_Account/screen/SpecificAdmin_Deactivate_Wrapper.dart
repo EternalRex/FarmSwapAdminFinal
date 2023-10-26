@@ -1,32 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import '../../admin_account_logs/database/admin_logs_insert.dart';
-import '../../admin_account_wrapper/read_admin_users.dart';
-import '../admin_deactivate_user/specific_ReactivateRetrived_DocID.dart';
-import '../widgets/details_buttons/archive__details_btn.dart';
-import '../widgets/details_buttons/deactivate__details_btn.dart';
-import '../widgets/details_buttons/update_details_btn.dart';
+import '../../../../../dashboard_page/dashboard_query/dashboard_query.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
+import '../../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../../admin_account_logs/database/admin_logs_insert.dart';
+import '../../../admin_account_wrapper/read_admin_users.dart';
+import '../../query/specific_ReactivateRetrived_DocID.dart';
 
 // ignore: must_be_immutable
 class SpecificAdminDeactivateWrapper extends StatefulWidget {
@@ -915,7 +910,7 @@ class _AdminSpecificDeactivateWrapperState
                                                             height: 10,
                                                           ),
 
-                                                          //sizedbox for archive account buttons
+                                                          //sizedbox for reactivate account buttons
                                                           SizedBox(
                                                             child: Row(
                                                               mainAxisAlignment:
@@ -934,7 +929,7 @@ class _AdminSpecificDeactivateWrapperState
                                                                 ),
                                                                 const SizedBox(
                                                                     width: 5),
-                                                                //Archive account button
+                                                                //reactivate account button
                                                                 Padding(
                                                                   padding:
                                                                       const EdgeInsets
@@ -986,11 +981,12 @@ class _AdminSpecificDeactivateWrapperState
                                                                                   print(widget.selectedId);
                                                                                 });
 
-                                                                                //create logs here where the account status filed will be set to active
+                                                                                //create logs here where the account status filed will be set to requesting
                                                                                 await updateField("Requesting", widget.selectedId);
 
-                                                                                //this will navigate to admin details.dart
-                                                                                Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+                                                                                //this will navigate to admin deactivate page
+                                                                                // ignore: use_build_context_synchronously
+                                                                                Navigator.of(context).pushNamed(RoutesManager.specificadmindeact);
                                                                               },
                                                                               child: Text(
                                                                                 "Reactivate Account",
@@ -1039,76 +1035,6 @@ class _AdminSpecificDeactivateWrapperState
               ),
             ),
           ),
-          /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  /*PUTTING BOX SHADOW ON THE CONTAINER */
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
-                    ),
-                  ],
-                ),
-                /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
-                child: Column(
-                  children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          /*PROFILE TEXT */
-                          const SizedBox(
-                            width: 82,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 150,
-                    ),
-                    const UpdateAdminBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const ArchiveAdminBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const DeactivateAccountBtn(),
-                  ],
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -1140,8 +1066,8 @@ class _AdminSpecificDeactivateWrapperState
     };
 
     // Create an admin log with the description Reactivate_Admin_Account
-    // adminLogs.createAdminLogs(
-    //   email, userID, "Reactivate_Admin_Account", DateTime.now());
+    adminLogs.createAdminLogs(
+        email, userID, "Reactivate_Admin_Account", DateTime.now());
 
     try {
       // Update the Firestore document with the new data

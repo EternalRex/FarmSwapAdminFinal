@@ -1,4 +1,4 @@
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/Text/editprofile_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +17,7 @@ class UpdateOptionsBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.adminProfile);
+                Navigator.of(context).pushNamed(RoutesManager.adminProfile);
               },
               child: const EditProfileText(
                 myText: 'Update Account',
@@ -29,8 +28,7 @@ class UpdateOptionsBtn extends StatelessWidget {
               width: 5,
             ),
             const Image(
-              image: AssetImage(
-                  'assets/karl_assets/images/update.png'),
+              image: AssetImage('assets/karl_assets/images/update.png'),
               height: 23,
               width: 23,
             ),

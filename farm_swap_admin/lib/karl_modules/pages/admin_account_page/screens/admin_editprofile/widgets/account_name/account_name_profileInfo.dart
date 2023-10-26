@@ -13,7 +13,7 @@ import "package:firebase_storage/firebase_storage.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import "../../screens/admin_account_logs/database/admin_logs_insert.dart";
+import '../../../admin_account_logs/database/admin_logs_insert.dart';
 
 /*We created this class to be called in the dashboard this will take a value which 
 is the document id we get from our firebase query. That is why this class has a 
@@ -51,31 +51,62 @@ class _ProfilePhotoState extends State<ProfilePhotoAccount> {
           /*Creating a dynamic variable and store and store the data we get from our querry which
           we aceessed using the word snapshot */
           dynamic data = snapshot.data!.data() as dynamic;
+          final profileUrl = data["profileUrl"];
 
-          /*Display the image */
-          final image = CachedNetworkImageProvider("${data["profileUrl"]}");
-          return Stack(
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: image,
-              ),
-              Positioned(
-                top: 48,
-                left: 50,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.add_circle_rounded,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    selectUploadImage();
-                  },
+          if (profileUrl != null && profileUrl.isNotEmpty) {
+            /*Display the image */
+            final image = CachedNetworkImageProvider("${data["profileUrl"]}");
+            return Stack(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: image,
                 ),
-              ),
-            ],
-          );
+                Positioned(
+                  top: 48,
+                  left: 50,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add_circle_rounded,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      selectUploadImage();
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.blue,
+                  child: Icon(
+                    Icons.person, // Specify the icon
+                    size: 60, // Adjust the size of the icon
+                    color: Colors.white, // Set the icon color
+                  ),
+                ),
+                Positioned(
+                  top: 48,
+                  left: 50,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add_circle_rounded,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      selectUploadImage();
+                    },
+                  ),
+                ),
+              ],
+            );
+          }
         }
+
         return const Center(
           child: CircularProgressIndicator(),
         );

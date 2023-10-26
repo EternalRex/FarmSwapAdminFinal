@@ -200,6 +200,13 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
   Future<void> uploadImage() async {
     try {
       if (_selectedImage == null) {
+        // Pass the download URL to the "Dashboard" page
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const SignupSuccessScreen(),
+          ),
+        );
         // Handle the case where no image is selected.
         return;
       }

@@ -17,6 +17,7 @@ class GetAllAdminAccs {
   }
 }
 
+//this class is for reading all the admin users that has the account status requesting
 class GetAllAdminRequests {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 

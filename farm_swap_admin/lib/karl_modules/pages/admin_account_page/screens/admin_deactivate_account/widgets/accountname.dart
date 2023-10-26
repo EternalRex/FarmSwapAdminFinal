@@ -1,7 +1,7 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:flutter/material.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../../widgets/account_name/account_name_profileInfo.dart';
+import '../../admin_editprofile/widgets/account_name/account_name_profileInfo.dart';
 import '../../admin_account_wrapper/read_admin_users.dart';
 import 'account_name_profileInfo.dart';
 

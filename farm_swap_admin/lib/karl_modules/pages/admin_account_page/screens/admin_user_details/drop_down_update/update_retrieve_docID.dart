@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//this class will retrieve the specific document id of the selected user id
 class UpdateRetriveDocId {
   String mydocid = "";
 

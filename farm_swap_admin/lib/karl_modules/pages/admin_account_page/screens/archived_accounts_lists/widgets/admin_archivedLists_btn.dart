@@ -2,8 +2,8 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/ad
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class UpdateAdminBtn extends StatelessWidget {
-  const UpdateAdminBtn({
+class AdminArchivedListBtn extends StatelessWidget {
+  const AdminArchivedListBtn({
     super.key,
   });
 
@@ -17,10 +17,11 @@ class UpdateAdminBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(RoutesManager.admindetailspage);
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.archivedaccountlists);
               },
               child: const EditProfileText(
-                myText: 'Update Account',
+                myText: 'Admin',
                 myColor: Color(0xFF09041B),
               ),
             ),
@@ -28,7 +29,7 @@ class UpdateAdminBtn extends StatelessWidget {
               width: 5,
             ),
             const Image(
-              image: AssetImage('assets/karl_assets/images/update.png'),
+              image: AssetImage('assets/clare_assets/images/Admins.png'),
               height: 23,
               width: 23,
             ),

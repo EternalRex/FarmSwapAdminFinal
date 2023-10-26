@@ -1,11 +1,11 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/personalinfo_Deactivate.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile/editprofile_description.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/formtitle.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import 'package:flutter/material.dart';
 import '../widgets/accountname.dart';
-import '../widgets/deactivate_account_documentID.dart';
+import '../widgets/deactivate_accountStatus.dart';
 
 class AdminDeactivateAccount extends StatefulWidget {
   const AdminDeactivateAccount({
@@ -137,10 +137,10 @@ class _AdminDeactivateAccountState extends State<AdminDeactivateAccount> {
                                                 //calling the class that displays the title header
                                                 const EditProfileDescription(),
 
-                                                //calling the class that displays the account status and the user details
+                                                //calling the class that displays the account status of the current user
                                                 DeactivatedStatus(),
 
-                                                //calling the class that displays user details
+                                                //calling the class that displays user details this is for the current user
                                                 PersonalInfoDeact(),
                                               ],
                                             ),

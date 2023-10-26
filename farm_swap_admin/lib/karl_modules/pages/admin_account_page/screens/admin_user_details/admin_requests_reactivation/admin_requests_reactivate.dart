@@ -10,15 +10,15 @@ import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../../../constants/Colors/colors.dart';
-import '../../../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
-import '../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
-import '../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
-import '../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import '../admin_account_logs/database/admin_logs_insert.dart';
-import '../admin_user_details/drop_down_update/update_retrieve_docID.dart';
-import '../admin_user_details/provider/admin_details_provider.dart';
+import '../../../../../../constants/Colors/colors.dart';
+import '../../../../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
+import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../admin_account_logs/database/admin_logs_insert.dart';
+import '../drop_down_update/update_retrieve_docID.dart';
+import '../provider/admin_details_provider.dart';
 
 // ignore: must_be_immutable
 class RequestReactivationLists extends StatefulWidget {
@@ -357,20 +357,47 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                                                                     widget.selectedId =
                                                                         "${document["User Id"]}";
                                                                   });
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            "Confirmation!"),
+                                                                        content:
+                                                                            const Text("Account is requesting for reactivation!\nClick proceed to accept request."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Proceed"),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              Navigator.of(context).pop(); // this will close the dialog box
+                                                                              /**
+                                                                              * In this function when the button is clicked it will update the selected id
+                                                                              * the account status into active then it will also create admin logs
+                                                                              */
+                                                                              await updateField("Active", widget.selectedId);
 
-                                                                  //create logs here where the account status filed will be set to deactivated
-                                                                  await updateField(
-                                                                      "Active",
-                                                                      widget
-                                                                          .selectedId);
-
-                                                                  //this will navigate to specific admin deactivate page
-                                                                  // ignore: use_build_context_synchronously
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pushNamed(
-                                                                          RoutesManager
-                                                                              .requestreactivation);
+                                                                              //this will navigate to request reactivate account page
+                                                                              // ignore: use_build_context_synchronously
+                                                                              Navigator.of(context).pushNamed(RoutesManager.requestreactivation);
+                                                                            },
+                                                                          ),
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Cancel"),
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop(); // Close the dialog box
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
                                                                 },
                                                                 child: Padding(
                                                                   padding:
@@ -466,29 +493,47 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                                                                     widget.selectedId =
                                                                         "${document["User Id"]}";
                                                                   });
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            "Confirmation!"),
+                                                                        content:
+                                                                            const Text("Are you sure you want to decline request?\nClick proceed to decline request."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Proceed"),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              Navigator.of(context).pop(); // this will close the dialog box
+                                                                              //create logs here where the account status filed will be set to deactivated
+                                                                              await updateField1("Decline", widget.selectedId);
 
-                                                                  //create logs here where the account status filed will be set to deactivated
-                                                                  await updateField1(
-                                                                      "Decline",
-                                                                      widget
-                                                                          .selectedId);
+                                                                              // ignore: use_build_context_synchronously
+                                                                              Provider.of<AdminDetailsProvider>(context, listen: false).setadminUserId(widget.selectedId);
 
-                                                                  // ignore: use_build_context_synchronously
-                                                                  Provider.of<AdminDetailsProvider>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .setadminUserId(
-                                                                          widget
-                                                                              .selectedId);
-
-                                                                  //this will navigate to specific admin deactivate page
-                                                                  // ignore: use_build_context_synchronously
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pushNamed(
-                                                                          RoutesManager
-                                                                              .requestreactivation);
+                                                                              //this will navigate to specific admin deactivate page
+                                                                              // ignore: use_build_context_synchronously
+                                                                              Navigator.of(context).pushNamed(RoutesManager.requestreactivation);
+                                                                            },
+                                                                          ),
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Cancel"),
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop(); // Close the dialog box
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
                                                                 },
                                                                 child: Padding(
                                                                   padding:
@@ -700,8 +745,13 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
   //Object for the admin logs model used to save admin logs to db
   AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
 
+  /*this function is to update the field account status into active
+  then this will also create admin logs
+  */
   Future<void> updateField(String? updatedata, String userid) async {
-    // Calling the getUpdateddocID function from the class UpdateRetrieve
+    /*Calling the getUpdateddocID function from the class UpdateRetrieve 
+    reusing the class for retrieving doc id
+    */
     await updateRetrieve.getUpdateDocId(userid);
 
     final documentRef = FirebaseFirestore.instance
@@ -725,6 +775,9 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
     }
   }
 
+/*this function is to update the field account status into decline
+  then this will also create admin logs
+  */
   Future<void> updateField1(String? updatedata, String userid) async {
     // Calling the getUpdateddocID function from the class UpdateRetrieve
     await updateRetrieve.getUpdateDocId(userid);
@@ -738,7 +791,7 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
       'Account Status': updatedata,
     };
 
-    // Create an admin log with a activity dec;ine requests admin account
+    // Create an admin log with a activity decline requests admin account
     adminLogs.createAdminLogs(
         email, userID, "Decline_Reactivation_Request", DateTime.now());
 

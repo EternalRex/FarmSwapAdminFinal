@@ -40,18 +40,35 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
           /*Creating a dynamic variable and store and store the data we get from our querry which
           we aceessed using the word snapshot */
           dynamic data = snapshot.data!.data() as dynamic;
+          final profileUrl = data["profileUrl"];
 
-          /*Display the image */
-          final image = CachedNetworkImageProvider("${data["profileUrl"]}");
-          return Stack(
-            children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundImage: image,
+          //if the profile url is not empty this will display
+          if (profileUrl != null && profileUrl.isNotEmpty) {
+            final image = CachedNetworkImageProvider("${data["profileUrl"]}");
+
+            return Stack(
+              children: [
+                CircleAvatar(
+                  radius: 80,
+                  backgroundImage: image,
+                ),
+              ],
+            );
+          }
+          //if the profile url is empty this will display
+          else {
+            return const CircleAvatar(
+              radius: 80,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.person, // Specify the icon
+                size: 150, // Adjust the size of the icon
+                color: Colors.white, // Set the icon color
               ),
-            ],
-          );
+            );
+          }
         }
+
         return const Center(
           child: CircularProgressIndicator(),
         );

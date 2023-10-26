@@ -1,11 +1,11 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/archive_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Btns/update_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/accountname.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/formtitle.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/EditProfile_Content/personalinfo.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile/editprofile_description.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Btns/archive_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Btns/update_btn.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/accountname.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/formtitle.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/personalinfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -233,7 +233,7 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                                                 //calling the class that displays the title header
                                                 const EditProfileDescription(),
 
-                                                //calling the class that has the datas of admin user details
+                                                //calling the class that has the current admin user details
                                                 PersonalInfo(),
                                               ],
                                             ),
