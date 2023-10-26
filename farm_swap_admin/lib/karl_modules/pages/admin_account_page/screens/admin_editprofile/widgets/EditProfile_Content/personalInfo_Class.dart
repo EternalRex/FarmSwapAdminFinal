@@ -8,10 +8,10 @@ import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:provider/provider.dart";
-import '../../../../../../constants/typography/typography.dart';
-import "../../screens/admin_account_logs/database/admin_logs_insert.dart";
-import '../../screens/admin_deactivate_account/widgets/retrieve_Deact/Deac/Reactivate_DocID.dart';
-import "../../screens/admin_user_details/widgets/update_Textfield.dart";
+import '../../../../../../../../constants/typography/typography.dart';
+import '../../../admin_account_logs/database/admin_logs_insert.dart';
+import '../../../admin_deactivate_account/widgets/Reactivate_DocID.dart';
+import '../../../admin_user_details/widgets/update_Textfield.dart';
 
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
@@ -691,11 +691,12 @@ class EditPersonalInfo extends StatelessWidget {
                                           RetrieveDeactivateDocId retriever =
                                               RetrieveDeactivateDocId();
 
-                                          // Call the updateFieldAndNavigate method to update Firestore and navigate
+                                          // Call the updateFieldAndNavigate method to update
+                                          //the account status and create admin logs
                                           await retriever
-                                              .updateFieldAndNavigateDeactivate();
+                                              .updateFieldDeactivate();
 
-                                          // Now you can navigate to another page here, for example:
+                                          //then after the update it will navigate to deactivate accout page
                                           Navigator.of(context).pushNamed(
                                               RoutesManager
                                                   .deactivateaccountpage);
@@ -739,6 +740,7 @@ class EditPersonalInfo extends StatelessWidget {
   Widget updateLabel = const Text("Type here");
   TextEditingController updateController = TextEditingController();
 
+  //this function is for selecting field to update in a dropdown
   void selectfieldUpdate(BuildContext context, String passeduid) {
     showDialog(
         context: context,

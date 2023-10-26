@@ -3,7 +3,7 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/ad
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'SpecificAdmin_Deactivate_Wrapper.dart';
+import '../screen/SpecificAdmin_Deactivate_Wrapper.dart';
 
 // ignore: must_be_immutable
 class SpecificAdminDeactivate extends StatelessWidget {

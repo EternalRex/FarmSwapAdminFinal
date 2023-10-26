@@ -1,9 +1,8 @@
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/widgets/Text/editprofile_text.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/Text/editprofile_text.dart';
 import 'package:flutter/material.dart';
 
-class DeactivateOptionsBtn extends StatelessWidget {
-  const DeactivateOptionsBtn({
+class ConsumerArchivedListBtn extends StatelessWidget {
+  const ConsumerArchivedListBtn({
     super.key,
   });
 
@@ -16,12 +15,9 @@ class DeactivateOptionsBtn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.deactivateaccountpage);
-              },
+              onPressed: () {},
               child: const EditProfileText(
-                myText: 'Deactivate Account',
+                myText: 'Consumer',
                 myColor: Color(0xFF09041B),
               ),
             ),
@@ -29,7 +25,7 @@ class DeactivateOptionsBtn extends StatelessWidget {
               width: 5,
             ),
             const Image(
-              image: AssetImage('assets/karl_assets/images/deactivate.png'),
+              image: AssetImage('assets/clare_assets/images/Consumer.png'),
               height: 23,
               width: 23,
             ),

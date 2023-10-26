@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../../admin_account_logs/database/admin_logs_insert.dart';
+import '../../admin_account_logs/database/admin_logs_insert.dart';
 
 //Object for the admin logs model used to save admin logs to db
 AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
@@ -23,7 +23,7 @@ class RetrieveDeactivateDocId {
     return documentID;
   }
 
-  Future<void> updateFieldAndNavigateDeactivate() async {
+  Future<void> updateFieldDeactivate() async {
     // Call the getDocsId method to retrieve the document ID
     String docId = await getDocsId();
 
@@ -57,11 +57,11 @@ class RetrieveReactivateDocId {
     return documentID;
   }
 
-  Future<void> updateFieldAndNavigateReactivate() async {
+  Future<void> updateFieldReactivate() async {
     // Call the getDocsId method to retrieve the document ID
     String docId = await getDocsId();
 
-    //this will create a log of the user which is reactivate account
+    //this will create a log of the user which is request reactivate account
     adminLogs.createAdminLogs(
         userEmail, userId, "Request_Reactivation", DateTime.now());
 

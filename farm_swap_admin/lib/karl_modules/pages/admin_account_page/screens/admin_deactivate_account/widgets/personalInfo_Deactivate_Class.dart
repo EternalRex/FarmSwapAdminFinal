@@ -1,11 +1,12 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:farm_swap_admin/constants/Colors/colors_rollaine.dart";
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/retrieve_Deact/Deac/Reactivate_DocID.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/Reactivate_DocID.dart';
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import '../../../../../../constants/typography/typography.dart';
+import "../../admin_user_details/drop_down_update/update_retrieve_docID.dart";
 
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
@@ -619,12 +620,11 @@ class EditPersonalInfoDeact extends StatelessWidget {
                                         RetrieveReactivateDocId();
 
                                     /**
-                                     * when text button clicked it will update the field into active status
+                                     * when text button clicked it will update the field into requesting
                                      */
-                                    await retriever
-                                        .updateFieldAndNavigateReactivate();
+                                    await retriever.updateFieldReactivate();
 
-                                    // then it will navigate to update page
+                                    // then it will navigate to deactivate page
                                     Navigator.of(context).pushNamed(
                                         RoutesManager.deactivateaccountpage);
                                   },
@@ -656,5 +656,36 @@ class EditPersonalInfoDeact extends StatelessWidget {
         );
       },
     );
+  }
+
+  /*
+   * this will retrieve the document id of the specific user id
+   * this class is being reused
+   */
+  UpdateRetriveDocId updateRetrieve = UpdateRetriveDocId();
+
+  /*
+  This function will check the account status if it exists 
+  */
+  Future<String> checkAccountStatus(String userid) async {
+    // Retrieve the document ID
+    await updateRetrieve.getUpdateDocId(userid);
+
+    // Query Firestore to check the account status
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(updateRetrieve.mydocid)
+        .get();
+
+    if (doc.exists) {
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        String accountStatus = data['Account Status'] ?? "";
+        return accountStatus;
+      }
+    }
+
+    // If the document doesn't exist or the field is missing, return an empty string
+    return "";
   }
 }

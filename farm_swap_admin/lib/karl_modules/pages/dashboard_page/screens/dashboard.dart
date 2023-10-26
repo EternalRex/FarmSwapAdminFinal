@@ -21,7 +21,6 @@ import '../widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
-import '../widgets/dshb_buttons_widgets/dashboard_requests_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
@@ -129,11 +128,6 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
                     const DashCommunicationOptionsBtn(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const DashRequestsOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
                     const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DashLogoutOptionBtn(),
@@ -363,7 +357,8 @@ class _DashboardState extends State<Dashboard> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           const SizedBox(

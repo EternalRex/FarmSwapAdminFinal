@@ -370,6 +370,31 @@ class _SignInAdminState extends State<SignInAdmin> {
         if (accountStatus == "Requesting") {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
+        } else if (accountStatus == "Deactivate") {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
+        } else if (accountStatus == "Decline") {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
+        } else if (accountStatus == "Archived") {
+          // ignore: use_build_context_synchronously
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Note!"),
+                content: const Text("Account is archived!"),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog box
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         } else {
           // Update online status and navigate to the dashboard
           onlineStatus.updateOnlineStatus(user.uid, true);

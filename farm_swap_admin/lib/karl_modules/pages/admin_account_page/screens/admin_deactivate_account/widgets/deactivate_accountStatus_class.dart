@@ -3,12 +3,12 @@ import "package:farm_swap_admin/constants/Colors/colors_rollaine.dart";
 import "package:flutter/material.dart";
 import '../../../../../../../constants/typography/typography.dart';
 
-/*This is the class for displaying the archived account, its ways are simillar to the above class
-only that it does not use the widget word to access the document id because this class is 
-a stateless widget and that it can directly access the constructor varibales */
+/*This is the class for displaying the deactivate account, it does not use the widget word to 
+access the document id because this class is a stateless widget and that it can directly 
+access the constructor varibales */
 // ignore: must_be_immutable
-class DeactivateAccountDisplay extends StatelessWidget {
-  const DeactivateAccountDisplay({
+class DeactivateAccountStatusDisplay extends StatelessWidget {
+  const DeactivateAccountStatusDisplay({
     super.key,
     required this.documentId,
   });
@@ -70,7 +70,7 @@ class DeactivateAccountDisplay extends StatelessWidget {
                                   Text(
                                     " ${data["Account Status"]}",
                                     style: Poppins.farmerName.copyWith(
-                                      color: Color(0xFFFF9800),
+                                      color: const Color(0xFFFF9800),
                                     ),
                                   ),
                                 ],

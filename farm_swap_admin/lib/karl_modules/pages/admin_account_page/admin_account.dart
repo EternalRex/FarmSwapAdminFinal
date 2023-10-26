@@ -3,6 +3,7 @@ import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/admin_account_wrapper.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,11 +19,11 @@ import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.da
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_logout_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_options_header_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
-import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_requests_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 import '../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import 'widgets/archived_button.dart';
 
 class AdminAccount extends StatefulWidget {
   const AdminAccount({super.key});
@@ -122,11 +123,6 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                     /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
                     const DashCommunicationOptionsBtn(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const DashRequestsOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
                     const Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DashLogoutOptionBtn(),
@@ -226,6 +222,29 @@ class _AdminAccount extends State<AdminAccount> {
                                                       .copyWith(
                                                     color:
                                                         const Color(0xFF09041B),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 515,
+                                                ),
+                                                //this textbutton will navigate to request reactivation page
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pushNamed(RoutesManager
+                                                            .requestreactivation);
+                                                  },
+                                                  child: const Text(
+                                                    "Requests",
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontFamily: poppins,
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -435,6 +454,10 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                     /*ADMIN RECENT ACTIVITIES BUTTON */
                     AdminRecentActivitiesBtn(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const ArchivedAccountOptionsBtn(),
                   ],
                 ),
               ),
