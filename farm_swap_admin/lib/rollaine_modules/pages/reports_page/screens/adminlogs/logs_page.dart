@@ -332,7 +332,7 @@ class _AdminLogs extends State<AdminLogs> {
                                         .snapshots(),
                                     builder: (context, snapshot) {
                                       if (!snapshot.hasData) {
-                                        return const CircularProgressIndicator();
+                                        return const Center(child: Text('Loading...'));
                                       } else {
                                         final docs = snapshot.data!.docs;
 

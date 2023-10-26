@@ -253,7 +253,7 @@ class _UserAccount extends State<UserAccount> {
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 15, left: 15),
+                                          top: 15, left: 15, right: 15),
                                       child: Row(
                                         children: [
                                           /*Farmers Title */
@@ -262,6 +262,18 @@ class _UserAccount extends State<UserAccount> {
                                             style:
                                                 Poppins.contentTitle.copyWith(
                                               color: const Color(0xFF09051C),
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          InkWell(
+                                            onTap: () {},
+                                            child: Text(
+                                              'Farmer Requests',
+                                              style: Poppins.menuTitle.copyWith(
+                                                color: greenDark,
+                                                fontWeight: FontWeight.w500,
+                                                decoration: TextDecoration.underline,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -332,7 +344,7 @@ class _UserAccount extends State<UserAccount> {
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 15, left: 15),
+                                          top: 15, left: 15, right: 15),
                                       child: Row(
                                         children: [
                                           Text(
@@ -340,6 +352,18 @@ class _UserAccount extends State<UserAccount> {
                                             style:
                                                 Poppins.contentTitle.copyWith(
                                               color: const Color(0xFF09051C),
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          InkWell(
+                                            onTap: () {},
+                                            child: Text(
+                                              'Consumer Requests',
+                                              style: Poppins.menuTitle.copyWith(
+                                                color: greenDark,
+                                                fontWeight: FontWeight.w500,
+                                                decoration: TextDecoration.underline,
+                                              ),
                                             ),
                                           ),
                                         ],
