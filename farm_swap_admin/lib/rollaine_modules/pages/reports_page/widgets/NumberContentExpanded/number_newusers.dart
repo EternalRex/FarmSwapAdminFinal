@@ -24,8 +24,8 @@ class _NumberNewUsersState extends State<NumberNewUsers> {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       //Initialize references to two Firestore collections: 'FarmerUsers' and 'CustomerUsers'. 
-      final CollectionReference collection1 = firestore.collection('FarmerUsers');
-      final CollectionReference collection2 = firestore.collection('CustomerUsers');
+      final CollectionReference collection1 = firestore.collection('sample_FarmerUsers');
+      final CollectionReference collection2 = firestore.collection('sample_ConsumerUsers');
 
       //Gets the current date and time and assigns it to a DateTime variable named today.
       final DateTime today = DateTime.now();

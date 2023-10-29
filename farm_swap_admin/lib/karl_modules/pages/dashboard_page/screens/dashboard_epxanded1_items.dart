@@ -79,9 +79,7 @@ class _DashBoardExpanded1ItemState extends State<DashBoardExpanded1Item> {
         ),
         /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
         const DashCommunicationOptionsBtn(),
-        const SizedBox(
-          height: 15,
-        ),
+        const Spacer(),
         /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
         DashLogoutOptionBtn(),
       ],

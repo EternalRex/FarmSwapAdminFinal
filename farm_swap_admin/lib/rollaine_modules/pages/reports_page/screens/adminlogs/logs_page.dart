@@ -21,6 +21,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -34,6 +35,11 @@ class AdminLogs extends StatefulWidget {
 
 class _AdminLogs extends State<AdminLogs> {
   final db = FirebaseFirestore.instance;
+
+  //creates an instance of TextEditingController named searchFarmerController.
+  TextEditingController searchAdminController = TextEditingController();
+  //store the search query entered by the user for searching farmers.
+  String adminSearchValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -154,59 +160,34 @@ class _AdminLogs extends State<AdminLogs> {
 
                       //Container for search bar
                       child: SizedBox(
-                        width: 280,
-                        height: 50,
-                        child: Row(
-                          children: [
-
-                            /*The code creates a search bar with an input field for 
-                            text input and a search button with a magnifying glass icon. 
-                            Users can type their search queries in the input field and 
-                            click the search button to initiate a search action.*/
-                            SizedBox(
-                              width: 230,
-                              height: 100,
-                              child: TextField(
-                                style: GoogleFonts.poppins(
-                                    color: const Color(0xFFDA6317),
-                                    height: 1.5),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(5),
-                                  filled: true,
-                                  fillColor:
-                                      const Color(0xFFF9A84D).withOpacity(0.10),
-                                  border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'Search',
-                                ),
+                        width: 250,
+                        height: 15,
+                        child: TextField(
+                          controller: searchAdminController,
+                          style: GoogleFonts.poppins(
+                              color: const Color(0xFFDA6317), height: 1.5),
+                          onSubmitted: (String query) {
+                            setState(
+                              () {
+                                adminSearchValue = query;
+                              },
+                            );
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(5),
+                            filled: true,
+                            fillColor:
+                                const Color(0xFFF9A84D).withOpacity(0.10),
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
                               ),
+                              borderSide: BorderSide.none,
                             ),
-                            Container(
-                              height: 50,
-                              width: 40,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFDA6317),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: const SizedBox(
-                                  width: 30,
-                                  height: 50,
-                                  child: Icon(
-                                    Icons.search_rounded,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                            hintText: 'Search',
+                            prefixIcon: const Icon(Icons.search_rounded),
+                            prefixIconColor: const Color(0xFFDA6317),
+                          ),
                         ),
                       ),
                     ),
@@ -312,7 +293,7 @@ class _AdminLogs extends State<AdminLogs> {
 
                                 //creates a simple rectangular container with white background color and rounded corners.
                                 Container(
-                                  width: 780,
+                                  width: 800,
                                   height: 385,
                                   decoration: const BoxDecoration(
                                     color: Colors.white,
@@ -320,101 +301,11 @@ class _AdminLogs extends State<AdminLogs> {
                                       Radius.circular(10),
                                     ),
                                   ),
-
-                                  //Used to build a UI that automatically updates as new data is streamed in from the Firestore database.
-                                  child: StreamBuilder<QuerySnapshot>(
-
-                                    /*listens to changes in the 'AdminLogs' collection, orders the data by the 'Activity Date' field, 
-                                    and listens for snapshots (real-time updates) in the data.*/
-                                    stream: db
-                                        .collection('AdminLogs')
-                                        .orderBy('Activity Date')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return const CircularProgressIndicator();
-                                      } else {
-                                        final docs = snapshot.data!.docs;
-
-                                        //Display the documents in a scrollable list.
-                                        return ListView.builder(
-                                          itemCount: docs.length,
-                                          itemBuilder: (context, index) {
-
-                                            //Retrieves a document at a specific index from the docs list.
-                                            final document = docs[index];
-
-                                            //Extracts a timestamp called 'Activity Date' from the document.
-                                            Timestamp dateTimestamp =
-                                                document['Activity Date'];
-                                            
-                                            //Converts this timestamp to a DateTime object.
-                                            DateTime dateTime =
-                                                dateTimestamp.toDate();
-
-                                            //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format 
-                                            String dateFinal = DateFormat(
-                                                    'MM/dd/yyyy   HH:mm:ss')
-                                                .format(dateTime);
-
-                                            return ListTile(
-                                              title: Row(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Text(
-                                                      '${document['Admin Email']}',
-                                                      style: Poppins.adminName
-                                                          .copyWith(
-                                                        color: const Color(
-                                                            0xFF09051B),
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 30,
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Text(
-                                                      dateFinal,
-                                                      style: Poppins.adminName
-                                                          .copyWith(
-                                                        color: const Color(
-                                                            0xFF09051B),
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 50,
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Text(
-                                                      '${document['Admin Activity']}',
-                                                      style: Poppins.adminName
-                                                          .copyWith(
-                                                        color: const Color(
-                                                            0xFF09051B),
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
+                                  child: SingleChildScrollView(
+                                    child: SizedBox(
+                                      height: 420,
+                                      child: _buildAdminList(),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -513,5 +404,197 @@ class _AdminLogs extends State<AdminLogs> {
         ],
       ),
     );
+  }
+
+  //Farmer
+
+  //returns a widget for displaying a list of items.
+  Widget _buildAdminList() {
+    return StreamBuilder<QuerySnapshot>(
+      //listens for changes in the collection and update the UI accordingly.
+      stream: db.collection('AdminLogs').orderBy('Activity Date').snapshots(),
+      //defines what should be displayed based on the data from the stream.
+      builder: (context, snapshot) {
+        //It ensures that the stream is active and data is available.
+        if (snapshot.connectionState == ConnectionState.active) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 15),
+            //displaying a scrollable list of items.
+            child: ListView(
+              /*We are getting all the list of documents in the firebase, and each document like one
+              by one, the documents will passed to the _buildUserListItems */
+              children: snapshot.data!.docs
+                  .map<Widget>((document) => _buildAdminListItems(document))
+                  .toList(),
+            ),
+          );
+        } else {
+          //This is a loading indicator that informs the user that data is being fetched.
+          return const Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Color(0xFF14BE77),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  //responsible for creating a widget to represent a farmer
+  Widget _buildAdminListItems(DocumentSnapshot document) {
+    //specifies that the data should be treated as a map with string keys and dynamic values.
+    Map<String, dynamic> admin = document.data() as Map<String, dynamic>;
+
+    //checks if a searchValue variable is not empty
+    if (adminSearchValue.isNotEmpty) {
+      //checks whether the searchValue matches any of the farmer's attributes
+      if (admin['Admin Email'] == adminSearchValue ||
+          admin['Admin Activity'] == adminSearchValue ||
+          admin['Activity Date'] == adminSearchValue) {
+        //Extracts a timestamp called 'Activity Date' from the document.
+        Timestamp dateTimestamp = document['Activity Date'];
+
+        //Converts this timestamp to a DateTime object.
+        DateTime dateTime = dateTimestamp.toDate();
+
+        //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format
+        String dateFinal = DateFormat('MM/dd/yyyy   HH:mm:ss').format(dateTime);
+
+        //displaying a single row in a list
+        return Align(
+          alignment: Alignment.center,
+          child: ListTile(
+            title: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadow,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  //Row where the profile, first name, last name, and details
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "${admin["Admin Email"]}",
+                          style: Poppins.userName.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 110,
+                        ),
+                        //First name of farmer
+                        Text(
+                          dateFinal,
+                          style: Poppins.detailsText.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 80,
+                        ),
+                        //Last name of farmer
+                        Text(
+                          "${admin["Admin Activity"]}",
+                          style: Poppins.contentText.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email != admin['Admin Email']) {
+      //Extracts a timestamp called 'Activity Date' from the document.
+      Timestamp dateTimestamp = document['Activity Date'];
+
+      //Converts this timestamp to a DateTime object.
+      DateTime dateTime = dateTimestamp.toDate();
+
+      //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format
+      String dateFinal = DateFormat('MM/dd/yyyy   HH:mm:ss').format(dateTime);
+
+      return Align(
+        alignment: Alignment.center,
+        child: ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                //Row where the profile, first name, last name, and details
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "${admin["Admin Email"]}",
+                        style: Poppins.userName.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 110,
+                      ),
+                      //First name of farmer
+                      Text(
+                        dateFinal,
+                        style: Poppins.detailsText.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 80,
+                      ),
+                      //Last name of farmer
+                      Text(
+                        "${admin["Admin Activity"]}",
+                        style: Poppins.contentText.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return Container();
   }
 }

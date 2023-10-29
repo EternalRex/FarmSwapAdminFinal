@@ -70,9 +70,9 @@ class _ReportsState extends State<Reports> {
                   children: [
                     //Row for the logo, name, and slogan
                     ReportsLogoSideMenu(),
-                    //15 height spacing
+                    //20 height spacing
                     SizedBox(
-                      height: 25,
+                      height: 20,
                     ),
 
                     //Dashboard icon and label

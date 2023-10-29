@@ -12,7 +12,7 @@ class RetrieveCustomerUserId {
   Future<String?> getDocsId(String data) async {
     String customerData = data;
     await db
-        .collection("CustomerUsers")
+        .collection("sample_ConsumerUsers")
         .where("userId", isEqualTo: customerData)
         .get()
         .then(

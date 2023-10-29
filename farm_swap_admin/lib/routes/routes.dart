@@ -22,7 +22,10 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/admi
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/number_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/selling_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_details.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_request.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_details.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_request.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/pending/pending_users.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
@@ -76,8 +79,11 @@ class RoutesManager {
 
   static const reportsPage = '/reportspage';
   static const userAccountPage = '/useraccountpage';
+  static const pendingAccountPage = '/pendingaccountpage';
   static const detailsFarmerPage = '/detailsfarmerpage';
   static const detailsCustomerPage = '/detailscustomerpage';
+  static const requestFarmer = '/requestreactivatefarmer';
+  static const requestCustomer = '/requestreactivatecustomer';
   static const listingsPage = '/listingspage';
   static const communicationPage = '/communicationpage';
 
@@ -175,17 +181,32 @@ class RoutesManager {
 
       case userAccountPage:
         return MaterialPageRoute(
-          builder: (context) => const UserAccount(),
+          builder: (context) => UserAccount(),
+        );
+
+      case pendingAccountPage:
+        return MaterialPageRoute(
+          builder: (context) => const PendingUserAccounts(),
         );
 
       case detailsFarmerPage:
         return MaterialPageRoute(
-          builder: (context) => const DetailsFarmerPage(),
+          builder: (context) => DetailsFarmerPage(),
         );
 
       case detailsCustomerPage:
         return MaterialPageRoute(
-          builder: (context) => const DetailsCustomerPage(),
+          builder: (context) => DetailsCustomerPage(),
+        );
+
+      case requestFarmer:
+        return MaterialPageRoute(
+          builder: (context) => const FarmerRequestPage(),
+        );
+
+      case requestCustomer:
+        return MaterialPageRoute(
+          builder: (context) => const CustomerRequestPage(),
         );
 
       case listingsPage:

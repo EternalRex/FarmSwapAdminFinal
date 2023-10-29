@@ -12,7 +12,7 @@ class RetrieveFarmerUserId {
   Future<String?> getDocsId(String data) async {
     String farmerData = data;
     await db
-        .collection("FarmerUsers")
+        .collection("sample_FarmerUsers")
         .where("userId", isEqualTo: farmerData)
         .get()
         .then(
