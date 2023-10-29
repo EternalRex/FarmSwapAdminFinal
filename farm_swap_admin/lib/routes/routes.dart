@@ -104,7 +104,7 @@ class RoutesManager {
 
       case adminAccount:
         return MaterialPageRoute(
-          builder: (context) => const AdminAccount(),
+          builder: (context) => AdminAccount(),
         );
 
       case archivedaccountlists:

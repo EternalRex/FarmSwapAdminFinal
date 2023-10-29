@@ -11,14 +11,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../constants/Colors/colors.dart';
-import '../../../../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
-import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import '../../admin_account_logs/database/admin_logs_insert.dart';
 import '../drop_down_update/update_retrieve_docID.dart';
 import '../provider/admin_details_provider.dart';
+import 'widget/third_expanded_textbuttons.dart';
 
 // ignore: must_be_immutable
 class RequestReactivationLists extends StatefulWidget {
@@ -37,6 +35,8 @@ class RequestReactivationLists extends StatefulWidget {
 class _RequestReactivationListsState extends State<RequestReactivationLists> {
   final GetAllAdminRequests getAllAdminRequests = GetAllAdminRequests();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
+  TextEditingController searchController = TextEditingController();
+  String searchValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +79,17 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.adminAccount);
+                    },
+                  ),
                   title: const DashBoardTitleText(
                     myText: "Reactivation Requests",
                     myColor: Color(0xFF09041B),
@@ -95,6 +106,7 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                         width: 250,
                         height: 15,
                         child: TextField(
+                          controller: searchController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
@@ -108,8 +120,18 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                               ),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
+                            hintText: 'Search here',
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  searchValue = searchController.text;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: Color(0xFFDA6317),
+                              ),
+                            ),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
                         ),
@@ -146,435 +168,32 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           top: 15, left: 15),
-                                      child: Row(
-                                        children: [
-                                          //this padding holds the content title
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 35, top: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Admin Requests',
-                                                  style: Poppins.contentTitle
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09041B),
-                                                  ),
-                                                ),
-                                              ],
+
+                                      //this padding holds the content title
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 35, top: 25),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Admin Requests',
+                                              style:
+                                                  Poppins.contentTitle.copyWith(
+                                                color: const Color(0xFF09041B),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                Expanded(
-                                    child: StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('AdminUsers')
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (!snapshot.hasData) {
-                                      return const CircularProgressIndicator();
-                                    }
-
-                                    final List<QueryDocumentSnapshot>
-                                        documents = snapshot.data!.docs;
-
-                                    final filteredDocuments =
-                                        documents.where((doc) {
-                                      // Check if the 'Account Status' field of the document is equal to "Request"
-                                      return doc['Account Status'] ==
-                                          "Requesting";
-                                    }).toList();
-
-                                    if (filteredDocuments.isEmpty) {
-                                      return const Center(
-                                        child: Text("No data available"),
-                                      );
-                                    }
-
-                                    return ListView.builder(
-                                      itemCount: filteredDocuments.length,
-                                      itemBuilder: (context, index) {
-                                        final document =
-                                            filteredDocuments[index];
-
-                                        final profileImage =
-                                            CachedNetworkImageProvider(
-                                                "${document["profileUrl"]}");
-
-                                        return ListTile(
-                                          title: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: shadow,
-                                                  blurRadius: 2,
-                                                  offset: const Offset(0, 1),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    //this is the sizedox for the image, lastname,firstname,
-                                                    //and location for the admin user
-                                                    SizedBox(
-                                                      width: 350,
-                                                      child: Row(
-                                                        children: [
-                                                          //this padding holds the profile image of the admin
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: CircleAvatar(
-                                                              backgroundImage:
-                                                                  profileImage,
-                                                              radius: 20,
-                                                            ),
-                                                          ),
-
-                                                          //this column holds the admin users info
-                                                          //like firstname, lastname and address
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              //first column that holds the admin user firstname and username
-                                                              SizedBox(
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      "${document["First Name"]} ",
-                                                                      style:
-                                                                          const TextStyle(
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      "${document["Last Name"]}",
-                                                                      style:
-                                                                          const TextStyle(
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              //second column that holds the admin user address
-                                                              Text(
-                                                                "${document["Address"]}",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 10,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    //sizedbox to separate the two sizedbox
-                                                    const SizedBox(
-                                                      width: 250,
-                                                    ),
-                                                    //sizedbox for accept button of admin reactivation
-                                                    SizedBox(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(5.0),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                  begin: Alignment
-                                                                      .topLeft,
-                                                                  end: Alignment
-                                                                      .bottomRight,
-                                                                  colors: [
-                                                                    Color(
-                                                                        0xEEFF9012),
-                                                                    Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            233,
-                                                                            104,
-                                                                            39),
-                                                                  ],
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          17.50),
-                                                                ),
-                                                              ),
-                                                              child:
-                                                                  ElevatedButton(
-                                                                style: ElevatedButton
-                                                                    .styleFrom(
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  disabledForegroundColor: Colors
-                                                                      .transparent
-                                                                      .withOpacity(
-                                                                          0.38),
-                                                                  disabledBackgroundColor: Colors
-                                                                      .transparent
-                                                                      .withOpacity(
-                                                                          0.12),
-                                                                  shadowColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                ),
-                                                                onPressed:
-                                                                    () async {
-                                                                  setState(() {
-                                                                    widget.selectedId =
-                                                                        "${document["User Id"]}";
-                                                                  });
-                                                                  showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (BuildContext
-                                                                            context) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            "Confirmation!"),
-                                                                        content:
-                                                                            const Text("Account is requesting for reactivation!\nClick proceed to accept request."),
-                                                                        actions: <Widget>[
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text("Proceed"),
-                                                                            onPressed:
-                                                                                () async {
-                                                                              Navigator.of(context).pop(); // this will close the dialog box
-                                                                              /**
-                                                                              * In this function when the button is clicked it will update the selected id
-                                                                              * the account status into active then it will also create admin logs
-                                                                              */
-                                                                              await updateField("Active", widget.selectedId);
-
-                                                                              //this will navigate to request reactivate account page
-                                                                              // ignore: use_build_context_synchronously
-                                                                              Navigator.of(context).pushNamed(RoutesManager.requestreactivation);
-                                                                            },
-                                                                          ),
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text("Cancel"),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop(); // Close the dialog box
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                },
-                                                                child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              5,
-                                                                          bottom:
-                                                                              5),
-                                                                  child: Text(
-                                                                    'Accept',
-                                                                    style: GoogleFonts
-                                                                        .poppins(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          8,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      letterSpacing:
-                                                                          0.50,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    //sizedbox for the decline button of admin reactivation
-                                                    SizedBox(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(5.0),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            //decline button
-                                                            DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                  begin: Alignment
-                                                                      .topLeft,
-                                                                  end: Alignment
-                                                                      .bottomRight,
-                                                                  colors: [
-                                                                    Color(
-                                                                        0xFF53E78B),
-                                                                    Color(
-                                                                        0xFF14BE77),
-                                                                  ],
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          17.50),
-                                                                ),
-                                                              ),
-                                                              child:
-                                                                  ElevatedButton(
-                                                                style: ElevatedButton
-                                                                    .styleFrom(
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  disabledForegroundColor: Colors
-                                                                      .transparent
-                                                                      .withOpacity(
-                                                                          0.38),
-                                                                  disabledBackgroundColor: Colors
-                                                                      .transparent
-                                                                      .withOpacity(
-                                                                          0.12),
-                                                                  shadowColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                ),
-                                                                onPressed:
-                                                                    () async {
-                                                                  setState(() {
-                                                                    widget.selectedId =
-                                                                        "${document["User Id"]}";
-                                                                  });
-                                                                  showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (BuildContext
-                                                                            context) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            "Confirmation!"),
-                                                                        content:
-                                                                            const Text("Are you sure you want to decline request?\nClick proceed to decline request."),
-                                                                        actions: <Widget>[
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text("Proceed"),
-                                                                            onPressed:
-                                                                                () async {
-                                                                              Navigator.of(context).pop(); // this will close the dialog box
-                                                                              //create logs here where the account status filed will be set to deactivated
-                                                                              await updateField1("Decline", widget.selectedId);
-
-                                                                              // ignore: use_build_context_synchronously
-                                                                              Provider.of<AdminDetailsProvider>(context, listen: false).setadminUserId(widget.selectedId);
-
-                                                                              //this will navigate to specific admin deactivate page
-                                                                              // ignore: use_build_context_synchronously
-                                                                              Navigator.of(context).pushNamed(RoutesManager.requestreactivation);
-                                                                            },
-                                                                          ),
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text("Cancel"),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop(); // Close the dialog box
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                },
-                                                                child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              5,
-                                                                          bottom:
-                                                                              5),
-                                                                  child: Text(
-                                                                    'Decline',
-                                                                    style: GoogleFonts
-                                                                        .poppins(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          8,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      letterSpacing:
-                                                                          0.50,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                )),
+                                SizedBox(
+                                  height: 600,
+                                  child: _buildUserList(),
+                                ),
                               ],
                             ),
                           ),
@@ -617,19 +236,9 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                           horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
-                          const SizedBox(
-                            width: 5,
-                          ),
                           /*PROFILE TEXT */
-                          DashBoardTxt(
-                            myText: "Profile",
-                            myColor: const Color(0xFF09041B),
-                            mySize: 15,
-                            myFont: GoogleFonts.poppins().fontFamily,
-                            myWeight: FontWeight.w800,
-                          ),
                           const SizedBox(
-                            width: 34,
+                            width: 82,
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
@@ -651,83 +260,17 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 150,
                     ),
-
-                    /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
-
-                    /*In this future builder we will get the document id that we get from
-                    the database querry in the dashboardquery file */
-                    FutureBuilder(
-                      future: id.getDocsId(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          String data = snapshot.data!;
-                          return Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                /*We call the profilephoto class from ourr dashboard profileinfo and then
-                                pass the variable data that has the documentid string form*/
-                                ProfilePhoto(documentId: data),
-                              ],
-                            ),
-                          );
-                        } else {
-                          /*If the data is not yet given so it will display no data until data is presented */
-                          return const Text("No data");
-                        }
-                      },
-                    ),
+                    const AdminRequestsListBtn(),
                     const SizedBox(
                       height: 15,
                     ),
-
-                    /*THE NAME OF THE USER, This future builder will display the name of the current uer
-                    its ways ae simillar above */
-                    FutureBuilder(
-                      future: id.getDocsId(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          String data = snapshot.data!;
-                          return Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ProfileName(documentId: data),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return const Text("No data");
-                        }
-                      },
-                    ),
-
-                    /*ID OF THE USER,This future builder will display the name of the current uer
-                    its ways ae simillar above */
-                    FutureBuilder(
-                      future: id.getDocsId(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          String data = snapshot.data!;
-                          return ProfileId(documentId: data);
-                        } else {
-                          return const Text("No data");
-                        }
-                      },
-                    ),
+                    const FarmerRequestsListBtn(),
                     const SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
-
-                    /*EDIT PROFILE BUTTON */
-                    const AdminEditProfileBtn(),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    /*ADMIN RECENT ACTIVITIES BUTTON */
-                    AdminRecentActivitiesBtn(),
+                    const ConsumerRequestsListBtn(),
                   ],
                 ),
               ),
@@ -736,6 +279,591 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
         ],
       ),
     );
+  }
+
+  Widget _buildUserList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('AdminUsers')
+          .where('Account Status', isEqualTo: 'Requesting')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator(); // Display a loading indicator while waiting for data.
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListView(
+              children: snapshot.data!.docs.map<Widget>((document) {
+                return _buildUserListItems(document);
+              }).toList(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildUserListItems(DocumentSnapshot document) {
+    /*We are accessing a document that was passed here one by one, and map it into 
+    String and dynamic, to look the same in the firebase strcuture */
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    final profileImage = CachedNetworkImageProvider("${data["profileUrl"]}");
+/*Only the specific account searched will display*/
+    if (searchValue.isNotEmpty) {
+      if (data["First Name"] == searchValue ||
+          data["Last Name"] == searchValue ||
+          data["Email Address"] == searchValue) {
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 350,
+                      child: Row(
+                        children: [
+                          //this padding holds the profile image of the admin
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              backgroundImage: profileImage,
+                              radius: 20,
+                            ),
+                          ),
+
+                          //this column holds the admin users info
+                          //like firstname, lastname and address
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //first column that holds the admin user firstname and username
+                              SizedBox(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "${data["First Name"]} ",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${data["Last Name"]}",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //second column that holds the admin user address
+                              Text(
+                                "${data["Address"]}",
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 240,
+                    ),
+                    //sizedbox for accept button of admin reactivation
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color(0xEEFF9012),
+                                    Color.fromARGB(255, 233, 104, 39),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(17.50),
+                                ),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  disabledForegroundColor:
+                                      Colors.transparent.withOpacity(0.38),
+                                  disabledBackgroundColor:
+                                      Colors.transparent.withOpacity(0.12),
+                                  shadowColor: Colors.transparent,
+                                ),
+                                onPressed: () async {
+                                  setState(() {
+                                    widget.selectedId =
+                                        "${document["User Id"]}";
+                                  });
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text("Confirmation!"),
+                                        content: const Text(
+                                            "Account is requesting for reactivation!\nClick proceed to accept request."),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text("Proceed"),
+                                            onPressed: () async {
+                                              Navigator.of(context)
+                                                  .pop(); // this will close the dialog box
+                                              /**
+                                                                              * In this function when the button is clicked it will update the selected id
+                                                                              * the account status into active then it will also create admin logs
+                                                                              */
+                                              await updateField(
+                                                  "Active", widget.selectedId);
+
+                                              //this will navigate to request reactivate account page
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.of(context).pushNamed(
+                                                  RoutesManager
+                                                      .requestreactivation);
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text("Cancel"),
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog box
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Accept',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            //decline button
+                            DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color(0xFF53E78B),
+                                    Color(0xFF14BE77),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(17.50),
+                                ),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  disabledForegroundColor:
+                                      Colors.transparent.withOpacity(0.38),
+                                  disabledBackgroundColor:
+                                      Colors.transparent.withOpacity(0.12),
+                                  shadowColor: Colors.transparent,
+                                ),
+                                onPressed: () async {
+                                  setState(() {
+                                    widget.selectedId =
+                                        "${document["User Id"]}";
+                                  });
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text("Confirmation!"),
+                                        content: const Text(
+                                            "Are you sure you want to decline request?\nClick proceed to decline request."),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text("Proceed"),
+                                            onPressed: () async {
+                                              Navigator.of(context)
+                                                  .pop(); // this will close the dialog box
+                                              //create logs here where the account status filed will be set to deactivated
+                                              await updateField1(
+                                                  "Decline", widget.selectedId);
+
+                                              // ignore: use_build_context_synchronously
+                                              Provider.of<AdminDetailsProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .setadminUserId(
+                                                      widget.selectedId);
+
+                                              //this will navigate to specific admin deactivate page
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.of(context).pushNamed(
+                                                  RoutesManager
+                                                      .requestreactivation);
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text("Cancel"),
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog box
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Decline',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+
+    /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
+    because we will not display the current user here only those other users*/
+
+    else {
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 350,
+                    child: Row(
+                      children: [
+                        //this padding holds the profile image of the admin
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundImage: profileImage,
+                            radius: 20,
+                          ),
+                        ),
+
+                        //this column holds the admin users info
+                        //like firstname, lastname and address
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //first column that holds the admin user firstname and username
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${data["First Name"]} ",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${data["Last Name"]}",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //second column that holds the admin user address
+                            Text(
+                              "${data["Address"]}",
+                              style: const TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 240,
+                  ),
+                  //sizedbox for accept button of admin reactivation
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xEEFF9012),
+                                  Color.fromARGB(255, 233, 104, 39),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(17.50),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () async {
+                                setState(() {
+                                  widget.selectedId = "${document["User Id"]}";
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Confirmation!"),
+                                      content: const Text(
+                                          "Account is requesting for reactivation!\nClick proceed to accept request."),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text("Proceed"),
+                                          onPressed: () async {
+                                            Navigator.of(context)
+                                                .pop(); // this will close the dialog box
+                                            /**
+                                                                              * In this function when the button is clicked it will update the selected id
+                                                                              * the account status into active then it will also create admin logs
+                                                                              */
+                                            await updateField(
+                                                "Active", widget.selectedId);
+
+                                            //this will navigate to request reactivate account page
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.of(context).pushNamed(
+                                                RoutesManager
+                                                    .requestreactivation);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: const Text("Cancel"),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog box
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Accept',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //decline button
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF53E78B),
+                                  Color(0xFF14BE77),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(17.50),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () async {
+                                setState(() {
+                                  widget.selectedId = "${document["User Id"]}";
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Confirmation!"),
+                                      content: const Text(
+                                          "Are you sure you want to decline request?\nClick proceed to decline request."),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text("Proceed"),
+                                          onPressed: () async {
+                                            Navigator.of(context)
+                                                .pop(); // this will close the dialog box
+                                            //create logs here where the account status filed will be set to deactivated
+                                            await updateField1(
+                                                "Decline", widget.selectedId);
+
+                                            // ignore: use_build_context_synchronously
+                                            Provider.of<AdminDetailsProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .setadminUserId(
+                                                    widget.selectedId);
+
+                                            //this will navigate to specific admin deactivate page
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.of(context).pushNamed(
+                                                RoutesManager
+                                                    .requestreactivation);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: const Text("Cancel"),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog box
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Decline',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Container();
   }
 
 //create a varaible for the current user in making admin logs

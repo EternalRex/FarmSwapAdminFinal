@@ -39,6 +39,8 @@ class AdminLogsSpecificWrapper extends StatefulWidget {
 
 class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
+  TextEditingController searchController = TextEditingController();
+  String searchValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -195,517 +197,385 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                 const SizedBox(
                                   height: 30,
                                 ),
-
-                                //this is the specific admin activity
                                 FutureBuilder<DocumentSnapshot>(
-                                  future: adminRef.doc(widget.documentID).get(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      dynamic data =
-                                          snapshot.data!.data() as dynamic;
-                                      /**
-                                       * This declare the final variable specificEmails of type List<String> 
-                                       * and assigns the list with the email address to it.
-                                       */
-                                      final List<String> specificEmails = [
-                                        data["Email Address"]
-                                      ];
+                                    future:
+                                        adminRef.doc(widget.documentID).get(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        dynamic data =
+                                            snapshot.data!.data() as dynamic;
 
-                                      return Column(
-                                        children: [
-                                          //first column that holds the important details of an admin user
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Container(
-                                              width: 800,
-                                              height: 145,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                  Radius.circular(10),
+                                        final specificEmail =
+                                            data["Email Address"];
+
+                                        return Column(
+                                          children: [
+                                            //first column that holds the important details of an admin user
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Container(
+                                                width: 800,
+                                                height: 145,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: shadow,
+                                                      blurRadius: 2,
+                                                      offset:
+                                                          const Offset(0, 1),
+                                                    ),
+                                                  ],
                                                 ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: shadow,
-                                                    blurRadius: 2,
-                                                    offset: const Offset(0, 1),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  //this first sizedbox holds the profile Url of the admin users
-                                                  //this will also display the picture of the admin users
-                                                  SizedBox(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: CircleAvatar(
-                                                        backgroundImage:
-                                                            NetworkImage(
-                                                                "${data["profileUrl"]}"),
-                                                        radius: 50,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    //this first sizedbox holds the profile Url of the admin users
+                                                    //this will also display the picture of the admin users
+                                                    SizedBox(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: CircleAvatar(
+                                                          backgroundImage:
+                                                              NetworkImage(
+                                                                  "${data["profileUrl"]}"),
+                                                          radius: 50,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
 
-                                                  //this second sizedbox expanded hold the admin users information
-                                                  //like first and last name, email address and admin user ID
-                                                  SizedBox(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          //this row holds the first name and last name of the admin users
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                "${data["First Name"]} ",
-                                                                style: Poppins
-                                                                    .adminName
-                                                                    .copyWith(
-                                                                  color: const Color(
-                                                                      0xFF09041B),
-                                                                  fontSize: 15,
+                                                    //this second sizedbox expanded hold the admin users information
+                                                    //like first and last name, email address and admin user ID
+                                                    SizedBox(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            //this row holds the first name and last name of the admin users
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  "${data["First Name"]} ",
+                                                                  style: Poppins
+                                                                      .adminName
+                                                                      .copyWith(
+                                                                    color: const Color(
+                                                                        0xFF09041B),
+                                                                    fontSize:
+                                                                        15,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                "${data["Last Name"]}",
-                                                                style: Poppins
-                                                                    .adminName
-                                                                    .copyWith(
-                                                                  color: const Color(
-                                                                      0xFF09041B),
-                                                                  fontSize: 15,
+                                                                Text(
+                                                                  "${data["Last Name"]}",
+                                                                  style: Poppins
+                                                                      .adminName
+                                                                      .copyWith(
+                                                                    color: const Color(
+                                                                        0xFF09041B),
+                                                                    fontSize:
+                                                                        15,
+                                                                  ),
                                                                 ),
+                                                              ],
+                                                            ),
+                                                            //this Text holds the admin email address
+                                                            Text(
+                                                              "${data["Email Address"]}",
+                                                              style: Poppins
+                                                                  .userName
+                                                                  .copyWith(
+                                                                color: const Color(
+                                                                    0xFF09041B),
                                                               ),
-                                                            ],
-                                                          ),
-                                                          //this Text holds the admin email address
-                                                          Text(
-                                                            "${data["Email Address"]}",
-                                                            style: Poppins
-                                                                .userName
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
                                                             ),
-                                                          ),
-                                                          //this Text holds the admin user ID
-                                                          Text(
-                                                            "ID: ${data["User Id"]}",
-                                                            style: Poppins
-                                                                .detailsText
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
+                                                            //this Text holds the admin user ID
+                                                            Text(
+                                                              "ID: ${data["User Id"]}",
+                                                              style: Poppins
+                                                                  .detailsText
+                                                                  .copyWith(
+                                                                color: const Color(
+                                                                    0xFF09041B),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-
-                                          //putting container inside align to center the container
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Container(
-                                              width: 800,
-                                              height: 600,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                  Radius.circular(10),
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: shadow,
-                                                    blurRadius: 2,
-                                                    offset: const Offset(0, 1),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            //putting container inside align to center the container
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Container(
+                                                width: 800,
+                                                height: 600,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(10),
                                                   ),
-                                                ],
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 5,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10,
-                                                          vertical: 10),
-                                                      child: Column(
-                                                        children: [
-                                                          //this is for setting the search bar to center right
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: shadow,
+                                                      blurRadius: 2,
+                                                      offset:
+                                                          const Offset(0, 1),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 10),
+                                                        child: Column(
+                                                          children: [
+                                                            //this is for setting the search bar to center right
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .centerRight,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        10),
 
-                                                              //Container for search bar
-                                                              child: SizedBox(
-                                                                width: 250,
-                                                                height: 25,
-                                                                child:
-                                                                    TextField(
-                                                                  style: GoogleFonts.poppins(
-                                                                      color: const Color(
-                                                                          0xFFDA6317),
-                                                                      height:
-                                                                          1.5),
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    contentPadding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            5),
-                                                                    filled:
-                                                                        true,
-                                                                    fillColor: const Color(
-                                                                            0xFFF9A84D)
-                                                                        .withOpacity(
-                                                                            0.10),
-                                                                    border:
-                                                                        const OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            10),
-                                                                      ),
-                                                                      borderSide:
-                                                                          BorderSide
-                                                                              .none,
-                                                                    ),
-                                                                    hintText:
-                                                                        'Search here...',
-                                                                    prefixIcon:
-                                                                        const Icon(
-                                                                            Icons.search_rounded),
-                                                                    prefixIconColor:
-                                                                        const Color(
+                                                                //Container for search bar
+                                                                child: SizedBox(
+                                                                  width: 250,
+                                                                  height: 28,
+                                                                  child:
+                                                                      TextField(
+                                                                    controller:
+                                                                        searchController,
+                                                                    style: GoogleFonts.poppins(
+                                                                        color: const Color(
                                                                             0xFFDA6317),
+                                                                        height:
+                                                                            1.5),
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      contentPadding:
+                                                                          const EdgeInsets
+                                                                              .all(
+                                                                              5),
+                                                                      filled:
+                                                                          true,
+                                                                      fillColor: const Color(
+                                                                              0xFFF9A84D)
+                                                                          .withOpacity(
+                                                                              0.10),
+                                                                      border:
+                                                                          const OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10),
+                                                                        ),
+                                                                        borderSide:
+                                                                            BorderSide.none,
+                                                                      ),
+                                                                      hintText:
+                                                                          'Search here',
+                                                                      prefixIcon:
+                                                                          IconButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            searchValue =
+                                                                                searchController.text;
+                                                                          });
+                                                                        },
+                                                                        icon:
+                                                                            const Icon(
+                                                                          Icons
+                                                                              .search,
+                                                                          color:
+                                                                              Color(0xFFDA6317),
+                                                                        ),
+                                                                      ),
+                                                                      prefixIconColor:
+                                                                          const Color(
+                                                                              0xFFDA6317),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ),
-
-                                                          const SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          //this container serves as the header
-                                                          //this holds the title header
-                                                          Container(
-                                                            width: 780,
-                                                            height: 40,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color
-                                                                  .fromARGB(
-                                                                  255,
-                                                                  188,
-                                                                  241,
-                                                                  189),
-                                                              borderRadius:
-                                                                  const BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10),
-                                                              ),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: shadow,
-                                                                  blurRadius: 2,
-                                                                  offset:
-                                                                      const Offset(
-                                                                          0, 1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: Row(
-                                                              children: [
-                                                                const SizedBox(
-                                                                  width: 100,
-                                                                ),
-                                                                Text(
-                                                                  "User",
-                                                                  style: Poppins
-                                                                      .adminName
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
-                                                                    fontSize:
-                                                                        15,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 160,
-                                                                ),
-                                                                Text(
-                                                                  "Date and Time",
-                                                                  style: Poppins
-                                                                      .adminName
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
-                                                                    fontSize:
-                                                                        15,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 200,
-                                                                ),
-                                                                Text(
-                                                                  "Action",
-                                                                  style: Poppins
-                                                                      .adminName
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
-                                                                    fontSize:
-                                                                        15,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 3,
-                                                          ),
-                                                          /**
-                                                           * this container has the value of admin logs
-                                                           * this logs is for the specific admin
-                                                           */
-                                                          Container(
-                                                            width: 780,
-                                                            height: 400,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  const BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10),
-                                                              ),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: shadow,
-                                                                  blurRadius: 2,
-                                                                  offset:
-                                                                      const Offset(
-                                                                          0, 1),
-                                                                ),
-                                                              ],
                                                             ),
 
-                                                            /**
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            //this container serves as the header
+                                                            //this holds the title header
+                                                            Container(
+                                                              width: 780,
+                                                              height: 40,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: const Color
+                                                                    .fromARGB(
+                                                                    255,
+                                                                    188,
+                                                                    241,
+                                                                    189),
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                        .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10),
+                                                                ),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color:
+                                                                        shadow,
+                                                                    blurRadius:
+                                                                        2,
+                                                                    offset:
+                                                                        const Offset(
+                                                                            0,
+                                                                            1),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Row(
+                                                                children: [
+                                                                  const SizedBox(
+                                                                    width: 100,
+                                                                  ),
+                                                                  Text(
+                                                                    "User",
+                                                                    style: Poppins
+                                                                        .adminName
+                                                                        .copyWith(
+                                                                      color: const Color(
+                                                                          0xFF09041B),
+                                                                      fontSize:
+                                                                          15,
+                                                                    ),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    width: 160,
+                                                                  ),
+                                                                  Text(
+                                                                    "Date and Time",
+                                                                    style: Poppins
+                                                                        .adminName
+                                                                        .copyWith(
+                                                                      color: const Color(
+                                                                          0xFF09041B),
+                                                                      fontSize:
+                                                                          15,
+                                                                    ),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    width: 200,
+                                                                  ),
+                                                                  Text(
+                                                                    "Action",
+                                                                    style: Poppins
+                                                                        .adminName
+                                                                        .copyWith(
+                                                                      color: const Color(
+                                                                          0xFF09041B),
+                                                                      fontSize:
+                                                                          15,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 3,
+                                                            ),
+
+                                                            Container(
+                                                              width: 780,
+                                                              height: 400,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                        .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10),
+                                                                ),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color:
+                                                                        shadow,
+                                                                    blurRadius:
+                                                                        2,
+                                                                    offset:
+                                                                        const Offset(
+                                                                            0,
+                                                                            1),
+                                                                  ),
+                                                                ],
+                                                              ),
+
+                                                              /**
                                                              * the streambuilder will listen the changes
                                                              * of AdminLogs collection in the firebase 
                                                              */
-                                                            child:
-                                                                StreamBuilder(
-                                                              stream: FirebaseFirestore
-                                                                  .instance
-                                                                  .collection(
-                                                                      'AdminLogs')
-                                                                  .snapshots(),
-                                                              builder: (context,
-                                                                  snapshot) {
-                                                                /**
-                                                                     * This condition checks whether the snapshot contains data. 
-                                                                     * If it doesn't, it returns a CircularProgressIndicator, 
-                                                                     * which is a loading spinner.
-                                                                     */
-                                                                if (!snapshot
-                                                                    .hasData) {
-                                                                  return const CircularProgressIndicator();
-                                                                }
-
-                                                                /**
-                                                                 * documents is a list of QueryDocumentSnapshot 
-                                                                 * objects retrieved from the snapshot.data!.docs property.
-                                                                 *  It contains the documents in the 'AdminLogs' collection.
-                                                                 */
-                                                                final List<
-                                                                        QueryDocumentSnapshot>
-                                                                    documents =
-                                                                    snapshot
-                                                                        .data!
-                                                                        .docs;
-
-                                                                final filteredDocuments =
-                                                                    documents
-                                                                        .where(
-                                                                            (doc) {
-                                                                  // Check if the 'email' field of the document matches one of the specific emails
-                                                                  return specificEmails
-                                                                      .contains(
-                                                                          doc['Admin Email']);
-                                                                }).toList();
-
-                                                                /**
-                                                                 * if the filtered document is empty
-                                                                 * it will return the center
-                                                                 * where it show no data available
-                                                                 */
-                                                                if (filteredDocuments
-                                                                    .isEmpty) {
-                                                                  return const Center(
-                                                                    child: Text(
-                                                                        "No data available"),
-                                                                  );
-                                                                }
-
-                                                                /**
-                                                                 * This is a widget used to build a scrollable list. 
-                                                                 * It takes the filtered documents and builds a ListTile for each of them.
-                                                                 */
-                                                                return ListView
-                                                                    .builder(
-                                                                  itemCount:
-                                                                      filteredDocuments
-                                                                          .length,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    final document =
-                                                                        filteredDocuments[
-                                                                            index];
-                                                                    Timestamp
-                                                                        dateTimestamp =
-                                                                        document[
-                                                                            "Activity Date"];
-                                                                    DateTime
-                                                                        dateTime =
-                                                                        dateTimestamp
-                                                                            .toDate();
-                                                                    String
-                                                                        dateFinal =
-                                                                        DateFormat('yyyy-MM-dd HH:mm:ss')
-                                                                            .format(dateTime);
-
-                                                                    /**
-                                                                     * this listtile uses a Row with multiple Text widgets to display information 
-                                                                     * about each document, 
-                                                                     * including the 'Admin Email', 'Activity Date', and 'Admin Activity'.
-                                                                    */
-                                                                    return ListTile(
-                                                                      title:
-                                                                          Row(
-                                                                        children: [
-                                                                          const SizedBox(
-                                                                            width:
-                                                                                20,
-                                                                          ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                1,
-                                                                            child:
-                                                                                Text(
-                                                                              "${document["Admin Email"]} ",
-                                                                              style: Poppins.adminName.copyWith(
-                                                                                color: const Color(0xFF09041B),
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.normal,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            width:
-                                                                                15,
-                                                                          ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                1,
-                                                                            child:
-                                                                                Text(
-                                                                              " $dateFinal ",
-                                                                              style: Poppins.adminName.copyWith(
-                                                                                color: const Color(0xFF09041B),
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.normal,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                1,
-                                                                            child:
-                                                                                Text(
-                                                                              " ${document["Admin Activity"]}",
-                                                                              style: Poppins.adminName.copyWith(
-                                                                                color: const Color(0xFF09041B),
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.normal,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                );
-                                                              },
+                                                              child: _buildUserList(
+                                                                  specificEmail),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    } else {
-                                      return const CircularProgressIndicator(
-                                        color: Colors.green,
-                                      );
-                                    }
-                                  },
-                                ),
-
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                          ],
+                                        );
+                                      } else {
+                                        return const CircularProgressIndicator(
+                                          color: Colors.green,
+                                        );
+                                      }
+                                    }),
                               ],
                             ),
                           ),
@@ -877,5 +747,158 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
         ],
       ),
     );
+  }
+
+  Widget _buildUserList(String specificEmail) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('AdminLogs')
+          .where('Admin Email', isEqualTo: specificEmail)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          final logs = snapshot.data!.docs;
+
+          if (logs.isEmpty) {
+            return const Center(
+              child: Text('No admin logs available for this user.'),
+            );
+          }
+
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListView(
+              children: logs.map<Widget>((document) {
+                return _buildUserListItems(document);
+              }).toList(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildUserListItems(DocumentSnapshot document) {
+    /*We are accessing a document that was passed here one by one, and map it into 
+    String and dynamic, to look the same in the firebase strcuture */
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    Timestamp dateTimestamp = document["Activity Date"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateFinal = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+/*Only the specific account searched will display*/
+    if (searchValue.isNotEmpty) {
+      if (data["Activity Date"] == searchValue ||
+          data["Admin Email"] == searchValue ||
+          data["Admin Activity"] == searchValue) {
+        return ListTile(
+          title: Row(
+            children: [
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  "${document["Admin Email"]} ",
+                  style: Poppins.adminName.copyWith(
+                    color: const Color(0xFF09041B),
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  " $dateFinal ",
+                  style: Poppins.adminName.copyWith(
+                    color: const Color(0xFF09041B),
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  " ${document["Admin Activity"]}",
+                  style: Poppins.adminName.copyWith(
+                    color: const Color(0xFF09041B),
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
+    /* else search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
+    because we will not display the current user here only those other users*/
+
+    else {
+      return ListTile(
+        title: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                "${document["Admin Email"]} ",
+                style: Poppins.adminName.copyWith(
+                  color: const Color(0xFF09041B),
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                " $dateFinal ",
+                style: Poppins.adminName.copyWith(
+                  color: const Color(0xFF09041B),
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                " ${document["Admin Activity"]}",
+                style: Poppins.adminName.copyWith(
+                  color: const Color(0xFF09041B),
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Container();
   }
 }

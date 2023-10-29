@@ -10,6 +10,7 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashbo
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../../routes/routes.dart';
 import '../../../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import 'widgets/consumer_archivedLists_btn.dart';
@@ -30,6 +31,9 @@ class ArchivedAccountLists extends StatefulWidget {
 class _RequestReactivationListsState extends State<ArchivedAccountLists> {
   final GetAllAdminRequests getAllAdminRequests = GetAllAdminRequests();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
+
+  TextEditingController searchController = TextEditingController();
+  String searchValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +76,19 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.adminAccount);
+                    },
+                  ),
                   title: const DashBoardTitleText(
-                    myText: "Archived Accounts",
+                    myText: "Archived Account",
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -88,6 +103,7 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
                         width: 250,
                         height: 15,
                         child: TextField(
+                          controller: searchController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
@@ -101,8 +117,18 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
                               ),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
+                            hintText: 'Search here',
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  searchValue = searchController.text;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: Color(0xFFDA6317),
+                              ),
+                            ),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
                         ),
@@ -139,248 +165,29 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           top: 15, left: 15),
-                                      child: Row(
-                                        children: [
-                                          //this padding holds the content title
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 35, top: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Admin Archived Accounts',
-                                                  style: Poppins.contentTitle
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09041B),
-                                                  ),
-                                                ),
-                                              ],
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 35, top: 25),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Admin Archived Accounts',
+                                              style:
+                                                  Poppins.contentTitle.copyWith(
+                                                color: const Color(0xFF09041B),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                Expanded(
-                                  child: StreamBuilder(
-                                    stream: FirebaseFirestore.instance
-                                        .collection('AdminArchivedUsers')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return const CircularProgressIndicator();
-                                      }
-
-                                      final List<QueryDocumentSnapshot>
-                                          documents = snapshot.data!.docs;
-
-                                      final filteredDocuments =
-                                          documents.where((doc) {
-                                        // Check if the 'Account Status' field of the document is equal to "archived"
-                                        return doc['Account Status'] ==
-                                            "Archived";
-                                      }).toList();
-
-                                      if (filteredDocuments.isEmpty) {
-                                        return const Center(
-                                          child: Text("No data available"),
-                                        );
-                                      }
-
-                                      return ListView.builder(
-                                        itemCount: filteredDocuments.length,
-                                        itemBuilder: (context, index) {
-                                          final document =
-                                              filteredDocuments[index];
-
-                                          final profileImage =
-                                              CachedNetworkImageProvider(
-                                                  "${document["profileUrl"]}");
-
-                                          return ListTile(
-                                            title: Align(
-                                              alignment: Alignment.center,
-                                              child: Container(
-                                                width: 800,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                    Radius.circular(10),
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: shadow,
-                                                      blurRadius: 2,
-                                                      offset:
-                                                          const Offset(0, 1),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        const SizedBox(
-                                                          width: 25,
-                                                        ),
-                                                        //this is the sizedox for the image, lastname,firstname,
-                                                        //and location for the admin user
-                                                        SizedBox(
-                                                          width: 350,
-                                                          child: Row(
-                                                            children: [
-                                                              //this padding holds the profile image of the admin
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        8.0),
-                                                                child:
-                                                                    CircleAvatar(
-                                                                  backgroundImage:
-                                                                      profileImage,
-                                                                  radius: 20,
-                                                                ),
-                                                              ),
-
-                                                              //this column holds the admin users info
-                                                              //like firstname, lastname and address
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  //first column that holds the admin user firstname and username
-                                                                  SizedBox(
-                                                                    child: Row(
-                                                                      children: [
-                                                                        Text(
-                                                                          "${document["First Name"]} ",
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                15,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          "${document["Last Name"]}",
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            fontSize:
-                                                                                15,
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  //second column that holds the admin user address
-                                                                  Text(
-                                                                    "${document["Address"]}",
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          10,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        //sizedbox to separate the two sizedbox
-                                                        const SizedBox(
-                                                          width: 300,
-                                                        ),
-                                                        //sizedbox for archived button
-                                                        SizedBox(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(5.0),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                DecoratedBox(
-                                                                  decoration:
-                                                                      const BoxDecoration(
-                                                                    color: Color(
-                                                                        0xFFD9D9D9),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .all(
-                                                                      Radius.circular(
-                                                                          17.50),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      ElevatedButton(
-                                                                    style: ElevatedButton
-                                                                        .styleFrom(
-                                                                      backgroundColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      disabledForegroundColor: Colors
-                                                                          .transparent
-                                                                          .withOpacity(
-                                                                              0.38),
-                                                                      disabledBackgroundColor: Colors
-                                                                          .transparent
-                                                                          .withOpacity(
-                                                                              0.12),
-                                                                      shadowColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () async {},
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              5,
-                                                                          bottom:
-                                                                              5),
-                                                                      child:
-                                                                          Text(
-                                                                        'Archived',
-                                                                        style: GoogleFonts
-                                                                            .poppins(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontSize:
-                                                                              8,
-                                                                          fontWeight:
-                                                                              FontWeight.w700,
-                                                                          letterSpacing:
-                                                                              0.50,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
+                                SizedBox(
+                                  height: 600,
+                                  child: _buildUserList(),
                                 ),
                               ],
                             ),
@@ -467,5 +274,295 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
         ],
       ),
     );
+  }
+
+  Widget _buildUserList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('AdminArchivedUsers')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator(); // Display a loading indicator while waiting for data.
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListView(
+              children: snapshot.data!.docs.map<Widget>((document) {
+                return _buildUserListItems(document);
+              }).toList(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildUserListItems(DocumentSnapshot document) {
+    /*We are accessing a document that was passed here one by one, and map it into 
+    String and dynamic, to look the same in the firebase strcuture */
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    final profileImage = CachedNetworkImageProvider("${data["profileUrl"]}");
+/*Only the specific account searched will display*/
+    if (searchValue.isNotEmpty) {
+      if (data["First Name"] == searchValue ||
+          data["Last Name"] == searchValue ||
+          data["Email Address"] == searchValue) {
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 350,
+                      child: Row(
+                        children: [
+                          //this padding holds the profile image of the admin
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              backgroundImage: profileImage,
+                              radius: 20,
+                            ),
+                          ),
+
+                          //this column holds the admin users info
+                          //like firstname, lastname and address
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //first column that holds the admin user firstname and username
+                              SizedBox(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "${data["First Name"]} ",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${data["Last Name"]}",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //second column that holds the admin user address
+                              Text(
+                                "${data["Address"]}",
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 240,
+                    ),
+                    //sizedbox for the button archived
+                    //sizedbox for archived button
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            DecoratedBox(
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFD9D9D9),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(17.50),
+                                ),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  disabledForegroundColor:
+                                      Colors.transparent.withOpacity(0.38),
+                                  disabledBackgroundColor:
+                                      Colors.transparent.withOpacity(0.12),
+                                  shadowColor: Colors.transparent,
+                                ),
+                                onPressed: () async {},
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Archived',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ), /*When tapping that particular row of user we will send that users id and email
+        address to the next screen which is the AsminActual Screen */
+        );
+      }
+    }
+
+    /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
+    because we will not display the current user here only those other users*/
+
+    else {
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 350,
+                    child: Row(
+                      children: [
+                        //this padding holds the profile image of the admin
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundImage: profileImage,
+                            radius: 20,
+                          ),
+                        ),
+
+                        //this column holds the admin users info
+                        //like firstname, lastname and address
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //first column that holds the admin user firstname and username
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${data["First Name"]} ",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${data["Last Name"]}",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //second column that holds the admin user address
+                            Text(
+                              "${data["Address"]}",
+                              style: const TextStyle(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 240,
+                  ),
+                  //sizedbox for the button archived
+                  //sizedbox for archived button
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFD9D9D9),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(17.50),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () async {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Archived',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.black,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ), /*When tapping that particular row of user we will send that users id and email
+        address to the next screen which is the AsminActual Screen */
+      );
+    }
+
+    return Container();
   }
 }
