@@ -10,7 +10,7 @@ class RetrieveCustomerAccounts {
 
   //Provides a method (getDocsId) for fetching document IDs from the 'CustomerUsers' collection in Firestore and storing them in the documentId list
   Future getDocsId() async {
-    await db.collection('CustomerUsers').get().then(
+    await db.collection('sample_ConsumerUsers').get().then(
           // ignore: avoid_function_literals_in_foreach_calls
           (snapshot) => snapshot.docs.forEach(
             (document) {

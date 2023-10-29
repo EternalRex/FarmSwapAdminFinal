@@ -22,8 +22,8 @@ class _NumberOverallUsersState extends State<NumberOverallUsers> {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       //These lines create references to two Firestore collections, collection1 and collection2
-      final CollectionReference collection1 = firestore.collection('FarmerUsers');
-      final CollectionReference collection2 = firestore.collection('CustomerUsers');
+      final CollectionReference collection1 = firestore.collection('sample_FarmerUsers');
+      final CollectionReference collection2 = firestore.collection('sample_ConsumerUsers');
 
       //These lines execute queries on the collection1 and collection2 collections and retrieve all the documents within each collection.
       final QuerySnapshot collection1Snapshot = await collection1.get();

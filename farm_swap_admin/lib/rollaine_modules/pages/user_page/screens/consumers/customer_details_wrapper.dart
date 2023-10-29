@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_account_query.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/consumers/customer_images_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:photo_view/photo_view.dart';
 
 // ignore: must_be_immutable
 class ReadCustomerDetails extends StatelessWidget {
@@ -22,7 +22,7 @@ class ReadCustomerDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     //mag create ug reference sa database firestore
     CollectionReference reference =
-        FirebaseFirestore.instance.collection('CustomerUsers');
+        FirebaseFirestore.instance.collection('sample_ConsumerUsers');
 
     return FutureBuilder(
       /*In this part kay gigagmit ang value sa documentid na variable para ma access tong document nga
@@ -33,13 +33,19 @@ class ReadCustomerDetails extends StatelessWidget {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
+          Timestamp birthdaytimestamp = data["birthdate"];
+          DateTime birthDate = birthdaytimestamp.toDate();
+          String bdaybirthdate =
+              DateFormat('MM/dd/yyy').format(birthDate);
+
+          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
           Timestamp registertimestamp = data["registrationDate"];
           DateTime registerDate = registertimestamp.toDate();
           String registerbirthdate =
               DateFormat('MM/dd/yyy').format(registerDate);
 
           final customerImage =
-              CachedNetworkImageProvider("${data["profileUrl"]}");
+              CachedNetworkImageProvider("${data["profilePhoto"]}");
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -73,7 +79,7 @@ class ReadCustomerDetails extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(
-                                width: 80,
+                                width: 20,
                               ),
                               Column(
                                 children: [
@@ -85,7 +91,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                                width: 50,
+                                width: 30,
                               ),
                               //Retrieve username of consumers
                               Column(
@@ -93,7 +99,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${data["username"]}",
+                                    "${data["userName"]}",
                                     style: Poppins.farmerName.copyWith(
                                       color: const Color(0xFF09041B),
                                     ),
@@ -141,7 +147,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "${data["swapCoins"]}",
+                                "${data["swapcoins"]}",
                                 style: Poppins.farmerName.copyWith(
                                   color: greenNormalHover,
                                 ),
@@ -274,7 +280,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           //First name
-                                                          "${data["firstName"]}",
+                                                          "${data["firstname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -287,7 +293,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                         ),
                                                         //Last name
                                                         Text(
-                                                          "${data["lastName"]}",
+                                                          "${data["lastname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -343,7 +349,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["contactNumber"]}",
+                                                          "${data["contactnum"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -399,7 +405,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthDate"]}",
+                                                          bdaybirthdate,
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -562,7 +568,26 @@ class ReadCustomerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["address"]}",
+                                                          "${data["baranggay"]}",
+                                                          style: Poppins
+                                                              .farmerName
+                                                              .copyWith(
+                                                                  color:
+                                                                      greenNormalHover),
+                                                        ),
+                                                        Text(
+                                                          ",",
+                                                          style: Poppins
+                                                              .farmerName
+                                                              .copyWith(
+                                                                  color:
+                                                                      greenNormalHover),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 3,
+                                                        ),
+                                                        Text(
+                                                          "${data["city_municipality"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -617,7 +642,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthPlace"]}",
+                                                          "${data["birthplace"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -708,36 +733,58 @@ class ReadCustomerDetails extends StatelessWidget {
                                       child: SizedBox(
                                         height: 800,
                                         width: 500,
-                                        child: FutureBuilder(
-                                          //Represents a query to the Firestore database to fetch all documents from the 'FarmerUsers' collection.
-                                          future: FirebaseFirestore.instance
-                                              .collection('CustomerUsers')
+                                        child: StreamBuilder<DocumentSnapshot>(
+                                          stream: FirebaseFirestore.instance
+                                              .collection(
+                                                  'sample_ConsumerUsers')
                                               .doc(documentId)
-                                              .get(),
+                                              .snapshots(),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState ==
-                                                ConnectionState.done) {
-                                              //Displays a gallery of photos from Firestore
-                                              final data =
-                                                  snapshot.data!.data();
-                                              final List<String> photoUrls =
-                                                  (data!['docRequirements']
-                                                          as List<dynamic>)
-                                                      .cast<String>();
-
-                                              //Uses photo_view to allow users to interact with and enlarge the photos.
-                                              return ReadCustomerImage(
-                                                  images: photoUrls);
-                                            }
-                                            return const Center(
-                                              child: SizedBox(
-                                                height: 20,
-                                                width: 20,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: Color(0xFF14BE77),
+                                                ConnectionState.waiting) {
+                                              return const Center(
+                                                child: SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                          color: Color(
+                                                              0xFF14BE77)),
                                                 ),
+                                              );
+                                            }
+
+                                            if (snapshot.hasError) {
+                                              return Center(
+                                                child: Text(
+                                                    'Error: ${snapshot.error}'),
+                                              );
+                                            }
+
+                                            if (!snapshot.hasData ||
+                                                !snapshot.data!.exists) {
+                                              return const Center(
+                                                child: Text(
+                                                    'Document does not exist.'),
+                                              );
+                                            }
+
+                                            final String photoUrls =
+                                                snapshot.data!.get('idProof');
+
+                                            return PhotoView(
+                                              imageProvider:
+                                                  NetworkImage(
+                                                      photoUrls),
+                                              backgroundDecoration:
+                                                  const BoxDecoration(
+                                                color: Colors.white,
                                               ),
+                                              minScale: PhotoViewComputedScale
+                                                  .contained,
+                                              maxScale: PhotoViewComputedScale
+                                                      .covered *
+                                                  2,
                                             );
                                           },
                                         ),

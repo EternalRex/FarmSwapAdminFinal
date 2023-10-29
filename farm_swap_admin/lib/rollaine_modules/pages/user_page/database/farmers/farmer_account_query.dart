@@ -10,7 +10,7 @@ class RetrieveFarmerAccounts {
 
   //Provides a method (getDocsId) for fetching document IDs from the 'FarmerUsers' collection in Firestore and storing them in the documentId list
   Future getDocsId() async {
-    await db.collection('FarmerUsers').get().then(
+    await db.collection('sample_FarmerUsers').get().then(
           // ignore: avoid_function_literals_in_foreach_calls
           (snapshot) => snapshot.docs.forEach(
             (document) {

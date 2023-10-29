@@ -7,7 +7,7 @@ class ReactivateFarmerId {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<String> getUpdateDocId(String userId) async {
-    CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('sample_FarmerUsers');
     QuerySnapshot query = await reference.where('userId', isEqualTo: userId).get();
 
     if (query.docs.isNotEmpty) {

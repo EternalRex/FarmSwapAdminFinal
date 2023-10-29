@@ -9,7 +9,7 @@ class UpdateUserId {
     String userId = userid;
 
     //It creates a reference to the Firestore collection.
-    CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('sample_FarmerUsers');
 
     //Performs a query to retrieve documents.
     QuerySnapshot query = await reference.where('userId', isEqualTo: userId).get();

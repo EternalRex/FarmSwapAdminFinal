@@ -22,7 +22,7 @@ class ReadFarmerDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     //mag create ug reference sa database firestore
     CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+        FirebaseFirestore.instance.collection('sample_FarmerUsers');
 
     return FutureBuilder(
       /*In this part kay gigagmit ang value sa documentid na variable para ma access tong document nga
@@ -33,13 +33,18 @@ class ReadFarmerDetails extends StatelessWidget {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
+          Timestamp birthdaytimestamp = data["birthdate"];
+          DateTime birthDate = birthdaytimestamp.toDate();
+          String bdaybirthdate = DateFormat('MM/dd/yyy').format(birthDate);
+
+          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
           Timestamp registertimestamp = data["registrationDate"];
           DateTime registerDate = registertimestamp.toDate();
           String registerbirthdate =
               DateFormat('MM/dd/yyy').format(registerDate);
 
           final farmerImage =
-              CachedNetworkImageProvider("${data["profileUrl"]}");
+              CachedNetworkImageProvider("${data["profilePhoto"]}");
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -72,7 +77,7 @@ class ReadFarmerDetails extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(
-                                width: 80,
+                                width: 20,
                               ),
                               Column(
                                 children: [
@@ -84,7 +89,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                                width: 50,
+                                width: 30,
                               ),
                               //Retrieve the username of farmer
                               Column(
@@ -92,7 +97,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${data["username"]}",
+                                    "${data["userName"]}",
                                     style: Poppins.farmerName.copyWith(
                                       color: const Color(0xFF09041B),
                                     ),
@@ -140,7 +145,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "${data["swapCoins"]}",
+                                "${data["swapcoins"]}",
                                 style: Poppins.farmerName.copyWith(
                                   color: greenNormalHover,
                                 ),
@@ -273,7 +278,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["firstName"]}",
+                                                          "${data["firstname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -285,7 +290,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          "${data["lastName"]}",
+                                                          "${data["lastname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -341,7 +346,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["contactNumber"]}",
+                                                          "${data["contactnum"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -397,7 +402,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthDate"]}",
+                                                          bdaybirthdate,
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -563,7 +568,28 @@ class ReadFarmerDetails extends StatelessWidget {
                                                       child: Row(
                                                         children: [
                                                           Text(
-                                                            '${data['address']}',
+                                                            '${data['city_baranggay']}',
+                                                            style: Poppins
+                                                                .farmerName
+                                                                .copyWith(
+                                                              color:
+                                                                  greenNormalHover,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ',',
+                                                            style: Poppins
+                                                                .farmerName
+                                                                .copyWith(
+                                                              color:
+                                                                  greenNormalHover,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 3,
+                                                          ),
+                                                          Text(
+                                                            '${data['city_municipality']}',
                                                             style: Poppins
                                                                 .farmerName
                                                                 .copyWith(
@@ -620,7 +646,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthPlace"]}",
+                                                          "${data["birthplace"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -711,39 +737,43 @@ class ReadFarmerDetails extends StatelessWidget {
                                       child: SizedBox(
                                         height: 800,
                                         width: 500,
-                                        child: FutureBuilder(
-                                          //Represents a query to the Firestore database to fetch all documents from the 'FarmerUsers' collection.
-                                          future: FirebaseFirestore.instance
-                                              .collection('FarmerUsers')
-                                              .doc(documentId)
-                                              .get(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.done) {
-                                              //Displays a gallery of photos from Firestore
-                                              final data =
-                                                  snapshot.data!.data();
-                                              final List<String> photoUrls =
-                                                  (data!['docRequirements']
-                                                          as List<dynamic>)
-                                                      .cast<String>();
+                                        child: StreamBuilder<DocumentSnapshot>(
+                                            stream: FirebaseFirestore.instance
+                                                .collection(
+                                                    'sample_FarmerUsers')
+                                                .doc(documentId)
+                                                .snapshots(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<DocumentSnapshot>
+                                                    snapshot) {
+                                              if (!snapshot.hasData) {
+                                                return const Center(
+                                                  child: SizedBox(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                            color: Color(
+                                                                0xFF14BE77)),
+                                                  ),
+                                                );
+                                              }
 
-                                              //Uses photo_view to allow users to interact with and enlarge the photos.
+                                              if (!snapshot.data!.exists) {
+                                                return const Center(
+                                                  child: Text(
+                                                      'Document does not exist.'),
+                                                );
+                                              }
+
+                                              final List<String> photoUrls = [
+                                                snapshot.data!['documentProof'],
+                                                snapshot.data!['idProof'],
+                                              ];
+
                                               return ReadFarmerImage(
                                                   images: photoUrls);
-                                            }
-                                            return const Center(
-                                              child: SizedBox(
-                                                height: 20,
-                                                width: 20,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: Color(0xFF14BE77),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                            }),
                                       ),
                                     ),
                                   ),

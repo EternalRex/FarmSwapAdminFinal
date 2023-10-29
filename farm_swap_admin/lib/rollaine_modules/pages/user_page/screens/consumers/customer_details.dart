@@ -4,7 +4,6 @@ import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/database/admin/logs_insert_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/update_customerid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/right_user_text.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserRightMenu_btns/user_archive_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserRightMenu_btns/user_deduction_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_userid_query.dart';
@@ -24,7 +23,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -33,20 +31,18 @@ class DetailsCustomerPage extends StatefulWidget {
 
   //Declares a variable
   String selectedId = '';
-  
+
   @override
   State<DetailsCustomerPage> createState() => _DetailsCustomerPageState();
 }
 
 class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
-
   //Creates an instance of the RetrieveCustomerUserId class and makes it accessible through the retrieveCustomerUserId variable
   final RetrieveCustomerUserId retrieveCustomerUserId =
       RetrieveCustomerUserId();
 
   @override
   Widget build(BuildContext context) {
-
     /*//Retrieves the farmer user's ID from a state management 
     provider (FarmerUserIdProvider) using the Provider package*/
     String customerUserId =
@@ -182,36 +178,6 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-
-                      //Container for search bar
-                      child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 body: Row(
                   children: [
@@ -352,7 +318,123 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                     const SizedBox(
                       height: 150,
                     ),
-                    const UserArchiveOptionsBtn(),
+
+                    //Archive button
+                    Padding(
+                      padding: const EdgeInsets.only(right: 35),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+                            //This code essentially updates the selectedId property of the widget to the value of customerUserId when the TextButton is pressed. 
+                            TextButton(
+                              onPressed: () async {
+                                setState(() {
+                                  widget.selectedId = customerUserId;
+                                });
+
+                                //Displays a modal dialog box
+                                showDialog(
+                                    //required to properly display the dialog
+                                    context: context,
+                                    //build the content of the dialog.
+                                    builder: (BuildContext context) {
+                                      //designed for displaying a pop-up dialog box 
+                                      return AlertDialog(
+                                        //sets the title of the dialog
+                                        title: const Text('Confirmation!'),
+                                        //sets the content of the dialog
+                                        content: const Text(
+                                            'Do you want to archive this account permanently?\nClick proceed to archived account.'),
+                                        //define a list of widgets
+                                        actions: <Widget>[
+                                          TextButton(
+                                            //This sets the text label of the button to "Proceed".
+                                            child: const Text('Proceed'),
+                                            onPressed: () async {
+                                              //It retrieves an instance of the provider, which manages the state of the user ID.
+                                              Provider.of<CustomerUserIdProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .setcustomerUserId(
+                                                      widget.selectedId);
+
+                                              //It sets the account status to "Archived" for the user with the ID specified by widget.selectedId.
+                                              await updateField2('Archived',
+                                                  widget.selectedId);
+
+                                              //Moving the farmer's data to an archived collection based on the widget.selectedId. 
+                                              await moveCustomerToArchivedCollection(
+                                                  widget.selectedId);
+
+                                              // ignore: use_build_context_synchronously
+                                              showDialog(
+                                                context: context,
+                                                //defines the content of the dialog.
+                                                builder:
+                                                    (BuildContext context) {
+                                                  //displaying a pop-up dialog box
+                                                  return AlertDialog(
+                                                    //sets the title of the dialog to "Successful!"
+                                                    title: const Text(
+                                                        "Successful!"),
+                                                    //displays a success message informing the user that the account has been successfully archived.
+                                                    content: const Text(
+                                                        "Account successfuly archived!"),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        //sets the text label of the button to "Ok"
+                                                        child: const Text("Ok"),
+                                                        //executed when the "Ok" button is pressed
+                                                        onPressed: () {
+                                                          //closes the dialog box by popping the current route
+                                                          Navigator.of(context)
+                                                              .pop(); // Close the dialog box
+
+                                                          //this will navigate to user account page
+                                                          Navigator.of(context)
+                                                              .pushNamed(
+                                                                  RoutesManager
+                                                                      .userAccountPage);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                          TextButton(
+                                            //executed when the "Cancel" button is pressed
+                                            onPressed: () {
+                                              //dismisses the dialog
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Cancel'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: const RightUserText(
+                                myText: 'Archive',
+                                myColor: Color(0xFF09041B),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Image(
+                              image: AssetImage(
+                                  'assets/rollaine_assets/icons/delete.png'),
+                              height: 23,
+                              width: 23,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 25,
                     ),
@@ -366,7 +448,6 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                           children: [
                             TextButton(
                               onPressed: () async {
-
                                 //Used to update the widget.selectedId property with the value of customerUserId.
                                 setState(() {
                                   widget.selectedId = customerUserId;
@@ -382,8 +463,9 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                                     'Deactivate', widget.selectedId);
 
                                 //Navigates to a new page.
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.detailsCustomerPage);
+                                // ignore: use_build_context_synchronously
+                                Navigator.of(context).pushNamed(
+                                    RoutesManager.detailsCustomerPage);
                               },
                               child: const RightUserText(
                                 myText: 'Deactivate',
@@ -424,15 +506,16 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
   final email = FirebaseAuth.instance.currentUser!.email;
   final userId = FirebaseAuth.instance.currentUser!.uid;
 
-    //An instance for logging admin actions.
-   AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
-   Future<void> updateField(String? updatedata, String userid) async {
-
+  //An instance for logging admin actions.
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+  Future<void> updateField(String? updatedata, String userid) async {
     //Retrieves the document ID associated with the provided user ID.
     await updateUserId.getUpdateUserId(userid);
 
     //Creates a reference to a Firestore document inside the 'CustomerUsers' collection.
-    final reference = FirebaseFirestore.instance.collection('CustomerUsers').doc(updateUserId.docId);
+    final reference = FirebaseFirestore.instance
+        .collection('sample_ConsumerUsers')
+        .doc(updateUserId.docId);
 
     //Prepares the data that will be updated in the Firestore document.
     final updateData = {
@@ -440,14 +523,57 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
     };
 
     //Log the admin's action.
-    adminLogs.createAdminLogs(email, userId, "Deactivate_Customer_Account", DateTime.now());
+    adminLogs.createAdminLogs(
+        email, userId, "Deactivate_Customer_Account", DateTime.now());
 
     try {
-
       //Attempts to update the Firestore document using the update method.
       await reference.update(updateData);
     } catch (e) {
       print('Error while updating document: $e');
     }
-   }
+  }
+
+  Future<void> updateField2(String? updatedata, String userid) async {
+    await updateUserId.getUpdateUserId(userid);
+
+    final reference = FirebaseFirestore.instance
+        .collection('sample_ConsumerUsers')
+        .doc(updateUserId.docId);
+
+    final updateData = {
+      'accountStatus': updatedata,
+    };
+
+    adminLogs.createAdminLogs(
+        email, userId, 'Archived_Customer_Account', DateTime.now());
+
+    try {
+      await reference.update(updateData);
+    } catch (e) {
+      print('Error while updating document: $e');
+    }
+  }
+
+  Future<void> moveCustomerToArchivedCollection(String userId) async {
+    CollectionReference customerCollection =
+        FirebaseFirestore.instance.collection('sample_ConsumerUsers');
+    CollectionReference archivedCustomerCollection =
+        FirebaseFirestore.instance.collection('CustomerArchived');
+
+    QuerySnapshot query =
+        await customerCollection.where('userId', isEqualTo: userId).get();
+
+    if (query.docs.isNotEmpty) {
+      DocumentSnapshot customer = query.docs.first;
+
+      String accountStatus = customer.get('accountStatus');
+
+      if (accountStatus == 'Archived') {
+        await archivedCustomerCollection.doc(customer.id).set(customer.data());
+
+        await customerCollection.doc(customer.id).delete();
+      }
+    }
+  }
 }

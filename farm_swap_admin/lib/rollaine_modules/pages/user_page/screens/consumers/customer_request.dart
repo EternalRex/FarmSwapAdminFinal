@@ -16,18 +16,18 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FarmerRequestPage extends StatefulWidget {
-  const FarmerRequestPage({super.key});
+class CustomerRequestPage extends StatefulWidget {
+  const CustomerRequestPage({super.key});
 
   @override
-  State<FarmerRequestPage> createState() => _FarmerRequestPageState();
+  State<CustomerRequestPage> createState() => _CustomerRequestPageState();
 }
 
-class _FarmerRequestPageState extends State<FarmerRequestPage> {
-  //creates an instance of TextEditingController named searchFarmerController.
-  TextEditingController searchFarmerController = TextEditingController();
-  //store the search query entered by the user for searching farmers.
-  String farmerSearchValue = '';
+class _CustomerRequestPageState extends State<CustomerRequestPage> {
+  //creates an instance of TextEditingController named searchCustomerController.
+  TextEditingController searchCustomerController = TextEditingController();
+  //used to store the search query entered by the user for searching customers.
+  String customerSearchValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +244,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                                           children: [
                                             /*Farmers Title */
                                             Text(
-                                              'Farmers',
+                                              'Consumers',
                                               style:
                                                   Poppins.contentTitle.copyWith(
                                                 color: const Color(0xFF09051C),
@@ -278,7 +278,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                                   /*SingleChildScrollView(
                                     child: SizedBox(
                                       height: 450,
-                                      child: _buildFarmerList(),
+                                      child: _buildCustomerList(),
                                     ),
                                   ),*/
                                 ],
@@ -299,10 +299,10 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
   }
 
   //returns a widget for displaying a list of items.
-  /*Widget _buildFarmerList() {
+  /*Widget _buildCustomerList() {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
-      stream: FirebaseFirestore.instance.collection('FarmerUsers').snapshots(),
+      stream: FirebaseFirestore.instance.collection('CustomerUsers').snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         //It ensures that the stream is active and data is available.
@@ -314,7 +314,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
               /*We are getting all the list of documents in the firebase, and each document like one
               by one, the documents will passed to the _buildUserListItems */
               children: snapshot.data!.docs
-                  .map<Widget>((document) => _buildFarmerListItems(document))
+                  .map<Widget>((document) => _buildCustomerListItems(document))
                   .toList(),
             ),
           );
@@ -335,16 +335,16 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
   }
 
   //responsible for creating a widget to represent a farmer
-  Widget _buildFarmerListItems(DocumentSnapshot document) {
+  Widget _buildCustomerListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
-    Map<String, dynamic> farmers = document.data() as Map<String, dynamic>;
+    Map<String, dynamic> customer = document.data() as Map<String, dynamic>;
 
     //checks if a searchValue variable is not empty
-    if (farmerSearchValue.isNotEmpty) {
+    if (customerSearchValue.isNotEmpty) {
       //checks whether the searchValue matches any of the farmer's attributes
-      if (farmers['firstName'] == farmerSearchValue ||
-          farmers['lastName'] == farmerSearchValue ||
-          farmers['email'] == farmerSearchValue) {
+      if (customer['firstName'] == customerSearchValue ||
+          customer['lastName'] == customerSearchValue ||
+          customer['email'] == customerSearchValue) {
         //displaying a single row in a list
         return ListTile(
           title: Container(
@@ -368,10 +368,10 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
+                      //profile of consumer
                       child: CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
-                            '${farmers['profileUrl']}'),
+                            '${customer['profileUrl']}'),
                         radius: 20,
                       ),
                     ),
@@ -380,7 +380,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                     ),
                     //First name of farmer
                     Text(
-                      "${farmers["firstName"]}",
+                      "${customer["firstName"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -390,7 +390,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                     ),
                     //Last name of farmer
                     Text(
-                      "${farmers["lastName"]}",
+                      "${customer["lastName"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -574,7 +574,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
       }
     }
     //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
-    else if (FirebaseAuth.instance.currentUser!.email != farmers['email']) {
+    else if (FirebaseAuth.instance.currentUser!.email != customer['email']) {
       return ListTile(
         title: Container(
           decoration: BoxDecoration(
@@ -600,7 +600,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                     //profile of farmer
                     child: CircleAvatar(
                       backgroundImage: CachedNetworkImageProvider(
-                          '${farmers['profileUrl']}'),
+                          '${customer['profileUrl']}'),
                       radius: 20,
                     ),
                   ),
@@ -609,7 +609,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                   ),
                   //First name of farmer
                   Text(
-                    "${farmers["firstName"]}",
+                    "${customer["firstName"]}",
                     style: Poppins.farmerName.copyWith(
                       color: const Color(0xFF09051B),
                     ),
@@ -619,7 +619,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                   ),
                   //Last name of farmer
                   Text(
-                    "${farmers["lastName"]}",
+                    "${customer["lastName"]}",
                     style: Poppins.farmerName.copyWith(
                       color: const Color(0xFF09051B),
                     ),
