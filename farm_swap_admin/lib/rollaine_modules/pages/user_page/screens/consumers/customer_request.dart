@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/database/admin/logs_insert_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/update_customerid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -12,12 +16,19 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_wallet_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class CustomerRequestPage extends StatefulWidget {
-  const CustomerRequestPage({super.key});
+  CustomerRequestPage({super.key});
+
+  //Variable na selected id nga String
+  String selectedId = '';
 
   @override
   State<CustomerRequestPage> createState() => _CustomerRequestPageState();
@@ -31,6 +42,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Row(
         children: [
@@ -275,12 +287,12 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                       ),
                                     ),
                                   ),
-                                  /*SingleChildScrollView(
+                                  SingleChildScrollView(
                                     child: SizedBox(
                                       height: 450,
-                                      child: _buildCustomerList(),
+                                      child: _buildRequestList(),
                                     ),
-                                  ),*/
+                                  ),
                                 ],
                               ),
                             ],
@@ -299,10 +311,12 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
   }
 
   //returns a widget for displaying a list of items.
-  /*Widget _buildCustomerList() {
+  Widget _buildRequestList() {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
-      stream: FirebaseFirestore.instance.collection('CustomerUsers').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('sample_ConsumerUsers')
+          .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         //It ensures that the stream is active and data is available.
@@ -311,10 +325,14 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
             padding: const EdgeInsets.only(top: 15),
             //displaying a scrollable list of items.
             child: ListView(
-              /*We are getting all the list of documents in the firebase, and each document like one
-              by one, the documents will passed to the _buildUserListItems */
+              /* We are getting all the list of documents in the Firebase, and each document one by one.
+           The documents will be passed to the _buildRequestListItems */
               children: snapshot.data!.docs
-                  .map<Widget>((document) => _buildCustomerListItems(document))
+                  .where((document) {
+                    // Filter documents where accountStatus is 'REQUESTING'.
+                    return document['accountStatus'] == 'REQUESTING';
+                  })
+                  .map<Widget>((document) => _buildRequestListItems(document))
                   .toList(),
             ),
           );
@@ -335,15 +353,15 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
   }
 
   //responsible for creating a widget to represent a farmer
-  Widget _buildCustomerListItems(DocumentSnapshot document) {
+  Widget _buildRequestListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
     Map<String, dynamic> customer = document.data() as Map<String, dynamic>;
 
     //checks if a searchValue variable is not empty
     if (customerSearchValue.isNotEmpty) {
       //checks whether the searchValue matches any of the farmer's attributes
-      if (customer['firstName'] == customerSearchValue ||
-          customer['lastName'] == customerSearchValue ||
+      if (customer['firstname'] == customerSearchValue ||
+          customer['lastname'] == customerSearchValue ||
           customer['email'] == customerSearchValue) {
         //displaying a single row in a list
         return ListTile(
@@ -371,7 +389,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                       //profile of consumer
                       child: CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
-                            '${customer['profileUrl']}'),
+                            '${customer['profilePhoto']}'),
                         radius: 20,
                       ),
                     ),
@@ -380,7 +398,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                     ),
                     //First name of farmer
                     Text(
-                      "${customer["firstName"]}",
+                      "${customer["firstname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -390,7 +408,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                     ),
                     //Last name of farmer
                     Text(
-                      "${customer["lastName"]}",
+                      "${customer["lastname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -410,19 +428,18 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  Color(0xFF53E78B),
-                                  Color(0xFF14BE77),
+                                  Color.fromARGB(255, 107, 107, 107),
+                                  Color.fromARGB(255, 48, 48, 48),
                                 ],
                               ),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(17.50),
+                                Radius.circular(5),
                               ),
                             ),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 5),
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
                               child: Text(
-                                'Archived',
+                                'ARCHIVED',
                                 style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 8,
@@ -467,7 +484,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                     Colors.transparent.withOpacity(0.12),
                                 shadowColor: Colors.transparent,
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 //Update the state of the widget with the selected user's ID
                                 setState(() {
                                   widget.selectedId = "${customer["userId"]}";
@@ -478,80 +495,19 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                         listen: false)
                                     .setcustomerUserId(widget.selectedId);
 
+                                await updateField(
+                                    'ACTIVE', widget.selectedId);
+
                                 //Navigates to a different screen
+                                // ignore: use_build_context_synchronously
                                 Navigator.of(context).pushNamed(
-                                    RoutesManager.detailsCustomerPage);
+                                    RoutesManager.userAccountPage);
                               },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
                                   'Accept',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Decline button
-                    const SizedBox(width: 10),
-                    //Button for details where you will be redirected to farmer details
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color(0xFF53E78B),
-                                  Color(0xFF14BE77),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(17.50),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
-                                shadowColor: Colors.transparent,
-                              ),
-                              onPressed: () {
-                                //Update the state of the widget with the selected user's ID
-                                setState(() {
-                                  widget.selectedId = "${customer["userId"]}";
-                                });
-
-                                //Uses the Provider package to set the user ID in a state management provider
-                                Provider.of<CustomerUserIdProvider>(context,
-                                        listen: false)
-                                    .setcustomerUserId(widget.selectedId);
-
-                                //Navigates to a different screen
-                                Navigator.of(context).pushNamed(
-                                    RoutesManager.detailsCustomerPage);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(
-                                  'Decline',
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 8,
@@ -632,5 +588,40 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
       );
     }
     return Container();
-  }*/
+  }
+
+  //Used for fetching the document ID associated with a given user in Firestore.
+  UpdateUserId updateUserId = UpdateUserId();
+
+  //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+  final email = FirebaseAuth.instance.currentUser!.email;
+  final userId = FirebaseAuth.instance.currentUser!.uid;
+
+  //An instance for logging admin actions.
+  AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+  Future<void> updateField(String? updatedata, String userid) async {
+    //Retrieves the document ID associated with the provided user ID.
+    await updateUserId.getUpdateUserId(userid);
+
+    //Creates a reference to a Firestore document inside the 'CustomerUsers' collection.
+    final reference = FirebaseFirestore.instance
+        .collection('sample_ConsumerUsers')
+        .doc(updateUserId.docId);
+
+    //Prepares the data that will be updated in the Firestore document.
+    final updateData = {
+      'accountStatus': updatedata,
+    };
+
+    //Log the admin's action.
+    adminLogs.createAdminLogs(
+        email, userId, "Reactivate_Customer_Account", DateTime.now());
+
+    try {
+      //Attempts to update the Firestore document using the update method.
+      await reference.update(updateData);
+    } catch (e) {
+      print('Error while updating document: $e');
+    }
+  }
 }
