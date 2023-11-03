@@ -651,7 +651,7 @@ class EditPersonalInfo extends StatelessWidget {
                             width: 3,
                           ),
                           const SizedBox(width: 5),
-                          //Archive account button
+                          //Deactivate account button
                           Padding(
                             padding: const EdgeInsets.only(
                               bottom: 15,
@@ -718,6 +718,136 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                             ),
                           ),
+
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          const SizedBox(width: 5),
+                          //archived account button
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 15,
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // ignore: sized_box_for_whitespace
+                                  Container(
+                                    height: 50,
+                                    width: 190,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment(0.99, -0.15),
+                                        end: Alignment(-0.99, 0.15),
+                                        colors: [
+                                          Color(0xFFE21B1B),
+                                          Color(0xEEFF9012),
+                                        ],
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: shadow,
+                                          blurRadius: 5,
+                                          offset: const Offset(1, 5),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: TextButton(
+                                        onPressed: () async {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title:
+                                                    const Text("Confirmation!"),
+                                                content: const Text(
+                                                    "Are you sure you want to archived your account permanently?\nClick proceed to acrhive account."),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child:
+                                                        const Text("Proceed"),
+                                                    onPressed: () async {
+                                                      // Create an instance of RetrieveArchivedDocId
+                                                      RetrieveArchiveDocId
+                                                          retriever =
+                                                          RetrieveArchiveDocId();
+
+                                                      // Call the updateFieldAndNavigate method to update
+                                                      //the account status and create admin logs
+                                                      await retriever
+                                                          .updateFieldArchive();
+
+                                                      //this will move to other collection called admin archived users
+                                                      await moveUserToArchivedCollection();
+
+                                                      // ignore: use_build_context_synchronously
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                                "Successful!"),
+                                                            content: const Text(
+                                                                "Account successfuly archived!"),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "Ok"),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop(); // Close the dialog box
+
+                                                                  //this will navigate to admin account page
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pushNamed(
+                                                                          RoutesManager
+                                                                              .signInPage);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                  TextButton(
+                                                    child: const Text("Cancel"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the dialog box
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Text(
+                                          "Archived Account",
+                                          style: TextStyle(
+                                            fontFamily: GoogleFonts.poppins()
+                                                .fontFamily,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -732,6 +862,37 @@ class EditPersonalInfo extends StatelessWidget {
         );
       },
     );
+  }
+
+  //this function will move the collection to adminArchived if the account status if the field is archived
+  Future<void> moveUserToArchivedCollection() async {
+    // Get a reference to the Firestore collections
+    CollectionReference adminUsersCollection =
+        FirebaseFirestore.instance.collection('AdminUsers');
+    CollectionReference archivedUsersCollection =
+        FirebaseFirestore.instance.collection('AdminArchivedUsers');
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    // Query the adminUsers collection for the user with the given userId
+    QuerySnapshot query =
+        await adminUsersCollection.where('User Id', isEqualTo: userId).get();
+
+    // Check if a document was found
+    if (query.docs.isNotEmpty) {
+      // Get the first document (assuming userId is unique)
+      DocumentSnapshot userDoc = query.docs.first;
+
+      // Check the "Account Status" field
+      String accountStatus = userDoc.get('Account Status');
+
+      if (accountStatus == 'Archived') {
+        // Move the document to the archivedUsers collection
+        await archivedUsersCollection.doc(userDoc.id).set(userDoc.data());
+
+        // Delete the document from the adminUsers collection
+        await adminUsersCollection.doc(userDoc.id).delete();
+      }
+    }
   }
 
   String? updatedValue;
