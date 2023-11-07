@@ -289,7 +289,15 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Display a loading indicator while waiting for data.
+          return const Center(
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(
+                color: Color(0xFF15be77),
+              ),
+            ),
+          ); // Display a loading indicator while waiting for data.
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {

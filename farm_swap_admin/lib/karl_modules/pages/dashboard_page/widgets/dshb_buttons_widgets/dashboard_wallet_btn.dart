@@ -28,7 +28,7 @@ class DashWalletOptions extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(RoutesManager.farmerrequestwalletpage);
+                    .pushNamed(RoutesManager.requestwalletpage);
               },
               child: DashBoardTxt(
                 myText: "Wallet",
