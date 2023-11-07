@@ -516,7 +516,9 @@ class _UserAccount extends State<UserAccount> {
   Widget _buildFarmerList() {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
-      stream: FirebaseFirestore.instance.collection('sample_FarmerUsers').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('sample_FarmerUsers')
+          .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         //It ensures that the stream is active and data is available.
@@ -527,7 +529,14 @@ class _UserAccount extends State<UserAccount> {
             child: ListView(
               /*We are getting all the list of documents in the firebase, and each document like one
               by one, the documents will passed to the _buildUserListItems */
-              children: snapshot.data!.docs.where((document) => document['accountStatus'] != 'PENDING')
+              children: snapshot.data!.docs
+                  .where((document) {
+                    // Filter out documents with 'DEACTIVATED' and 'REQUESTING' account statuses.
+                    final accountStatus = document['accountStatus'];
+                    return accountStatus != 'PENDING' &&
+                        accountStatus != 'DEACTIVATED' &&
+                        accountStatus != 'REQUESTING';
+                  })
                   .map<Widget>((document) => _buildFarmerListItems(document))
                   .toList(),
             ),
@@ -811,8 +820,9 @@ class _UserAccount extends State<UserAccount> {
   Widget _buildCustomerList() {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
-      stream:
-          FirebaseFirestore.instance.collection('sample_ConsumerUsers').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('sample_ConsumerUsers')
+          .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         //It ensures that the stream is active and data is available.

@@ -361,7 +361,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                                                       widget.selectedId);
 
                                               //It sets the account status to "Archived" for the user with the ID specified by widget.selectedId.
-                                              await updateField2('Archived',
+                                              await updateField2('ARCHIVED',
                                                   widget.selectedId);
 
                                               //Moving the farmer's data to an archived collection based on the widget.selectedId. 
@@ -381,7 +381,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                                                         "Successful!"),
                                                     //displays a success message informing the user that the account has been successfully archived.
                                                     content: const Text(
-                                                        "Account successfuly archived!"),
+                                                        "Account has been successfuly ARCHIVED!"),
                                                     actions: <Widget>[
                                                       TextButton(
                                                         //sets the text label of the button to "Ok"
@@ -460,7 +460,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
 
                                 //This function perform some action related to deactivating a customer.
                                 await updateField(
-                                    'Deactivate', widget.selectedId);
+                                    'DEACTIVATED', widget.selectedId);
 
                                 //Navigates to a new page.
                                 // ignore: use_build_context_synchronously
@@ -569,7 +569,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
 
       String accountStatus = customer.get('accountStatus');
 
-      if (accountStatus == 'Archived') {
+      if (accountStatus == 'ARCHIVED') {
         await archivedCustomerCollection.doc(customer.id).set(customer.data());
 
         await customerCollection.doc(customer.id).delete();
