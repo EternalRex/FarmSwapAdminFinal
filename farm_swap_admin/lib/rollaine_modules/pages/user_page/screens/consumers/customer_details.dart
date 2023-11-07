@@ -524,7 +524,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
 
     //Log the admin's action.
     adminLogs.createAdminLogs(
-        email, userId, "Deactivate_Customer_Account", DateTime.now());
+        email, userId, "Deactivate_Consumer_Account", DateTime.now());
 
     try {
       //Attempts to update the Firestore document using the update method.
@@ -546,7 +546,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
     };
 
     adminLogs.createAdminLogs(
-        email, userId, 'Archived_Customer_Account', DateTime.now());
+        email, userId, 'Archived_Consumer_Account', DateTime.now());
 
     try {
       await reference.update(updateData);
@@ -556,22 +556,29 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
   }
 
   Future<void> moveCustomerToArchivedCollection(String userId) async {
+
+    //getting references to the Firestore collections
     CollectionReference customerCollection =
         FirebaseFirestore.instance.collection('sample_ConsumerUsers');
     CollectionReference archivedCustomerCollection =
-        FirebaseFirestore.instance.collection('CustomerArchived');
+        FirebaseFirestore.instance.collection('sample_ConsumerArchived');
 
+    //find customer documents where the 'userId' field matches the specified userId.
     QuerySnapshot query =
         await customerCollection.where('userId', isEqualTo: userId).get();
 
+    //If there are matching documents, it proceeds to process them.
     if (query.docs.isNotEmpty) {
       DocumentSnapshot customer = query.docs.first;
 
+      //checks the 'accountStatus' field of the customer document
       String accountStatus = customer.get('accountStatus');
 
+      //creates a new document in the archived collection with the same data.
       if (accountStatus == 'ARCHIVED') {
         await archivedCustomerCollection.doc(customer.id).set(customer.data());
 
+        //deletes the original customer document
         await customerCollection.doc(customer.id).delete();
       }
     }

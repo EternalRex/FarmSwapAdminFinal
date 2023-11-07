@@ -105,7 +105,7 @@ class RoutesManager {
       //WHEN THE PUSHNAMED USES DASHBOARD PAGE THIS WILL BE USED
       case dashboard:
         return MaterialPageRoute(
-          builder: (context) => const Dashboard(),
+          builder: (context) => Dashboard(),
         );
 
       case adminAccount:
@@ -206,7 +206,7 @@ class RoutesManager {
 
       case requestCustomer:
         return MaterialPageRoute(
-          builder: (context) => const CustomerRequestPage(),
+          builder: (context) => CustomerRequestPage(),
         );
 
       case listingsPage:

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/database/admin/logs_insert_query.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/customer_userid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/customers/update_customerid_query.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
@@ -40,9 +41,11 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
   //used to store the search query entered by the user for searching customers.
   String customerSearchValue = '';
 
+  final RetrieveCustomerUserId retrieveCustomerUserId =
+      RetrieveCustomerUserId();
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Row(
         children: [
@@ -203,104 +206,111 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                     ),
                   ],
                 ),
-                body: Row(
-                  children: [
-                    //Expanded for main content
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
-                        child: Container(
-                          height: 510,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                            //Box shadow of container
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadow,
-                                blurRadius: 2,
-                                offset: const Offset(1, 5),
+                body: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      //Expanded for main content
+                      Expanded(
+                        flex: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 15),
+                          child: Container(
+                            height: 510,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15,
-                                        left: 15,
-                                        right: 15,
-                                        bottom: 5),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: greenLight,
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(5),
+                              //Box shadow of container
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadow,
+                                  blurRadius: 2,
+                                  offset: const Offset(1, 5),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15,
+                                          left: 15,
+                                          right: 15,
+                                          bottom: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: greenLight,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(5),
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: shadow,
+                                                blurRadius: 2,
+                                                offset: const Offset(0, 1),
+                                              )
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Row(
+                                            children: [
+                                              /*Farmers Title */
+                                              Text(
+                                                'Consumers',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09051C),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 480,
+                                              ),
+                                              Text(
+                                                'Status',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09051C),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 80,
+                                              ),
+                                              Text(
+                                                'Approval',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09051C),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(0, 1),
-                                            )
-                                          ]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Row(
-                                          children: [
-                                            /*Farmers Title */
-                                            Text(
-                                              'Consumers',
-                                              style:
-                                                  Poppins.contentTitle.copyWith(
-                                                color: const Color(0xFF09051C),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 480,
-                                            ),
-                                            Text(
-                                              'Status',
-                                              style:
-                                                  Poppins.contentTitle.copyWith(
-                                                color: const Color(0xFF09051C),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 80,
-                                            ),
-                                            Text(
-                                              'Request',
-                                              style:
-                                                  Poppins.contentTitle.copyWith(
-                                                color: const Color(0xFF09051C),
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SingleChildScrollView(
-                                    child: SizedBox(
-                                      height: 450,
-                                      child: _buildRequestList(),
+                                    SingleChildScrollView(
+                                      child: SizedBox(
+                                        height: 400,
+                                        child: _buildRequestList(),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -414,37 +424,43 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                       ),
                     ),
                     //Status
-                    const Spacer(),
-                    //Button for details where you will be redirected to farmer details
+                    const SizedBox(
+                      width: 458,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color.fromARGB(255, 107, 107, 107),
-                                  Color.fromARGB(255, 48, 48, 48),
-                                ],
+                          SizedBox(
+                            height: 27,
+                            width: 60,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 255, 196, 0),
+                                    Color.fromARGB(255, 255, 153, 0),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
                               ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'ARCHIVED',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'REQUESTING',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
                                 ),
                               ),
                             ),
@@ -453,7 +469,9 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                       ),
                     ),
                     //Accept button
-                    const Spacer(),
+                    const SizedBox(
+                      width: 76,
+                    ),
                     //Button for details where you will be redirected to farmer details
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -487,7 +505,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                               onPressed: () async {
                                 //Update the state of the widget with the selected user's ID
                                 setState(() {
-                                  widget.selectedId = "${customer["userId"]}";
+                                  widget.selectedId = "${document["userId"]}";
                                 });
 
                                 //Uses the Provider package to set the user ID in a state management provider
@@ -495,13 +513,12 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                         listen: false)
                                     .setcustomerUserId(widget.selectedId);
 
-                                await updateField(
-                                    'ACTIVE', widget.selectedId);
+                                await updateField('ACTIVE', widget.selectedId);
 
                                 //Navigates to a different screen
                                 // ignore: use_build_context_synchronously
-                                Navigator.of(context).pushNamed(
-                                    RoutesManager.userAccountPage);
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.userAccountPage);
                               },
                               child: Padding(
                                 padding:
@@ -556,7 +573,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                     //profile of farmer
                     child: CircleAvatar(
                       backgroundImage: CachedNetworkImageProvider(
-                          '${customer['profileUrl']}'),
+                          '${customer['profilePhoto']}'),
                       radius: 20,
                     ),
                   ),
@@ -565,7 +582,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                   ),
                   //First name of farmer
                   Text(
-                    "${customer["firstName"]}",
+                    "${customer["firstname"]}",
                     style: Poppins.farmerName.copyWith(
                       color: const Color(0xFF09051B),
                     ),
@@ -575,9 +592,126 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                   ),
                   //Last name of farmer
                   Text(
-                    "${customer["lastName"]}",
+                    "${customer["lastname"]}",
                     style: Poppins.farmerName.copyWith(
                       color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  //Status
+                  const SizedBox(
+                    width: 458,
+                  ),
+                  //Button for details where you will be redirected to farmer details
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //Details button
+                        SizedBox(
+                          height: 27,
+                          width: 60,
+                          child: DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 255, 196, 0),
+                                  Color.fromARGB(255, 255, 153, 0),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'REQUESTING',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //Accept button
+                  const SizedBox(
+                    width: 76,
+                  ),
+                  //Button for details where you will be redirected to farmer details
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //Details button
+                        DecoratedBox(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF53E78B),
+                                Color(0xFF14BE77),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(17.50),
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              disabledForegroundColor:
+                                  Colors.transparent.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.transparent.withOpacity(0.12),
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () async {
+                              //Update the state of the widget with the selected user's ID
+                              setState(() {
+                                widget.selectedId = "${document["userId"]}";
+                              });
+
+                              //Uses the Provider package to set the user ID in a state management provider
+                              Provider.of<CustomerUserIdProvider>(context,
+                                      listen: false)
+                                  .setcustomerUserId(widget.selectedId);
+
+                              await updateField('ACTIVE', widget.selectedId);
+
+                              //Navigates to a different screen
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context)
+                                  .pushNamed(RoutesManager.userAccountPage);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                'Accept',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.50,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -615,7 +749,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
 
     //Log the admin's action.
     adminLogs.createAdminLogs(
-        email, userId, "Reactivate_Customer_Account", DateTime.now());
+        email, userId, "Reactivate_Consumer_Account", DateTime.now());
 
     try {
       //Attempts to update the Firestore document using the update method.

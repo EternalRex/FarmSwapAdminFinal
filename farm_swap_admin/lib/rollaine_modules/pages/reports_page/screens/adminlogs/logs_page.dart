@@ -406,7 +406,7 @@ class _AdminLogs extends State<AdminLogs> {
     );
   }
 
-  //Farmer
+  //Admin
 
   //returns a widget for displaying a list of items.
   Widget _buildAdminList() {
@@ -428,7 +428,8 @@ class _AdminLogs extends State<AdminLogs> {
                   .toList(),
             ),
           );
-        } else {
+        }
+        else {
           //This is a loading indicator that informs the user that data is being fetched.
           return const Center(
             child: SizedBox(
