@@ -29,6 +29,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/pending
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
+import '../clare_modules/pages/wallet_management_balance/wallet_requests_balance.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
 import '../karl_modules/pages/admin_account_page/screens/archived_accounts_lists/archived_accounts_list.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_deactivate_account/screen/deactivate_account.dart';
@@ -69,6 +70,7 @@ class RoutesManager {
   static const adminTransactionsPromotion = "/admintransactionspromotion";
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
+  static const farmerrequestwalletpage = "/farmerrequestwalletpage";
 
   //rollaine routes
   static const platformPage = '/reportspage';
@@ -280,6 +282,11 @@ class RoutesManager {
           builder: (context) => const ChatPage(),
         );
 
+      //farmer wallet cash in and cash out balance
+      case farmerrequestwalletpage:
+        return MaterialPageRoute(
+          builder: (context) => RequestBalanceFarmerLists(),
+        );
       default:
         throw const FormatException("No route");
     }

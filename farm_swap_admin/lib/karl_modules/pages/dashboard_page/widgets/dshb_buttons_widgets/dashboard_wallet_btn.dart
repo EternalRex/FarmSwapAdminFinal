@@ -1,3 +1,4 @@
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,7 +26,10 @@ class DashWalletOptions extends StatelessWidget {
               height: 3,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.farmerrequestwalletpage);
+              },
               child: DashBoardTxt(
                 myText: "Wallet",
                 myColor: const Color(0xFF09041B),
