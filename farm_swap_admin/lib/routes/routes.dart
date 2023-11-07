@@ -208,7 +208,7 @@ class RoutesManager {
 
       case requestCustomer:
         return MaterialPageRoute(
-          builder: (context) => const CustomerRequestPage(),
+          builder: (context) => CustomerRequestPage(),
         );
 
       case listingsPage:
