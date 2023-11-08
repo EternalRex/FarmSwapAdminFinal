@@ -3,11 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/database/farmers/farmer_account_query.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_address_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/farmers/farmer_images_wrapper.dart';
-import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -25,7 +22,7 @@ class ReadFarmerDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     //mag create ug reference sa database firestore
     CollectionReference reference =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+        FirebaseFirestore.instance.collection('sample_FarmerUsers');
 
     return FutureBuilder(
       /*In this part kay gigagmit ang value sa documentid na variable para ma access tong document nga
@@ -36,13 +33,18 @@ class ReadFarmerDetails extends StatelessWidget {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
+          Timestamp birthdaytimestamp = data["birthdate"];
+          DateTime birthDate = birthdaytimestamp.toDate();
+          String bdaybirthdate = DateFormat('MM/dd/yyy').format(birthDate);
+
+          //In this part kay need nato i convert ang Firebase na timestamp into datetime ug i format siya sa imo ganahan na format sa date
           Timestamp registertimestamp = data["registrationDate"];
           DateTime registerDate = registertimestamp.toDate();
           String registerbirthdate =
               DateFormat('MM/dd/yyy').format(registerDate);
 
           final farmerImage =
-              CachedNetworkImageProvider("${data["profileUrl"]}");
+              CachedNetworkImageProvider("${data["profilePhoto"]}");
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -75,7 +77,7 @@ class ReadFarmerDetails extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(
-                                width: 80,
+                                width: 20,
                               ),
                               Column(
                                 children: [
@@ -87,7 +89,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                                width: 50,
+                                width: 30,
                               ),
                               //Retrieve the username of farmer
                               Column(
@@ -95,7 +97,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${data["username"]}",
+                                    "${data["userName"]}",
                                     style: Poppins.farmerName.copyWith(
                                       color: const Color(0xFF09041B),
                                     ),
@@ -143,7 +145,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "${data["swapCoins"]}",
+                                "${data["swapcoins"]}",
                                 style: Poppins.farmerName.copyWith(
                                   color: greenNormalHover,
                                 ),
@@ -276,7 +278,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["firstName"]}",
+                                                          "${data["firstname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -288,7 +290,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          "${data["lastName"]}",
+                                                          "${data["lastname"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -344,7 +346,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["contactNumber"]}",
+                                                          "${data["contactnum"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -400,7 +402,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthDate"]}",
+                                                          bdaybirthdate,
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -565,7 +567,36 @@ class ReadFarmerDetails extends StatelessWidget {
                                                               8.0),
                                                       child: Row(
                                                         children: [
-                                                          RetrieveFarmerAddress()
+                                                          Text(
+                                                            '${data['city_baranggay']}',
+                                                            style: Poppins
+                                                                .farmerName
+                                                                .copyWith(
+                                                              color:
+                                                                  greenNormalHover,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ',',
+                                                            style: Poppins
+                                                                .farmerName
+                                                                .copyWith(
+                                                              color:
+                                                                  greenNormalHover,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 3,
+                                                          ),
+                                                          Text(
+                                                            '${data['city_municipality']}',
+                                                            style: Poppins
+                                                                .farmerName
+                                                                .copyWith(
+                                                              color:
+                                                                  greenNormalHover,
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -615,7 +646,7 @@ class ReadFarmerDetails extends StatelessWidget {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          "${data["birthPlace"]}",
+                                                          "${data["birthplace"]}",
                                                           style: Poppins
                                                               .farmerName
                                                               .copyWith(
@@ -695,132 +726,54 @@ class ReadFarmerDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
-
-                                      //Container for document requirement
-                                      child: SizedBox(
-                                        height: 800,
-                                        width: 500,
-                                        child: ReadFarmerImage(),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: shadow,
-                        blurRadius: 2,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 8),
-                          child: Column(
-                            children: [
                               Row(
                                 children: [
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 10),
-                                            //Update button wherein you can archive, suspend, and deduct swap coins
-                                            child: Row(
-                                              children: [
-                                                DecoratedBox(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      begin: Alignment.topLeft,
-                                                      end:
-                                                          Alignment.bottomRight,
-                                                      colors: [
-                                                        Color(0xFF53E78B),
-                                                        Color(0xFF14BE77),
-                                                      ],
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(10),
-                                                    ),
+
+                                      //Container for document requirement
+                                      child: SizedBox(
+                                        height: 800,
+                                        width: 500,
+                                        child: StreamBuilder<DocumentSnapshot>(
+                                            stream: FirebaseFirestore.instance
+                                                .collection(
+                                                    'sample_FarmerUsers')
+                                                .doc(documentId)
+                                                .snapshots(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<DocumentSnapshot>
+                                                    snapshot) {
+                                              if (!snapshot.hasData) {
+                                                return const Center(
+                                                  child: SizedBox(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                            color: Color(
+                                                                0xFF14BE77)),
                                                   ),
-                                                  child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      disabledForegroundColor:
-                                                          Colors.transparent
-                                                              .withOpacity(
-                                                                  0.38),
-                                                      disabledBackgroundColor:
-                                                          Colors.transparent
-                                                              .withOpacity(
-                                                                  0.12),
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                    ),
-                                                    onPressed: () {
-                                                      selectButtonToUpdate(
-                                                          context);
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 5,
-                                                              bottom: 5),
-                                                      child: Text(
-                                                        'Update',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          letterSpacing: 0.50,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                                );
+                                              }
+
+                                              if (!snapshot.data!.exists) {
+                                                return const Center(
+                                                  child: Text(
+                                                      'Document does not exist.'),
+                                                );
+                                              }
+
+                                              final List<String> photoUrls = [
+                                                snapshot.data!['documentProof'],
+                                                snapshot.data!['idProof'],
+                                              ];
+
+                                              return ReadFarmerImage(
+                                                  images: photoUrls);
+                                            }),
                                       ),
                                     ),
                                   ),
@@ -844,254 +797,6 @@ class ReadFarmerDetails extends StatelessWidget {
             width: 20,
             child: CircularProgressIndicator(
               color: Color(0xFF14BE77),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  /*This function is defined with the name selectButtonToUpdate, and it takes a BuildContext argument, 
-  which is used to determine where the dialog should be displayed in the widget tree.*/
-  void selectButtonToUpdate(BuildContext context) {
-    //Used to display a dialog box, typically an AlertDialog, on the screen
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          //Title of the showDialog
-          title: Text(
-            'Update Account',
-            style: Poppins.contentTitle.copyWith(
-              color: const Color(0xFF09041B),
-            ),
-            textAlign: TextAlign.center,
-          ),
-          content: SizedBox(
-            height: 260,
-            width: 250,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-
-                    //Archive button
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DecoratedBox(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFF00B4D8),
-                                Color(0xFF0077B6),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              disabledForegroundColor:
-                                  Colors.transparent.withOpacity(0.38),
-                              disabledBackgroundColor:
-                                  Colors.transparent.withOpacity(0.12),
-                              shadowColor: Colors.transparent,
-                            ),
-                            onPressed: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'Archive',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-
-                    //Suspend button
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DecoratedBox(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color.fromARGB(255, 240, 121, 24),
-                                Color(0xFFD1001F),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              disabledForegroundColor:
-                                  Colors.transparent.withOpacity(0.38),
-                              disabledBackgroundColor:
-                                  Colors.transparent.withOpacity(0.12),
-                              shadowColor: Colors.transparent,
-                            ),
-                            onPressed: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'Suspend',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-
-                    //Deduction button
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DecoratedBox(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFFFFB347),
-                                Color.fromARGB(255, 250, 124, 27),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              disabledForegroundColor:
-                                  Colors.transparent.withOpacity(0.38),
-                              disabledBackgroundColor:
-                                  Colors.transparent.withOpacity(0.12),
-                              shadowColor: Colors.transparent,
-                            ),
-                            onPressed: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'Deduction',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-
-                            //Cancel button
-                            child: Row(
-                              children: [
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xFF88807B),
-                                        Color(0xFF787276),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          RoutesManager.detailsFarmerPage);
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Cancel',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
             ),
           ),
         );

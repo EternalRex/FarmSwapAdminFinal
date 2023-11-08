@@ -5,7 +5,6 @@ import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/functions/update_online_status.dart';
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../clare_modules/pages/admin_signup_page/authentication/sign_up_auth.dart';
@@ -170,7 +169,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                       ],
                     ),
                   ),
-                  /*LABEL ON CHOOSING TO CONTINUE WITH FACEBOOK OR GOOGLE */
+                  /*LABEL ON CHOOSING TO CONTINUE WITH GOOGLE */
                   Text(
                     "Or continue with",
                     style: TextStyle(
@@ -182,63 +181,19 @@ class _SignInAdminState extends State<SignInAdmin> {
                   const SizedBox(
                     height: 25,
                   ),
-                  /*VERTICALLY CENTERING THE ROW THAT WILL CONTAIN THE CONTAINERS
-                  THAT WILL HOLD THE FACEBOOK AND GOOGLE ICON */
+                  /**
+                   * this row holds the google icon, textbutton for forgotten password and sign up
+                   */
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 470),
-                        child: Column(
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(FontAwesomeIcons.facebook),
-                              label: const Text('Facebook'),
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(10),
-                                fixedSize: const Size(160, 45),
-                                textStyle: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w900),
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.blue,
-                                elevation: 15,
-                                shadowColor: shadow,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminForgotPass);
-                                },
-                                child: Text(
-                                  "Forgot Your Password?",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
-                                    color: FarmSwapGreen.darkGreenActive,
-                                    fontWeight: FontWeight.w700,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 22),
                         child: Column(
                           children: [
+                            //elevatedbutton icon for sign in using google account
                             ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {},
                               icon: SvgPicture.asset(
                                 "assets/clare_assets/svg/google.svg",
                               ),
@@ -260,25 +215,55 @@ class _SignInAdminState extends State<SignInAdmin> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed(RoutesManager.adminSignup);
-                                },
-                                child: Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily:
-                                        GoogleFonts.poppins().fontFamily,
-                                    color: FarmSwapGreen.darkGreenActive,
-                                    fontWeight: FontWeight.w700,
-                                    decoration: TextDecoration.underline,
+
+                            Row(
+                              children: [
+                                //this padding will navigate to forgot password page to reset password if forgotten
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.adminForgotPass);
+                                    },
+                                    child: Text(
+                                      "Forgot Your Password?",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily:
+                                            GoogleFonts.poppins().fontFamily,
+                                        color: FarmSwapGreen.darkGreenActive,
+                                        fontWeight: FontWeight.w700,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                                //this padding will navigate to sign up page to register
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed(RoutesManager.adminSignup);
+                                    },
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily:
+                                            GoogleFonts.poppins().fontFamily,
+                                        color: FarmSwapGreen.darkGreenActive,
+                                        fontWeight: FontWeight.w700,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -359,11 +344,12 @@ class _SignInAdminState extends State<SignInAdmin> {
 
     try {
       User? user = await adminAuth.signInWithEmailAndPassword(email, password);
+
       if (user != null) {
         // Get the document ID
         String documentID = await RetrieveDocId().getDocsId();
 
-        // Check the account status
+        // Check the account status in the "AdminUsers" collection
         String accountStatus = await checkAccountStatus(documentID);
 
         //if the accountstatus is equal to requesting it will navigate to deactivate page
@@ -376,25 +362,6 @@ class _SignInAdminState extends State<SignInAdmin> {
         } else if (accountStatus == "Decline") {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
-        } else if (accountStatus == "Archived") {
-          // ignore: use_build_context_synchronously
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Note!"),
-                content: const Text("Account is archived!"),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text("Ok"),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog box
-                    },
-                  ),
-                ],
-              );
-            },
-          );
         } else {
           // Update online status and navigate to the dashboard
           onlineStatus.updateOnlineStatus(user.uid, true);
@@ -402,7 +369,39 @@ class _SignInAdminState extends State<SignInAdmin> {
           Navigator.of(context).pushNamed(RoutesManager.dashboard);
         }
       }
-    } catch (e) {
+    }
+
+    /**if ang account kay wala sa collection na admin users
+     * icatch siya dayun iya i check ang status kay archived naman 
+     * so mo show siya ug dialog box na archived account
+     */
+    catch (e) {
+      // Get the document ID
+      String documentID = await RetrieveDocIdArchived().getDocsId();
+      // Check the account status in the "AdminArchivedUsers" collection
+      String accountStatusArchived =
+          await checkAccountStatusArchived(documentID);
+      //if the user account status is archived then it will show a dialog
+      if (accountStatusArchived == "Archived") {
+        // ignore: use_build_context_synchronously
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Note!"),
+              content: const Text("Account is archived!"),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog box
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
       throw ("Some error happened in log in");
     }
   }
@@ -415,6 +414,26 @@ class _SignInAdminState extends State<SignInAdmin> {
     // Query Firestore to check the account status
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('AdminUsers')
+        .doc(documentID)
+        .get();
+
+    if (doc.exists) {
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        String accountStatus = data['Account Status'] ?? "";
+        return accountStatus;
+      }
+    }
+
+    // If the document doesn't exist or the field is missing, return an empty string
+    return "";
+  }
+
+  //this function kay para sa archived account collection
+  Future<String> checkAccountStatusArchived(String documentID) async {
+    // Query Firestore to check the account status
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('AdminArchivedUsers')
         .doc(documentID)
         .get();
 

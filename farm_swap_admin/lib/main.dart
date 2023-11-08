@@ -52,18 +52,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AdminLogsProvider(),
         ),
+        /*Registering our provider for Admin Activity */
         ChangeNotifierProvider(
           create: (context) => AdminActivityProvider(),
         ),
+        /*Registering our provider for Admin Specific Deactivate */
         ChangeNotifierProvider(
           create: (context) => AdminSpecificDeactivateProvider(),
         ),
         /*Registering povider for update account dropdown hint */
         ChangeNotifierProvider(
           create: (context) => UpdateAdminDropDownHint(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => FarmerUserIdProvider(),
         ),
         /*Registering provider  for notification incrementer*/
         ChangeNotifierProvider(

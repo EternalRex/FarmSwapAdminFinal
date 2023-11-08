@@ -22,7 +22,7 @@ class _NumberFarmersState extends State<NumberFarmers> {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       //Creates a CollectionReference named usersCollection, which is a reference to the Firestore collection named 'FarmerUsers'
-      final CollectionReference usersCollection = firestore.collection('FarmerUsers');
+      final CollectionReference usersCollection = firestore.collection('sample_FarmerUsers');
 
       //Fetches the data from the 'FarmerUsers' collection using the get method, which retrieves all documents within the collection
       final QuerySnapshot usersSnapshot = await usersCollection.get();

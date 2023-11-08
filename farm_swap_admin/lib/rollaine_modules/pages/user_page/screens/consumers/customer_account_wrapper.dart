@@ -30,7 +30,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
   Widget build(BuildContext context) {
 
     //Creates a reference to a Firestore collection named 'CustomerUsers' using the FirebaseFirestore instance
-    CollectionReference reference = FirebaseFirestore.instance.collection('CustomerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('sample_ConsumerUsers');
 
     //Fetch data from Firestore and then build a widget based on the retrieved data
     return FutureBuilder(
@@ -42,7 +42,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //Loads an image from the URL specified in the profileUrl field in the Firestore document data
-          final customerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
+          final customerProfile = CachedNetworkImageProvider("${data["profilePhoto"]}");
 
           //Container for the Customer's name and details
           return Container(
@@ -77,7 +77,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                     ),
                     //First name
                     Text(
-                      "${data["firstName"]}",
+                      "${data["firstname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -87,7 +87,7 @@ class _ReadCustomerAccountState extends State<ReadCustomerAccount> {
                     ),
                     //Last name
                     Text(
-                      "${data["lastName"]}",
+                      "${data["lastname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),

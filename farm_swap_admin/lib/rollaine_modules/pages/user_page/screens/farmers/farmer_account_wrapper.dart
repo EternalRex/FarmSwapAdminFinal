@@ -24,13 +24,18 @@ class ReadFarmerAccount extends StatefulWidget {
 }
 
 class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
+
   final RetrieveFarmerAccounts retrieveUserAccounts = RetrieveFarmerAccounts();
+
+  TextEditingController searchController = TextEditingController();
+  String searchValue = '';
+
 
   @override
   Widget build(BuildContext context) {
 
     //Creates a reference to a Firestore collection named 'FarmerUsers' using the FirebaseFirestore instance
-    CollectionReference reference = FirebaseFirestore.instance.collection('FarmerUsers');
+    CollectionReference reference = FirebaseFirestore.instance.collection('sample_FarmerUsers');
 
     //Fetch data from Firestore and then build a widget based on the retrieved data
     return FutureBuilder(
@@ -42,7 +47,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
           dynamic data = snapshot.data!.data() as dynamic;
 
           //Loads an image from the URL specified in the profileUrl field in the Firestore document data
-          final farmerProfile = CachedNetworkImageProvider("${data["profileUrl"]}");
+          final farmerProfile = CachedNetworkImageProvider("${data["profilePhoto"]}");
 
           //Container for the Farmer's name and details
           return Container(
@@ -77,7 +82,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                     ),
                     //First name of farmer
                     Text(
-                      "${data["firstName"]}",
+                      "${data["firstname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),
@@ -87,7 +92,7 @@ class _ReadFarmerAccountState extends State<ReadFarmerAccount> {
                     ),
                     //Last name of farmer
                     Text(
-                      "${data["lastName"]}",
+                      "${data["lastname"]}",
                       style: Poppins.farmerName.copyWith(
                         color: const Color(0xFF09051B),
                       ),

@@ -43,644 +43,314 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            final profileUrl = data["profileUrl"];
-            if (profileUrl != null && profileUrl.isNotEmpty) {
-              final profileImage =
-                  CachedNetworkImageProvider("${data["profileUrl"]}");
-              //if the profile url is not empty this container will return
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(0, 1),
-                    ),
-                  ],
+            final profileImage =
+                CachedNetworkImageProvider("${data["profileUrl"]}");
+            //if the profile url is not empty this container will return
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        //this is the sizedox for the image, lastname,firstname,
-                        //and location for the admin user
-                        SizedBox(
-                          width: 350,
-                          child: Row(
-                            children: [
-                              //this padding holds the profile image of the admin
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundImage: profileImage,
-                                  radius: 20,
-                                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadow,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      //this is the sizedox for the image, lastname,firstname,
+                      //and location for the admin user
+                      SizedBox(
+                        width: 350,
+                        child: Row(
+                          children: [
+                            //this padding holds the profile image of the admin
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                backgroundImage: profileImage,
+                                radius: 20,
                               ),
+                            ),
 
-                              //this column holds the admin users info
-                              //like firstname, lastname and address
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //first column that holds the admin user firstname and username
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "${data["First Name"]} ",
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          ),
+                            //this column holds the admin users info
+                            //like firstname, lastname and address
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //first column that holds the admin user firstname and username
+                                SizedBox(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "${data["First Name"]} ",
+                                        style: const TextStyle(
+                                          fontSize: 15,
                                         ),
-                                        Text(
-                                          "${data["Last Name"]}",
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          ),
+                                      ),
+                                      Text(
+                                        "${data["Last Name"]}",
+                                        style: const TextStyle(
+                                          fontSize: 15,
                                         ),
-                                      ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                //second column that holds the admin user address
+                                Text(
+                                  "${data["Address"]}",
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      //sizedbox to separate the two sizedbox
+                      const SizedBox(
+                        width: 240,
+                      ),
+                      //sizedbox for the activities button of admin user
+                      SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              DecoratedBox(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color(0xEEFF9012),
+                                      Color.fromARGB(255, 233, 104, 39),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(17.50),
+                                  ),
+                                ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    disabledForegroundColor:
+                                        Colors.transparent.withOpacity(0.38),
+                                    disabledBackgroundColor:
+                                        Colors.transparent.withOpacity(0.12),
+                                    shadowColor: Colors.transparent,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      widget.selectedId = "${data["User Id"]}";
+                                    });
+                                    //assign the widget.selectedId to setAdminUserId
+                                    //to bring in other class
+                                    Provider.of<AdminActivityProvider>(context,
+                                            listen: false)
+                                        .setadminUserId(widget.selectedId);
+                                    //this will navigate to specific admin activity page
+                                    Navigator.of(context).pushNamed(
+                                        RoutesManager.adminactivityspage);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5),
+                                    child: Text(
+                                      'Activities',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.50,
+                                      ),
                                     ),
                                   ),
-                                  //second column that holds the admin user address
-                                  Text(
-                                    "${data["Address"]}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        //sizedbox to separate the two sizedbox
-                        const SizedBox(
-                          width: 240,
-                        ),
-                        //sizedbox for the activities button of admin user
-                        SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xEEFF9012),
-                                        Color.fromARGB(255, 233, 104, 39),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(17.50),
-                                    ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      //sizedbox for the details button of admin user
+                      SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              //details button decoration
+                              DecoratedBox(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color(0xFF53E78B),
+                                      Color(0xFF14BE77),
+                                    ],
                                   ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.selectedId =
-                                            "${data["User Id"]}";
-                                      });
-                                      //assign the widget.selectedId to setAdminUserId
-                                      //to bring in other class
-                                      Provider.of<AdminActivityProvider>(
-                                              context,
-                                              listen: false)
-                                          .setadminUserId(widget.selectedId);
-                                      //this will navigate to specific admin activity page
-                                      Navigator.of(context).pushNamed(
-                                          RoutesManager.adminactivityspage);
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Activities',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
-                                      ),
-                                    ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(17.50),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        //sizedbox for the details button of admin user
-                        SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //details button decoration
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(17.50),
-                                    ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    disabledForegroundColor:
+                                        Colors.transparent.withOpacity(0.38),
+                                    disabledBackgroundColor:
+                                        Colors.transparent.withOpacity(0.12),
+                                    shadowColor: Colors.transparent,
                                   ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () async {
-                                      setState(() {
-                                        widget.selectedId =
-                                            "${data["User Id"]}";
-                                      });
-                                      // Retrieve the document ID and check the account status
-                                      String docId = widget.selectedId;
-                                      String accountStatus =
-                                          await checkAccountStatus(docId);
+                                  onPressed: () async {
+                                    setState(() {
+                                      widget.selectedId = "${data["User Id"]}";
+                                    });
+                                    // Retrieve the document ID and check the account status
+                                    String docId = widget.selectedId;
+                                    String accountStatus =
+                                        await checkAccountStatus(docId);
 
-                                      /*if the accountStatus == Active then the admin details provider 
+                                    /*if the accountStatus == Active then the admin details provider 
                                     will pass data to the next page*/
-                                      if (accountStatus == "Active") {
-                                        // Handle active account
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
+                                    if (accountStatus == "Active") {
+                                      // Handle active account
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
 
-                                        //then it will navigate to the details page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.admindetailspage);
-                                      }
-                                      /*if the status is equal to deactivate it will 
+                                      //then it will navigate to the details page
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.admindetailspage);
+                                    }
+                                    /*if the status is equal to deactivate it will 
                                     also pass data to the next page*/
-                                      else if (accountStatus == "Deactivate") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        // this will navigate to the next page which is deactivate page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.specificadmindeact);
-                                      }
-                                      /**if the status is equivalent to requesting it will show a dialog box
+                                    else if (accountStatus == "Deactivate") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      // this will navigate to the next page which is deactivate page
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.specificadmindeact);
+                                    }
+                                    /**if the status is equivalent to requesting it will show a dialog box
                                      * user will choose either to proceed or stay in the page */
-                                      else if (accountStatus == "Requesting") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Note!"),
-                                              content: const Text(
-                                                  "Account is requesting for reactivation!\nClick proceed to see request."),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Text("Proceed"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // this will close the dialog box
-                                                    /**at the same time it will navigate to the next page
+                                    else if (accountStatus == "Requesting") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Note!"),
+                                            content: const Text(
+                                                "Account is requesting for reactivation!\nClick proceed to see request."),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text("Proceed"),
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // this will close the dialog box
+                                                  /**at the same time it will navigate to the next page
                                                    * request reactivation page
                                                    */
-                                                    Navigator.of(context)
-                                                        .pushNamed(RoutesManager
-                                                            .requestreactivation);
-                                                  },
-                                                ),
-                                                TextButton(
-                                                  child: const Text("Cancel"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the dialog box
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                      /**
+                                                  Navigator.of(context)
+                                                      .pushNamed(RoutesManager
+                                                          .requestreactivation);
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: const Text("Cancel"),
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog box
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                    /**
                                      * if the status is decline after the admin user decline the request
                                      * the admin can request again and it will navigate to deactivate page
                                      */
-                                      else if (accountStatus == "Decline") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        // Navigate to the specific "deactivate" page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.specificadmindeact);
-                                      }
-                                      /**
+                                    else if (accountStatus == "Decline") {
+                                      Provider.of<AdminDetailsProvider>(context,
+                                              listen: false)
+                                          .setadminUserId(widget.selectedId);
+                                      // Navigate to the specific "deactivate" page
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.specificadmindeact);
+                                    }
+                                    /**
                                      * if the status is archived after the admin archived the account
                                      * it will prompt a dialog box that account is archived
                                      */
-                                      else if (accountStatus == "Archived") {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Note!"),
-                                              content: const Text(
-                                                  "Account is archived!"),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Text("Ok"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the dialog box
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      } else {
-                                        // display an error message that account status is unknown
-                                        print(
-                                            "Unknown account status: $accountStatus");
-                                      }
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Details',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
+                                    else if (accountStatus == "Archived") {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Note!"),
+                                            content: const Text(
+                                                "Account is archived!"),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text("Ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog box
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      // display an error message that account status is unknown
+                                      print(
+                                          "Unknown account status: $accountStatus");
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5),
+                                    child: Text(
+                                      'Details',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.50,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }
-            //if profileUrl is empty this container will return
-            else {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(0, 1),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        //this is the sizedox for the image, lastname,firstname,
-                        //and location for the admin user
-                        SizedBox(
-                          width: 350,
-                          child: Row(
-                            children: [
-                              //this padding holds the profile image of the admin
-                              const Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.blue,
-                                  radius: 20,
-                                  child: Icon(
-                                    Icons.person, // Specify the icon
-                                    size: 30, // Adjust the size of the icon
-                                    color: Colors.white, // Set the icon color
-                                  ),
-                                ),
-                              ),
-
-                              //this column holds the admin users info
-                              //like firstname, lastname and address
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //first column that holds the admin user firstname and username
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "${data["First Name"]} ",
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${data["Last Name"]}",
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  //second column that holds the admin user address
-                                  Text(
-                                    "${data["Address"]}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ],
                           ),
                         ),
-                        //sizedbox to separate the two sizedbox
-                        const SizedBox(
-                          width: 240,
-                        ),
-                        //sizedbox for the activities button of admin user
-                        SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xEEFF9012),
-                                        Color.fromARGB(255, 233, 104, 39),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(17.50),
-                                    ),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.selectedId =
-                                            "${data["User Id"]}";
-                                      });
-                                      //assign the widget.selectedId to setAdminUserId
-                                      //to bring in other class
-                                      Provider.of<AdminActivityProvider>(
-                                              context,
-                                              listen: false)
-                                          .setadminUserId(widget.selectedId);
-                                      //this will navigate to specific admin activity page
-                                      Navigator.of(context).pushNamed(
-                                          RoutesManager.adminactivityspage);
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Activities',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        //sizedbox for the details button of admin user
-                        SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //details button decoration
-                                DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xFF53E78B),
-                                        Color(0xFF14BE77),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(17.50),
-                                    ),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      disabledForegroundColor:
-                                          Colors.transparent.withOpacity(0.38),
-                                      disabledBackgroundColor:
-                                          Colors.transparent.withOpacity(0.12),
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () async {
-                                      setState(() {
-                                        widget.selectedId =
-                                            "${data["User Id"]}";
-                                      });
-                                      // Retrieve the document ID and check the account status
-                                      String docId = widget.selectedId;
-                                      String accountStatus =
-                                          await checkAccountStatus(docId);
-
-                                      /*if the accountStatus == Active then the admin details provider 
-                                    will pass data to the next page*/
-                                      if (accountStatus == "Active") {
-                                        // Handle active account
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-
-                                        //then it will navigate to the details page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.admindetailspage);
-                                      }
-                                      /*if the status is equal to deactivate it will 
-                                    also pass data to the next page*/
-                                      else if (accountStatus == "Deactivate") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        // this will navigate to the next page which is deactivate page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.specificadmindeact);
-                                      }
-                                      /**if the status is equivalent to requesting it will show a dialog box
-                                     * user will choose either to proceed or stay in the page */
-                                      else if (accountStatus == "Requesting") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Note!"),
-                                              content: const Text(
-                                                  "Account is requesting for reactivation!\nClick proceed to see request."),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Text("Proceed"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // this will close the dialog box
-                                                    /**at the same time it will navigate to the next page
-                                                   * request reactivation page
-                                                   */
-                                                    Navigator.of(context)
-                                                        .pushNamed(RoutesManager
-                                                            .requestreactivation);
-                                                  },
-                                                ),
-                                                TextButton(
-                                                  child: const Text("Cancel"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the dialog box
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                      /**
-                                     * if the status is decline after the admin user decline the request
-                                     * the admin can request again and it will navigate to deactivate page
-                                     */
-                                      else if (accountStatus == "Decline") {
-                                        Provider.of<AdminDetailsProvider>(
-                                                context,
-                                                listen: false)
-                                            .setadminUserId(widget.selectedId);
-                                        // Navigate to the specific "deactivate" page
-                                        Navigator.of(context).pushNamed(
-                                            RoutesManager.specificadmindeact);
-                                      }
-                                      /**
-                                     * if the status is archived after the admin archived the account
-                                     * it will prompt a dialog box that account is archived
-                                     */
-                                      else if (accountStatus == "Archived") {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Note!"),
-                                              content: const Text(
-                                                  "Account is archived!"),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Text("Ok"),
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the dialog box
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      } else {
-                                        // display an error message that account status is unknown
-                                        print(
-                                            "Unknown account status: $accountStatus");
-                                      }
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 5),
-                                      child: Text(
-                                        'Details',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.50,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
           }
           return const Center(
             child: SizedBox(
