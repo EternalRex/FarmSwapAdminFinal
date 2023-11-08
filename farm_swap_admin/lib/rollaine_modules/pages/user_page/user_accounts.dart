@@ -530,7 +530,9 @@ class _UserAccount extends State<UserAccount> {
               /*We are getting all the list of documents in the firebase, and each document like one
               by one, the documents will passed to the _buildUserListItems */
               children: snapshot.data!.docs
-                  .where((document) => document['accountStatus'] != 'PENDING')
+                  .where((document) => document['accountStatus'] != 'Pending' &&
+                      document['accountStatus'] != 'Deactivate' &&
+                      document['accountStatus'] != 'Requesting')
                   .map<Widget>((document) => _buildFarmerListItems(document))
                   .toList(),
             ),

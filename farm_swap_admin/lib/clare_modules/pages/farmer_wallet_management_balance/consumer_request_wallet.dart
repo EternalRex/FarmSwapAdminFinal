@@ -79,9 +79,19 @@ class _RequestBalanceConsumerListState
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RoutesManager.dashboard);
+                    },
+                  ),
                   //Design the page title
                   title: const TitleText(
-                    myText: 'Consumer Wallet Request',
+                    myText: 'Consumer Wallet',
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -102,7 +112,7 @@ class _RequestBalanceConsumerListState
                           onSubmitted: (String query) {
                             setState(
                               () {
-                                searchValue = searchController.text;
+                                searchValue = query;
                               },
                             );
                           },
@@ -455,7 +465,8 @@ class _RequestBalanceConsumerListState
                                                   child: const Text("Ok"),
                                                   onPressed: () async {
                                                     setState(() {
-                                                      widget.selectedId = "${document["userId"]}";
+                                                      widget.selectedId =
+                                                          "${document["userId"]}";
                                                     });
                                                     Navigator.of(context)
                                                         .pop(); // this will close the dialog box
@@ -1317,11 +1328,18 @@ class _RequestBalanceConsumerListState
                                                                     "Proceed"),
                                                                 onPressed:
                                                                     () async {
-
-                                                                  String cashOutAmount = "${document["amount"]}";
+                                                                  String
+                                                                      cashOutAmount =
+                                                                      "${document["amount"]}";
                                                                   //this will decrement the balance of the user
-                                                                  await wallet.updateBalance1(cashOutAmount, widget.selectedId);
-                                                                  await wallet.updateStatus1('APPROVED', widget.selectedId);
+                                                                  await wallet.updateBalance1(
+                                                                      cashOutAmount,
+                                                                      widget
+                                                                          .selectedId);
+                                                                  await wallet.updateStatus1(
+                                                                      'APPROVED',
+                                                                      widget
+                                                                          .selectedId);
 
                                                                   Navigator.of(
                                                                           context)
@@ -3359,10 +3377,19 @@ class _RequestBalanceConsumerListState
                                                                 //  newBalance,
                                                                 //widget.selectedId);
 
-                                                                String cashOutAmount = "${document["amount"]}";
-                                                                  //this will decrement the balance of the user
-                                                                  await wallet.updateBalance1(cashOutAmount, widget.selectedId);
-                                                                  await wallet.updateStatus1('APPROVED', widget.selectedId);
+                                                                String
+                                                                    cashOutAmount =
+                                                                    "${document["amount"]}";
+                                                                //this will decrement the balance of the user
+                                                                await wallet.updateBalance1(
+                                                                    cashOutAmount,
+                                                                    widget
+                                                                        .selectedId);
+                                                                await wallet
+                                                                    .updateStatus1(
+                                                                        'APPROVED',
+                                                                        widget
+                                                                            .selectedId);
 
                                                                 Navigator.of(
                                                                         context)

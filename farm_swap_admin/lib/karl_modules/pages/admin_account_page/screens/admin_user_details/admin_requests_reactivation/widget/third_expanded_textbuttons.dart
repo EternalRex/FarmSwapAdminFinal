@@ -54,7 +54,9 @@ class FarmerRequestsListBtn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
+              },
               child: const EditProfileText(
                 myText: 'Farmer',
                 myColor: Color(0xFF09041B),

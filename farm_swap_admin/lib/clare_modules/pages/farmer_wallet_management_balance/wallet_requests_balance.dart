@@ -90,7 +90,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     },
                   ),
                   title: const DashBoardTitleText(
-                    myText: "Farmer Wallet Requests",
+                    myText: "Farmer Wallet",
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -108,6 +108,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                           controller: searchController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
+                          onSubmitted: (String query) {
+                            setState(
+                              () {
+                                searchValue = query;
+                              },
+                            );
+                          },
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
@@ -119,18 +126,8 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                               ),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search here',
-                            prefixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  searchValue = searchController.text;
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.search,
-                                color: Color(0xFFDA6317),
-                              ),
-                            ),
+                            hintText: 'Search',
+                            prefixIcon: const Icon(Icons.search_rounded),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
                         ),
@@ -409,7 +406,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                       ),
                     ),
                     const SizedBox(
-                      width: 100,
+                      width: 90,
                     ),
 
                     //sizedbox for accept button of admin reactivation
@@ -950,7 +947,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                               .pop(); // Close the AlertDialog
 
                                                                           Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                              .pushNamed(RoutesManager.requestwalletpage);
                                                                         },
                                                                       ),
                                                                     ],
@@ -1358,7 +1355,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                           Navigator.of(context)
                                                                               .pop(); // Close the  AlertDialog
                                                                           Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                              .pushNamed(RoutesManager.requestwalletpage);
                                                                         },
                                                                       ),
                                                                     ],
@@ -1905,7 +1902,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                               .pop(); // Close the AlertDialog
 
                                                                           Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                              .pushNamed(RoutesManager.requestwalletpage);
                                                                         },
                                                                       ),
                                                                     ],
@@ -2302,7 +2299,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                           Navigator.of(context)
                                                                               .pop(); // Close the AlertDialog
                                                                           Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                              .pushNamed(RoutesManager.requestwalletpage);
                                                                         },
                                                                       ),
                                                                     ],
@@ -2449,7 +2446,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     ),
                   ),
                   const SizedBox(
-                    width: 100,
+                    width: 90,
                   ),
 
                   //sizedbox for accept button of admin reactivation
@@ -3874,7 +3871,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                         onPressed: () async {
                                                           await wallet
                                                               .updateStatus(
-                                                                  "Declined",
+                                                                  "Decline",
                                                                   widget
                                                                       .selectedId);
                                                           Navigator.of(context)
@@ -4258,7 +4255,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                               .pop(); // Close the AlertDialog Close
                                                           await wallet
                                                               .updateStatus1(
-                                                                  "Declined",
+                                                                  "Decline",
                                                                   widget
                                                                       .selectedId);
 
@@ -4334,7 +4331,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
         ),
       );
     }
-
     return Container();
   }
 }
