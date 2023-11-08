@@ -10,11 +10,13 @@ class WalletTextField extends StatelessWidget {
     required this.controller,
     required this.enabled,
     this.label,
+    this.onChanged,
     this.prefixIcon,
   }) : super(key: key);
 
   TextEditingController controller;
   Widget? label;
+  final onChanged;
   final bool enabled;
   final Widget? prefixIcon;
 
@@ -32,6 +34,7 @@ class WalletTextField extends StatelessWidget {
           height: 40, // Set the desired height
           child: TextField(
             controller: controller,
+            onChanged: onChanged,
             decoration: InputDecoration(
               enabled: enabled,
               label: label,
