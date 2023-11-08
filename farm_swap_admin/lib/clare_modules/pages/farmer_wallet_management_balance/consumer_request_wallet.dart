@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/widget/wallet_consumer_retrieveDocId.dart';
-import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/widget/wallet_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_consumer_retrieveDocId.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
@@ -23,6 +23,7 @@ class RequestBalanceConsumerList extends StatefulWidget {
 
   final String? documentId;
   String selectedId = '';
+  String cashOutselectedId = "";
 
   @override
   State<RequestBalanceConsumerList> createState() =>
@@ -453,6 +454,9 @@ class _RequestBalanceConsumerListState
                                                 TextButton(
                                                   child: const Text("Ok"),
                                                   onPressed: () async {
+                                                    setState(() {
+                                                      widget.selectedId = "${document["userId"]}";
+                                                    });
                                                     Navigator.of(context)
                                                         .pop(); // this will close the dialog box
 
@@ -917,6 +921,7 @@ class _RequestBalanceConsumerListState
                                                                       "APPROVED",
                                                                       widget
                                                                           .selectedId);
+                                                                  // ignore: use_build_context_synchronously
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop(); // Close the AlertDialog Close
@@ -1312,9 +1317,11 @@ class _RequestBalanceConsumerListState
                                                                     "Proceed"),
                                                                 onPressed:
                                                                     () async {
-                                                                  //await updateBalanceCashOut(
-                                                                  //  newBalance,
-                                                                  //widget.selectedId);
+
+                                                                  String cashOutAmount = "${document["amount"]}";
+                                                                  //this will decrement the balance of the user
+                                                                  await wallet.updateBalance1(cashOutAmount, widget.selectedId);
+                                                                  await wallet.updateStatus1('APPROVED', widget.selectedId);
 
                                                                   Navigator.of(
                                                                           context)
@@ -2285,7 +2292,7 @@ class _RequestBalanceConsumerListState
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop(); // Close the AlertDialog Close
-                                                                  await wallet.updateStatus(
+                                                                  await wallet.updateStatus1(
                                                                       "DECLINED",
                                                                       widget
                                                                           .selectedId);
@@ -3352,6 +3359,11 @@ class _RequestBalanceConsumerListState
                                                                 //  newBalance,
                                                                 //widget.selectedId);
 
+                                                                String cashOutAmount = "${document["amount"]}";
+                                                                  //this will decrement the balance of the user
+                                                                  await wallet.updateBalance1(cashOutAmount, widget.selectedId);
+                                                                  await wallet.updateStatus1('APPROVED', widget.selectedId);
+
                                                                 Navigator.of(
                                                                         context)
                                                                     .pop(); // Close the AlertDialog Close
@@ -4309,7 +4321,7 @@ class _RequestBalanceConsumerListState
                                                                         context)
                                                                     .pop(); // Close the AlertDialog Close
                                                                 await wallet
-                                                                    .updateStatus(
+                                                                    .updateStatus1(
                                                                         "DECLINED",
                                                                         widget
                                                                             .selectedId);

@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_farmer_retrieveDocId.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textbuttons_user.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
@@ -12,9 +15,6 @@ import 'package:intl/intl.dart';
 import '../../../../../../constants/Colors/colors.dart';
 import '../../../karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import 'widget/wallet_farmer_retrieveDocId.dart';
-import 'widget/wallet_textbuttons_user.dart';
-import 'widget/wallet_textfield.dart';
 
 // ignore: must_be_immutable
 class RequestBalanceFarmerLists extends StatefulWidget {

@@ -942,7 +942,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             .pop(); // Close the AlertDialog
 
                                                                         Navigator.of(context)
-                                                                            .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                            .pushNamed(RoutesManager.requestwalletpage);
                                                                       },
                                                                     ),
                                                                   ],
@@ -1333,7 +1333,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                         Navigator.of(context)
                                                                             .pop(); // Close the  AlertDialog
                                                                         Navigator.of(context)
-                                                                            .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                            .pushNamed(RoutesManager.requestwalletpage);
                                                                       },
                                                                     ),
                                                                   ],
@@ -1865,7 +1865,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             .pop(); // Close the AlertDialog
 
                                                                         Navigator.of(context)
-                                                                            .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                            .pushNamed(RoutesManager.requestwalletpage);
                                                                       },
                                                                     ),
                                                                   ],
@@ -2246,7 +2246,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                         Navigator.of(context)
                                                                             .pop(); // Close the AlertDialog
                                                                         Navigator.of(context)
-                                                                            .pushNamed(RoutesManager.farmerrequestwalletpage);
+                                                                            .pushNamed(RoutesManager.requestwalletpage);
                                                                       },
                                                                     ),
                                                                   ],
