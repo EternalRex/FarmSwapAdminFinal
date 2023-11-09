@@ -187,86 +187,83 @@ class _SignInAdminState extends State<SignInAdmin> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 22),
-                        child: Column(
-                          children: [
-                            //elevatedbutton icon for sign in using google account
-                            ElevatedButton.icon(
-                              onPressed: () async {},
-                              icon: SvgPicture.asset(
-                                "assets/clare_assets/svg/google.svg",
-                              ),
-                              label: const Text('Google'),
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(10),
-                                fixedSize: const Size(160, 45),
-                                textStyle: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w900),
-                                backgroundColor: Colors.white,
-                                foregroundColor:
-                                    const Color.fromARGB(255, 85, 84, 84),
-                                elevation: 15,
-                                shadowColor: shadow,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
+                      Column(
+                        children: [
+                          //elevatedbutton icon for sign in using google account
+                          ElevatedButton.icon(
+                            onPressed: () async {},
+                            icon: SvgPicture.asset(
+                              "assets/clare_assets/svg/google.svg",
+                            ),
+                            label: const Text('Google'),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(10),
+                              fixedSize: const Size(160, 45),
+                              textStyle: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w900),
+                              backgroundColor: Colors.white,
+                              foregroundColor:
+                                  const Color.fromARGB(255, 85, 84, 84),
+                              elevation: 15,
+                              shadowColor: shadow,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
                                 ),
                               ),
                             ),
+                          ),
 
-                            Row(
-                              children: [
-                                //this padding will navigate to forgot password page to reset password if forgotten
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          RoutesManager.adminForgotPass);
-                                    },
-                                    child: Text(
-                                      "Forgot Your Password?",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily:
-                                            GoogleFonts.poppins().fontFamily,
-                                        color: FarmSwapGreen.darkGreenActive,
-                                        fontWeight: FontWeight.w700,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                          Row(
+                            children: [
+                              //this padding will navigate to forgot password page to reset password if forgotten
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                        RoutesManager.adminForgotPass);
+                                  },
+                                  child: Text(
+                                    "Forgot Your Password?",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily:
+                                          GoogleFonts.poppins().fontFamily,
+                                      color: FarmSwapGreen.darkGreenActive,
+                                      fontWeight: FontWeight.w700,
+                                      decoration: TextDecoration.underline,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 100,
-                                ),
-                                //this padding will navigate to sign up page to register
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context)
-                                          .pushNamed(RoutesManager.adminSignup);
-                                    },
-                                    child: Text(
-                                      "Sign Up",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily:
-                                            GoogleFonts.poppins().fontFamily,
-                                        color: FarmSwapGreen.darkGreenActive,
-                                        fontWeight: FontWeight.w700,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                              ),
+                              const SizedBox(
+                                width: 65,
+                              ),
+                              //this padding will navigate to sign up page to register
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed(RoutesManager.adminSignup);
+                                  },
+                                  child: Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily:
+                                          GoogleFonts.poppins().fontFamily,
+                                      color: FarmSwapGreen.darkGreenActive,
+                                      fontWeight: FontWeight.w700,
+                                      decoration: TextDecoration.underline,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
