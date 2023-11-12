@@ -1,11 +1,6 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_content_description.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_details_card.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsContentSection/listings_names.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsRightMenu_btns/listings_chat_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsRightMenu_btns/listings_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_dashboard_btn.dart';
@@ -28,6 +23,16 @@ class Listings extends StatefulWidget {
 }
 
 class _ListingsState extends State<Listings> {
+  //creates an instance of TextEditingController named searchFarmerController.
+  TextEditingController searchBarterController = TextEditingController();
+  //store the search query entered by the user for searching farmers.
+  String searchBarterValue = '';
+
+  //creates an instance of TextEditingController named searchFarmerController.
+  TextEditingController searchSellController = TextEditingController();
+  //store the search query entered by the user for searching farmers.
+  String searchSellValue = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,7 +141,7 @@ class _ListingsState extends State<Listings> {
 
           //Second expanded division that contains the content
           Expanded(
-            flex: 4,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -151,31 +156,51 @@ class _ListingsState extends State<Listings> {
                   automaticallyImplyLeading: false,
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.all(10),
-
-                      //Container for search bar
-                      child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 250, 175, 0),
+                                  Color.fromARGB(255, 255, 128, 0),
+                                ],
                               ),
-                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Archived Accounts',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],
@@ -183,159 +208,237 @@ class _ListingsState extends State<Listings> {
                 body: Row(
                   children: [
                     Expanded(
+                      flex: 2,
                       child: Padding(
-                        //Decorate the expanded area for the main content
                         padding: const EdgeInsets.only(
                             left: 10, right: 10, bottom: 15),
                         child: Container(
-                          //Design of the container
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-
-                            //Box shadow of container
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadow,
-                                blurRadius: 2,
-                                offset: const Offset(1, 5),
+                            height: 510,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
                               ),
-                            ],
-                          ),
-
-                          //Column for main content
-                          child: SingleChildScrollView(
+                              //Box shadow of container
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadow,
+                                  blurRadius: 2,
+                                  offset: const Offset(1, 5),
+                                ),
+                              ],
+                            ),
                             child: Column(
                               children: [
-                                //Content title
-                                const ListingsContentDescription(),
-
-                                Row(
+                                Column(
                                   children: [
-                                    Expanded(
-                                      flex: 2,
+                                    Align(
+                                      alignment: Alignment.topRight,
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.amber,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Name',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
+                                        padding: const EdgeInsets.all(10),
+
+                                        //Container for search bar
+                                        child: SizedBox(
+                                          width: 280,
+                                          height: 40,
+                                          child: TextField(
+                                            controller: searchBarterController,
+                                            style: GoogleFonts.poppins(
+                                                color: const Color(0xFFDA6317),
+                                                height: 1.5),
+                                            onSubmitted: (String query) {
+                                              setState(() {
+                                                searchBarterValue = query;
+                                              });
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(5),
+                                              filled: true,
+                                              fillColor: const Color(0xFFF9A84D)
+                                                  .withOpacity(0.10),
+                                              border: const OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              hintText: 'Search',
+                                              prefixIcon: const Icon(
+                                                  Icons.search_rounded),
+                                              prefixIconColor:
+                                                  const Color(0xFFDA6317),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.blue,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  'Status',
-                                                  style: Poppins.farmerName
-                                                      .copyWith(
-                                                    color:
-                                                        const Color(0xFF09051C),
-                                                  ),
-                                                )
-                                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          left: 15,
+                                          right: 15,
+                                          bottom: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: greenLight,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(5),
                                             ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: shadow,
+                                                blurRadius: 2,
+                                                offset: const Offset(0, 1),
+                                              )
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              /*Farmers Title */
+                                              Text(
+                                                'List of Products for Barter',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09051C),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
+                                      ),
+                                    ),
+                                    const SingleChildScrollView(
+                                      child: SizedBox(
+                                        height: 390,
+                                        child: Column(),
                                       ),
                                     ),
                                   ],
                                 ),
-
-                                //Farmer name, identity, details button
-                                const ListingsNames(),
+                              ],
+                            )),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Container(
+                            height: 510,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              //Box shadow of container
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadow,
+                                  blurRadius: 2,
+                                  offset: const Offset(1, 5),
+                                ),
                               ],
                             ),
-                          ),
-                        ),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+
+                                        //Container for search bar
+                                        child: SizedBox(
+                                          width: 280,
+                                          height: 40,
+                                          child: TextField(
+                                            controller: searchSellController,
+                                            style: GoogleFonts.poppins(
+                                                color: const Color(0xFFDA6317),
+                                                height: 1.5),
+                                            onSubmitted: (String query) {
+                                              setState(() {
+                                                searchSellValue = query;
+                                              });
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(5),
+                                              filled: true,
+                                              fillColor: const Color(0xFFF9A84D)
+                                                  .withOpacity(0.10),
+                                              border: const OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              hintText: 'Search',
+                                              prefixIcon: const Icon(
+                                                  Icons.search_rounded),
+                                              prefixIconColor:
+                                                  const Color(0xFFDA6317),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          left: 15,
+                                          right: 15,
+                                          bottom: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: greenLight,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(5),
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: shadow,
+                                                blurRadius: 2,
+                                                offset: const Offset(0, 1),
+                                              )
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              /*Farmers Title */
+                                              Text(
+                                                'List of Products for Selling',
+                                                style: Poppins.contentTitle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xFF09051C),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    /*SingleChildScrollView(
+                                      child: SizedBox(
+                                        height: 390,
+                                        child: _buildSellProductsList(),
+                                      ),
+                                    ),*/
+                                  ],
+                                ),
+                              ],
+                            )),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          //Third expanded division which contains the information of a farmer
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: Container(
-                //Designing the container
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-
-                  //Box shadow of the container
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
-                    ),
-                  ],
-                ),
-
-                //Column for the chat and notification buttons
-                child: const Column(
-                  children: [
-                    //Row for the buttons
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 14),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 75, top: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            //Chat button
-                            ListingsChatOptionsBtn(),
-                            SizedBox(
-                              width: 5,
-                            ),
-
-                            //Notification button
-                            ListingsNotificationOptionsBtn(),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-
-                    //Card for promotion request of farmers
-                    ListingsDetailsCard(),
                   ],
                 ),
               ),

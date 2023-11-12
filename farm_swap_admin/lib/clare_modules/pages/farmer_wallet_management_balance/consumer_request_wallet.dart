@@ -453,11 +453,10 @@ class _RequestBalanceConsumerListState
                                       onPressed: () async {
                                         setState(() {
                                           widget.selectedId =
-                                              "${document["userId"]}";
+                                              "${data["userId"]}";
                                         });
 
-                                        String requestType =
-                                            document["request"];
+                                        String requestType = data["request"];
 
                                         showDialog(
                                           context: context,
@@ -465,14 +464,14 @@ class _RequestBalanceConsumerListState
                                             return AlertDialog(
                                               title: const Text("Note!"),
                                               content: Text(
-                                                  "This account is requesting for ${document["request"]}"),
+                                                  "This account is requesting for ${data["request"]}"),
                                               actions: <Widget>[
                                                 TextButton(
                                                   child: const Text("Ok"),
                                                   onPressed: () async {
                                                     setState(() {
                                                       widget.selectedId =
-                                                          "${document["userId"]}";
+                                                          "${data["userId"]}";
                                                     });
                                                     Navigator.of(context)
                                                         .pop(); // this will close the dialog box
@@ -595,7 +594,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["request"]} ",
+                                                                        "${data["request"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -634,7 +633,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["userId"]} ",
+                                                                        "${data["userId"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -675,8 +674,8 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["firstname"]} " +
-                                                                              "${document["lastname"]} ",
+                                                                          "${data["firstname"]} " +
+                                                                              "${data["lastname"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -718,7 +717,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["contactnum"]} ",
+                                                                          "${data["contactnum"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -760,7 +759,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["address"]} ",
+                                                                          "${data["address"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -802,7 +801,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["amount"]} ",
+                                                                          "${data["amount"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -911,7 +910,7 @@ class _RequestBalanceConsumerListState
                                                                         enabled:
                                                                             true,
                                                                         label: Text(
-                                                                            "${document["amount"]}"),
+                                                                            "${data["amount"]}"),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -953,7 +952,7 @@ class _RequestBalanceConsumerListState
                                                                           title:
                                                                               const Text("Succesful!"),
                                                                           content:
-                                                                              Text("Successfully added balance to ${document["firstname"]} ${document["lastname"]}"),
+                                                                              Text("Successfully added balance to ${data["firstname"]} ${data["lastname"]}"),
                                                                           actions: <Widget>[
                                                                             TextButton(
                                                                               child: const Text("Ok"),
@@ -1100,7 +1099,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["request"]} ",
+                                                                        "${data["request"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -1139,7 +1138,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["userId"]} ",
+                                                                        "${data["userId"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -1180,8 +1179,8 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["firstname"]} " +
-                                                                              "${document["lastname"]} ",
+                                                                          "${data["firstname"]} " +
+                                                                              "${data["lastname"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1223,7 +1222,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["contactnum"]} ",
+                                                                          "${data["contactnum"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1265,7 +1264,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["address"]} ",
+                                                                          "${data["address"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1307,7 +1306,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["amount"]} ",
+                                                                          "${data["amount"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1333,7 +1332,7 @@ class _RequestBalanceConsumerListState
                                                                       setState(
                                                                           () {
                                                                         widget.selectedId =
-                                                                            "${document["userId"]}";
+                                                                            "${data["userId"]}";
                                                                       });
                                                                       await selectImage();
                                                                       await uploadImage(
@@ -1384,14 +1383,14 @@ class _RequestBalanceConsumerListState
                                                                                   ),
                                                                                 ],
                                                                               ),
-                                                                              actions: [
+                                                                              actions: <Widget>[
                                                                                 TextButton(
                                                                                   child: const Text("Confirm"),
                                                                                   onPressed: () async {
                                                                                     setState(() {
-                                                                                      widget.selectedId = "${document["userId"]}";
+                                                                                      widget.selectedId = "${data["userId"]}";
                                                                                     });
-                                                                                    String cashOutAmount = "${document["amount"]} ";
+                                                                                    String cashOutAmount = "${data["amount"]} ";
                                                                                     //this will decrement the balance of the user
                                                                                     await wallet.updateBalance1(cashOutAmount, widget.selectedId);
                                                                                     await wallet.updateStatus1("APPROVED", widget.selectedId);
@@ -1404,7 +1403,7 @@ class _RequestBalanceConsumerListState
                                                                                       builder: (context) {
                                                                                         return AlertDialog(
                                                                                           title: const Text("Successful"),
-                                                                                          content: Text("Sucessfully confirm ${document["firstname"]} ${document["lastname"]} cash out!"),
+                                                                                          content: Text("Sucessfully confirm ${data["firstname"]} ${data["lastname"]} cash out!"),
                                                                                           actions: [
                                                                                             TextButton(
                                                                                               onPressed: () {
@@ -1507,11 +1506,10 @@ class _RequestBalanceConsumerListState
                                       onPressed: () async {
                                         setState(() {
                                           widget.selectedId =
-                                              "${document["userId"]}";
+                                              "${data["userId"]}";
                                         });
 
-                                        String requestType =
-                                            document["request"];
+                                        String requestType = data["request"];
 
                                         showDialog(
                                           context: context,
@@ -1646,7 +1644,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["request"]} ",
+                                                                        "${data["request"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -1685,7 +1683,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["userId"]} ",
+                                                                        "${data["userId"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -1726,8 +1724,8 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["firstname"]} " +
-                                                                              "${document["lastname"]} ",
+                                                                          "${data["firstname"]} " +
+                                                                              "${data["lastname"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1769,7 +1767,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["contactnum"]} ",
+                                                                          "${data["contactnum"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1811,7 +1809,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["address"]} ",
+                                                                          "${data["address"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1853,7 +1851,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["amount"]} ",
+                                                                          "${data["amount"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -1961,7 +1959,7 @@ class _RequestBalanceConsumerListState
                                                                           title:
                                                                               const Text("Succesful!"),
                                                                           content:
-                                                                              Text("Successfully declined cash in request of ${document["firstname"]} ${document["lastname"]}"),
+                                                                              Text("Successfully declined cash in request of ${data["firstname"]} ${data["lastname"]}"),
                                                                           actions: <Widget>[
                                                                             TextButton(
                                                                               child: const Text("Ok"),
@@ -2109,7 +2107,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["request"]} ",
+                                                                        "${data["request"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2148,7 +2146,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["userId"]} ",
+                                                                        "${data["userId"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2189,8 +2187,8 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["firstname"]} " +
-                                                                              "${document["lastname"]} ",
+                                                                          "${data["firstname"]} " +
+                                                                              "${data["lastname"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2232,7 +2230,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["contactnum"]} ",
+                                                                          "${data["contactnum"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2274,7 +2272,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["address"]} ",
+                                                                          "${data["address"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2316,7 +2314,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["amount"]} ",
+                                                                          "${data["amount"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2361,7 +2359,7 @@ class _RequestBalanceConsumerListState
                                                                           title:
                                                                               const Text("Successful!"),
                                                                           content:
-                                                                              Text("Successfully decline request cash out of ${document["firstname"]} ${document["lastname"]}"),
+                                                                              Text("Successfully decline request cash out of ${data["firstname"]} ${data["lastname"]}"),
                                                                           actions: <Widget>[
                                                                             TextButton(
                                                                               child: const Text("Ok"),
@@ -2545,11 +2543,10 @@ class _RequestBalanceConsumerListState
                                     ),
                                     onPressed: () async {
                                       setState(() {
-                                        widget.selectedId =
-                                            "${document["userId"]}";
+                                        widget.selectedId = "${data["userId"]}";
                                       });
 
-                                      String requestType = document["request"];
+                                      String requestType = data["request"];
 
                                       showDialog(
                                         context: context,
@@ -2557,14 +2554,14 @@ class _RequestBalanceConsumerListState
                                           return AlertDialog(
                                             title: const Text("Note!"),
                                             content: Text(
-                                                "This account is requesting for ${document["request"]}"),
+                                                "This account is requesting for ${data["request"]}"),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: const Text("Ok"),
                                                 onPressed: () async {
                                                   setState(() {
                                                     widget.selectedId =
-                                                        "${document["userId"]}";
+                                                        "${data["userId"]}";
                                                   });
                                                   Navigator.of(context)
                                                       .pop(); // this will close the dialog box
@@ -2683,7 +2680,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["request"]} ",
+                                                                      "${data["request"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -2721,7 +2718,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["userId"]} ",
+                                                                      "${data["userId"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -2761,8 +2758,8 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["firstname"]} " +
-                                                                            "${document["lastname"]} ",
+                                                                        "${data["firstname"]} " +
+                                                                            "${data["lastname"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2803,7 +2800,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["contactnum"]} ",
+                                                                        "${data["contactnum"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2844,7 +2841,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["address"]} ",
+                                                                        "${data["address"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2885,7 +2882,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["amount"]} ",
+                                                                        "${data["amount"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2997,7 +2994,7 @@ class _RequestBalanceConsumerListState
                                                                       enabled:
                                                                           true,
                                                                       label: Text(
-                                                                          "${document["amount"]}"),
+                                                                          "${data["amount"]}"),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -3040,7 +3037,7 @@ class _RequestBalanceConsumerListState
                                                                         title: const Text(
                                                                             "Succesful!"),
                                                                         content:
-                                                                            Text("Successfully added balance to ${document["firstname"]} ${document["lastname"]}"),
+                                                                            Text("Successfully added balance to ${data["firstname"]} ${data["lastname"]}"),
                                                                         actions: <Widget>[
                                                                           TextButton(
                                                                             child:
@@ -3185,7 +3182,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["request"]} ",
+                                                                      "${data["request"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -3223,7 +3220,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["userId"]} ",
+                                                                      "${data["userId"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -3263,8 +3260,8 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["firstname"]} " +
-                                                                            "${document["lastname"]} ",
+                                                                        "${data["firstname"]} " +
+                                                                            "${data["lastname"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3305,7 +3302,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["contactnum"]} ",
+                                                                        "${data["contactnum"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3346,7 +3343,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["address"]} ",
+                                                                        "${data["address"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3387,7 +3384,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["amount"]} ",
+                                                                        "${data["amount"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3413,7 +3410,7 @@ class _RequestBalanceConsumerListState
                                                                     setState(
                                                                         () {
                                                                       widget.selectedId =
-                                                                          "${document["userId"]}";
+                                                                          "${data["userId"]}";
                                                                     });
                                                                     await selectImage();
                                                                     await uploadImage(
@@ -3466,14 +3463,14 @@ class _RequestBalanceConsumerListState
                                                                                 ),
                                                                               ],
                                                                             ),
-                                                                            actions: [
+                                                                            actions: <Widget>[
                                                                               TextButton(
                                                                                 child: const Text("Confirm"),
                                                                                 onPressed: () async {
                                                                                   setState(() {
-                                                                                    widget.selectedId = "${document["userId"]}";
+                                                                                    widget.selectedId = "${data["userId"]}";
                                                                                   });
-                                                                                  String cashOutAmount = "${document["amount"]} ";
+                                                                                  String cashOutAmount = "${data["amount"]} ";
                                                                                   //this will decrement the balance of the user
                                                                                   await wallet.updateBalance1(cashOutAmount, widget.selectedId);
                                                                                   await wallet.updateStatus1("APPROVED", widget.selectedId);
@@ -3486,7 +3483,7 @@ class _RequestBalanceConsumerListState
                                                                                     builder: (context) {
                                                                                       return AlertDialog(
                                                                                         title: const Text("Successful"),
-                                                                                        content: Text("Sucessfully confirm ${document["firstname"]} ${document["lastname"]} cash out!"),
+                                                                                        content: Text("Sucessfully confirm ${data["firstname"]} ${data["lastname"]} cash out!"),
                                                                                         actions: [
                                                                                           TextButton(
                                                                                             onPressed: () {
@@ -3586,11 +3583,10 @@ class _RequestBalanceConsumerListState
                                     ),
                                     onPressed: () async {
                                       setState(() {
-                                        widget.selectedId =
-                                            "${document["userId"]}";
+                                        widget.selectedId = "${data["userId"]}";
                                       });
 
-                                      String requestType = document["request"];
+                                      String requestType = data["request"];
 
                                       showDialog(
                                         context: context,
@@ -3721,7 +3717,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["request"]} ",
+                                                                      "${data["request"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -3759,7 +3755,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["userId"]} ",
+                                                                      "${data["userId"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -3799,8 +3795,8 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["firstname"]} " +
-                                                                            "${document["lastname"]} ",
+                                                                        "${data["firstname"]} " +
+                                                                            "${data["lastname"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3841,7 +3837,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["contactnum"]} ",
+                                                                        "${data["contactnum"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3882,7 +3878,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["address"]} ",
+                                                                        "${data["address"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -3923,7 +3919,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["amount"]} ",
+                                                                        "${data["amount"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -4036,7 +4032,7 @@ class _RequestBalanceConsumerListState
                                                                         title: const Text(
                                                                             "Succesful!"),
                                                                         content:
-                                                                            Text("Successfully declined cash in request of ${document["firstname"]} ${document["lastname"]}"),
+                                                                            Text("Successfully declined cash in request of ${data["firstname"]} ${data["lastname"]}"),
                                                                         actions: <Widget>[
                                                                           TextButton(
                                                                             child:
@@ -4181,7 +4177,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["request"]} ",
+                                                                      "${data["request"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -4219,7 +4215,7 @@ class _RequestBalanceConsumerListState
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      "${document["userId"]} ",
+                                                                      "${data["userId"]} ",
                                                                       style: Poppins
                                                                           .adminName
                                                                           .copyWith(
@@ -4259,8 +4255,8 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["firstname"]} " +
-                                                                            "${document["lastname"]} ",
+                                                                        "${data["firstname"]} " +
+                                                                            "${data["lastname"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -4301,7 +4297,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["contactnum"]} ",
+                                                                        "${data["contactnum"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -4342,7 +4338,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["address"]} ",
+                                                                        "${data["address"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -4383,7 +4379,7 @@ class _RequestBalanceConsumerListState
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        "${document["amount"]} ",
+                                                                        "${data["amount"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -4429,7 +4425,7 @@ class _RequestBalanceConsumerListState
                                                                         title: const Text(
                                                                             "Successful!"),
                                                                         content:
-                                                                            Text("Successfully decline request cash out of ${document["firstname"]} ${document["lastname"]}"),
+                                                                            Text("Successfully decline request cash out of ${data["firstname"]} ${data["lastname"]}"),
                                                                         actions: <Widget>[
                                                                           TextButton(
                                                                             child:

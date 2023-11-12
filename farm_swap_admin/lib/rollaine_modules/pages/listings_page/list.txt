@@ -1,0 +1,364 @@
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  Widget _buildBarterProductsList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: firestore.collectionGroup('barter').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData && snapshot.data != null) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: snapshot.data!.docs
+                    .where((document) =>
+                        document['listingstatus'] != 'ARCHIVED' &&
+                        document['listingstatus'] != 'PROMOTED')
+                    .map<Widget>(
+                        (document) => _buildBarterProductsListItems(document))
+                    .toList(),
+              ),
+            );
+          }
+        }
+        return const Center(
+          child: SizedBox(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              color: Color(0xFF14BE77),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildBarterProductsListItems(QueryDocumentSnapshot document) {
+    Map<String, dynamic> barter = document.data() as Map<String, dynamic>;
+
+    /*Date Conversions of listing start date*/
+    Timestamp timestamp1 = barter["listingStartTime"];
+    DateTime dateTime1 = timestamp1.toDate();
+    String finalStartDate = DateFormat('yyyy-MM-dd').format(dateTime1);
+
+    /*Date Conversions of listing end date */
+    Timestamp timestamp2 = barter["listingEndTime"];
+    DateTime dateTime2 = timestamp2.toDate();
+    String finalEndDate = DateFormat('yyyy-MM-dd').format(dateTime2);
+
+    /*Firebase data assigned to variables for easy use */
+    String imageUrl = barter["listingpictureUrl"];
+    String listingname = barter["listingName"];
+    String listingPrice = barter["listingprice"].toString();
+    String listingQuan = barter['listingQuantity'].toString();
+    String listingStatus = barter["listingstatus"];
+    String prefItem = barter["prefferedItem"];
+    bool promoted = barter["promoted"];
+    String listingCategory = barter["listingcategory"];
+    String listingDisc = barter["listingdiscription"];
+    String farmerName = barter["farmerFname"];
+    String farmerLname = barter["farmerLname"];
+    String farmerMunicipality = barter["farmerMunicipality"];
+    String farmerBarangay = barter["farmerBaranggay"];
+    String farmerUsername = barter["farmerUserName"];
+
+    if (searchBarterValue.isNotEmpty) {
+      if (barter["listingName"] == searchBarterValue ||
+          barter["farmerFname"] == searchBarterValue ||
+          barter["farmerLname"] == searchBarterValue) {
+        return ListTile(
+          title: GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    /*Passing the values to the constructor of our next page
+                    so that we can use this values in that page */
+                    return BarterListingDetails(
+                      imageUrl: imageUrl,
+                      listingname: listingname,
+                      listingPrice: listingPrice,
+                      prefItem: prefItem,
+                      promoted: promoted,
+                      listingCategory: listingCategory,
+                      listingDisc: listingDisc,
+                      farmerName: farmerName,
+                      farmerLname: farmerLname,
+                      farmerMunicipality: farmerMunicipality,
+                      farmerBarangay: farmerBarangay,
+                      farmerUsername: farmerUsername,
+                      startTime: finalStartDate,
+                      endTime: finalEndDate,
+                      listingQuan: listingQuan,
+                      listingStatus: listingStatus,
+                    );
+                  },
+                ),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadow,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(imageUrl),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      listingname,
+                                      style: Poppins.farmerName.copyWith(
+                                          color: const Color(0xFF09051B)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      '$listingQuan kilograms',
+                                      style: Poppins.userName.copyWith(
+                                          color: const Color(0xFF09051B)),
+                                    ),
+                                  ),
+                                  Text(
+                                    '$listingPrice value',
+                                    style: Poppins.contentText.copyWith(
+                                        color: const Color(0xFF09051B)),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    /*Passing the values to the constructor of our next page
+                    so that we can use this values in that page */
+                                    return BarterListingDetails(
+                                      imageUrl: imageUrl,
+                                      listingname: listingname,
+                                      listingPrice: listingPrice,
+                                      prefItem: prefItem,
+                                      promoted: promoted,
+                                      listingCategory: listingCategory,
+                                      listingDisc: listingDisc,
+                                      farmerName: farmerName,
+                                      farmerLname: farmerLname,
+                                      farmerMunicipality: farmerMunicipality,
+                                      farmerBarangay: farmerBarangay,
+                                      farmerUsername: farmerUsername,
+                                      startTime: finalStartDate,
+                                      endTime: finalEndDate,
+                                      listingQuan: listingQuan,
+                                      listingStatus: listingStatus,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.read_more_rounded,
+                              color: greenNormal,
+                            ),
+                            iconSize: 25,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    } else {
+      return ListTile(
+        title: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  /*Passing the values to the constructor of our next page
+                    so that we can use this values in that page */
+                  return BarterListingDetails(
+                    imageUrl: imageUrl,
+                    listingname: listingname,
+                    listingPrice: listingPrice,
+                    prefItem: prefItem,
+                    promoted: promoted,
+                    listingCategory: listingCategory,
+                    listingDisc: listingDisc,
+                    farmerName: farmerName,
+                    farmerLname: farmerLname,
+                    farmerMunicipality: farmerMunicipality,
+                    farmerBarangay: farmerBarangay,
+                    farmerUsername: farmerUsername,
+                    startTime: finalStartDate,
+                    endTime: finalEndDate,
+                    listingQuan: listingQuan,
+                    listingStatus: listingStatus,
+                  );
+                },
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(imageUrl),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Text(
+                                    listingname,
+                                    style: Poppins.farmerName.copyWith(
+                                        color: const Color(0xFF09051B)),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Text(
+                                    '$listingQuan kilograms',
+                                    style: Poppins.userName.copyWith(
+                                        color: const Color(0xFF09051B)),
+                                  ),
+                                ),
+                                Text(
+                                  '$listingPrice value',
+                                  style: Poppins.contentText
+                                      .copyWith(color: const Color(0xFF09051B)),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  /*Passing the values to the constructor of our next page
+                    so that we can use this values in that page */
+                                  return BarterListingDetails(
+                                    imageUrl: imageUrl,
+                                    listingname: listingname,
+                                    listingPrice: listingPrice,
+                                    prefItem: prefItem,
+                                    promoted: promoted,
+                                    listingCategory: listingCategory,
+                                    listingDisc: listingDisc,
+                                    farmerName: farmerName,
+                                    farmerLname: farmerLname,
+                                    farmerMunicipality: farmerMunicipality,
+                                    farmerBarangay: farmerBarangay,
+                                    farmerUsername: farmerUsername,
+                                    startTime: finalStartDate,
+                                    endTime: finalEndDate,
+                                    listingQuan: listingQuan,
+                                    listingStatus: listingStatus,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.read_more_rounded,
+                            color: greenNormal,
+                          ),
+                          iconSize: 25,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return Container();
+  }
