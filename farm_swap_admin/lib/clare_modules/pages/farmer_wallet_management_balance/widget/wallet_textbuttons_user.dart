@@ -18,7 +18,7 @@ class FarmerRequestsListBtn extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(RoutesManager.farmerrequestwalletpage);
+                    .pushNamed(RoutesManager.requestwalletpage);
               },
               child: const EditProfileText(
                 myText: 'Farmer',
@@ -54,7 +54,9 @@ class ConsumerRequestsListBtn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(RoutesManager.walletPage);
+              },
               child: const EditProfileText(
                 myText: 'Consumer',
                 myColor: Color(0xFF09041B),

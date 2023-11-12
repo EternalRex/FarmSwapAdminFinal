@@ -512,7 +512,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
 
     //Creates a reference to a Firestore document using the retrieved docId.
     final reference = FirebaseFirestore.instance
-        .collection('FarmerUsers')
+        .collection('sample_FarmerUsers')
         .doc(updateUserId.docId);
 
     //It prepares the data to update in the Firestore document.
@@ -536,7 +536,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
     await updateUserId.getUpdateUserId(userid);
 
     final reference = FirebaseFirestore.instance
-        .collection('FarmerUsers')
+        .collection('sample_FarmerUsers')
         .doc(updateUserId.docId);
 
     final updateData = {
@@ -555,9 +555,9 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
 
   Future<void> moveFarmerToArchivedCollection(String userId) async {
     CollectionReference farmerCollection =
-        FirebaseFirestore.instance.collection('FarmerUsers');
+        FirebaseFirestore.instance.collection('sample_FarmerUsers');
     CollectionReference archivedFarmerCollection =
-        FirebaseFirestore.instance.collection('FarmerArchived');
+        FirebaseFirestore.instance.collection('sample_FarmerArchived');
 
     QuerySnapshot query =
         await farmerCollection.where('userId', isEqualTo: userId).get();

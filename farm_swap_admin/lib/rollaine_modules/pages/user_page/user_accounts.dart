@@ -473,7 +473,7 @@ class _UserAccount extends State<UserAccount> {
                                                             .requestCustomer);
                                                   },
                                                   child: Text(
-                                                    'Customer Requests',
+                                                    'Consumer Requests',
                                                     style: Poppins.menuTitle
                                                         .copyWith(
                                                       color: greenDark,
@@ -530,13 +530,9 @@ class _UserAccount extends State<UserAccount> {
               /*We are getting all the list of documents in the firebase, and each document like one
               by one, the documents will passed to the _buildUserListItems */
               children: snapshot.data!.docs
-                  .where((document) {
-                    // Filter out documents with 'DEACTIVATED' and 'REQUESTING' account statuses.
-                    final accountStatus = document['accountStatus'];
-                    return accountStatus != 'PENDING' &&
-                        accountStatus != 'DEACTIVATED' &&
-                        accountStatus != 'REQUESTING';
-                  })
+                  .where((document) => document['accountStatus'] != 'Pending' &&
+                      document['accountStatus'] != 'Deactivate' &&
+                      document['accountStatus'] != 'Requesting')
                   .map<Widget>((document) => _buildFarmerListItems(document))
                   .toList(),
             ),
@@ -831,9 +827,13 @@ class _UserAccount extends State<UserAccount> {
             padding: const EdgeInsets.only(top: 15),
             //displaying a scrollable list of items.
             child: ListView(
-              /*We are getting all the list of documents in the firebase, and each document like one
-              by one, the documents will passed to the _buildUserListItems */
+              /* We are getting all the list of documents in Firebase, and each document one by one.
+           * The documents will be passed to the _buildUserListItems */
               children: snapshot.data!.docs
+                  .where((document) =>
+                      document['accountStatus'] != 'PENDING' &&
+                      document['accountStatus'] != 'DEACTIVATED' &&
+                      document['accountStatus'] != 'REQUESTING')
                   .map<Widget>((document) => _buildCustomerListItems(document))
                   .toList(),
             ),

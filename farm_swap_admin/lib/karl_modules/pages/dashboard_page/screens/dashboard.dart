@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_bell_btn/dhsb_notif.dart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
@@ -32,13 +36,31 @@ import '../widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
 // ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  Dashboard({Key? key}) : super(key: key);
+
+  //Variable na selected id nga String
+  String selectedId = '';
 
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  //creates an instance of TextEditingController named searchAdminController.
+  TextEditingController searchAdminController = TextEditingController();
+  //store the search query entered by the user for searching admins.
+  String adminSearchValue = '';
+
+  //creates an instance of TextEditingController named searchFarmerController.
+  TextEditingController searchFarmerController = TextEditingController();
+  //store the search query entered by the user for searching farmers.
+  String farmerSearchValue = '';
+
+  //creates an instance of TextEditingController named searchConsumerController.
+  TextEditingController searchConsumerController = TextEditingController();
+  //store the search query entered by the user for searching farmers.
+  String consumerSearchValue = '';
+
   @override
   Widget build(BuildContext context) {
     DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
@@ -324,6 +346,355 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Archived Accounts',
+                                    style: Poppins.pageTitle.copyWith(
+                                      color: const Color(0xFF09041B),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        //Row for Admin Archived
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, bottom: 15),
+                                child: Container(
+                                  height: 500,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(5),
+                                    ),
+                                    //Box shadow of container
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: shadow,
+                                        blurRadius: 2,
+                                        offset: const Offset(1, 5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10,
+                                                left: 5,
+                                                right: 5,
+                                                bottom: 10),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        width: 760,
+                                                        height: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: greenNormal,
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(
+                                                            Radius.circular(10),
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: shadow,
+                                                              blurRadius: 2,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 1),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'ADMINS',
+                                                            style: Poppins
+                                                                .adminName
+                                                                .copyWith(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 15,
+                                                              letterSpacing:
+                                                                  1.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                SingleChildScrollView(
+                                                  child: SizedBox(
+                                                    height: 420,
+                                                    width: 760,
+                                                    child:
+                                                        _buildAdminArchiveList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+
+                        //Row for Farmers Archived
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, bottom: 15),
+                                child: Container(
+                                  height: 500,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(5),
+                                    ),
+                                    //Box shadow of container
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: shadow,
+                                        blurRadius: 2,
+                                        offset: const Offset(1, 5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10,
+                                                left: 5,
+                                                right: 5,
+                                                bottom: 10),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        width: 760,
+                                                        height: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: greenNormal,
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(
+                                                            Radius.circular(10),
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: shadow,
+                                                              blurRadius: 2,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 1),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'FARMERS',
+                                                            style: Poppins
+                                                                .adminName
+                                                                .copyWith(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 15,
+                                                              letterSpacing:
+                                                                  1.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                SingleChildScrollView(
+                                                  child: SizedBox(
+                                                    height: 420,
+                                                    width: 760,
+                                                    child:
+                                                        _buildFarmerArchiveList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+
+                        //Row for Consumers Archived
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, bottom: 15),
+                                child: Container(
+                                  height: 500,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(5),
+                                    ),
+                                    //Box shadow of container
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: shadow,
+                                        blurRadius: 2,
+                                        offset: const Offset(1, 5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10,
+                                                left: 5,
+                                                right: 5,
+                                                bottom: 10),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        width: 760,
+                                                        height: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: greenNormal,
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(
+                                                            Radius.circular(10),
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: shadow,
+                                                              blurRadius: 2,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 1),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'CONSUMERS',
+                                                            style: Poppins
+                                                                .adminName
+                                                                .copyWith(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 15,
+                                                              letterSpacing:
+                                                                  1.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                SingleChildScrollView(
+                                                  child: SizedBox(
+                                                    height: 420,
+                                                    width: 760,
+                                                    child:
+                                                        _buildConsumerArchiveList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -496,5 +867,783 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
     );
+  }
+
+  //Admin
+
+  //returns a widget for displaying a list of items.
+  Widget _buildAdminArchiveList() {
+    return StreamBuilder<QuerySnapshot>(
+      //listens for changes in the collection and update the UI accordingly.
+      stream: FirebaseFirestore.instance
+          .collection('AdminArchivedUsers')
+          .snapshots(),
+      //defines what should be displayed based on the data from the stream.
+      builder: (context, snapshot) {
+        //It ensures that the stream is active and data is available.
+        if (snapshot.connectionState == ConnectionState.active) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 15),
+            //displaying a scrollable list of items.
+            child: ListView(
+              /*We are getting all the list of documents in the firebase, and each document like one
+              by one, the documents will passed to the _buildUserListItems */
+              children: snapshot.data!.docs
+                  .where((document) => document['Account Status'] == 'Archived')
+                  .map<Widget>(
+                      (document) => _buildAdminArchiveListItems(document))
+                  .toList(),
+            ),
+          );
+        } else {
+          //This is a loading indicator that informs the user that data is being fetched.
+          return const Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Color(0xFF14BE77),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  //responsible for creating a widget to represent a farmer
+  Widget _buildAdminArchiveListItems(DocumentSnapshot document) {
+    //specifies that the data should be treated as a map with string keys and dynamic values.
+    Map<String, dynamic> admin = document.data() as Map<String, dynamic>;
+
+    //checks if a searchValue variable is not empty
+    if (adminSearchValue.isNotEmpty) {
+      //checks whether the searchValue matches any of the farmer's attributes
+      if (admin['First Name'] == adminSearchValue ||
+          admin['Last Name'] == adminSearchValue ||
+          admin['Email Address'] == adminSearchValue) {
+        //displaying a single row in a list
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                //Row where the profile, first name, last name, and details
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      //profile of farmer
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                            '${admin['profileUrl']}'),
+                        radius: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    //First name of farmer
+                    Text(
+                      "${admin["First Name"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    //Last name of farmer
+                    Text(
+                      "${admin["Last Name"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          SizedBox(
+                            height: 27,
+                            width: 60,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 173, 173, 173),
+                                    Color.fromARGB(255, 173, 173, 173),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Center(
+                                  child: Text(
+                                    'ARCHIVED',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email !=
+        admin['Email Address']) {
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              //Row where the profile, first name, last name, and details
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    //profile of farmer
+                    child: CircleAvatar(
+                      backgroundImage:
+                          CachedNetworkImageProvider('${admin['profileUrl']}'),
+                      radius: 20,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  //First name of farmer
+                  Text(
+                    "${admin["First Name"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  //Last name of farmer
+                  Text(
+                    "${admin["Last Name"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //Details button
+                        SizedBox(
+                          height: 27,
+                          width: 60,
+                          child: DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 173, 173, 173),
+                                  Color.fromARGB(255, 173, 173, 173),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Center(
+                                child: Text(
+                                  'ARCHIVED',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return Container();
+  }
+
+  //Farmer
+
+  //returns a widget for displaying a list of items.
+  Widget _buildFarmerArchiveList() {
+    return StreamBuilder<QuerySnapshot>(
+      //listens for changes in the collection and update the UI accordingly.
+      stream: FirebaseFirestore.instance
+          .collection('sample_FarmerArchived')
+          .snapshots(),
+      //defines what should be displayed based on the data from the stream.
+      builder: (context, snapshot) {
+        //It ensures that the stream is active and data is available.
+        if (snapshot.connectionState == ConnectionState.active) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 15),
+            //displaying a scrollable list of items.
+            child: ListView(
+              /*We are getting all the list of documents in the firebase, and each document like one
+              by one, the documents will passed to the _buildUserListItems */
+              children: snapshot.data!.docs
+                  .where((document) => document['accountStatus'] == 'Archived')
+                  .map<Widget>(
+                      (document) => _buildFarmerArchiveListItems(document))
+                  .toList(),
+            ),
+          );
+        } else {
+          //This is a loading indicator that informs the user that data is being fetched.
+          return const Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Color(0xFF14BE77),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  //responsible for creating a widget to represent a farmer
+  Widget _buildFarmerArchiveListItems(DocumentSnapshot document) {
+    //specifies that the data should be treated as a map with string keys and dynamic values.
+    Map<String, dynamic> farmer = document.data() as Map<String, dynamic>;
+
+    //checks if a searchValue variable is not empty
+    if (adminSearchValue.isNotEmpty) {
+      //checks whether the searchValue matches any of the farmer's attributes
+      if (farmer['firstname'] == farmerSearchValue ||
+          farmer['lastname'] == farmerSearchValue ||
+          farmer['email'] == farmerSearchValue) {
+        //displaying a single row in a list
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                //Row where the profile, first name, last name, and details
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      //profile of farmer
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                            '${farmer['profilePhoto']}'),
+                        radius: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    //First name of farmer
+                    Text(
+                      "${farmer["firstname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    //Last name of farmer
+                    Text(
+                      "${farmer["lastname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          SizedBox(
+                            height: 27,
+                            width: 60,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 173, 173, 173),
+                                    Color.fromARGB(255, 173, 173, 173),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Center(
+                                  child: Text(
+                                    'ARCHIVED',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email != farmer['email']) {
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              //Row where the profile, first name, last name, and details
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    //profile of farmer
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                          '${farmer['profilePhoto']}'),
+                      radius: 20,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  //First name of farmer
+                  Text(
+                    "${farmer["firstname"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  //Last name of farmer
+                  Text(
+                    "${farmer["lastname"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //Details button
+                        SizedBox(
+                          height: 27,
+                          width: 60,
+                          child: DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 173, 173, 173),
+                                  Color.fromARGB(255, 173, 173, 173),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Center(
+                                child: Text(
+                                  'ARCHIVED',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return Container();
+  }
+
+  //Consumer
+
+  //returns a widget for displaying a list of items.
+  Widget _buildConsumerArchiveList() {
+    return StreamBuilder<QuerySnapshot>(
+      //listens for changes in the collection and update the UI accordingly.
+      stream: FirebaseFirestore.instance
+          .collection('sample_ConsumerArchived')
+          .snapshots(),
+      //defines what should be displayed based on the data from the stream.
+      builder: (context, snapshot) {
+        //It ensures that the stream is active and data is available.
+        if (snapshot.connectionState == ConnectionState.active) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 15),
+            //displaying a scrollable list of items.
+            child: ListView(
+              /*We are getting all the list of documents in the firebase, and each document like one
+              by one, the documents will passed to the _buildUserListItems */
+              children: snapshot.data!.docs
+                  .where((document) => document['accountStatus'] == 'ARCHIVED')
+                  .map<Widget>(
+                      (document) => _buildConsumerArchiveListItems(document))
+                  .toList(),
+            ),
+          );
+        } else {
+          //This is a loading indicator that informs the user that data is being fetched.
+          return const Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Color(0xFF14BE77),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  //responsible for creating a widget to represent a farmer
+  Widget _buildConsumerArchiveListItems(DocumentSnapshot document) {
+    //specifies that the data should be treated as a map with string keys and dynamic values.
+    Map<String, dynamic> consumer = document.data() as Map<String, dynamic>;
+
+    //checks if a searchValue variable is not empty
+    if (adminSearchValue.isNotEmpty) {
+      //checks whether the searchValue matches any of the farmer's attributes
+      if (consumer['firstname'] == consumerSearchValue ||
+          consumer['lastname'] == consumerSearchValue ||
+          consumer['email'] == consumerSearchValue) {
+        //displaying a single row in a list
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                //Row where the profile, first name, last name, and details
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      //profile of farmer
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                            '${consumer['profilePhoto']}'),
+                        radius: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    //First name of farmer
+                    Text(
+                      "${consumer["firstname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    //Last name of farmer
+                    Text(
+                      "${consumer["lastname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          SizedBox(
+                            height: 27,
+                            width: 60,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 173, 173, 173),
+                                    Color.fromARGB(255, 173, 173, 173),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Center(
+                                  child: Text(
+                                    'ARCHIVED',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email != consumer['email']) {
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              //Row where the profile, first name, last name, and details
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    //profile of farmer
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                          '${consumer['profilePhoto']}'),
+                      radius: 20,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  //First name of farmer
+                  Text(
+                    "${consumer["firstname"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  //Last name of farmer
+                  Text(
+                    "${consumer["lastname"]}",
+                    style: Poppins.farmerName.copyWith(
+                      color: const Color(0xFF09051B),
+                    ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //Details button
+                        SizedBox(
+                          height: 27,
+                          width: 60,
+                          child: DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 173, 173, 173),
+                                  Color.fromARGB(255, 173, 173, 173),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Center(
+                                child: Text(
+                                  'ARCHIVED',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return Container();
   }
 }

@@ -7,6 +7,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/consumer_request_wallet.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
@@ -70,7 +71,7 @@ class RoutesManager {
   static const adminTransactionsPromotion = "/admintransactionspromotion";
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
-  static const farmerrequestwalletpage = "/farmerrequestwalletpage";
+  static const requestwalletpage = "/requestwalletpage";
 
   //rollaine routes
   static const platformPage = '/reportspage';
@@ -87,6 +88,7 @@ class RoutesManager {
   static const requestFarmer = '/requestreactivatefarmer';
   static const requestCustomer = '/requestreactivatecustomer';
   static const listingsPage = '/listingspage';
+  static const walletPage = '/walletpage';
   static const communicationPage = '/communicationpage';
 
 //METHOD THAT WILL SWITCH THE ROUTE BASED ON THE PROVIDED ROUTENAME
@@ -107,7 +109,7 @@ class RoutesManager {
       //WHEN THE PUSHNAMED USES DASHBOARD PAGE THIS WILL BE USED
       case dashboard:
         return MaterialPageRoute(
-          builder: (context) => const Dashboard(),
+          builder: (context) => Dashboard(),
         );
 
       case adminAccount:
@@ -203,7 +205,7 @@ class RoutesManager {
 
       case requestFarmer:
         return MaterialPageRoute(
-          builder: (context) => const FarmerRequestPage(),
+          builder: (context) => FarmerRequestPage(),
         );
 
       case requestCustomer:
@@ -214,6 +216,11 @@ class RoutesManager {
       case listingsPage:
         return MaterialPageRoute(
           builder: (context) => const Listings(),
+        );
+
+      case walletPage:
+        return MaterialPageRoute(
+          builder: (context) => RequestBalanceConsumerList(),
         );
 
       case communicationPage:
@@ -283,7 +290,7 @@ class RoutesManager {
         );
 
       //farmer wallet cash in and cash out balance
-      case farmerrequestwalletpage:
+      case requestwalletpage:
         return MaterialPageRoute(
           builder: (context) => RequestBalanceFarmerLists(),
         );

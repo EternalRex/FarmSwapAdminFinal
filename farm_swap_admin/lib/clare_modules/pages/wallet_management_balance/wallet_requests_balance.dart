@@ -1,6 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_farmer_retrieveDocId.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textbuttons_user.dart';
+import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
@@ -13,9 +15,6 @@ import 'package:intl/intl.dart';
 import '../../../../../../constants/Colors/colors.dart';
 import '../../../karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import 'widget/wallet_farmer_retrieveDocId.dart';
-import 'widget/wallet_textbuttons_user.dart';
-import 'widget/wallet_textfield.dart';
 
 // ignore: must_be_immutable
 class RequestBalanceFarmerLists extends StatefulWidget {
@@ -25,7 +24,6 @@ class RequestBalanceFarmerLists extends StatefulWidget {
   });
   final String? documentID;
   String selectedId = "";
-  String cashOutselectedId = "";
 
   @override
   State<RequestBalanceFarmerLists> createState() =>
@@ -90,7 +88,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     },
                   ),
                   title: const DashBoardTitleText(
-                    myText: "Farmer Wallet",
+                    myText: "Farmer Wallet Requests",
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -108,13 +106,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                           controller: searchController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
-                          onSubmitted: (String query) {
-                            setState(
-                              () {
-                                searchValue = query;
-                              },
-                            );
-                          },
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
@@ -126,8 +117,18 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                               ),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
+                            hintText: 'Search here',
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  searchValue = searchController.text;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: Color(0xFFDA6317),
+                              ),
+                            ),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
                         ),
@@ -406,7 +407,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                       ),
                     ),
                     const SizedBox(
-                      width: 90,
+                      width: 100,
                     ),
 
                     //sizedbox for accept button of admin reactivation
@@ -457,10 +458,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                           TextButton(
                                             child: const Text("Ok"),
                                             onPressed: () async {
-                                              setState(() {
-                                                widget.selectedId =
-                                                    "${document["userId"]}";
-                                              });
                                               Navigator.of(context)
                                                   .pop(); // this will close the dialog box
 
@@ -927,6 +924,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                     context)
                                                                 .pop(); // Close the AlertDialog Close
 
+                                                            // ignore: use_build_context_synchronously
                                                             showDialog(
                                                                 context:
                                                                     context,
@@ -1316,25 +1314,16 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           child: const Text(
                                                               "Proceed"),
                                                           onPressed: () async {
-                                                            String
-                                                                cashOutAmount =
-                                                                "${document["amount"]} ";
-                                                            //this will decrement the balance of the user
-                                                            await wallet
-                                                                .updateBalance1(
-                                                                    cashOutAmount,
-                                                                    widget
-                                                                        .selectedId);
-                                                            await wallet
-                                                                .updateStatus1(
-                                                                    "Approved",
-                                                                    widget
-                                                                        .selectedId);
+                                                            //await updateBalanceCashOut(
+                                                            //  newBalance,
+                                                            //widget.selectedId);
+
                                                             Navigator.of(
                                                                     context)
                                                                 .pop(); // Close the AlertDialog Close
 
-                                                            //temporary dialog as of now
+                                                            //for the mean time kani lang sa na dialog
+                                                            // ignore: use_build_context_synchronously
                                                             showDialog(
                                                                 context:
                                                                     context,
@@ -1342,20 +1331,39 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                     (context) {
                                                                   return AlertDialog(
                                                                     title: const Text(
-                                                                        "Success"),
-                                                                    content:
-                                                                        const Text(
-                                                                            "Successfully approved cash out!"),
-                                                                    actions: [
+                                                                        "Confirmation!"),
+                                                                    content: Text(
+                                                                        "Do you want to approve request cash out of ${document["firstname"]} ${document["lastname"]} ?"),
+                                                                    actions: <Widget>[
                                                                       TextButton(
                                                                         child: const Text(
-                                                                            "Ok"),
+                                                                            "Yes"),
                                                                         onPressed:
                                                                             () async {
                                                                           Navigator.of(context)
-                                                                              .pop(); // Close the  AlertDialog
-                                                                          Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.requestwalletpage);
+                                                                              .pop(); // Close the AlertDialog
+
+                                                                          //diri na part sad dapat naa ang pag upload sa proof of payment ni admin
+                                                                          //update sa proofPhoto
+                                                                          /**update ang balance with the amount minus balance */
+                                                                          showDialog(
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return AlertDialog(
+                                                                                  title: const Text("Successful!"),
+                                                                                  content: Text("Successfully approve request cash out of ${document["firstname"]} ${document["lastname"]}"),
+                                                                                  actions: <Widget>[
+                                                                                    TextButton(
+                                                                                      child: const Text("Ok"),
+                                                                                      onPressed: () async {
+                                                                                        Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                                        Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
+                                                                                      },
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              });
                                                                         },
                                                                       ),
                                                                     ],
@@ -1406,7 +1414,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     const SizedBox(
                       width: 10,
                     ),
-
                     //sizedbox for decline button of admin reactivation
                     SizedBox(
                       child: Padding(
@@ -1882,6 +1889,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                     context)
                                                                 .pop(); // Close the AlertDialog Close
 
+                                                            // ignore: use_build_context_synchronously
                                                             showDialog(
                                                                 context:
                                                                     context,
@@ -2275,11 +2283,12 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                     context)
                                                                 .pop(); // Close the AlertDialog Close
                                                             await wallet
-                                                                .updateStatus1(
+                                                                .updateStatus(
                                                                     "Decline",
                                                                     widget
                                                                         .selectedId);
 
+                                                            // ignore: use_build_context_synchronously
                                                             showDialog(
                                                                 context:
                                                                     context,
@@ -2446,7 +2455,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     ),
                   ),
                   const SizedBox(
-                    width: 90,
+                    width: 100,
                   ),
 
                   //sizedbox for accept button of admin reactivation
@@ -2497,10 +2506,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                         TextButton(
                                           child: const Text("Ok"),
                                           onPressed: () async {
-                                            setState(() {
-                                              widget.selectedId =
-                                                  "${document["userId"]}";
-                                            });
                                             Navigator.of(context)
                                                 .pop(); // this will close the dialog box
 
@@ -2954,6 +2959,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           Navigator.of(context)
                                                               .pop(); // Close the AlertDialog Close
 
+                                                          // ignore: use_build_context_synchronously
                                                           showDialog(
                                                               context: context,
                                                               builder:
@@ -3328,43 +3334,56 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                         child: const Text(
                                                             "Proceed"),
                                                         onPressed: () async {
-                                                          String cashOutAmount =
-                                                              "${document["amount"]} ";
-                                                          //this will decrement the balance of the user
-                                                          await wallet
-                                                              .updateBalance1(
-                                                                  cashOutAmount,
-                                                                  widget
-                                                                      .selectedId);
-                                                          await wallet
-                                                              .updateStatus1(
-                                                                  "Approved",
-                                                                  widget
-                                                                      .selectedId);
+                                                          //await updateBalanceCashOut(
+                                                          //  newBalance,
+                                                          //widget.selectedId);
+
                                                           Navigator.of(context)
                                                               .pop(); // Close the AlertDialog Close
 
-                                                          //temporary dialog as of now
+                                                          //for the mean time kani lang sa na dialog
+                                                          // ignore: use_build_context_synchronously
                                                           showDialog(
                                                               context: context,
                                                               builder:
                                                                   (context) {
                                                                 return AlertDialog(
                                                                   title: const Text(
-                                                                      "Success"),
-                                                                  content:
-                                                                      const Text(
-                                                                          "Successfully approved cash out!"),
-                                                                  actions: [
+                                                                      "Confirmation!"),
+                                                                  content: Text(
+                                                                      "Do you want to approve request cash out of ${document["firstname"]} ${document["lastname"]} ?"),
+                                                                  actions: <Widget>[
                                                                     TextButton(
                                                                       child: const Text(
-                                                                          "Ok"),
+                                                                          "Yes"),
                                                                       onPressed:
                                                                           () async {
                                                                         Navigator.of(context)
-                                                                            .pop(); // Close the  AlertDialog
-                                                                        Navigator.of(context)
-                                                                            .pushNamed(RoutesManager.requestwalletpage);
+                                                                            .pop(); // Close the AlertDialog
+
+                                                                        //diri na part sad dapat naa ang pag upload sa proof of payment ni admin
+                                                                        //update sa proofPhoto
+                                                                        /**update ang balance with the amount minus balance */
+                                                                        showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (context) {
+                                                                              return AlertDialog(
+                                                                                title: const Text("Successful!"),
+                                                                                content: Text("Successfully approve request cash out of ${document["firstname"]} ${document["lastname"]}"),
+                                                                                actions: <Widget>[
+                                                                                  TextButton(
+                                                                                    child: const Text("Ok"),
+                                                                                    onPressed: () async {
+                                                                                      Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                                      Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
+                                                                                    },
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            });
                                                                       },
                                                                     ),
                                                                   ],
@@ -3414,7 +3433,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                   const SizedBox(
                     width: 10,
                   ),
-
                   //sizedbox for decline button of admin reactivation
                   SizedBox(
                     child: Padding(
@@ -3877,6 +3895,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           Navigator.of(context)
                                                               .pop(); // Close the AlertDialog Close
 
+                                                          // ignore: use_build_context_synchronously
                                                           showDialog(
                                                               context: context,
                                                               builder:
@@ -4254,11 +4273,12 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           Navigator.of(context)
                                                               .pop(); // Close the AlertDialog Close
                                                           await wallet
-                                                              .updateStatus1(
+                                                              .updateStatus(
                                                                   "Decline",
                                                                   widget
                                                                       .selectedId);
 
+                                                          // ignore: use_build_context_synchronously
                                                           showDialog(
                                                               context: context,
                                                               builder:
@@ -4331,6 +4351,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
         ),
       );
     }
+
     return Container();
   }
 }
