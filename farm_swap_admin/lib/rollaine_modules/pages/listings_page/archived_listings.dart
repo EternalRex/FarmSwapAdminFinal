@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/barter_details_wrapper.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/sell_details_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/archivedbarter_details_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/archivedsell_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_communication_btn.dart';
@@ -15,22 +15,22 @@ import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Lis
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_transactions.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_wallet_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class Listings extends StatefulWidget {
-  const Listings({super.key});
+class ArchivedListings extends StatefulWidget {
+  const ArchivedListings({super.key});
 
   final String farmerUname = '';
 
   @override
-  State<Listings> createState() => _ListingsState();
+  State<ArchivedListings> createState() => _ArchivedListingsState();
 }
 
-class _ListingsState extends State<Listings> {
+class _ArchivedListingsState extends State<ArchivedListings> {
   //creates an instance of TextEditingController named searchFarmerController.
   TextEditingController searchBarterController = TextEditingController();
   //store the search query entered by the user for searching farmers.
@@ -154,67 +154,25 @@ class _ListingsState extends State<Listings> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.listingsPage);
+                    },
+                  ),
                   //Design the page title
                   title: const TitleText(
-                    myText: 'Listings',
+                    myText: 'Archived Listings',
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color.fromARGB(255, 250, 175, 0),
-                                  Color.fromARGB(255, 255, 128, 0),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
-                                shadowColor: Colors.transparent,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.archivedListings);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(
-                                  'Archived Accounts',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
                 ),
                 body: Row(
                   children: [
@@ -310,7 +268,7 @@ class _ListingsState extends State<Listings> {
                                             children: [
                                               /*Farmers Title */
                                               Text(
-                                                'List of Products for Barter',
+                                                'Archived Barter Products',
                                                 style: Poppins.contentTitle
                                                     .copyWith(
                                                   color:
@@ -325,7 +283,7 @@ class _ListingsState extends State<Listings> {
                                     SingleChildScrollView(
                                       child: SizedBox(
                                         height: 390,
-                                        child: _buildBarterProductList(),
+                                        child: _buildArchivedBarterList(),
                                       ),
                                     ),
                                   ],
@@ -426,7 +384,7 @@ class _ListingsState extends State<Listings> {
                                             children: [
                                               /*Farmers Title */
                                               Text(
-                                                'List of Products for Selling',
+                                                'Archived Selling Products',
                                                 style: Poppins.contentTitle
                                                     .copyWith(
                                                   color:
@@ -441,7 +399,7 @@ class _ListingsState extends State<Listings> {
                                     SingleChildScrollView(
                                       child: SizedBox(
                                         height: 390,
-                                        child: _buildSellProductList(),
+                                        child: _buildArchivedSellList(),
                                       ),
                                     ),
                                   ],
@@ -462,7 +420,7 @@ class _ListingsState extends State<Listings> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Widget _buildBarterProductList() {
+  Widget _buildArchivedBarterList() {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('barter').snapshots(),
       builder: (context, snapshot) {
@@ -474,10 +432,10 @@ class _ListingsState extends State<Listings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) =>
-                        document['listingstatus'] != 'ARCHIVE' &&
+                        document['listingstatus'] != 'ACTIVE' &&
                         document['listingstatus'] != 'Promoted')
                     .map<Widget>(
-                        (document) => _buildBarterProductsListItems(document))
+                        (document) => _buildArchivedBarterListItems(document))
                     .toList(),
               ),
             );
@@ -496,7 +454,7 @@ class _ListingsState extends State<Listings> {
     );
   }
 
-  Widget _buildBarterProductsListItems(QueryDocumentSnapshot document) {
+  Widget _buildArchivedBarterListItems(QueryDocumentSnapshot document) {
     Map<String, dynamic> barter = document.data() as Map<String, dynamic>;
 
     /*Date Conversions of listing start date*/
@@ -612,7 +570,7 @@ class _ListingsState extends State<Listings> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return BarterDetails(
+                                return ArchivedBarterDetails(
                                   url: imageUrl,
                                   name: listingname,
                                   disc: listingDisc,
@@ -732,7 +690,7 @@ class _ListingsState extends State<Listings> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return BarterDetails(
+                              return ArchivedBarterDetails(
                                 url: imageUrl,
                                 name: listingname,
                                 disc: listingDisc,
@@ -773,7 +731,7 @@ class _ListingsState extends State<Listings> {
 
   //Selling
 
-  Widget _buildSellProductList() {
+  Widget _buildArchivedSellList() {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('sell').snapshots(),
       builder: (context, snapshot) {
@@ -785,10 +743,10 @@ class _ListingsState extends State<Listings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) =>
-                        document['listingstatus'] != 'ARCHIVE' &&
+                        document['listingstatus'] != 'ACTIVE' &&
                         document['listingstatus'] != 'Promoted')
                     .map<Widget>(
-                        (document) => _buildSellProductsListItems(document))
+                        (document) => _buildArchivedSellListItems(document))
                     .toList(),
               ),
             );
@@ -807,7 +765,7 @@ class _ListingsState extends State<Listings> {
     );
   }
 
-  Widget _buildSellProductsListItems(QueryDocumentSnapshot document) {
+  Widget _buildArchivedSellListItems(QueryDocumentSnapshot document) {
     Map<String, dynamic> sell = document.data() as Map<String, dynamic>;
 
     /*Date Conversions of listing start date*/
@@ -922,7 +880,7 @@ class _ListingsState extends State<Listings> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return SellDetails(
+                                return ArchivedSellDetails(
                                   url: imageUrl,
                                   name: listingname,
                                   disc: listingDisc,
@@ -1041,7 +999,7 @@ class _ListingsState extends State<Listings> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return SellDetails(
+                              return ArchivedSellDetails(
                                 url: imageUrl,
                                 name: listingname,
                                 disc: listingDisc,
