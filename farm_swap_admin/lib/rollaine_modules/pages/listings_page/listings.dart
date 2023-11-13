@@ -200,7 +200,58 @@ class _ListingsState extends State<Listings> {
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
-                                  'Archived Accounts',
+                                  'Archived Listings',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF30BFBF),
+                                  Color(0xFF008080),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.promotedListings);
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Promoted Listings',
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 12,
@@ -569,7 +620,7 @@ class _ListingsState extends State<Listings> {
                               ),
                             ),
                             const SizedBox(
-                              width: 10,
+                              width: 20,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -690,7 +741,7 @@ class _ListingsState extends State<Listings> {
                             ),
                           ),
                           const SizedBox(
-                            width: 10,
+                            width: 20,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -882,7 +933,7 @@ class _ListingsState extends State<Listings> {
                               ),
                             ),
                             const SizedBox(
-                              width: 10,
+                              width: 20,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -1002,7 +1053,7 @@ class _ListingsState extends State<Listings> {
                             ),
                           ),
                           const SizedBox(
-                            width: 10,
+                            width: 20,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,

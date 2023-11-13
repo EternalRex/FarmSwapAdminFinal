@@ -3,7 +3,6 @@ import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/poppins_text.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/database/archive_update.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_communication_btn.dart';
@@ -15,14 +14,14 @@ import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Lis
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_transactions.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_wallet_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BarterDetails extends StatefulWidget {
-  const BarterDetails({
+class BarterPromotedDetails extends StatefulWidget {
+  const BarterPromotedDetails({
     super.key,
     required this.url,
     required this.name,
@@ -62,13 +61,10 @@ class BarterDetails extends StatefulWidget {
   final String fbarangay;
 
   @override
-  State<BarterDetails> createState() => _BarterListingDetailsState();
+  State<BarterPromotedDetails> createState() => _BarterPromotedDetailsState();
 }
 
-class _BarterListingDetailsState extends State<BarterDetails> {
-  /*Instance of the archiving class*/
-  ArchiveListing archive = ArchiveListing();
-
+class _BarterPromotedDetailsState extends State<BarterPromotedDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,7 +190,7 @@ class _BarterListingDetailsState extends State<BarterDetails> {
                     },
                   ),
                   title: const TitleText(
-                    myText: 'Barter Product Details',
+                    myText: 'Promoted Barter Products',
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -238,58 +234,7 @@ class _BarterListingDetailsState extends State<BarterDetails> {
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
-                                  'Archived Accounts',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color(0xFF30BFBF),
-                                  Color(0xFF008080),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
-                                shadowColor: Colors.transparent,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.promotedListings);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(
-                                  'Promoted Listings',
+                                  'Archived Listings',
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 12,
@@ -749,10 +694,8 @@ class _BarterListingDetailsState extends State<BarterDetails> {
                                                 begin: Alignment.topLeft,
                                                 end: Alignment.bottomRight,
                                                 colors: [
-                                                  Color.fromARGB(
-                                                      255, 250, 175, 0),
-                                                  Color.fromARGB(
-                                                      255, 255, 128, 0),
+                                                  Color(0xFF0583D2),
+                                                  Color(0xFF0077B6),
                                                 ],
                                               ),
                                               borderRadius: BorderRadius.all(
@@ -772,19 +715,32 @@ class _BarterListingDetailsState extends State<BarterDetails> {
                                                 shadowColor: Colors.transparent,
                                               ),
                                               onPressed: () {
-                                                confirmArchive();
+                                                information();
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     top: 5, bottom: 5),
-                                                child: Text(
-                                                  'Archive',
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.white,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w700,
-                                                    letterSpacing: 0.50,
-                                                  ),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.question_mark,
+                                                      color: Colors.white,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      'Information',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        letterSpacing: 0.50,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -813,73 +769,26 @@ class _BarterListingDetailsState extends State<BarterDetails> {
     );
   }
 
-  /*Function for archiving warning message*/
-  void confirmArchive() {
+  /*Function that will show an information to the user*/
+  void information() {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: poppinsText(
-            "Warning",
-            Colors.red,
+            "Information",
+            Colors.blue,
             20,
-            FontWeight.w500,
+            FontWeight.w300,
           ),
           content: poppinsText(
-            "The Listing will be archived and will not be accessible again!",
-            Colors.black,
-            13,
+            "This listing will be promoted within 7 days, if the listing expires before the 7th promotion day, the promotion will stop",
+            const Color(0xFF09041B),
+            15,
             FontWeight.normal,
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                archiveListing();
-                successArchive();
-              },
-              child: poppinsText(
-                  "Continue", farmSwapTitlegreen, 20, FontWeight.w500),
-            ),
-          ],
         );
       },
     );
-  }
-
-  /*Function for achiving success message*/
-  void successArchive() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: poppinsText(
-            "Archive Complete!",
-            Colors.red,
-            20,
-            FontWeight.w500,
-          ),
-          content: poppinsText(
-            "You Archived the listing successfully",
-            Colors.black,
-            13,
-            FontWeight.normal,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RoutesManager.listingsPage);
-              },
-              child: poppinsText(
-                  "Continue", farmSwapTitlegreen, 20, FontWeight.w500),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  /*Actual function for archiving */
-  Future<void> archiveListing() async {
-    await archive.archiveBarterListing(widget.fUname, widget.url, widget.farmerid);
   }
 }

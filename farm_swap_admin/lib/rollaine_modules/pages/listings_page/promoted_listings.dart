@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/archivedbarter_details_wrapper.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/archivedsell_details_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/promotedbarter_details_wrapper.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/screens/promotedsell_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_communication_btn.dart';
@@ -21,16 +21,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class ArchivedListings extends StatefulWidget {
-  const ArchivedListings({super.key});
-
-  final String farmerUname = '';
+class PromotedListings extends StatefulWidget {
+  const PromotedListings({super.key});
 
   @override
-  State<ArchivedListings> createState() => _ArchivedListingsState();
+  State<PromotedListings> createState() => _PromotedListingsState();
 }
 
-class _ArchivedListingsState extends State<ArchivedListings> {
+class _PromotedListingsState extends State<PromotedListings> {
   //creates an instance of TextEditingController named searchFarmerController.
   TextEditingController searchBarterController = TextEditingController();
   //store the search query entered by the user for searching farmers.
@@ -154,20 +152,9 @@ class _ArchivedListingsState extends State<ArchivedListings> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
-                  leading: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Color(0xFFDA6317),
-                    ),
-                    splashColor: const Color(0xFFF9A84D),
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(RoutesManager.listingsPage);
-                    },
-                  ),
                   //Design the page title
                   title: const TitleText(
-                    myText: 'Archived Listings',
+                    myText: 'Promoted Listings',
                     myColor: Color(0xFF09041B),
                   ),
                   backgroundColor: Colors.transparent,
@@ -186,8 +173,8 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  Color(0xFF30BFBF),
-                                  Color(0xFF008080),
+                                  Color.fromARGB(255, 250, 175, 0),
+                                  Color.fromARGB(255, 255, 128, 0),
                                 ],
                               ),
                               borderRadius: BorderRadius.all(
@@ -205,13 +192,13 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                               ),
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushNamed(RoutesManager.promotedListings);
+                                    .pushNamed(RoutesManager.archivedListings);
                               },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(
-                                  'Promoted Listings',
+                                  'Archived Listings',
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 12,
@@ -321,7 +308,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                                             children: [
                                               /*Farmers Title */
                                               Text(
-                                                'Archived Barter Products',
+                                                'Promoted Products for Barter',
                                                 style: Poppins.contentTitle
                                                     .copyWith(
                                                   color:
@@ -336,7 +323,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                                     SingleChildScrollView(
                                       child: SizedBox(
                                         height: 390,
-                                        child: _buildArchivedBarterList(),
+                                        child: _buildBarterPromotedList(),
                                       ),
                                     ),
                                   ],
@@ -437,7 +424,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                                             children: [
                                               /*Farmers Title */
                                               Text(
-                                                'Archived Selling Products',
+                                                'Promoted Products for Selling',
                                                 style: Poppins.contentTitle
                                                     .copyWith(
                                                   color:
@@ -452,7 +439,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                                     SingleChildScrollView(
                                       child: SizedBox(
                                         height: 390,
-                                        child: _buildArchivedSellList(),
+                                        child: _buildSellPromotedList(),
                                       ),
                                     ),
                                   ],
@@ -473,7 +460,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Widget _buildArchivedBarterList() {
+  Widget _buildBarterPromotedList() {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('barter').snapshots(),
       builder: (context, snapshot) {
@@ -485,10 +472,9 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) =>
-                        document['listingstatus'] != 'ACTIVE' &&
-                        document['listingstatus'] != 'Promoted')
+                        document['promoted'] == true)
                     .map<Widget>(
-                        (document) => _buildArchivedBarterListItems(document))
+                        (document) => _buildBarterPromotedListItems(document))
                     .toList(),
               ),
             );
@@ -507,7 +493,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
     );
   }
 
-  Widget _buildArchivedBarterListItems(QueryDocumentSnapshot document) {
+  Widget _buildBarterPromotedListItems(QueryDocumentSnapshot document) {
     Map<String, dynamic> barter = document.data() as Map<String, dynamic>;
 
     /*Date Conversions of listing start date*/
@@ -624,7 +610,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ArchivedBarterDetails(
+                                return BarterPromotedDetails(
                                   url: imageUrl,
                                   name: listingname,
                                   disc: listingDisc,
@@ -745,7 +731,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return ArchivedBarterDetails(
+                              return BarterPromotedDetails(
                                 url: imageUrl,
                                 name: listingname,
                                 disc: listingDisc,
@@ -787,7 +773,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
 
   //Selling
 
-  Widget _buildArchivedSellList() {
+  Widget _buildSellPromotedList() {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('sell').snapshots(),
       builder: (context, snapshot) {
@@ -799,10 +785,9 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) =>
-                        document['listingstatus'] != 'ACTIVE' &&
-                        document['listingstatus'] != 'Promoted')
+                        document['promoted'] == true)
                     .map<Widget>(
-                        (document) => _buildArchivedSellListItems(document))
+                        (document) => _buildSellPromotedListItems(document))
                     .toList(),
               ),
             );
@@ -821,7 +806,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
     );
   }
 
-  Widget _buildArchivedSellListItems(QueryDocumentSnapshot document) {
+  Widget _buildSellPromotedListItems(QueryDocumentSnapshot document) {
     Map<String, dynamic> sell = document.data() as Map<String, dynamic>;
 
     /*Date Conversions of listing start date*/
@@ -937,7 +922,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ArchivedSellDetails(
+                                return SellPromotedDetails(
                                   url: imageUrl,
                                   name: listingname,
                                   disc: listingDisc,
@@ -1057,7 +1042,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return ArchivedSellDetails(
+                              return SellPromotedDetails(
                                 url: imageUrl,
                                 name: listingname,
                                 disc: listingDisc,
