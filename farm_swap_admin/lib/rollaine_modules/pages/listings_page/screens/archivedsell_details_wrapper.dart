@@ -34,6 +34,7 @@ class ArchivedSellDetails extends StatefulWidget {
     required this.category,
     required this.start,
     required this.end,
+    required this.farmerid,
     required this.fname,
     required this.fLname,
     required this.fUname,
@@ -51,6 +52,7 @@ class ArchivedSellDetails extends StatefulWidget {
   final String category;
   final String start;
   final String end;
+  final String farmerid;
   final String fname;
   final String fLname;
   final String fUname;
@@ -746,6 +748,6 @@ class _ArchivedSellDetailsState extends State<ArchivedSellDetails> {
 
   /*Actual function for archiving */
   Future<void> archiveReactivateListing() async {
-    await reactivate.archiveReactSelling(widget.fUname, widget.url);
+    await reactivate.archiveReactSelling(widget.fUname, widget.url, widget.farmerid);
   }
 }

@@ -35,6 +35,7 @@ class BarterDetails extends StatefulWidget {
     required this.category,
     required this.start,
     required this.end,
+    required this.farmerid,
     required this.fname,
     required this.fLname,
     required this.fUname,
@@ -53,6 +54,7 @@ class BarterDetails extends StatefulWidget {
   final String category;
   final String start;
   final String end;
+  final String farmerid;
   final String fname;
   final String fLname;
   final String fUname;
@@ -65,7 +67,7 @@ class BarterDetails extends StatefulWidget {
 
 class _BarterListingDetailsState extends State<BarterDetails> {
   /*Instance of the archiving class*/
-  ArchiveUpdateListing archive = ArchiveUpdateListing();
+  ArchiveListing archive = ArchiveListing();
 
   @override
   Widget build(BuildContext context) {
@@ -827,6 +829,6 @@ class _BarterListingDetailsState extends State<BarterDetails> {
 
   /*Actual function for archiving */
   Future<void> archiveListing() async {
-    await archive.archiveBarterListing(widget.fUname, widget.url);
+    await archive.archiveBarterListing(widget.fUname, widget.url, widget.farmerid);
   }
 }

@@ -519,6 +519,7 @@ class _ListingsState extends State<Listings> {
     bool promoted = barter["promoted"];
     String listingCategory = barter["listingcategory"];
     String listingDisc = barter["listingdiscription"];
+    String farmerId = barter["farmerId"];
     String farmerName = barter["farmerFname"];
     String farmerLname = barter["farmerLname"];
     String farmerMunicipality = barter["farmerMunicipality"];
@@ -624,6 +625,7 @@ class _ListingsState extends State<Listings> {
                                   category: listingCategory,
                                   start: finalStartDate,
                                   end: finalEndDate,
+                                  farmerid: farmerId,
                                   fname: farmerName,
                                   fLname: farmerLname,
                                   fUname: farmerUsername,
@@ -744,6 +746,7 @@ class _ListingsState extends State<Listings> {
                                 category: listingCategory,
                                 start: finalStartDate,
                                 end: finalEndDate,
+                                farmerid: farmerId,
                                 fname: farmerName,
                                 fLname: farmerLname,
                                 fUname: farmerUsername,
@@ -829,6 +832,7 @@ class _ListingsState extends State<Listings> {
     bool promoted = sell["promoted"];
     String listingCategory = sell["listingcategory"];
     String listingDisc = sell["listingdiscription"];
+    String farmerId = sell["farmerId"];
     String farmerName = sell["farmerFname"];
     String farmerLname = sell["farmerLname"];
     String farmerMunicipality = sell["farmerMunicipality"];
@@ -933,6 +937,7 @@ class _ListingsState extends State<Listings> {
                                   category: listingCategory,
                                   start: finalStartDate,
                                   end: finalEndDate,
+                                  farmerid: farmerId,
                                   fname: farmerName,
                                   fLname: farmerLname,
                                   fUname: farmerUsername,
@@ -1052,6 +1057,7 @@ class _ListingsState extends State<Listings> {
                                 category: listingCategory,
                                 start: finalStartDate,
                                 end: finalEndDate,
+                                farmerid: farmerId,
                                 fname: farmerName,
                                 fLname: farmerLname,
                                 fUname: farmerUsername,
