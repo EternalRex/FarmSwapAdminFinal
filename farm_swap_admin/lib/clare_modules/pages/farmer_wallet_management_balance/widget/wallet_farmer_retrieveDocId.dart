@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //this class will retrieve the specific document id of the selected user id of the farmer
@@ -45,7 +46,9 @@ class RetriveWalletDocId {
     return mydocid;
   }
 
-//kani na function kay gamiton sa pagkuha sa doc id na ang field kay naay request equivalent to cash out
+//kani na function kay gamiton sa pagkuha sa doc id na ang field kay
+//naay request equivalent to cash out
+//then ang status kay pending
   Future<String> getDocIdRequestCashOut(String userid) async {
     String myuserid = userid;
 
@@ -54,6 +57,7 @@ class RetriveWalletDocId {
     QuerySnapshot query = await reference
         .where('userId', isEqualTo: userid)
         .where('request', isEqualTo: 'cash out')
+        .where('status', isEqualTo: 'pending')
         .get();
 
     if (query.docs.isNotEmpty) {
@@ -154,10 +158,11 @@ class UpdateWallet {
   }
 
   //CASH OUT DECREMENT THE BALANCE
-  //this function kay mag update sa balance na field which is mag add si addedAmount ug balance field
+/*kani na function kay mag update sa balance if ang  balance kay lesser than the amount na gi input
+then dili siya mo perform sa update*/
   Future<void> updateBalance1(String cashOutAmount, String userId) async {
     try {
-      // Convert the minus amount to a double
+      // Convert the cashOutAmount to a double
       double amountCashOut = double.parse(cashOutAmount);
 
       String mydocid = await getDocId(userId);
@@ -175,15 +180,20 @@ class UpdateWallet {
           // Get the current balance from the document
           double currentBalance = documentSnapshot.data()?['balance'] ?? 0.0;
 
-          // Calculate the new balance by decrementing the amountCashOut
-          double newBalance = currentBalance - amountCashOut;
+          //if ang amountCashout is less than or equal to the current balance then it will update the field
+          if (amountCashOut <= currentBalance) {
+            // Calculate the new balance by decrementing the amountCashOut
+            double newBalance = currentBalance - amountCashOut;
 
-          // Update the 'balance' field in the Firestore document with the new balance
-          await documentRef.update({
-            'balance': newBalance,
-          });
+            // Update the 'balance' field in the Firestore document with the new balance
+            await documentRef.update({
+              'balance': newBalance,
+            });
 
-          print('Balance has been updated for user ID: $userId');
+            print('Balance has been updated for user ID: $userId');
+          } else {
+            print('Insufficient balance for user ID: $userId');
+          }
         } else {
           print('Document not found for user ID: $userId');
         }
@@ -196,6 +206,7 @@ class UpdateWallet {
   }
 
   RetriveWalletDocId retrievewallet = RetriveWalletDocId();
+
 /*this function is to update the field status of the collection 
 sample_farmer wallet for cash in
   */
@@ -250,7 +261,7 @@ sample_farmer wallet for cash in
   }
 
   /*this function is to update the field status of the collection 
-sample_farmer wallet for cash out
+sample_farmer wallet for CASH OUT
   */
   Future<void> updateStatus1(String? updatedata, String userid) async {
     /*Calling the getUpdateddocID function from the class UpdateRetrieve 

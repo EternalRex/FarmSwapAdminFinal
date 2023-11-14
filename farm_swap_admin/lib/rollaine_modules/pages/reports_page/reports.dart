@@ -28,6 +28,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
+
 class Reports extends StatefulWidget {
   const Reports({super.key});
 
@@ -217,7 +219,7 @@ class _ReportsState extends State<Reports> {
                               children: [
                                 //Report content description title
                                 const ReportsContentDescription(),
-                          
+
                                 //Row for 2 expanded container
                                 //Row1
                                 const Row(
@@ -235,7 +237,7 @@ class _ReportsState extends State<Reports> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                          
+
                                 //Row for 2 expanded container
                                 //Row 2
                                 const Row(
@@ -250,7 +252,7 @@ class _ReportsState extends State<Reports> {
                                     ReportsSuggestions(),
                                   ],
                                 ),
-                          
+
                                 //Suggestions
                                 const ReportsContentSuggestions(),
 
@@ -329,8 +331,8 @@ class _ReportsState extends State<Reports> {
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 14),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       child: Padding(
                         padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
@@ -350,6 +352,12 @@ class _ReportsState extends State<Reports> {
                     ),
                     SizedBox(
                       height: 120,
+                    ),
+
+                    //Platform icon and label
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
+                      height: 15,
                     ),
 
                     //Platform icon and label
