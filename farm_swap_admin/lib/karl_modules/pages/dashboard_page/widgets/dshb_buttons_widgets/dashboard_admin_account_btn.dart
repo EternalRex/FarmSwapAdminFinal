@@ -22,8 +22,8 @@ class DashAdminAccountOptionsBtn extends StatelessWidget {
               width: 20,
             ),
             const SizedBox(
-                width: 3,
-              ),
+              width: 3,
+            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(

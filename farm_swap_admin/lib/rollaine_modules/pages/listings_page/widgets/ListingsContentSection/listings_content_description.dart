@@ -9,13 +9,13 @@ class ListingsContentDescription extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 45, top: 25),
+          padding: const EdgeInsets.only(left: 5, top: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Content Title
               Text(
-                'List of Farmers Requesting for Promotion:',
+                'List of Products',
                 style: Poppins.contentTitle.copyWith(
                   color: const Color(0xFF09041B),
                 ),

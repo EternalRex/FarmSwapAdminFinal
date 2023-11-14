@@ -287,7 +287,7 @@ class _AdminAccount extends State<AdminAccount> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 25,
                     ),
 
                     /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */

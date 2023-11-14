@@ -20,7 +20,7 @@ class DashboardLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     //RETURNS A LINE CHART WIDGET
     return LineChart(
-      swapAnimationDuration: const Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
       /*SAMPLEDATA1 IS A METHOD THAT GETS THE VALUES THAT WE PUT INTO OUR 
       CHART, NOT JUST THE VALUES, BUT ALSO THE BORDERS, THE GRIDDATA, THE LABELS
       AND TITLES */

@@ -17,7 +17,9 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashbo
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/communication_page/communication.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/archived_listings.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/listings.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/promoted_listings.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/reports.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/barter_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/adminlogs/logs_page.dart';
@@ -94,6 +96,8 @@ class RoutesManager {
   static const listingsPage = '/listingspage';
   static const walletPage = '/walletpage';
   static const communicationPage = '/communicationpage';
+  static const archivedListings = '/archivedlistings';
+  static const promotedListings = '/promotedlistings';
 
 //METHOD THAT WILL SWITCH THE ROUTE BASED ON THE PROVIDED ROUTENAME
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -220,6 +224,16 @@ class RoutesManager {
       case listingsPage:
         return MaterialPageRoute(
           builder: (context) => const Listings(),
+        );
+
+      case archivedListings:
+        return MaterialPageRoute(
+          builder: (context) => const ArchivedListings(),
+        );
+
+      case promotedListings:
+        return MaterialPageRoute(
+          builder: (context) => const PromotedListings(),
         );
 
       case walletPage:

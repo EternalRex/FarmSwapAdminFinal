@@ -36,8 +36,7 @@ class FarmSwapTextField extends StatelessWidget {
           cursorColor: FarmSwapGreen.normalGreen,
           selectionHeightStyle: BoxHeightStyle.includeLineSpacingBottom,
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
             filled: true,
             fillColor: Colors.white,
             label: label,
@@ -50,13 +49,11 @@ class FarmSwapTextField extends StatelessWidget {
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
+              borderSide: const BorderSide(width: 0.50, color: Color(0xFFF4F4F4)),
               borderRadius: BorderRadius.circular(15),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                  width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
+              borderSide: const BorderSide(width: 0.50, color: Color.fromARGB(255, 50, 202, 108)),
               borderRadius: BorderRadius.circular(15),
             ),
             errorBorder: OutlineInputBorder(

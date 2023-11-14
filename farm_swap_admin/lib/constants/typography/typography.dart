@@ -43,6 +43,11 @@ class Poppins {
     fontWeight: FontWeight.w800,
     fontSize: 20,
   );
+  static TextStyle discText = const TextStyle(
+    fontFamily: poppins,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+  );
   static TextStyle farmerName = const TextStyle(
     fontFamily: poppins,
     fontWeight: FontWeight.w600,

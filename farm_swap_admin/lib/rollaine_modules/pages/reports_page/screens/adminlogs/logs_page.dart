@@ -254,34 +254,40 @@ class _AdminLogs extends State<AdminLogs> {
                                       ]),
                                   child: Row(
                                     children: [
-                                      const SizedBox(
-                                        width: 60,
-                                      ),
-                                      Text(
-                                        'User',
-                                        style: Poppins.adminName.copyWith(
-                                          color: const Color(0xFF09041B),
-                                          fontSize: 15,
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 12),
+                                          child: Text(
+                                            'User',
+                                            style: Poppins.adminName.copyWith(
+                                              color: const Color(0xFF09041B),
+                                              fontSize: 15,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 200,
-                                      ),
-                                      Text(
-                                        'Date and Time',
-                                        style: Poppins.adminName.copyWith(
-                                          color: const Color(0xFF09041B),
-                                          fontSize: 15,
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            'Date and Time',
+                                            style: Poppins.adminName.copyWith(
+                                              color: const Color(0xFF09041B),
+                                              fontSize: 15,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 180,
-                                      ),
-                                      Text(
-                                        "Action",
-                                        style: Poppins.adminName.copyWith(
-                                          color: const Color(0xFF09041B),
-                                          fontSize: 15,
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "Action",
+                                          style: Poppins.adminName.copyWith(
+                                            color: const Color(0xFF09041B),
+                                            fontSize: 15,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -292,20 +298,10 @@ class _AdminLogs extends State<AdminLogs> {
                                 ),
 
                                 //creates a simple rectangular container with white background color and rounded corners.
-                                Container(
-                                  width: 800,
-                                  height: 385,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: SizedBox(
-                                      height: 420,
-                                      child: _buildAdminList(),
-                                    ),
+                                SingleChildScrollView(
+                                  child: SizedBox(
+                                    height: 400,
+                                    child: _buildAdminList(),
                                   ),
                                 ),
                               ],
@@ -428,8 +424,7 @@ class _AdminLogs extends State<AdminLogs> {
                   .toList(),
             ),
           );
-        }
-        else {
+        } else {
           //This is a loading indicator that informs the user that data is being fetched.
           return const Center(
             child: SizedBox(
@@ -466,80 +461,7 @@ class _AdminLogs extends State<AdminLogs> {
         String dateFinal = DateFormat('MM/dd/yyyy   HH:mm:ss').format(dateTime);
 
         //displaying a single row in a list
-        return Align(
-          alignment: Alignment.center,
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  //Row where the profile, first name, last name, and details
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "${admin["Admin Email"]}",
-                          style: Poppins.userName.copyWith(
-                            color: const Color(0xFF09051B),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 110,
-                        ),
-                        //First name of farmer
-                        Text(
-                          dateFinal,
-                          style: Poppins.detailsText.copyWith(
-                            color: const Color(0xFF09051B),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        //Last name of farmer
-                        Text(
-                          "${admin["Admin Activity"]}",
-                          style: Poppins.contentText.copyWith(
-                            color: const Color(0xFF09051B),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      }
-    }
-    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
-    else if (FirebaseAuth.instance.currentUser!.email != admin['Admin Email']) {
-      //Extracts a timestamp called 'Activity Date' from the document.
-      Timestamp dateTimestamp = document['Activity Date'];
-
-      //Converts this timestamp to a DateTime object.
-      DateTime dateTime = dateTimestamp.toDate();
-
-      //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format
-      String dateFinal = DateFormat('MM/dd/yyyy   HH:mm:ss').format(dateTime);
-
-      return Align(
-        alignment: Alignment.center,
-        child: ListTile(
+        return ListTile(
           title: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -558,33 +480,34 @@ class _AdminLogs extends State<AdminLogs> {
               children: [
                 //Row where the profile, first name, last name, and details
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Row(
                     children: [
-                      Text(
-                        "${admin["Admin Email"]}",
-                        style: Poppins.userName.copyWith(
-                          color: const Color(0xFF09051B),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          "${admin["Admin Email"]}",
+                          style: Poppins.userName.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 110,
-                      ),
-                      //First name of farmer
-                      Text(
-                        dateFinal,
-                        style: Poppins.detailsText.copyWith(
-                          color: const Color(0xFF09051B),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          dateFinal,
+                          style: Poppins.detailsText.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 80,
-                      ),
-                      //Last name of farmer
-                      Text(
-                        "${admin["Admin Activity"]}",
-                        style: Poppins.contentText.copyWith(
-                          color: const Color(0xFF09051B),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          "${admin["Admin Activity"]}",
+                          style: Poppins.contentText.copyWith(
+                            color: const Color(0xFF09051B),
+                          ),
                         ),
                       ),
                     ],
@@ -592,6 +515,74 @@ class _AdminLogs extends State<AdminLogs> {
                 ),
               ],
             ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email != admin['Admin Email']) {
+      //Extracts a timestamp called 'Activity Date' from the document.
+      Timestamp dateTimestamp = document['Activity Date'];
+
+      //Converts this timestamp to a DateTime object.
+      DateTime dateTime = dateTimestamp.toDate();
+
+      //Formats the DateTime as a string in the 'MM/DD/yyyy HH:mm:ss' format
+      String dateFinal = DateFormat('MM/dd/yyyy   HH:mm:ss').format(dateTime);
+
+      return ListTile(
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              //Row where the profile, first name, last name, and details
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "${admin["Admin Email"]}",
+                        style: Poppins.userName.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        dateFinal,
+                        style: Poppins.detailsText.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "${admin["Admin Activity"]}",
+                        style: Poppins.contentText.copyWith(
+                          color: const Color(0xFF09051B),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );

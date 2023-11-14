@@ -226,12 +226,14 @@ class _DashboardState extends State<Dashboard> {
                                     myText: "Revenue",
                                     myColor: const Color(0xFF09041B),
                                     mySize: 30,
-                                    myFont: GoogleFonts.viga().fontFamily,
+                                    myFont: GoogleFonts.poppins().fontFamily,
                                     myWeight: FontWeight.w800),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
                                     BoxShadow(
                                       color: shadow,
                                       blurRadius: 2,
@@ -260,12 +262,14 @@ class _DashboardState extends State<Dashboard> {
                                     myText: "Users",
                                     myColor: const Color(0xFF09041B),
                                     mySize: 30,
-                                    myFont: GoogleFonts.viga().fontFamily,
+                                    myFont: GoogleFonts.poppins().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
                                     BoxShadow(
                                       color: shadow,
                                       blurRadius: 2,
@@ -295,12 +299,14 @@ class _DashboardState extends State<Dashboard> {
                                     myText: "Barter Transactions",
                                     myColor: const Color(0xFF09041B),
                                     mySize: 30,
-                                    myFont: GoogleFonts.viga().fontFamily,
+                                    myFont: GoogleFonts.poppins().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
                                     BoxShadow(
                                       color: shadow,
                                       blurRadius: 2,
@@ -325,12 +331,14 @@ class _DashboardState extends State<Dashboard> {
                                     myText: "Sale Transactions",
                                     myColor: const Color(0xFF09041B),
                                     mySize: 30,
-                                    myFont: GoogleFonts.viga().fontFamily,
+                                    myFont: GoogleFonts.poppins().fontFamily,
                                     myWeight: FontWeight.bold),
                                 Container(
                                   width: 380,
                                   height: 300,
-                                  decoration: BoxDecoration(boxShadow: [
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
                                     BoxShadow(
                                       color: shadow,
                                       blurRadius: 2,

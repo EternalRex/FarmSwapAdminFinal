@@ -18,6 +18,7 @@ Future<void> main() async {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
         apiKey: "AIzaSyCH_x4XHqGnzdjoe8OwCpeaQ6u9TWtQ3Ec",
+        authDomain: "farmswap-678f3.firebaseapp.com",
         appId: "1:1095006869916:web:247631b47d516f63091059",
         messagingSenderId: "1095006869916",
         projectId: "farmswap-678f3",
