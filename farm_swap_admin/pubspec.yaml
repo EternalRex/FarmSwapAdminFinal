@@ -54,6 +54,7 @@ dependencies:
   cloud_firestore_web: ^3.8.4
   firebase_core: ^2.22.0
   firebase_storage_web: ^3.6.13
+  pie_chart: ^5.3.2
 
 dev_dependencies:
   flutter_test:

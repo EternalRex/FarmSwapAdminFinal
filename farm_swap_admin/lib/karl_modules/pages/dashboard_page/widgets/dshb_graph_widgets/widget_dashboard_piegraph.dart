@@ -12,6 +12,7 @@ class DashBoardPieChart extends StatefulWidget {
 }
 
 class _DashBoardPieChartState extends State<DashBoardPieChart> {
+
   @override
   Widget build(BuildContext context) {
     /*RETURNING A PIE CHART TO THE DASHBOARD PAGE */
@@ -27,15 +28,19 @@ class _DashBoardPieChartState extends State<DashBoardPieChart> {
             // ignore: avoid_unnecessary_containers
             child: Container(
               //color: Colors.blue,
-              child: PieChart(
-                /*PUTTING DATA INTO THE PIE CHART */
-                PieChartData(
-                  /*THE DATA ARE STORED IN THIS SECTIONS PROPERTY, WE PASSED ON A 
-                  GETSECTIONS METHOD THAT WILL MAP THE VALUES WE GOT FROM A DATA CLASS
-                  AND CONVERTS IT INTO A LIST */
-                  sections: getSections(),
-                  /*MAKING THE CIRCLE THICK BY INCREASING THE RADIUS OF THE SECTIONS */
-                  centerSpaceRadius: 40,
+              child: SizedBox(
+                height: 300,
+                width: 300,
+                child: PieChart(
+                  /*PUTTING DATA INTO THE PIE CHART */
+                  PieChartData(
+                    /*THE DATA ARE STORED IN THIS SECTIONS PROPERTY, WE PASSED ON A 
+                    GETSECTIONS METHOD THAT WILL MAP THE VALUES WE GOT FROM A DATA CLASS
+                    AND CONVERTS IT INTO A LIST */
+                    sections: getSections(),
+                    /*MAKING THE CIRCLE THICK BY INCREASING THE RADIUS OF THE SECTIONS */
+                    centerSpaceRadius: 10,
+                  ),
                 ),
               ),
             ),
@@ -132,7 +137,7 @@ class PieGraphIndicatorWidget extends StatelessWidget {
             ],
           ),
           Text(
-            "${data.toInt()}% MONTHLY",
+            "${data.toInt()}% ",
             style: TextStyle(
                 fontSize: 20,
                 color: Colors.black,
