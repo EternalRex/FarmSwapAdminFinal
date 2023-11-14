@@ -4,12 +4,11 @@ import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/data/testData/DashboardPieGraph/indicator.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_bell_btn/dhsb_notif.dart.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_piechart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
@@ -323,73 +322,9 @@ class _DashboardState extends State<Dashboard> {
                                         ),
                                       ],
                                       color: Colors.white),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 0),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 250,
-                                          width: 380,
-                                          child: PieChart(
-                                            PieChartData(
-                                              pieTouchData: PieTouchData(
-                                                touchCallback:
-                                                    (FlTouchEvent event,
-                                                        pieTouchResponse) {
-                                                  setState(() {
-                                                    if (!event
-                                                            .isInterestedForInteractions ||
-                                                        pieTouchResponse ==
-                                                            null ||
-                                                        pieTouchResponse
-                                                                .touchedSection ==
-                                                            null) {
-                                                      touchedIndex = -1;
-                                                      return;
-                                                    }
-                                                    touchedIndex =
-                                                        pieTouchResponse
-                                                            .touchedSection!
-                                                            .touchedSectionIndex;
-                                                  });
-                                                },
-                                              ),
-                                              centerSpaceRadius: 10,
-                                              borderData:
-                                                  FlBorderData(show: false),
-                                              sectionsSpace: 5,
-                                              sections: _generateSections(),
-                                            ),
-                                          ),
-                                        ),
-                                        //for active users
-                                        const SizedBox(
-                                          height: 50,
-                                          width: 380,
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Indicator(
-                                                color: Color(0xFF76BA1B),
-                                                textColor: Color(0xFF09051B),
-                                                text: 'Active Users',
-                                                isSquare: true,
-                                              ),
-                                              SizedBox(
-                                                width: 30,
-                                              ),
-                                              //for active users
-                                              Indicator(
-                                                color: Color(0xFF4C9C2A),
-                                                textColor: Color(0xFF09051B),
-                                                text: 'Archived Users',
-                                                isSquare: true,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(left: 0),
+                                    child: UsersPieChart(),
                                   ),
                                 ),
                               ],
@@ -1766,59 +1701,5 @@ class _DashboardState extends State<Dashboard> {
       );
     }
     return Container();
-  }
-
-  List<PieChartSectionData> _generateSections() {
-    return List.generate(2, (i) {
-      final isTouched = i == touchedIndex;
-      final radius = isTouched ? 90.0 : 80.0;
-      final shadows = [Shadow(color: shadow, blurRadius: 2)];
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xFF76BA1B),
-            value: activeUsers,
-            title: '${activeUsers.toStringAsFixed(2)}%',
-            radius: radius,
-            titleStyle: Poppins.farmerName.copyWith(
-              color: Colors.white,
-              shadows: shadows,
-            ),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xFF4C9A2A),
-            value: archivedUsers,
-            title: '${archivedUsers.toStringAsFixed(2)}%',
-            radius: radius,
-            titleStyle: Poppins.farmerName.copyWith(
-              color: Colors.white,
-              shadows: shadows,
-            ),
-          );
-        default:
-          throw Error();
-      }
-    });
-    /*return [
-      PieChartSectionData(
-        color: greenLightActive,
-        value: activeUsers,
-        title: '${activeUsers.toStringAsFixed(2)}%',
-        radius: 80,
-        titleStyle: Poppins.farmerName.copyWith(
-          color: Colors.white,
-        ),
-      ),
-      PieChartSectionData(
-        color: greenNormal,
-        value: archivedUsers,
-        title: '${archivedUsers.toStringAsFixed(2)}%',
-        radius: 80,
-        titleStyle: Poppins.farmerName.copyWith(
-          color: Colors.white,
-        ),
-      ),
-    ];*/
   }
 }
