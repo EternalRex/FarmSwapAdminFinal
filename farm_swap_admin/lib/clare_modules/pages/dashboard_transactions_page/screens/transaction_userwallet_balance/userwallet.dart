@@ -3,10 +3,11 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../widgets/text/transaction_typography.dart';
-import '../widgets/transactions_buttons/transactions_buttons.dart';
+import '../../../../../karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import '../../widgets/text/transaction_typography.dart';
+import '../../widgets/transactions_buttons/transactions_buttons.dart';
+import 'screens/consumerwallet_transaction.dart';
+import 'screens/farmerwallet_transaction.dart';
 
 class UserWalletScreen extends StatefulWidget {
   const UserWalletScreen({super.key});
@@ -16,6 +17,8 @@ class UserWalletScreen extends StatefulWidget {
 }
 
 class _UserWalletScreenState extends State<UserWalletScreen> {
+  TextEditingController searchController = TextEditingController();
+  String searchValue = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,9 +92,9 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
             ),
           ),
 
-          //second expanded of the transaction page
+          /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
-            flex: 4,
+            flex: 3,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -102,123 +105,134 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                       color: Color(0xFFDA6317),
                     ),
                     splashColor: const Color(0xFFF9A84D),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.reportsPage);
+                    },
                   ),
-                  title: transactionTitle(),
+                  title: const DashBoardTitleText(
+                    myText: "Transactions",
+                    myColor: Color(0xFF09041B),
+                  ),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-
-                      //Container for search bar
-                      child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 body: Row(
                   children: [
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 15),
+                          left: 10,
+                          right: 10,
+                          bottom: 15,
+                        ),
                         child: Container(
+                          height: 800,
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5),
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 2,
+                                offset: const Offset(1, 5),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: shadow,
-                                  blurRadius: 2,
-                                  offset: const Offset(1, 5),
-                                ),
-                              ]),
-                          child: SingleChildScrollView(
+                            ],
+                          ),
+                          child: DefaultTabController(
+                            length: 2,
                             child: Column(
-                              children: [
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 65, top: 25),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          //Content Title
-                                          Text(
-                                            'User Wallet',
-                                            style:
-                                                Poppins.contentTitle.copyWith(
-                                              color: const Color(0xFF09041B),
-                                            ),
-                                          ),
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 20,
+                                    left: 10,
+                                    right: 10,
+                                    bottom: 15,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment(0.99, -0.15),
+                                        end: Alignment(-0.99, 0.15),
+                                        colors: [
+                                          Color(0xFF53E78B),
+                                          Color(0xFF14BE77)
                                         ],
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 65, right: 45, top: 15),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Name',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 250,
-                                          ),
-                                          Text(
-                                            'Date',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 150,
-                                          ),
-                                          Text(
-                                            'Balance',
-                                            style: Poppins.farmerName.copyWith(
-                                              color: const Color.fromARGB(
-                                                  179, 9, 4, 27),
-                                            ),
-                                          ),
-                                        ],
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5),
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: shadow,
+                                          blurRadius: 2,
+                                          offset: const Offset(1, 5),
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                    constraints:
+                                        const BoxConstraints.expand(height: 45),
+                                    child: TabBar(
+                                        isScrollable: true,
+                                        labelColor: Colors.black,
+                                        unselectedLabelColor: Colors.grey,
+                                        indicator: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(5),
+                                          ),
+                                        ),
+                                        //mao ni ang tab button which is nag contain sa 12 months
+                                        tabs: [
+                                          Tab(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              constraints:
+                                                  const BoxConstraints.expand(
+                                                      width: 150, height: 45),
+                                              child: const Text(
+                                                "Farmer Wallet",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: poppins,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Tab(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              constraints:
+                                                  const BoxConstraints.expand(
+                                                      width: 150, height: 45),
+                                              child: const Text(
+                                                "Consumer Wallet",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: poppins,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: SizedBox(
+                                    //this will show the different tab bar view of the different tabs
+                                    child: TabBarView(children: [
+                                      FarmerWalletTabBarView(),
+                                      ConsumerWalletTabBarView(),
+                                    ]),
+                                  ),
                                 )
                               ],
                             ),

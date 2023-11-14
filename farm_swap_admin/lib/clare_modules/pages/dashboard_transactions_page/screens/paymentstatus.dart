@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'widgets/text/transaction_typography.dart';
+import '../widgets/text/transaction_typography.dart';
 
 class PaymentStatusScreen extends StatefulWidget {
   const PaymentStatusScreen({super.key});
