@@ -2,10 +2,10 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/paymentstatus.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/paymentstatus.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/swapcoinhistory.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_swapcoins/swapcoinhistory.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/consumer_request_wallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/revenue_report/screens/monthly_revenue_page.dart';
