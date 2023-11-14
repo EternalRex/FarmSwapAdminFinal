@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_print, unnecessary_null_comparison
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 //this class will retrieve the specific document id of the selected user id of the farmer
 class RetrieveConsumer {

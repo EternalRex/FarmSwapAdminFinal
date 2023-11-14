@@ -8,6 +8,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/consumer_request_wallet.dart';
+import 'package:farm_swap_admin/clare_modules/pages/revenue_report/screens/monthly_revenue_page.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
@@ -31,6 +32,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.d
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
 import '../clare_modules/pages/farmer_wallet_management_balance/wallet_requests_balance.dart';
+import '../clare_modules/pages/revenue_report/screens/revenue_report_page.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
 import '../karl_modules/pages/admin_account_page/screens/archived_accounts_lists/archived_accounts_list.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_deactivate_account/screen/deactivate_account.dart';
@@ -72,6 +74,8 @@ class RoutesManager {
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
   static const requestwalletpage = "/requestwalletpage";
+  static const revenuereport = "/revenuereport";
+  static const monthlyrevenue = "/monthlyrevenue";
 
   //rollaine routes
   static const platformPage = '/reportspage';
@@ -294,6 +298,16 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => RequestBalanceFarmerLists(),
         );
+
+      case revenuereport:
+        return MaterialPageRoute(
+          builder: (context) => RevenueReportPage(),
+        );
+      case monthlyrevenue:
+        return MaterialPageRoute(
+          builder: (context) => MonthlyRevenueReportPage(),
+        );
+
       default:
         throw const FormatException("No route");
     }
