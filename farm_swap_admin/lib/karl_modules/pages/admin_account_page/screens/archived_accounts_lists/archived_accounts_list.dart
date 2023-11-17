@@ -283,7 +283,14 @@ class _RequestReactivationListsState extends State<ArchivedAccountLists> {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Display a loading indicator while waiting for data.
+          // Display a loading indicator while waiting for data.
+          return const SizedBox(
+            height: 5,
+            width: 5,
+            child: CircularProgressIndicator(
+              color: Colors.blue,
+            ),
+          );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {

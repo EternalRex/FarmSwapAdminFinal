@@ -109,8 +109,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                     ),
                     splashColor: const Color(0xFFF9A84D),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(RoutesManager.reportsPage);
+                      Navigator.of(context).pushNamed(RoutesManager.dashboard);
                     },
                   ),
                   title: const DashBoardTitleText(
@@ -150,83 +149,87 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                               const SizedBox(
                                 height: 50,
                               ),
-                              /*this will align to center left where the container is
-                                the container has the overall revenue for the farmswaps wallet*/
-                              const Align(
-                                alignment: Alignment.centerLeft,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 35,
+                              Row(
+                                children: [
+                                  const Align(
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 35,
+                                        ),
+                                        Text(
+                                          'Swap Coins Top Up History',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Color(0xFF09041B),
+                                            fontSize: 20,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0.07,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      'Swap Coins Top Up History',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color(0xFF09041B),
-                                        fontSize: 20,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w700,
-                                        height: 0.07,
-                                      ),
+                                  ),
+
+                                  const SizedBox(
+                                    width: 270,
+                                  ),
+
+                                  //this align is for the container of the search textfield
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 35,
+                                        ),
+                                        SizedBox(
+                                          width: 200,
+                                          height: 40,
+                                          child: TextField(
+                                            controller: searchController,
+                                            style: GoogleFonts.poppins(
+                                              color: const Color(0xFFDA6317),
+                                              height: 1.5,
+                                            ),
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(5),
+                                              filled: true,
+                                              fillColor: const Color(0xFFF9A84D)
+                                                  .withOpacity(0.10),
+                                              border: const OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              hintText: 'Search here',
+                                              prefixIcon: const Icon(
+                                                Icons.search,
+                                                color: Color(0xFFDA6317),
+                                                size: 18,
+                                              ),
+                                              prefixIconColor:
+                                                  const Color(0xFFDA6317),
+                                            ),
+                                            onSubmitted: (value) {
+                                              setState(() {
+                                                searchValue =
+                                                    searchController.text;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(
                                 height: 15,
-                              ),
-
-                              //this align is for the container of the search textfield
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 35,
-                                    ),
-                                    SizedBox(
-                                      width: 250,
-                                      height: 40,
-                                      child: TextField(
-                                        controller: searchController,
-                                        style: GoogleFonts.poppins(
-                                          color: const Color(0xFFDA6317),
-                                          height: 1.5,
-                                        ),
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              const EdgeInsets.all(5),
-                                          filled: true,
-                                          fillColor: const Color(0xFFF9A84D)
-                                              .withOpacity(0.10),
-                                          border: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          hintText: 'Search here',
-                                          prefixIcon: const Icon(
-                                            Icons.search,
-                                            color: Color(0xFFDA6317),
-                                            size: 18,
-                                          ),
-                                          prefixIconColor:
-                                              const Color(0xFFDA6317),
-                                        ),
-                                        onSubmitted: (value) {
-                                          setState(() {
-                                            searchValue = searchController.text;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
                               ),
 
                               //this will display the header
@@ -387,38 +390,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                           ),
                           const SizedBox(
                             height: 150,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager.adminTransactionsPayment);
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      rightsidemenuText(
-                                        text: "Payment",
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      const Image(
-                                        image: AssetImage(
-                                            "assets/clare_assets/images/payments.png"),
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
                           ),
                           Center(
                             child: Row(
@@ -590,6 +561,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     Timestamp dateTimestamp = document["dateTime"];
     DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
     String dateFinal = DateFormat('MMMM d, y').format(dateTime);
     String timeListTile = DateFormat('hh:mm a').format(dateTime);
 
@@ -602,7 +574,8 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
           data["firstname"].toString().toLowerCase() == searchValueLowerCase ||
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
           data["address"].toString().toLowerCase() == searchValueLowerCase ||
-          data["dateTime"].toString().toLowerCase() == searchValueLowerCase) {
+          dateFinal.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             width: 780,

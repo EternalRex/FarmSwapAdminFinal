@@ -1,24 +1,25 @@
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_promotion_page/screens/barterpromotion_transaction.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_promotion_page/screens/sellpromotion_transaction.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/text/transaction_typography.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/trans_logo/translogo.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/widgets/transactions_buttons/transactions_buttons.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
-import '../../../../../karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
-import '../../widgets/text/transaction_typography.dart';
-import '../../widgets/transactions_buttons/transactions_buttons.dart';
-import 'screens/consumerwallet_transaction.dart';
-import 'screens/farmerwallet_transaction.dart';
+import 'package:flutter/material.dart';
+import 'widgets/third_expanded.dart';
 
-class UserWalletScreen extends StatefulWidget {
-  const UserWalletScreen({super.key});
+class TransactionPromotion extends StatefulWidget {
+  const TransactionPromotion({super.key});
 
   @override
-  State<UserWalletScreen> createState() => _UserWalletScreenState();
+  State<TransactionPromotion> createState() => _TransactionPromotionState();
 }
 
-class _UserWalletScreenState extends State<UserWalletScreen> {
+class _TransactionPromotionState extends State<TransactionPromotion> {
   TextEditingController searchController = TextEditingController();
   String searchValue = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,9 +93,9 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
             ),
           ),
 
-          /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
+          //second expanded of the transaction page
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -109,10 +110,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                       Navigator.of(context).pushNamed(RoutesManager.dashboard);
                     },
                   ),
-                  title: const DashBoardTitleText(
-                    myText: "Transactions",
-                    myColor: Color(0xFF09041B),
-                  ),
+                  title: transactionTitle(),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
@@ -194,7 +192,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                                                   const BoxConstraints.expand(
                                                       width: 150, height: 45),
                                               child: const Text(
-                                                "Farmer",
+                                                "Sell",
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: poppins,
@@ -211,7 +209,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                                                   const BoxConstraints.expand(
                                                       width: 150, height: 45),
                                               child: const Text(
-                                                "Consumer",
+                                                "Barter",
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: poppins,
@@ -228,8 +226,8 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                                   child: SizedBox(
                                     //this will show the different tab bar view of the different tabs
                                     child: TabBarView(children: [
-                                      FarmerWalletTabBarView(),
-                                      ConsumerWalletTabBarView(),
+                                      SellPromotiomTabBarView(),
+                                      BarterPromotionTabBarView(),
                                     ]),
                                   ),
                                 )
@@ -246,167 +244,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
           ),
 
           //the third expanded with right side menu buttons
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
-                    ),
-                  ],
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/message.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/notification.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const SizedBox(
-                            height: 150,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager
-                                            .adminTransactionsPromotion);
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      rightsidemenuText(
-                                        text: "Promotion",
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      const Image(
-                                        image: AssetImage(
-                                            "assets/clare_assets/images/promotion.png"),
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager
-                                            .adminTransactionsSwapCoins);
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      rightsidemenuText(
-                                        text: "Swap Coins",
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      const Image(
-                                        image: AssetImage(
-                                            "assets/clare_assets/images/swap coins.png"),
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager
-                                            .adminTransactionsUserWallet);
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      rightsidemenuText(
-                                        text: "Wallet",
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      const Image(
-                                        image: AssetImage(
-                                            "assets/clare_assets/images/wallet.png"),
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          const ThirdExpandedPromotion()
         ],
       ),
     );

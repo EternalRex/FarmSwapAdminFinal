@@ -24,6 +24,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
+
 class Barter extends StatefulWidget {
   const Barter({super.key});
 
@@ -353,6 +355,12 @@ class _Barter extends State<Barter> {
                     ),
                     SizedBox(
                       height: 120,
+                    ),
+
+                    //Platform icon and label
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
+                      height: 15,
                     ),
 
                     //Platform icon and label

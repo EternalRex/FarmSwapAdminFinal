@@ -148,7 +148,7 @@ class _UsersPieChartState extends State<UsersPieChart> {
               ),
             );
           default:
-            throw Error();
+            throw Exception("Default error message");
         }
       },
     );

@@ -28,7 +28,7 @@ class DisputeTransactionsOptionsBtn extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                    .pushNamed(RoutesManager.adminTransactionsPromotion);
               },
               child: DisputeTxt(
                 myText: "Transactions",

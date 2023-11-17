@@ -1,11 +1,10 @@
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile/editprofile_description.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Btns/archive_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Btns/update_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/accountname.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/formtitle.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/widgets/EditProfile_Content/personalinfo.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
@@ -21,6 +20,11 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_t
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../dashboard_page/dashboard_query/dashboard_query.dart';
+import '../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
+import '../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_recent_activities_btn.dart';
 
 class AdminEditProfile extends StatefulWidget {
   const AdminEditProfile({super.key});
@@ -30,6 +34,7 @@ class AdminEditProfile extends StatefulWidget {
 }
 
 class _AdminEditProfileState extends State<AdminEditProfile> {
+  DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -292,9 +297,19 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                           horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
-                          /*PROFILE TEXT */
                           const SizedBox(
-                            width: 82,
+                            width: 5,
+                          ),
+                          /*PROFILE TEXT */
+                          DashBoardTxt(
+                            myText: "Profile",
+                            myColor: const Color(0xFF09041B),
+                            mySize: 15,
+                            myFont: GoogleFonts.poppins().fontFamily,
+                            myWeight: FontWeight.w800,
+                          ),
+                          const SizedBox(
+                            width: 34,
                           ),
                           /*MESSAGE BUTTON */
                           IconButton(
@@ -316,13 +331,83 @@ class _AdminEditProfileState extends State<AdminEditProfile> {
                       ),
                     ),
                     const SizedBox(
-                      height: 150,
+                      height: 25,
                     ),
-                    const UpdateOptionsBtn(),
+
+                    /*SECOND ROW THAT WILL CONTAIN THE PROFILE PICTURE AND ID */
+
+                    /*In this future builder we will get the document id that we get from
+                    the database querry in the dashboardquery file */
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                /*We call the profilephoto class from ourr dashboard profileinfo and then
+                                pass the variable data that has the documentid string form*/
+                                ProfilePhoto(documentId: data),
+                              ],
+                            ),
+                          );
+                        } else {
+                          /*If the data is not yet given so it will display no data until data is presented */
+                          return const Text("No data");
+                        }
+                      },
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
-                    const ArchiveOptionsBtn(),
+
+                    /*THE NAME OF THE USER, This future builder will display the name of the current uer
+                    its ways ae simillar above */
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ProfileName(documentId: data),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
+                    ),
+
+                    /*ID OF THE USER,This future builder will display the name of the current uer
+                    its ways ae simillar above */
+                    FutureBuilder(
+                      future: id.getDocsId(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          String data = snapshot.data!;
+                          return ProfileId(documentId: data);
+                        } else {
+                          return const Text("No data");
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    /*EDIT PROFILE BUTTON */
+                    const AdminEditProfileBtn(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    /*ADMIN RECENT ACTIVITIES BUTTON */
+                    AdminRecentActivitiesBtn(),
                   ],
                 ),
               ),

@@ -230,7 +230,14 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                                   .snapshots(),
                                               builder: (context, snapshot) {
                                                 if (!snapshot.hasData) {
-                                                  return const CircularProgressIndicator();
+                                                  return const SizedBox(
+                                                    height: 5,
+                                                    width: 5,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.blue,
+                                                    ),
+                                                  );
                                                 }
 
                                                 // Extract the documents from the snapshot
@@ -510,7 +517,13 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                 .snapshots(),
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
-                                return const CircularProgressIndicator();
+                                return const SizedBox(
+                                  height: 10,
+                                  width: 10,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.blue,
+                                  ),
+                                );
                               }
 
                               // Extract the documents from the snapshot
@@ -684,6 +697,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     Timestamp dateTimestamp = document["dateTime"];
     DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
     String dateFinal = DateFormat('MMMM d, y').format(dateTime);
     String timeListTile = DateFormat('hh:mm a').format(dateTime);
 
@@ -696,7 +710,9 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
           data["firstname"].toString().toLowerCase() == searchValueLowerCase ||
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
           data["address"].toString().toLowerCase() == searchValueLowerCase ||
-          data["dateTime"].toString().toLowerCase() == searchValueLowerCase) {
+          data["dateTime"].toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             width: 780,

@@ -20,14 +20,16 @@ class _DashboardTransBttnState extends State<DashboardTransBttn> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(RoutesManager.dashboard);
+              },
               child: Row(
                 children: <Widget>[
                   const Image(
                     image:
                         AssetImage("assets/clare_assets/images/dashboard.png"),
-                        height: 20,
-                        width: 20,
+                    height: 20,
+                    width: 20,
                   ),
                   const SizedBox(
                     width: 10,
@@ -159,8 +161,8 @@ class __ListingsTransBttnState extends State<ListingsTransBttn> {
                   const Image(
                     image:
                         AssetImage("assets/clare_assets/images/listings.png"),
-                        height: 20,
-                        width: 20,
+                    height: 20,
+                    width: 20,
                   ),
                   const SizedBox(
                     width: 10,
@@ -198,15 +200,15 @@ class __TransactionsBttnState extends State<TransactionsBttn> {
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                    .pushNamed(RoutesManager.adminTransactionsPromotion);
               },
               child: Row(
                 children: <Widget>[
                   const Image(
                     image: AssetImage(
                         "assets/clare_assets/images/transactions.png"),
-                        height: 20,
-                        width: 20,
+                    height: 20,
+                    width: 20,
                   ),
                   const SizedBox(
                     width: 10,
@@ -287,8 +289,7 @@ class __DisputeBttnState extends State<DisputeBttn> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.dispute);
+                Navigator.of(context).pushNamed(RoutesManager.dispute);
               },
               child: Row(
                 children: <Widget>[
@@ -332,8 +333,7 @@ class __WalletBttnState extends State<WalletBttn> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                /* Navigator.of(context)
-                                      .pushNamed(RoutesManager.wallet);*/
+                Navigator.of(context).pushNamed(RoutesManager.walletPage);
               },
               child: Row(
                 children: <Widget>[
@@ -385,8 +385,8 @@ class __CommunicationBttnState extends State<CommunicationBttn> {
                   const Image(
                     image: AssetImage(
                         "assets/clare_assets/images/communication.png"),
-                        height: 20,
-                        width: 20,
+                    height: 20,
+                    width: 20,
                   ),
                   const SizedBox(
                     width: 10,

@@ -815,15 +815,6 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           /*NOTIFICATIOIN BUTTON */
                           const DashboardNotifBtn(),
-                          /*IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(RoutesManager.notificationAdminPage);
-                            },
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),*/
                         ],
                       ),
                     ),
@@ -836,19 +827,9 @@ class _DashboardState extends State<Dashboard> {
                     /*In this future builder we will get the document id that we get from
                     the database querry in the dashboardquery file */
                     FutureBuilder(
-                      /*The id was the object we creted above to access the methods inside the dashboard
-                      query file. we call the get docsId() method, meaning  we tell it to execute and
-                      get the document id of the current user */
                       future: id.getDocsId(),
-
-                      /*so this builder means that it will build the context meaning this page
-                      and this class. It will also build the snapshot, which is the object
-                      that we use to acces the data fom getDocsID() method */
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          /*Since the getDocsId is a Future<sting> it will return a the 
-                          documentId but in a futue form so not the actual string so we 
-                          need this snaphot to actually get the string and not the future form*/
                           String data = snapshot.data!;
                           return Center(
                             child: Row(
@@ -903,6 +884,9 @@ class _DashboardState extends State<Dashboard> {
                           return const Text("No data");
                         }
                       },
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     const SizedBox(
                       height: 10,
@@ -999,13 +983,22 @@ class _DashboardState extends State<Dashboard> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the admin
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${admin['profileUrl']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: admin["profileUrl"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -1103,13 +1096,22 @@ class _DashboardState extends State<Dashboard> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the admin
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage:
-                          CachedNetworkImageProvider('${admin['profileUrl']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: admin["profileUrl"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -1259,13 +1261,22 @@ class _DashboardState extends State<Dashboard> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the admin
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${farmer['profilePhoto']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: farmer["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -1362,13 +1373,22 @@ class _DashboardState extends State<Dashboard> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the admin
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${farmer['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: farmer["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -1518,13 +1538,22 @@ class _DashboardState extends State<Dashboard> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the admin
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${consumer['profilePhoto']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: consumer["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -1621,13 +1650,22 @@ class _DashboardState extends State<Dashboard> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the admin
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${consumer['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: consumer["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
                   const SizedBox(

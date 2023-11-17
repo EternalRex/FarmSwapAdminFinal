@@ -26,6 +26,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
+
 class AdminLogs extends StatefulWidget {
   const AdminLogs({super.key});
 
@@ -257,7 +259,8 @@ class _AdminLogs extends State<AdminLogs> {
                                       Expanded(
                                         flex: 1,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(left: 12),
+                                          padding:
+                                              const EdgeInsets.only(left: 12),
                                           child: Text(
                                             'User',
                                             style: Poppins.adminName.copyWith(
@@ -270,7 +273,8 @@ class _AdminLogs extends State<AdminLogs> {
                                       Expanded(
                                         flex: 1,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(left: 5),
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
                                           child: Text(
                                             'Date and Time',
                                             style: Poppins.adminName.copyWith(
@@ -364,6 +368,12 @@ class _AdminLogs extends State<AdminLogs> {
                     ),
                     SizedBox(
                       height: 120,
+                    ),
+
+                    //Platform icon and label
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
+                      height: 15,
                     ),
 
                     //Platform icon and label
