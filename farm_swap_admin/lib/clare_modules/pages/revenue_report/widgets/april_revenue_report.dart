@@ -449,6 +449,7 @@ class _AprilRevenueTabBarViewState extends State<AprilRevenueTabBarView> {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     Timestamp dateTimestamp = document["dateTime"];
     DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
     String dateFinal = DateFormat('MMMM d, y').format(dateTime);
     String timeListTile = DateFormat('hh:mm a').format(dateTime);
 
@@ -461,7 +462,9 @@ class _AprilRevenueTabBarViewState extends State<AprilRevenueTabBarView> {
           data["firstname"].toString().toLowerCase() == searchValueLowerCase ||
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
           data["address"].toString().toLowerCase() == searchValueLowerCase ||
-          data["dateTime"].toString().toLowerCase() == searchValueLowerCase) {
+          data["dateTime"].toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             width: 1000,

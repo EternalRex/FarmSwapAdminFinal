@@ -77,7 +77,7 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                 ),
 
                 const SizedBox(
-                  width: 300,
+                  width: 320,
                 ),
 
                 //this align is for the container of the search textfield
@@ -313,6 +313,7 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     Timestamp dateTimestamp = document["registrationDate"];
     DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
     String dateFinal = DateFormat('MMMM d, y').format(dateTime);
 
     TextEditingController amountController = TextEditingController();
@@ -326,8 +327,8 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
       if (data["balance"].toString().toLowerCase() == searchValueLowerCase ||
           data["firstname"].toString().toLowerCase() == searchValueLowerCase ||
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
-          data["registrationDate"].toString().toLowerCase() ==
-              searchValueLowerCase) {
+          dateFinal.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             width: 780,
@@ -384,7 +385,6 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                           placeholder: (context, url) =>
                               const CircularProgressIndicator(),
                           errorWidget: (context, url, error) {
-                            print("Error loading image: $error");
                             return const Icon(Icons.error);
                           },
                         ),
@@ -744,7 +744,6 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                         placeholder: (context, url) =>
                             const CircularProgressIndicator(),
                         errorWidget: (context, url, error) {
-                          print("Error loading image: $error");
                           return const Icon(Icons.error);
                         },
                       ),

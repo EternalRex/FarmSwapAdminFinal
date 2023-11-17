@@ -223,7 +223,7 @@ class _AdminAccount extends State<AdminAccount> {
             ),
           ),
 
-          /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
+          /*THIRD EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
             flex: 1,
             child: Padding(

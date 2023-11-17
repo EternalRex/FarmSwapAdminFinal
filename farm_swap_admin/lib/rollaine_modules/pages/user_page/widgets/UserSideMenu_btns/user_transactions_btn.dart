@@ -24,7 +24,7 @@ class UserTransactionOptionsBtn extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(RoutesManager.adminTransactionsPayment);
+                    .pushNamed(RoutesManager.adminTransactionsPromotion);
               },
               child: const UserAccountText(
                 myText: 'Transactions',

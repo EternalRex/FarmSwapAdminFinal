@@ -26,6 +26,8 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
+
 class NumberUsers extends StatefulWidget {
   const NumberUsers({super.key});
 
@@ -282,8 +284,8 @@ class _NumberUsers extends State<NumberUsers> {
                   children: [
                     //Row for the buttons
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 14),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       child: Padding(
                         padding: EdgeInsets.only(left: 75, top: 5),
                         child: Row(
@@ -304,6 +306,11 @@ class _NumberUsers extends State<NumberUsers> {
                       height: 120,
                     ),
 
+                    //Platform icon and label
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
+                      height: 15,
+                    ),
                     //Platform icon and label
                     ReportsPlatformOptionsBtn(),
                     SizedBox(

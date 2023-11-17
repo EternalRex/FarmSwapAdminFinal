@@ -2,8 +2,7 @@
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_upload_photo/admin_upload_photo.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/paymentstatus.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/promotion.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_promotion_page/promotion.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_swapcoins/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
@@ -71,7 +70,6 @@ class RoutesManager {
   static const adminForgotPass = "/adminforgotpass";
   static const resetpassscreensuccess = "/adminresetpasssuccess";
 
-  static const adminTransactionsPayment = "/admintransactionspayment";
   static const adminTransactionsPromotion = "/admintransactionspromotion";
   static const adminTransactionsSwapCoins = "/admintransactionsswapcoins";
   static const adminTransactionsUserWallet = "/admintransactionsuserwallet";
@@ -244,12 +242,6 @@ class RoutesManager {
       case communicationPage:
         return MaterialPageRoute(
           builder: (context) => const Communication(),
-        );
-
-      //Transactions routes
-      case adminTransactionsPayment:
-        return MaterialPageRoute(
-          builder: (context) => const PaymentStatusScreen(),
         );
 
       case adminTransactionsPromotion:
