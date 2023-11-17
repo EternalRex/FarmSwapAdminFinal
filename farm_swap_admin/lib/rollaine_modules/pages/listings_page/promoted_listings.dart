@@ -152,6 +152,17 @@ class _PromotedListingsState extends State<PromotedListings> {
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
                 appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFFDA6317),
+                    ),
+                    splashColor: const Color(0xFFF9A84D),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.listingsPage);
+                    },
+                  ),
                   //Design the page title
                   title: const TitleText(
                     myText: 'Promoted Listings',
@@ -471,8 +482,7 @@ class _PromotedListingsState extends State<PromotedListings> {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
-                    .where((document) =>
-                        document['promoted'] == true)
+                    .where((document) => document['promoted'] == true)
                     .map<Widget>(
                         (document) => _buildBarterPromotedListItems(document))
                     .toList(),
@@ -784,8 +794,7 @@ class _PromotedListingsState extends State<PromotedListings> {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
-                    .where((document) =>
-                        document['promoted'] == true)
+                    .where((document) => document['promoted'] == true)
                     .map<Widget>(
                         (document) => _buildSellPromotedListItems(document))
                     .toList(),

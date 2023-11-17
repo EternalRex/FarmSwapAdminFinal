@@ -13,10 +13,18 @@ class UsersPieChart extends StatefulWidget {
 }
 
 class _UsersPieChartState extends State<UsersPieChart> {
+
+  /*This variable is used to keep track of the index of the section in 
+  the pie chart that is currently being touched or interacted with.*/
   int touchedIndex = -1;
+
+  //store the percentage of active users
   late double activeUsers = 0.0;
+
+  //store the percentage of archived users
   late double archivedUsers = 0.0;
 
+  //used to perform initialization tasks, such as fetching data
   @override
   void initState() {
     super.initState();
