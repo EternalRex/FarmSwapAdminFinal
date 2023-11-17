@@ -94,7 +94,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
 
           /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(

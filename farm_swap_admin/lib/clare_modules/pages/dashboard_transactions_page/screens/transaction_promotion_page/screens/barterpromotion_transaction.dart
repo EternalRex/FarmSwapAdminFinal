@@ -24,64 +24,38 @@ String searchValue = "";
 class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5,
-        left: 10,
-        right: 10,
-        bottom: 10,
-      ),
-      child: Container(
-        height: 800,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(5),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: shadow,
-              blurRadius: 2,
-              offset: const Offset(1, 5),
-            ),
-          ],
+    return Container(
+      height: 750,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
         ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-
-            Row(
+        boxShadow: [
+          BoxShadow(
+            color: shadow,
+            blurRadius: 2,
+            offset: const Offset(1, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 25, right: 25),
+            child: Row(
               children: [
-                //header text
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 25,
-                      ),
-                      Text(
-                        'Barter Promotion Status',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF09041B),
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 0.07,
-                        ),
-                      ),
-                    ],
+                const Text(
+                  'Barter Promotion Status',
+                  style: TextStyle(
+                    color: Color(0xFF09041B),
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    height: 0.07,
                   ),
                 ),
-
-                const SizedBox(
-                  width: 300,
-                ),
-
-                //this align is for the container of the search textfield
+                const Spacer(),
                 SizedBox(
                   width: 200,
                   height: 40,
@@ -118,31 +92,26 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                 ),
               ],
             ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            //this will display the header
-            Container(
-              width: 780,
-              height: 50,
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, left: 35, right: 35, bottom: 10),
+            child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
+                  color: greenLight,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
                   ),
-                ],
-              ),
-              child: const Center(
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadow,
+                      blurRadius: 2,
+                      offset: const Offset(0, 1),
+                    )
+                  ]),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       flex: 2,
@@ -187,37 +156,17 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                 ),
               ),
             ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            //call the builder list for farmers
-            Container(
-              width: 780,
-              height: 320,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: 500,
-                  child: _buildBarterPromotionList(),
-                ),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25),
+              child: SizedBox(
+                height: 320,
+                child: _buildBarterPromotionList(),
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

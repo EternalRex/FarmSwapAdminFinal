@@ -130,7 +130,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                           bottom: 15,
                         ),
                         child: Container(
-                          height: 800,
+                          height: 510,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: const BorderRadius.all(
@@ -146,180 +146,135 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                           ),
                           child: Column(
                             children: [
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              Row(
-                                children: [
-                                  const Align(
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 35,
-                                        ),
-                                        Text(
-                                          'Swap Coins Top Up History',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color(0xFF09041B),
-                                            fontSize: 20,
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0.07,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  const SizedBox(
-                                    width: 270,
-                                  ),
-
-                                  //this align is for the container of the search textfield
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 35,
-                                        ),
-                                        SizedBox(
-                                          width: 200,
-                                          height: 40,
-                                          child: TextField(
-                                            controller: searchController,
-                                            style: GoogleFonts.poppins(
-                                              color: const Color(0xFFDA6317),
-                                              height: 1.5,
-                                            ),
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.all(5),
-                                              filled: true,
-                                              fillColor: const Color(0xFFF9A84D)
-                                                  .withOpacity(0.10),
-                                              border: const OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(10),
-                                                ),
-                                                borderSide: BorderSide.none,
-                                              ),
-                                              hintText: 'Search here',
-                                              prefixIcon: const Icon(
-                                                Icons.search,
-                                                color: Color(0xFFDA6317),
-                                                size: 18,
-                                              ),
-                                              prefixIconColor:
-                                                  const Color(0xFFDA6317),
-                                            ),
-                                            onSubmitted: (value) {
-                                              setState(() {
-                                                searchValue =
-                                                    searchController.text;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-
-                              //this will display the header
-                              Container(
-                                width: 780,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: shadow,
-                                      blurRadius: 2,
-                                      offset: const Offset(0, 1),
-                                    ),
-                                  ],
-                                ),
-                                child: const Row(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 15, left: 25, right: 25),
+                                child: Row(
                                   children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        'Name',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                    const Text(
+                                      'Swap Coins Top Up History',
+                                      style: TextStyle(
+                                        color: Color(0xFF09041B),
+                                        fontSize: 20,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0.07,
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        "Date and Time",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w600,
+                                    const Spacer(),
+
+                                    //this align is for the container of the search textfield
+                                    SizedBox(
+                                      width: 200,
+                                      height: 40,
+                                      child: TextField(
+                                        controller: searchController,
+                                        style: GoogleFonts.poppins(
+                                          color: const Color(0xFFDA6317),
+                                          height: 1.5,
                                         ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        "SwapCoins",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w600,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.all(5),
+                                          filled: true,
+                                          fillColor: const Color(0xFFF9A84D)
+                                              .withOpacity(0.10),
+                                          border: const OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                          hintText: 'Search here',
+                                          prefixIcon: const Icon(
+                                            Icons.search,
+                                            color: Color(0xFFDA6317),
+                                            size: 18,
+                                          ),
+                                          prefixIconColor:
+                                              const Color(0xFFDA6317),
                                         ),
+                                        onSubmitted: (value) {
+                                          setState(() {
+                                            searchValue = searchController.text;
+                                          });
+                                        },
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-
-                              const SizedBox(
-                                height: 10,
+                              //this will display the header
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: greenLight,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: shadow,
+                                        blurRadius: 2,
+                                        offset: const Offset(0, 1),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            'Name',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            "Date and Time",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            "SwapCoins",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
 
                               //call the builder list
-                              Container(
-                                width: 780,
-                                height: 350,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: shadow,
-                                      blurRadius: 2,
-                                      offset: const Offset(0, 1),
-                                    ),
-                                  ],
-                                ),
-                                child: SingleChildScrollView(
-                                  child: SizedBox(
-                                    height: 500,
-                                    child: _buildSwapCoinsList(),
-                                  ),
+                              SingleChildScrollView(
+                                child: SizedBox(
+                                  height: 360,
+                                  child: _buildSwapCoinsList(),
                                 ),
                               ),
                             ],

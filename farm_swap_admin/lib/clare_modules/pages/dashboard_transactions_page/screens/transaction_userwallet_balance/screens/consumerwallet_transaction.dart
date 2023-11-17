@@ -24,230 +24,171 @@ String searchValue = "";
 class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5,
-        left: 10,
-        right: 10,
-        bottom: 10,
-      ),
-      child: Container(
-        height: 800,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(5),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: shadow,
-              blurRadius: 2,
-              offset: const Offset(1, 5),
-            ),
-          ],
+    return Container(
+      height: 750,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(5),
         ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-
-            Row(
+        boxShadow: [
+          BoxShadow(
+            color: shadow,
+            blurRadius: 2,
+            offset: const Offset(1, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 25, right: 25),
+            child: Row(
               children: [
-                //header text
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 25,
-                      ),
-                      Text(
-                        'Consumer Wallet',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF09041B),
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                          height: 0.07,
-                        ),
-                      ),
-                    ],
+                const Text(
+                  'Consumer Wallet',
+                  style: TextStyle(
+                    color: Color(0xFF09041B),
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    height: 0.07,
                   ),
                 ),
-
-                const SizedBox(
-                  width: 290,
-                ),
-
-                //this align is for the container of the search textfield
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 35,
-                      ),
-                      SizedBox(
-                        width: 200,
-                        height: 40,
-                        child: TextField(
-                          controller: searchController,
-                          style: GoogleFonts.poppins(
-                            color: const Color(0xFFDA6317),
-                            height: 1.5,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: 'Search here',
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              color: Color(0xFFDA6317),
-                              size: 18,
-                            ),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
-                          onSubmitted: (value) {
-                            setState(() {
-                              searchValue = searchController.text;
-                            });
-                          },
+                const Spacer(),
+                SizedBox(
+                  width: 200,
+                  height: 40,
+                  child: TextField(
+                    controller: searchController,
+                    style: GoogleFonts.poppins(
+                      color: const Color(0xFFDA6317),
+                      height: 1.5,
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(5),
+                      filled: true,
+                      fillColor: const Color(0xFFF9A84D).withOpacity(0.10),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
+                        borderSide: BorderSide.none,
                       ),
-                    ],
+                      hintText: 'Search here',
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: Color(0xFFDA6317),
+                        size: 18,
+                      ),
+                      prefixIconColor: const Color(0xFFDA6317),
+                    ),
+                    onSubmitted: (value) {
+                      setState(() {
+                        searchValue = searchController.text;
+                      });
+                    },
                   ),
                 ),
               ],
             ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            //this will display the header
-            Container(
-              width: 780,
-              height: 50,
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, left: 35, right: 35, bottom: 10),
+            child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
+                  color: greenLight,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
                   ),
-                ],
-              ),
-              child: const Row(
-                children: [
-                  SizedBox(
-                    width: 50,
-                  ),
-                  SizedBox(
-                    width: 100,
-                    child: Text(
-                      'User',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadow,
+                      blurRadius: 2,
+                      offset: const Offset(0, 1),
+                    )
+                  ]),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 50,
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'User',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  SizedBox(
-                    width: 100,
-                    child: Text(
-                      'Name',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      width: 30,
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'Name',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      "Registration Date",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "Registration Date",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      "Wallet Balance",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "Wallet Balance",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            //call the builder list for consumer
-            Container(
-              width: 780,
-              height: 320,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadow,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: 500,
-                  child: _buildConsumerWalletList(),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25),
+              child: SizedBox(
+                height: 320,
+                child: _buildConsumerWalletList(),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
