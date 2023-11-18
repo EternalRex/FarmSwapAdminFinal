@@ -754,11 +754,13 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
       stream: FirebaseFirestore.instance
           .collection('AdminLogs')
           .where('Admin Email', isEqualTo: specificEmail)
+          .orderBy('Activity Date', descending: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
+          print(snapshot.error);
           return Text('Error: ${snapshot.error}');
         } else {
           final logs = snapshot.data!.docs;

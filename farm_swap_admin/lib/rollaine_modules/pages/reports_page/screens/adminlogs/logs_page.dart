@@ -418,7 +418,10 @@ class _AdminLogs extends State<AdminLogs> {
   Widget _buildAdminList() {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
-      stream: db.collection('AdminLogs').orderBy('Activity Date').snapshots(),
+      stream: db
+          .collection('AdminLogs')
+          .orderBy('Activity Date', descending: true)
+          .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         //It ensures that the stream is active and data is available.
