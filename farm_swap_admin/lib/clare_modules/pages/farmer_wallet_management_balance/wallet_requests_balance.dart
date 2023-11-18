@@ -267,11 +267,11 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const FarmerRequestsListBtn(),
+                    const FarmerWalletRequestsListBtn(),
                     const SizedBox(
                       height: 15,
                     ),
-                    const ConsumerRequestsListBtn(),
+                    const ConsumerWalletRequestsListBtn(),
                   ],
                 ),
               ),
