@@ -2,8 +2,8 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/ad
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class FarmerRequestsListBtn extends StatelessWidget {
-  const FarmerRequestsListBtn({
+class FarmerWalletRequestsListBtn extends StatelessWidget {
+  const FarmerWalletRequestsListBtn({
     super.key,
   });
 
@@ -40,8 +40,8 @@ class FarmerRequestsListBtn extends StatelessWidget {
   }
 }
 
-class ConsumerRequestsListBtn extends StatelessWidget {
-  const ConsumerRequestsListBtn({
+class ConsumerWalletRequestsListBtn extends StatelessWidget {
+  const ConsumerWalletRequestsListBtn({
     super.key,
   });
 
