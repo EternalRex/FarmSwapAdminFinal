@@ -9,32 +9,35 @@ class DashDisputeOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Image(
-              image: AssetImage(
-                "assets/karl_assets/images/dispute.png",
-              ),
-              height: 20,
-              width: 20,
-            ),
-            const SizedBox(
-              height: 3,
-            ),
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.dispute);
+                Navigator.of(context).pushNamed(RoutesManager.dispute);
               },
-              child: DashBoardTxt(
-                myText: "Dispute",
-                myColor: const Color(0xFF09041B),
-                mySize: 13,
-                myFont: GoogleFonts.poppins().fontFamily,
-                myWeight: FontWeight.w500,
+              child: Row(
+                children: [
+                  const Image(
+                    image: AssetImage(
+                      "assets/karl_assets/images/dispute.png",
+                    ),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DashBoardTxt(
+                    myText: "Dispute",
+                    myColor: const Color(0xFF09041B),
+                    mySize: 13,
+                    myFont: GoogleFonts.poppins().fontFamily,
+                    myWeight: FontWeight.w500,
+                  ),
+                ],
               ),
             ),
           ],

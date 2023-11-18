@@ -10,28 +10,32 @@ class ReportsNumberOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 28),
+      padding: const EdgeInsets.only(right: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.numberPage);
+                Navigator.of(context).pushNamed(RoutesManager.numberPage);
               },
-              child: const RightReportsText(
-                myText: 'Number of Users',
-                myColor: Color(0xFF09041B),
+              child: const Row(
+                children: [
+                  RightReportsText(
+                    myText: 'Number of Users',
+                    myColor: Color(0xFF09041B),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Image(
+                    image:
+                        AssetImage('assets/rollaine_assets/icons/number.png'),
+                    height: 21,
+                    width: 21,
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Image(
-              image: AssetImage('assets/rollaine_assets/icons/number.png'),
-              height: 21,
-              width: 21,
             ),
           ],
         ),

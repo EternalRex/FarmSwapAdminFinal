@@ -354,41 +354,41 @@ class _Selling extends State<Selling> {
                       ),
                     ),
                     SizedBox(
-                      height: 120,
+                      height: 80,
                     ),
 
                     //Platform icon and label
                     ReportsRevenueOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Platform icon and label
                     ReportsPlatformOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Barter icon and label
                     ReportsBarterOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Selling icon and label
                     ReportsSellingOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Number of users icon and label
                     ReportsNumberOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Admin logs icon and label
-                    ReportsAdminLogsOptionsBtn()
+                    ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),

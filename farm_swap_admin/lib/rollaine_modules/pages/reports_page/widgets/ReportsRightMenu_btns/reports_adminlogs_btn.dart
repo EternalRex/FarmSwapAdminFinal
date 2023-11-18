@@ -10,28 +10,31 @@ class ReportsAdminLogsOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 28),
+      padding: const EdgeInsets.only(right: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.logsPage);
+                Navigator.of(context).pushNamed(RoutesManager.logsPage);
               },
-              child: const RightReportsText(
-                myText: 'Admin Logs',
-                myColor: Color(0xFF09041B),
+              child: const Row(
+                children: [
+                  RightReportsText(
+                    myText: 'Admin Logs',
+                    myColor: Color(0xFF09041B),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Image(
+                    image: AssetImage('assets/rollaine_assets/icons/logs.png'),
+                    height: 22,
+                    width: 22,
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Image(
-              image: AssetImage('assets/rollaine_assets/icons/logs.png'),
-              height: 22,
-              width: 22,
             ),
           ],
         ),

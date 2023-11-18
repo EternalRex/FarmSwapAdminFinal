@@ -10,27 +10,30 @@ class ReportsUserAccountOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 28),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Image(
-              image: AssetImage('assets/rollaine_assets/icons/user.png'),
-              height: 23,
-              width: 23,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RoutesManager.userAccountPage);
+                Navigator.of(context).pushNamed(RoutesManager.userAccountPage);
               },
-              child: const ReportsText(
-                myText: 'User Account',
-                myColor: Color(0xFF09041B),
+              child: const Row(
+                children: [
+                  Image(
+                    image: AssetImage('assets/rollaine_assets/icons/user.png'),
+                    height: 23,
+                    width: 23,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ReportsText(
+                    myText: 'User Account',
+                    myColor: Color(0xFF09041B),
+                  ),
+                ],
               ),
             ),
           ],

@@ -21,21 +21,11 @@ class DashLogoutOptionBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, bottom: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Image(
-              image: AssetImage(
-                "assets/karl_assets/images/logout.png",
-              ),
-              height: 20,
-              width: 20,
-            ),
-            const SizedBox(
-              height: 3,
-            ),
             TextButton(
               onPressed: () {
                 /*So mag kuha ni siya sa admin logs nya iyang description kay ni login */
@@ -50,12 +40,26 @@ class DashLogoutOptionBtn extends StatelessWidget {
                     FirebaseAuth.instance.currentUser!.uid, active);
                 Navigator.of(context).pushNamed(RoutesManager.signInPage);
               },
-              child: DashBoardTxt(
-                myText: "Logout",
-                myColor: const Color(0xFF09041B),
-                mySize: 13,
-                myFont: GoogleFonts.poppins().fontFamily,
-                myWeight: FontWeight.w500,
+              child: Row(
+                children: [
+                  const Image(
+                    image: AssetImage(
+                      "assets/karl_assets/images/logout.png",
+                    ),
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DashBoardTxt(
+                    myText: "Logout",
+                    myColor: const Color(0xFF09041B),
+                    mySize: 13,
+                    myFont: GoogleFonts.poppins().fontFamily,
+                    myWeight: FontWeight.w500,
+                  ),
+                ],
               ),
             ),
           ],

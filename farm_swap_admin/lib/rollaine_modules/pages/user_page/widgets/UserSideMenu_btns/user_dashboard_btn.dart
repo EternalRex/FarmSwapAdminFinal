@@ -8,26 +8,31 @@ class UserDashboardOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 28),
+      padding: const EdgeInsets.only(left: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Image(
-              image: AssetImage('assets/rollaine_assets/icons/dashboard.png'),
-              height: 23,
-              width: 23,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(RoutesManager.dashboard);
               },
-              child: const UserAccountText(
-                myText: 'Dashboard',
-                myColor: Color(0xFF09041B),
+              child: const Row(
+                children: [
+                  Image(
+                    image: AssetImage(
+                        'assets/rollaine_assets/icons/dashboard.png'),
+                    height: 23,
+                    width: 23,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  UserAccountText(
+                    myText: 'Dashboard',
+                    myColor: Color(0xFF09041B),
+                  ),
+                ],
               ),
             ),
           ],

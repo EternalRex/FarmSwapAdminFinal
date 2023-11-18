@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/barter/bartrans_details_wrapper.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/BarterContentSection/barter_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
@@ -357,37 +358,37 @@ class _Barter extends State<Barter> {
                       ),
                     ),
                     SizedBox(
-                      height: 120,
+                      height: 80,
                     ),
 
                     //Platform icon and label
                     ReportsRevenueOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Platform icon and label
                     ReportsPlatformOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Barter icon and label
                     ReportsBarterOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Selling icon and label
                     ReportsSellingOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Number of users icon and label
                     ReportsNumberOptionsBtn(),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
 
                     //Admin logs icon and label
@@ -449,6 +450,26 @@ class _Barter extends State<Barter> {
   Widget _buildBarterTransListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
     Map<String, dynamic> barter = document.data() as Map<String, dynamic>;
+
+    String consumerLname = barter['consumerLname'];
+    String consumerUname = barter['consumerUname'];
+    String consumerbarangay = barter['consumerbarangay'];
+    String consumermunisipyo = barter['consumermunisipyo'];
+    String consumername = barter['consumername'];
+    String deductionConsu = barter['deductedConsumerCoins'].toString();
+    String deductionFarm = barter['deductedFarmerCoins'].toString();
+    String farmerLname = barter['farmerLname'];
+    String farmerUname = barter['farmerUname'];
+    String farmerbarangay = barter['farmerbarangay'];
+    String farmermunicipality = barter['farmermunicipality'];
+    String farmername = barter['farmername'];
+    String itemUrl = barter['itemUrl'];
+    String itemname = barter['itemname'];
+    String itemvalue = barter['itemvalue'].toString();
+    String listingUrl = barter['listingUrl'];
+    String listingname = barter['listingname'];
+    String listingvalue = barter['listingvalue'].toString();
+    String percentageFee = barter['percentageFee'];
 
     //checks if a searchValue variable is not empty
     if (searchValue.isNotEmpty) {
@@ -547,8 +568,8 @@ class _Barter extends State<Barter> {
                                 ),
                                 Text(
                                   barter['listingvalue'].toString(),
-                                  style: Poppins.contentText.copyWith(
-                                      color: const Color(0xFF09051B)),
+                                  style: Poppins.contentText
+                                      .copyWith(color: const Color(0xFF09051B)),
                                 ),
                               ],
                             )
@@ -590,8 +611,8 @@ class _Barter extends State<Barter> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 5, bottom: 5),
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
                                   child: Center(
                                     child: Text(
                                       'BARTERED',
@@ -608,7 +629,33 @@ class _Barter extends State<Barter> {
                             ),
                             const Spacer(),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => BarterTransDetails(
+                                        cLname: consumerLname,
+                                        cUname: consumerUname,
+                                        cBarangay: consumerbarangay,
+                                        cMunicipality: consumermunisipyo,
+                                        cName: consumername,
+                                        deductConsu: deductionConsu,
+                                        deductFarm: deductionFarm,
+                                        fLname: farmerLname,
+                                        fUname: farmerUname,
+                                        fBarangay: farmerbarangay,
+                                        fMunicipality: farmermunicipality,
+                                        fName: farmername,
+                                        itemUrl: itemUrl,
+                                        itemName: itemname,
+                                        itemVal: itemvalue,
+                                        listUrl: listingUrl,
+                                        listName: listingname,
+                                        listVal: listingvalue,
+                                        percent: percentageFee,
+                                        transact: dateFinal),
+                                  ),
+                                );
+                              },
                               icon: Icon(
                                 Icons.read_more_rounded,
                                 color: greenNormal,
@@ -687,8 +734,8 @@ class _Barter extends State<Barter> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: Text(
                                   barter['listingname'],
-                                  style: Poppins.farmerName.copyWith(
-                                      color: const Color(0xFF09051B)),
+                                  style: Poppins.farmerName
+                                      .copyWith(color: const Color(0xFF09051B)),
                                 ),
                               ),
                               Padding(
@@ -779,7 +826,33 @@ class _Barter extends State<Barter> {
                           ),
                           const Spacer(),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BarterTransDetails(
+                                      cLname: consumerLname,
+                                      cUname: consumerUname,
+                                      cBarangay: consumerbarangay,
+                                      cMunicipality: consumermunisipyo,
+                                      cName: consumername,
+                                      deductConsu: deductionConsu,
+                                      deductFarm: deductionFarm,
+                                      fLname: farmerLname,
+                                      fUname: farmerUname,
+                                      fBarangay: farmerbarangay,
+                                      fMunicipality: farmermunicipality,
+                                      fName: farmername,
+                                      itemUrl: itemUrl,
+                                      itemName: itemname,
+                                      itemVal: itemvalue,
+                                      listUrl: listingUrl,
+                                      listName: listingname,
+                                      listVal: listingvalue,
+                                      percent: percentageFee,
+                                      transact: dateFinal),
+                                ),
+                              );
+                            },
                             icon: Icon(
                               Icons.read_more_rounded,
                               color: greenNormal,

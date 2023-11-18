@@ -8,26 +8,31 @@ class UserLogoutOptionsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 28, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, bottom: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Image(
-              image: AssetImage('assets/rollaine_assets/icons/logout.png'),
-              height: 24,
-              width: 24,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(RoutesManager.introPage);
               },
-              child: const UserAccountText(
-                myText: 'Logout',
-                myColor: Color(0xFF09041B),
+              child: const Row(
+                children: [
+                  Image(
+                    image:
+                        AssetImage('assets/rollaine_assets/icons/logout.png'),
+                    height: 24,
+                    width: 24,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  UserAccountText(
+                    myText: 'Logout',
+                    myColor: Color(0xFF09041B),
+                  ),
+                ],
               ),
             ),
           ],
