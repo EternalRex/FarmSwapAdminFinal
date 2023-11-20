@@ -342,29 +342,55 @@ class _SignInAdminState extends State<SignInAdmin> {
     try {
       User? user = await adminAuth.signInWithEmailAndPassword(email, password);
 
+      // Check if the user is an admin
+      bool isAdmin = await checkIfAdmin(email);
+
       if (user != null) {
         // Get the document ID
         String documentID = await RetrieveDocId().getDocsId();
 
-        // Check the account status in the "AdminUsers" collection
-        String accountStatus = await checkAccountStatus(documentID);
+        if (isAdmin) {
+          // Check the account status in the "AdminUsers" collection
+          String accountStatus = await checkAccountStatus(documentID);
 
-        //if the accountstatus is equal to requesting it will navigate to deactivate page
-        if (accountStatus == "Requesting") {
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
-        } else if (accountStatus == "Deactivate") {
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
-        } else if (accountStatus == "Decline") {
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(RoutesManager.deactivateaccountpage);
+          //if the accountstatus is equal to requesting it will navigate to deactivate page
+          if (accountStatus == "Requesting") {
+            // ignore: use_build_context_synchronously
+            Navigator.of(context)
+                .pushNamed(RoutesManager.deactivateaccountpage);
+          } else if (accountStatus == "Deactivate") {
+            // ignore: use_build_context_synchronously
+            Navigator.of(context)
+                .pushNamed(RoutesManager.deactivateaccountpage);
+          } else if (accountStatus == "Decline") {
+            // ignore: use_build_context_synchronously
+            Navigator.of(context)
+                .pushNamed(RoutesManager.deactivateaccountpage);
+          } else {
+            // Update online status and navigate to the dashboard
+            onlineStatus.updateOnlineStatus(user.uid, true);
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pushNamed(RoutesManager.dashboard);
+          }
         } else {
-          // Update online status and navigate to the dashboard
-          onlineStatus.updateOnlineStatus(user.uid, true);
+          // Admin user not found in the collection
           // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(RoutesManager.dashboard);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Admin User Not Found!'),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
+      } else {
+        // User not found or email/password is invalid
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Log In Failed! Email or password is invalid.'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
 
@@ -373,6 +399,14 @@ class _SignInAdminState extends State<SignInAdmin> {
      * so mo show siya ug dialog box na archived account
      */
     catch (e) {
+      // Handle errors
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
       // Get the document ID
       String documentID = await RetrieveDocIdArchived().getDocsId();
       // Check the account status in the "AdminArchivedUsers" collection
@@ -401,6 +435,17 @@ class _SignInAdminState extends State<SignInAdmin> {
       }
       throw ("Some error happened in log in");
     }
+  }
+
+  // Function to check if the user is an admin
+  Future<bool> checkIfAdmin(String email) async {
+    // Query the "AdminUsers" collection for the user with the given email
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .where('Email Address', isEqualTo: email)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
   }
 
   /*
