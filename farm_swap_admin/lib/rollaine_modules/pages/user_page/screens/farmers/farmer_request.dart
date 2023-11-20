@@ -179,6 +179,7 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                         width: 250,
                         height: 15,
                         child: TextField(
+                          controller: searchFarmerController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
@@ -196,6 +197,11 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                             prefixIcon: const Icon(Icons.search_rounded),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
+                          onSubmitted: (value) {
+                            setState(() {
+                              farmerSearchValue = searchFarmerController.text;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -314,35 +320,36 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
           .collection('sample_FarmerUsers')
+          .where('accountStatus', isEqualTo: 'Requesting')
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
-        //It ensures that the stream is active and data is available.
-        if (snapshot.connectionState == ConnectionState.active) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 15),
-            //displaying a scrollable list of items.
-            child: ListView(
-              /*We are getting all the list of documents in the firebase, and each document like one
-              by one, the documents will passed to the _buildUserListItems */
-              children: snapshot.data!.docs
-                  .where((document) {
-                    // Filter documents where accountStatus is 'REQUESTING'.
-                    return document['accountStatus'] == 'Requesting';
-                  })
-                  .map<Widget>((document) => _buildFarmerListItems(document))
-                  .toList(),
-            ),
-          );
-        } else {
-          //This is a loading indicator that informs the user that data is being fetched.
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: SizedBox(
               height: 20,
               width: 20,
               child: CircularProgressIndicator(
-                color: Color(0xFF14BE77),
+                color: Color(0xFF15be77),
               ),
+            ),
+          ); // Display a loading indicator while waiting for data.
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          final logs = snapshot.data!.docs;
+
+          if (logs.isEmpty) {
+            return const Center(
+              child: Text('No farmer reactivation request available for now!'),
+            );
+          }
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListView(
+              children: snapshot.data!.docs.map<Widget>((document) {
+                return _buildFarmerListItems(document);
+              }).toList(),
             ),
           );
         }
@@ -357,10 +364,16 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
 
     //checks if a searchValue variable is not empty
     if (farmerSearchValue.isNotEmpty) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = farmerSearchValue.toLowerCase();
       //checks whether the searchValue matches any of the farmer's attributes
-      if (farmers['firstname'] == farmerSearchValue ||
-          farmers['lastname'] == farmerSearchValue ||
-          farmers['email'] == farmerSearchValue) {
+      if (farmers['firstname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          farmers['lastname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          farmers['accountStatus'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          farmers['email'].toString().toLowerCase() == searchValueLowerCase) {
         //displaying a single row in a list
         return ListTile(
           title: Container(
@@ -382,15 +395,25 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the consumer
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${farmers['profilePhoto']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: farmers["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
+
                     const SizedBox(
                       width: 8,
                     ),
@@ -625,15 +648,25 @@ class _FarmerRequestPageState extends State<FarmerRequestPage> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the consumer
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${farmers['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: farmers["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
+
                   const SizedBox(
                     width: 8,
                   ),

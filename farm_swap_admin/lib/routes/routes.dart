@@ -6,7 +6,7 @@ import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_swapcoins/swapcoinhistory.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
-import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/consumer_request_wallet.dart';
+import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/consumer_request_wallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/revenue_report/screens/monthly_revenue_page.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/admin_account.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_editprofile/admin_editprofile.dart';
@@ -32,7 +32,9 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/screens/pending
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/user_accounts.dart';
 import 'package:flutter/material.dart';
 import '../clare_modules/pages/admin_signup_page/screens/admin_signup_success_screen/signup_success_screen.dart';
-import '../clare_modules/pages/farmer_wallet_management_balance/wallet_requests_balance.dart';
+import '../clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/screens/getspecific_userId.dart/consumer_getID.dart';
+import '../clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/screens/getspecific_userId.dart/farmer_getID.dart';
+import '../clare_modules/pages/wallet_management_balance/farmer_wallet_requests_balance.dart';
 import '../clare_modules/pages/revenue_report/screens/revenue_report_page.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_account_logs/wrapper/admin_logs_getID.dart';
 import '../karl_modules/pages/admin_account_page/screens/archived_accounts_lists/archived_accounts_list.dart';
@@ -76,6 +78,8 @@ class RoutesManager {
   static const requestwalletpage = "/requestwalletpage";
   static const revenuereport = "/revenuereport";
   static const monthlyrevenue = "/monthlyrevenue";
+  static const specificwalletfarmerdetails = "/specificwalletfarmerdetails";
+  static const specificwalletconsumerdetails = "/specificwalletconsumerdetails";
 
   //rollaine routes
   static const platformPage = '/reportspage';
@@ -312,6 +316,16 @@ class RoutesManager {
       case monthlyrevenue:
         return MaterialPageRoute(
           builder: (context) => MonthlyRevenueReportPage(),
+        );
+
+      case specificwalletfarmerdetails:
+        return MaterialPageRoute(
+          builder: (context) => SpecificWalletFarmerUserID(),
+        );
+
+      case specificwalletconsumerdetails:
+        return MaterialPageRoute(
+          builder: (context) => SpecificWalletConsumerUserID(),
         );
 
       default:

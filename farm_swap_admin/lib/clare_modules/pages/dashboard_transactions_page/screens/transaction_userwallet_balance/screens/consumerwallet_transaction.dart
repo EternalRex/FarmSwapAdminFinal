@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/widgets/update_Balance_Consumer.dart';
-import 'package:farm_swap_admin/clare_modules/pages/farmer_wallet_management_balance/widget/wallet_textfield.dart';
+import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/widget/wallet_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/Specific_walletUser_details_Provider.dart';
 
 // ignore: must_be_immutable
 class ConsumerWalletTabBarView extends StatefulWidget {
@@ -405,7 +409,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: 5,
                       ),
                       IconButton(
                         icon: const Icon(
@@ -619,6 +623,24 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                           color: Colors.red,
                         ),
                       ),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.selectedId = "${data["userId"]}";
+                            });
+                            //assign the widget.selectedId to setAdminUserId
+                            //to bring in other class
+                            Provider.of<SpecificWalletDetailsProvider>(context,
+                                    listen: false)
+                                .setUserId(widget.selectedId);
+                            //this will navigate to specific admin activity page
+                            Navigator.of(context).pushNamed(
+                                RoutesManager.specificwalletconsumerdetails);
+                          },
+                          icon: const Icon(
+                            Icons.info,
+                            color: Colors.green,
+                          )),
                     ],
                   ),
                 ),
@@ -764,7 +786,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                       ),
                     ),
                     const SizedBox(
-                      width: 10,
+                      width: 5,
                     ),
                     IconButton(
                       icon: const Icon(
@@ -973,6 +995,24 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                         color: Colors.red,
                       ),
                     ),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.selectedId = "${data["userId"]}";
+                          });
+                          //assign the widget.selectedId to setAdminUserId
+                          //to bring in other class
+                          Provider.of<SpecificWalletDetailsProvider>(context,
+                                  listen: false)
+                              .setUserId(widget.selectedId);
+                          //this will navigate to specific admin activity page
+                          Navigator.of(context).pushNamed(
+                              RoutesManager.specificwalletconsumerdetails);
+                        },
+                        icon: const Icon(
+                          Icons.info,
+                          color: Colors.green,
+                        )),
                   ],
                 ),
               ),

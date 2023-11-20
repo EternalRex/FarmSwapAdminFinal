@@ -44,13 +44,25 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
 
           //if the profile url is not empty this will display
           if (profileUrl != null && profileUrl.isNotEmpty) {
-            final image = CachedNetworkImageProvider("${data["profileUrl"]}");
-
             return Stack(
               children: [
-                CircleAvatar(
-                  radius: 80,
-                  backgroundImage: image,
+                //this padding holds the profile image of the admin
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: //this will display the users profile picture in each listtile
+                      CachedNetworkImage(
+                    imageUrl: data["profileUrl"] ??
+                        "", // Provide a default empty string if it's null
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      backgroundImage: imageProvider,
+                      radius: 80,
+                    ),
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) {
+                      return const Icon(Icons.error);
+                    },
+                  ),
                 ),
               ],
             );
@@ -130,7 +142,6 @@ class ProfileName extends StatelessWidget {
   Widget build(BuildContext context) {
     CollectionReference reference =
         FirebaseFirestore.instance.collection('AdminUsers');
-    print(documentId);
     return FutureBuilder<DocumentSnapshot>(
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {
@@ -191,7 +202,6 @@ class ProfileRole extends StatelessWidget {
   Widget build(BuildContext context) {
     CollectionReference reference =
         FirebaseFirestore.instance.collection('AdminUsers');
-    print(documentId);
     return FutureBuilder<DocumentSnapshot>(
       future: reference.doc(documentId).get(),
       builder: (context, snapshot) {

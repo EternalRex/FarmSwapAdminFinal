@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../constants/Colors/colors.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
@@ -122,11 +123,7 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                             ),
                             hintText: 'Search here',
                             prefixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  searchValue = searchController.text;
-                                });
-                              },
+                              onPressed: () {},
                               icon: const Icon(
                                 Icons.search,
                                 color: Color(0xFFDA6317),
@@ -134,6 +131,11 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                             ),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
+                          onSubmitted: (value) {
+                            setState(() {
+                              searchValue = searchController.text;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -301,6 +303,13 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
+          final logs = snapshot.data!.docs;
+
+          if (logs.isEmpty) {
+            return const Center(
+              child: Text('No admin reactivation request available for now!'),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             child: ListView(
@@ -318,12 +327,20 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
     /*We are accessing a document that was passed here one by one, and map it into 
     String and dynamic, to look the same in the firebase strcuture */
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    final profileImage = CachedNetworkImageProvider("${data["profileUrl"]}");
+    Timestamp dateTimestamp = document["Registration Date"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal = DateFormat('MMMM d, y').format(dateTime);
 /*Only the specific account searched will display*/
     if (searchValue.isNotEmpty) {
-      if (data["First Name"] == searchValue ||
-          data["Last Name"] == searchValue ||
-          data["Email Address"] == searchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchValue.toLowerCase();
+      if (data["First Name"].toString().toLowerCase() == searchValueLowerCase ||
+          data["Last Name"].toString().toLowerCase() == searchValueLowerCase ||
+          data["Email Address"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(
@@ -350,9 +367,20 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                           //this padding holds the profile image of the admin
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              backgroundImage: profileImage,
-                              radius: 20,
+                            child: //this will display the users profile picture in each listtile
+                                CachedNetworkImage(
+                              imageUrl: data["profileUrl"] ??
+                                  "", // Provide a default empty string if it's null
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                backgroundImage: imageProvider,
+                                radius: 20,
+                              ),
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) {
+                                return const Icon(Icons.error);
+                              },
                             ),
                           ),
 
@@ -627,9 +655,20 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                         //this padding holds the profile image of the admin
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundImage: profileImage,
-                            radius: 20,
+                          child: //this will display the users profile picture in each listtile
+                              CachedNetworkImage(
+                            imageUrl: data["profileUrl"] ??
+                                "", // Provide a default empty string if it's null
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              backgroundImage: imageProvider,
+                              radius: 20,
+                            ),
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) {
+                              return const Icon(Icons.error);
+                            },
                           ),
                         ),
 

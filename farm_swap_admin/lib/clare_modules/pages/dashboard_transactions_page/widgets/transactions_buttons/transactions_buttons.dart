@@ -333,7 +333,8 @@ class __WalletBttnState extends State<WalletBttn> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                Navigator.of(context)
+                    .pushNamed(RoutesManager.requestwalletpage);
               },
               child: Row(
                 children: <Widget>[

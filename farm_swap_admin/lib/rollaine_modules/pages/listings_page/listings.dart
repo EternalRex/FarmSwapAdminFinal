@@ -578,9 +578,13 @@ class _ListingsState extends State<Listings> {
     String farmerUsername = barter["farmerUserName"];
 
     if (searchBarterValue.isNotEmpty) {
-      if (barter["listingName"] == searchBarterValue ||
-          barter["farmerFname"] == searchBarterValue ||
-          barter["farmerLname"] == searchBarterValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchBarterValue.toLowerCase();
+      if (barter["listingName"].toString().toLowerCase() == searchValueLowerCase ||
+          barter["farmerFname"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          barter["farmerLname"].toString().toLowerCase() ==
+              searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(
@@ -891,9 +895,13 @@ class _ListingsState extends State<Listings> {
     String farmerUsername = sell["farmerUserName"];
 
     if (searchSellValue.isNotEmpty) {
-      if (sell["listingName"] == searchSellValue ||
-          sell["farmerFname"] == searchSellValue ||
-          sell["farmerLname"] == searchSellValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchSellValue.toLowerCase();
+      if (sell["listingName"].toString().toLowerCase() == searchValueLowerCase ||
+          sell["farmerFname"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          sell["farmerLname"].toString().toLowerCase() ==
+              searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(

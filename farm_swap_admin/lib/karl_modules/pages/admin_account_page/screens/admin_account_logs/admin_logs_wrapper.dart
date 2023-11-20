@@ -414,13 +414,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                       prefixIcon:
                                                                           IconButton(
                                                                         onPressed:
-                                                                            () {
-                                                                          setState(
-                                                                              () {
-                                                                            searchValue =
-                                                                                searchController.text;
-                                                                          });
-                                                                        },
+                                                                            () {},
                                                                         icon:
                                                                             const Icon(
                                                                           Icons
@@ -433,6 +427,14 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                           const Color(
                                                                               0xFFDA6317),
                                                                     ),
+                                                                    onSubmitted:
+                                                                        (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        searchValue =
+                                                                            searchController.text;
+                                                                      });
+                                                                    },
                                                                   ),
                                                                 ),
                                                               ),
@@ -791,11 +793,18 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
     Timestamp dateTimestamp = document["Activity Date"];
     DateTime dateTime = dateTimestamp.toDate();
     String dateFinal = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal1 = DateFormat('MMMM d, y').format(dateTime);
 /*Only the specific account searched will display*/
     if (searchValue.isNotEmpty) {
-      if (data["Activity Date"] == searchValue ||
-          data["Admin Email"] == searchValue ||
-          data["Admin Activity"] == searchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchValue.toLowerCase();
+      if (data["Admin Email"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          data["Admin Activity"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          dateFinal1.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Row(
             children: [

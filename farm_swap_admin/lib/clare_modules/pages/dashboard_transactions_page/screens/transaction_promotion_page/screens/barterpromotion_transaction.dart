@@ -46,7 +46,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
             child: Row(
               children: [
                 const Text(
-                  'Barter Promotion Status',
+                  'Barter Promotion History',
                   style: TextStyle(
                     color: Color(0xFF09041B),
                     fontSize: 20,
@@ -239,7 +239,6 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
     String dateMonth = DateFormat('MMMM').format(dateTime);
     String timeListTile = DateFormat('hh:mm a').format(dateTime);
     String dateFinal1 = DateFormat('MMMM d, y').format(dateTime1);
-    String timeListTile1 = DateFormat('hh:mm a').format(dateTime1);
 
     //the searched transaction will display here
     if (searchValue.isNotEmpty) {
@@ -251,6 +250,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
           data["address"].toString().toLowerCase() == searchValueLowerCase ||
           dateFinal.toString().toLowerCase() == searchValueLowerCase ||
+          dateFinal1.toString().toLowerCase() == searchValueLowerCase ||
           dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
@@ -621,7 +621,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      " $dateFinal $timeListTile",
+                                      dateFinal,
                                       style: Poppins.adminName.copyWith(
                                         color: const Color(0xFF09041B),
                                         fontSize: 15,
@@ -652,7 +652,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      " $dateFinal1 $timeListTile1",
+                                      dateFinal1,
                                       style: Poppins.adminName.copyWith(
                                         color: const Color(0xFF09041B),
                                         fontSize: 15,
@@ -1261,7 +1261,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    " $dateFinal $timeListTile",
+                                    dateFinal,
                                     style: Poppins.adminName.copyWith(
                                       color: const Color(0xFF09041B),
                                       fontSize: 15,
@@ -1292,7 +1292,7 @@ class _BarterPromotionTabBarViewState extends State<BarterPromotionTabBarView> {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    " $dateFinal1 $timeListTile1",
+                                    dateFinal1,
                                     style: Poppins.adminName.copyWith(
                                       color: const Color(0xFF09041B),
                                       fontSize: 15,

@@ -20,6 +20,7 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -548,13 +549,22 @@ class _UserAccount extends State<UserAccount> {
   Widget _buildFarmerListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
     Map<String, dynamic> farmers = document.data() as Map<String, dynamic>;
+    Timestamp dateTimestamp = document["registrationDate"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal = DateFormat('MMMM d, y').format(dateTime);
 
     //checks if a searchValue variable is not empty
     if (farmerSearchValue.isNotEmpty) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = farmerSearchValue.toLowerCase();
       //checks whether the searchValue matches any of the farmer's attributes
-      if (farmers['firstname'] == farmerSearchValue ||
-          farmers['lastname'] == farmerSearchValue ||
-          farmers['email'] == farmerSearchValue) {
+      if (farmers['firstname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          farmers['lastname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase) {
         //displaying a single row in a list
         return ListTile(
           title: Container(
@@ -576,13 +586,22 @@ class _UserAccount extends State<UserAccount> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the customer
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${farmers['profilePhoto']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: farmers["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -699,13 +718,22 @@ class _UserAccount extends State<UserAccount> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the customer
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${farmers['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: farmers["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -849,13 +877,25 @@ class _UserAccount extends State<UserAccount> {
   Widget _buildCustomerListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
     Map<String, dynamic> customer = document.data() as Map<String, dynamic>;
+    Timestamp dateTimestamp = document["registrationDate"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal = DateFormat('MMMM d, y').format(dateTime);
 
     //checks if a searchValue variable is not empty
     if (customerSearchValue.isNotEmpty) {
-      //checks whether the searchValue matches any of the farmer's attributes
-      if (customer['firstname'] == customerSearchValue ||
-          customer['lastname'] == customerSearchValue ||
-          customer['email'] == customerSearchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = customerSearchValue.toLowerCase();
+      //checks whether the searchValue matches any of the customer's attributes
+      if (customer['firstname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['lastname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['accountStatus'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['email'].toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase) {
         //displaying a single row in a list
         return ListTile(
           title: Container(
@@ -877,15 +917,25 @@ class _UserAccount extends State<UserAccount> {
                 //Row where the profile, first name, last name, and details
                 Row(
                   children: [
+                    //this padding holds the profile image of the customer
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      //profile of farmer
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                            '${customer['profilePhoto']}'),
-                        radius: 20,
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: customer["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
                       ),
                     ),
+
                     const SizedBox(
                       width: 8,
                     ),
@@ -1000,15 +1050,25 @@ class _UserAccount extends State<UserAccount> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the customer
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${customer['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: customer["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
+
                   const SizedBox(
                     width: 8,
                   ),

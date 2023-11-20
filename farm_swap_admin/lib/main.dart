@@ -9,6 +9,7 @@ import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
+import "clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/provider/Specific_walletUser_details_Provider.dart";
 import "karl_modules/pages/admin_account_page/screens/admin_account_logs/provider/adminlogs_provider.dart";
 import 'karl_modules/pages/admin_account_page/screens/admin_user_details/provider/SpecificAdmin_Provider.dart';
 
@@ -68,6 +69,9 @@ class MyApp extends StatelessWidget {
         /*Registering provider  for notification incrementer*/
         ChangeNotifierProvider(
           create: (context) => AdminNotificationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SpecificWalletDetailsProvider(),
         ),
       ],
       builder: (context, child) {

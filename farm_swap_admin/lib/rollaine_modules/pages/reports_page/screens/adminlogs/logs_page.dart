@@ -457,13 +457,21 @@ class _AdminLogs extends State<AdminLogs> {
   Widget _buildAdminListItems(DocumentSnapshot document) {
     //specifies that the data should be treated as a map with string keys and dynamic values.
     Map<String, dynamic> admin = document.data() as Map<String, dynamic>;
+    Timestamp dateTimestamp = document["Activity Date"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal1 = DateFormat('MMMM d, y').format(dateTime);
 
     //checks if a searchValue variable is not empty
     if (adminSearchValue.isNotEmpty) {
-      //checks whether the searchValue matches any of the farmer's attributes
-      if (admin['Admin Email'] == adminSearchValue ||
-          admin['Admin Activity'] == adminSearchValue ||
-          admin['Activity Date'] == adminSearchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = adminSearchValue.toLowerCase();
+      if (admin["Admin Email"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          admin["Admin Activity"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          dateFinal1.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         //Extracts a timestamp called 'Activity Date' from the document.
         Timestamp dateTimestamp = document['Activity Date'];
 

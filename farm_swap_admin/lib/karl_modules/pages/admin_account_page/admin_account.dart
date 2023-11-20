@@ -8,6 +8,7 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/Colors/colors.dart';
 import '../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
@@ -19,7 +20,6 @@ import '../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.da
 import 'screens/admin_account_logs/provider/adminlogs_provider.dart';
 import 'screens/admin_user_details/drop_down_update/update_retrieve_docID.dart';
 import 'screens/admin_user_details/provider/admin_details_provider.dart';
-import 'widgets/archived_button.dart';
 
 // ignore: must_be_immutable
 class AdminAccount extends StatefulWidget {
@@ -112,11 +112,7 @@ class _AdminAccount extends State<AdminAccount> {
                             ),
                             hintText: 'Search here',
                             prefixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  searchValue = searchController.text;
-                                });
-                              },
+                              onPressed: () {},
                               icon: const Icon(
                                 Icons.search,
                                 color: Color(0xFFDA6317),
@@ -124,6 +120,11 @@ class _AdminAccount extends State<AdminAccount> {
                             ),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
+                          onSubmitted: (value) {
+                            setState(() {
+                              searchValue = searchController.text;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -364,10 +365,6 @@ class _AdminAccount extends State<AdminAccount> {
                     ),
                     /*ADMIN RECENT ACTIVITIES BUTTON */
                     AdminRecentActivitiesBtn(),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const ArchivedAccountOptionsBtn(),
                   ],
                 ),
               ),
@@ -385,8 +382,8 @@ class _AdminAccount extends State<AdminAccount> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: SizedBox(
-              height: 50,
-              width: 50,
+              height: 20,
+              width: 20,
               child: CircularProgressIndicator(
                 color: Color(0xFF15be77),
               ),
@@ -395,10 +392,35 @@ class _AdminAccount extends State<AdminAccount> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
+          final logs = snapshot.data!.docs;
+
+          if (logs.isEmpty) {
+            return const Center(
+              child: Text('No farmer wallet request available!'),
+            );
+          }
+
+          // This will sort the documents based on the 'dateTime' field
+          logs.sort((a, b) {
+            var dateTimeA = a['Registration Date'];
+            var dateTimeB = b['Registration Date'];
+
+            //This will check if the Registration Date field is a Timestamp and convert to DateTime
+            if (dateTimeA is Timestamp) {
+              dateTimeA = dateTimeA.toDate();
+            }
+
+            if (dateTimeB is Timestamp) {
+              dateTimeB = dateTimeB.toDate();
+            }
+            // this will perform the descending order base on the date and its time
+            return (dateTimeB as DateTime).compareTo(dateTimeA as DateTime);
+          });
+
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             child: ListView(
-              children: snapshot.data!.docs.map<Widget>((document) {
+              children: logs.map<Widget>((document) {
                 return _buildUserListItems(document);
               }).toList(),
             ),
@@ -412,12 +434,21 @@ class _AdminAccount extends State<AdminAccount> {
     /*We are accessing a document that was passed here one by one, and map it into 
     String and dynamic, to look the same in the firebase strcuture */
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    final profileImage = CachedNetworkImageProvider("${data["profileUrl"]}");
+    Timestamp dateTimestamp = document["Registration Date"];
+    DateTime dateTime = dateTimestamp.toDate();
+    String dateMonth = DateFormat('MMMM').format(dateTime);
+    String dateFinal = DateFormat('MMMM d, y').format(dateTime);
+
+    // Convert search value to lowercase
+    String searchValueLowerCase = searchValue.toLowerCase();
 /*Only the specific account searched will display*/
     if (searchValue.isNotEmpty) {
-      if (data["First Name"] == searchValue ||
-          data["Last Name"] == searchValue ||
-          data["Email Address"] == searchValue) {
+      if (data["First Name"].toString().toLowerCase() == searchValueLowerCase ||
+          data["Last Name"].toString().toLowerCase() == searchValueLowerCase ||
+          data["Email Address"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          dateFinal.toString().toLowerCase() == searchValueLowerCase ||
+          dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(
@@ -443,10 +474,21 @@ class _AdminAccount extends State<AdminAccount> {
                         children: [
                           //this padding holds the profile image of the admin
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              backgroundImage: profileImage,
-                              radius: 20,
+                            padding: const EdgeInsets.all(5.0),
+                            child: //this will display the users profile picture in each listtile
+                                CachedNetworkImage(
+                              imageUrl: data["profileUrl"] ??
+                                  "", // Provide a default empty string if it's null
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                backgroundImage: imageProvider,
+                                radius: 20,
+                              ),
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) {
+                                return const Icon(Icons.error);
+                              },
                             ),
                           ),
 
@@ -755,10 +797,21 @@ class _AdminAccount extends State<AdminAccount> {
                       children: [
                         //this padding holds the profile image of the admin
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundImage: profileImage,
-                            radius: 20,
+                          padding: const EdgeInsets.all(5.0),
+                          child: //this will display the users profile picture in each listtile
+                              CachedNetworkImage(
+                            imageUrl: data["profileUrl"] ??
+                                "", // Provide a default empty string if it's null
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              backgroundImage: imageProvider,
+                              radius: 20,
+                            ),
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) {
+                              return const Icon(Icons.error);
+                            },
                           ),
                         ),
 
@@ -801,6 +854,7 @@ class _AdminAccount extends State<AdminAccount> {
                   const SizedBox(
                     width: 240,
                   ),
+                  //sizedbox for the activity button of admin user
                   SizedBox(
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),

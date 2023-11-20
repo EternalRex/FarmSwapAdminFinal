@@ -110,9 +110,14 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
     bool isOnline = users["Online"];
 /*Only the specific account searched will display*/
     if (searchValue.isNotEmpty) {
-      if (users["First Name"] == searchValue ||
-          users["Last Name"] == searchValue ||
-          users["Email Address"] == searchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchValue.toLowerCase();
+
+      if (users["First Name"].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          users["Last Name"].toString().toLowerCase() == searchValueLowerCase ||
+          users["Email Address"].toString().toLowerCase() ==
+              searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(
@@ -132,7 +137,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider("${users["profileUrl"]}"),
+                  backgroundImage:
+                      CachedNetworkImageProvider("${users["profileUrl"]}"),
                   radius: 30,
                 ),
                 const SizedBox(
@@ -140,7 +146,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                 ),
                 SizedBox(
                   width: 100,
-                  child: ChatAllDisplayUserTexts(text: "${users["First Name"]}"),
+                  child:
+                      ChatAllDisplayUserTexts(text: "${users["First Name"]}"),
                 ),
                 const SizedBox(
                   width: 5,
@@ -154,7 +161,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                 ),
                 SizedBox(
                   width: 250,
-                  child: ChatAllDisplayUserTexts(text: "${users["Email Address"]}"),
+                  child: ChatAllDisplayUserTexts(
+                      text: "${users["Email Address"]}"),
                 ),
                 const SizedBox(
                   width: 30,
@@ -202,7 +210,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
     }
     /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
     because we will not display the current user here only those other users*/
-    else if (FirebaseAuth.instance.currentUser!.email != users['Email Address']) {
+    else if (FirebaseAuth.instance.currentUser!.email !=
+        users['Email Address']) {
       /*The actual display and styling is done here inside the listile */
       return ListTile(
         /*Pull outing the data from the firestore document and designing how it will look in the ui*/
@@ -224,7 +233,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider("${users["profileUrl"]}"),
+                backgroundImage:
+                    CachedNetworkImageProvider("${users["profileUrl"]}"),
                 radius: 30,
               ),
               const SizedBox(
@@ -246,7 +256,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
               ),
               SizedBox(
                 width: 250,
-                child: ChatAllDisplayUserTexts(text: "${users["Email Address"]}"),
+                child:
+                    ChatAllDisplayUserTexts(text: "${users["Email Address"]}"),
               ),
               const SizedBox(
                 width: 30,

@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/provider/Specific_walletUser_details_Provider.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import '../../../../farmer_wallet_management_balance/widget/wallet_textfield.dart';
+import 'package:provider/provider.dart';
+import '../../../../wallet_management_balance/widget/wallet_textfield.dart';
 import '../widgets/update_Balance_Farmer.dart';
 
 // ignore: must_be_immutable
@@ -404,13 +407,14 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: 5,
                       ),
+                      //icon button for adding a balance to the wallet
                       IconButton(
                         icon: const Icon(
                           Icons.add_circle,
                           size: 20,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                         onPressed: () {
                           setState(() {
@@ -497,6 +501,7 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                               });
                         },
                       ),
+                      //icon button for deducting a balance to the wallet
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -618,6 +623,25 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                           color: Colors.red,
                         ),
                       ),
+                      //icon button for details of specific user wallet
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.selectedId = "${data["userId"]}";
+                            });
+                            //assign the widget.selectedId to setAdminUserId
+                            //to bring in other class
+                            Provider.of<SpecificWalletDetailsProvider>(context,
+                                    listen: false)
+                                .setUserId(widget.selectedId);
+                            //this will navigate to specific admin activity page
+                            Navigator.of(context).pushNamed(
+                                RoutesManager.specificwalletfarmerdetails);
+                          },
+                          icon: const Icon(
+                            Icons.info,
+                            color: Colors.green,
+                          )),
                     ],
                   ),
                 ),
@@ -763,13 +787,14 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                       ),
                     ),
                     const SizedBox(
-                      width: 10,
+                      width: 5,
                     ),
+                    //icon button for adding a balance to the wallet
                     IconButton(
                       icon: const Icon(
                         Icons.add_circle,
                         size: 20,
-                        color: Colors.green,
+                        color: Colors.blue,
                       ),
                       onPressed: () {
                         setState(() {
@@ -854,6 +879,7 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                             });
                       },
                     ),
+                    //icon button for deducting a balance to the wallet
                     IconButton(
                       onPressed: () {
                         setState(() {
@@ -972,6 +998,25 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                         color: Colors.red,
                       ),
                     ),
+                    //icon button for details of specific user wallet
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.selectedId = "${data["userId"]}";
+                          });
+                          //assign the widget.selectedId to setAdminUserId
+                          //to bring in other class
+                          Provider.of<SpecificWalletDetailsProvider>(context,
+                                  listen: false)
+                              .setUserId(widget.selectedId);
+                          //this will navigate to specific admin activity page
+                          Navigator.of(context).pushNamed(
+                              RoutesManager.specificwalletfarmerdetails);
+                        },
+                        icon: const Icon(
+                          Icons.info,
+                          color: Colors.green,
+                        )),
                   ],
                 ),
               ),

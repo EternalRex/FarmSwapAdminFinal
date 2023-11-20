@@ -24,7 +24,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
 
@@ -149,7 +148,8 @@ class _NumberUsers extends State<NumberUsers> {
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  actions: [
+
+                  /*actions: [
                     Padding(
                       padding: const EdgeInsets.all(10),
 
@@ -179,6 +179,7 @@ class _NumberUsers extends State<NumberUsers> {
                       ),
                     ),
                   ],
+                */
                 ),
                 body: Row(
                   children: [

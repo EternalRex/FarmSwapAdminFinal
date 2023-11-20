@@ -184,6 +184,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                         width: 250,
                         height: 15,
                         child: TextField(
+                          controller: searchCustomerController,
                           style: GoogleFonts.poppins(
                               color: const Color(0xFFDA6317), height: 1.5),
                           decoration: InputDecoration(
@@ -201,6 +202,12 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                             prefixIcon: const Icon(Icons.search_rounded),
                             prefixIconColor: const Color(0xFFDA6317),
                           ),
+                          onSubmitted: (value) {
+                            setState(() {
+                              customerSearchValue =
+                                  searchCustomerController.text;
+                            });
+                          },
                         ),
                       ),
                     ),
@@ -326,35 +333,37 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
           .collection('sample_ConsumerUsers')
+          .where('accountStatus', isEqualTo: 'REQUESTING')
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
-        //It ensures that the stream is active and data is available.
-        if (snapshot.connectionState == ConnectionState.active) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 15),
-            //displaying a scrollable list of items.
-            child: ListView(
-              /* We are getting all the list of documents in the Firebase, and each document one by one.
-           The documents will be passed to the _buildRequestListItems */
-              children: snapshot.data!.docs
-                  .where((document) {
-                    // Filter documents where accountStatus is 'REQUESTING'.
-                    return document['accountStatus'] == 'REQUESTING';
-                  })
-                  .map<Widget>((document) => _buildRequestListItems(document))
-                  .toList(),
-            ),
-          );
-        } else {
-          //This is a loading indicator that informs the user that data is being fetched.
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: SizedBox(
               height: 20,
               width: 20,
               child: CircularProgressIndicator(
-                color: Color(0xFF14BE77),
+                color: Color(0xFF15be77),
               ),
+            ),
+          ); // Display a loading indicator while waiting for data.
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          final logs = snapshot.data!.docs;
+
+          if (logs.isEmpty) {
+            return const Center(
+              child:
+                  Text('No consumer reactivation request available for now!'),
+            );
+          }
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListView(
+              children: snapshot.data!.docs.map<Widget>((document) {
+                return _buildRequestListItems(document);
+              }).toList(),
             ),
           );
         }
@@ -369,12 +378,273 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
 
     //checks if a searchValue variable is not empty
     if (customerSearchValue.isNotEmpty) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = customerSearchValue.toLowerCase();
       //checks whether the searchValue matches any of the farmer's attributes
-      if (customer['firstname'] == customerSearchValue ||
-          customer['lastname'] == customerSearchValue ||
-          customer['email'] == customerSearchValue) {
+      if (customer['firstname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['lastname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['accountStatus'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          customer['email'].toString().toLowerCase() == searchValueLowerCase) {
         //displaying a single row in a list
         return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: shadow,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                //Row where the profile, first name, last name, and details
+                Row(
+                  children: [
+                    //this padding holds the profile image of the consumer
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: //this will display the users profile picture in each listtile
+                          CachedNetworkImage(
+                        imageUrl: customer["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    //First name of farmer
+                    Text(
+                      "${customer["firstname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    //Last name of farmer
+                    Text(
+                      "${customer["lastname"]}",
+                      style: Poppins.farmerName.copyWith(
+                        color: const Color(0xFF09051B),
+                      ),
+                    ),
+                    //Status
+                    const SizedBox(
+                      width: 458,
+                    ),
+                    //Button for details where you will be redirected to farmer details
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          SizedBox(
+                            height: 27,
+                            width: 60,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 255, 196, 0),
+                                    Color.fromARGB(255, 255, 153, 0),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'REQUESTING',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Accept button
+                    const SizedBox(
+                      width: 66,
+                    ),
+                    //Button for details where you will be redirected to farmer details
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF53E78B),
+                                  Color(0xFF14BE77),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(17.50),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () async {
+                                //Update the state of the widget with the selected user's ID
+                                setState(() {
+                                  widget.selectedId = "${document["userId"]}";
+                                });
+
+                                //Uses the Provider package to set the user ID in a state management provider
+                                Provider.of<CustomerUserIdProvider>(context,
+                                        listen: false)
+                                    .setcustomerUserId(widget.selectedId);
+
+                                await updateField('ACTIVE', widget.selectedId);
+
+                                //Navigates to a different screen
+                                // ignore: use_build_context_synchronously
+                                Navigator.of(context)
+                                    .pushNamed(RoutesManager.userAccountPage);
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Accept',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Decline button
+                    const SizedBox(width: 10),
+                    //Button for details where you will be redirected to farmer details
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Details button
+                          DecoratedBox(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF53E78B),
+                                  Color(0xFF14BE77),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(17.50),
+                              ),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                disabledForegroundColor:
+                                    Colors.transparent.withOpacity(0.38),
+                                disabledBackgroundColor:
+                                    Colors.transparent.withOpacity(0.12),
+                                shadowColor: Colors.transparent,
+                              ),
+                              onPressed: () async {
+                                //Update the state of the widget with the selected user's ID
+                                setState(() {
+                                  widget.selectedId = "${customer["userId"]}";
+                                });
+
+                                //Uses the Provider package to set the user ID in a state management provider
+                                Provider.of<CustomerUserIdProvider>(context,
+                                        listen: false)
+                                    .setcustomerUserId(widget.selectedId);
+
+                                //Navigates to a different screen
+                                Navigator.of(context).pushNamed(
+                                    RoutesManager.detailsCustomerPage);
+
+                                await updateField2(
+                                    'DEACTIVATED', widget.selectedId);
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                  'Decline',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
+    else if (FirebaseAuth.instance.currentUser!.email != customer['email']) {
+      return ListTile(
         title: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -394,13 +664,22 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
               //Row where the profile, first name, last name, and details
               Row(
                 children: [
+                  //this padding holds the profile image of the consumer
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${customer['profilePhoto']}'),
-                      radius: 20,
+                    child: //this will display the users profile picture in each listtile
+                        CachedNetworkImage(
+                      imageUrl: customer["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                      ),
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -587,249 +866,8 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                               Navigator.of(context)
                                   .pushNamed(RoutesManager.detailsCustomerPage);
 
-                              await updateField2('DEACTIVATED', widget.selectedId);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'Decline',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-      }
-    }
-    //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
-    else if (FirebaseAuth.instance.currentUser!.email != customer['email']) {
-      return ListTile(
-        title: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: shadow,
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              //Row where the profile, first name, last name, and details
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    //profile of farmer
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          '${customer['profilePhoto']}'),
-                      radius: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  //First name of farmer
-                  Text(
-                    "${customer["firstname"]}",
-                    style: Poppins.farmerName.copyWith(
-                      color: const Color(0xFF09051B),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 3,
-                  ),
-                  //Last name of farmer
-                  Text(
-                    "${customer["lastname"]}",
-                    style: Poppins.farmerName.copyWith(
-                      color: const Color(0xFF09051B),
-                    ),
-                  ),
-                  //Status
-                  const SizedBox(
-                    width: 458,
-                  ),
-                  //Button for details where you will be redirected to farmer details
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        //Details button
-                        SizedBox(
-                          height: 27,
-                          width: 60,
-                          child: DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color.fromARGB(255, 255, 196, 0),
-                                  Color.fromARGB(255, 255, 153, 0),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'REQUESTING',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //Accept button
-                  const SizedBox(
-                    width: 66,
-                  ),
-                  //Button for details where you will be redirected to farmer details
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        //Details button
-                        DecoratedBox(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFF53E78B),
-                                Color(0xFF14BE77),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(17.50),
-                            ),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              disabledForegroundColor:
-                                  Colors.transparent.withOpacity(0.38),
-                              disabledBackgroundColor:
-                                  Colors.transparent.withOpacity(0.12),
-                              shadowColor: Colors.transparent,
-                            ),
-                            onPressed: () async {
-                              //Update the state of the widget with the selected user's ID
-                              setState(() {
-                                widget.selectedId = "${document["userId"]}";
-                              });
-
-                              //Uses the Provider package to set the user ID in a state management provider
-                              Provider.of<CustomerUserIdProvider>(context,
-                                      listen: false)
-                                  .setcustomerUserId(widget.selectedId);
-
-                              await updateField('ACTIVE', widget.selectedId);
-
-                              //Navigates to a different screen
-                              // ignore: use_build_context_synchronously
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.userAccountPage);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                'Accept',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //Decline button
-                  const SizedBox(width: 10),
-                  //Button for details where you will be redirected to farmer details
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        //Details button
-                        DecoratedBox(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFF53E78B),
-                                Color(0xFF14BE77),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(17.50),
-                            ),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              disabledForegroundColor:
-                                  Colors.transparent.withOpacity(0.38),
-                              disabledBackgroundColor:
-                                  Colors.transparent.withOpacity(0.12),
-                              shadowColor: Colors.transparent,
-                            ),
-                            onPressed: () async {
-                              //Update the state of the widget with the selected user's ID
-                              setState(() {
-                                widget.selectedId = "${customer["userId"]}";
-                              });
-
-                              //Uses the Provider package to set the user ID in a state management provider
-                              Provider.of<CustomerUserIdProvider>(context,
-                                      listen: false)
-                                  .setcustomerUserId(widget.selectedId);
-
-                              //Navigates to a different screen
-                              Navigator.of(context)
-                                  .pushNamed(RoutesManager.detailsFarmerPage);
-
-                              await updateField2('DEACTIVATED', widget.selectedId);
+                              await updateField2(
+                                  'DEACTIVATED', widget.selectedId);
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 5, bottom: 5),

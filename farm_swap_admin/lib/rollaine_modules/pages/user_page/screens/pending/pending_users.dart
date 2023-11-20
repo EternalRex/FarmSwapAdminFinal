@@ -271,18 +271,38 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                             //Row where the profile, first name, last name, and details
                                                             Row(
                                                               children: [
+                                                                //this padding holds the profile image of the customer
                                                                 Padding(
                                                                   padding:
                                                                       const EdgeInsets
                                                                           .all(
                                                                           5.0),
-                                                                  //profile of farmer
-                                                                  child:
-                                                                      CircleAvatar(
-                                                                    backgroundImage:
-                                                                        CachedNetworkImageProvider(
-                                                                            '${farmers['profilePhoto']}'),
-                                                                    radius: 20,
+                                                                  child: //this will display the users profile picture in each listtile
+                                                                      CachedNetworkImage(
+                                                                    imageUrl: farmers[
+                                                                            "profilePhoto"] ??
+                                                                        "", // Provide a default empty string if it's null
+                                                                    imageBuilder:
+                                                                        (context,
+                                                                                imageProvider) =>
+                                                                            CircleAvatar(
+                                                                      backgroundImage:
+                                                                          imageProvider,
+                                                                      radius:
+                                                                          20,
+                                                                    ),
+                                                                    placeholder:
+                                                                        (context,
+                                                                                url) =>
+                                                                            const CircularProgressIndicator(),
+                                                                    errorWidget:
+                                                                        (context,
+                                                                            url,
+                                                                            error) {
+                                                                      return const Icon(
+                                                                          Icons
+                                                                              .error);
+                                                                    },
                                                                   ),
                                                                 ),
                                                                 const SizedBox(
@@ -543,17 +563,33 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                                 //Row where the profile, first name, last name, and details
                                                                 Row(
                                                                   children: [
+                                                                    //this padding holds the profile image of the customer
                                                                     Padding(
                                                                       padding: const EdgeInsets
                                                                           .all(
                                                                           5.0),
-                                                                      //profile of farmer
-                                                                      child:
-                                                                          CircleAvatar(
-                                                                        backgroundImage:
-                                                                            CachedNetworkImageProvider('${consumer['profilePhoto']}'),
-                                                                        radius:
-                                                                            20,
+                                                                      child: //this will display the users profile picture in each listtile
+                                                                          CachedNetworkImage(
+                                                                        imageUrl:
+                                                                            consumer["profilePhoto"] ??
+                                                                                "", // Provide a default empty string if it's null
+                                                                        imageBuilder:
+                                                                            (context, imageProvider) =>
+                                                                                CircleAvatar(
+                                                                          backgroundImage:
+                                                                              imageProvider,
+                                                                          radius:
+                                                                              20,
+                                                                        ),
+                                                                        placeholder:
+                                                                            (context, url) =>
+                                                                                const CircularProgressIndicator(),
+                                                                        errorWidget: (context,
+                                                                            url,
+                                                                            error) {
+                                                                          return const Icon(
+                                                                              Icons.error);
+                                                                        },
                                                                       ),
                                                                     ),
                                                                     const SizedBox(

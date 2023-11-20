@@ -10,6 +10,8 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../constants/typography/typography.dart';
+
 class SwapCoinHistory extends StatefulWidget {
   const SwapCoinHistory({super.key, this.documentID});
   final String? documentID;
@@ -206,7 +208,8 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                               ),
                               //this will display the header
                               Padding(
-                                padding: const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 15, right: 15, bottom: 10),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: greenLight,
@@ -254,7 +257,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                                         Expanded(
                                           flex: 2,
                                           child: Text(
-                                            "SwapCoins",
+                                            "Status",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
@@ -459,7 +462,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('sample_SwapCoinsLogs')
-          .where('status', isEqualTo: 'COMPLETED')
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -520,6 +522,9 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
     String dateFinal = DateFormat('MMMM d, y').format(dateTime);
     String timeListTile = DateFormat('hh:mm a').format(dateTime);
 
+    //creating variable para sa status, if ang status kay failed naay reason mugawas
+    String statusType = data["status"];
+
     //the searched transaction will display here
     if (searchValue.isNotEmpty) {
       // Convert search value to lowercase
@@ -529,6 +534,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
           data["firstname"].toString().toLowerCase() == searchValueLowerCase ||
           data["lastname"].toString().toLowerCase() == searchValueLowerCase ||
           data["address"].toString().toLowerCase() == searchValueLowerCase ||
+          data["status"].toString().toLowerCase() == searchValueLowerCase ||
           dateFinal.toString().toLowerCase() == searchValueLowerCase ||
           dateMonth.toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
@@ -558,6 +564,8 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                       const SizedBox(
                         width: 30,
                       ),
+
+                      //this will display the users profile picture in each listtile
                       CachedNetworkImage(
                         imageUrl: data["profile"] ??
                             "", // Provide a default empty string if it's null
@@ -658,18 +666,351 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                     ],
                   ),
                 ),
+
                 //this holds the swapcoins amount purchased
                 Expanded(
                   flex: 2,
-                  child: Text(
-                    "${data["swapcoins"]}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.normal,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${data["status"]}",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Container(
+                                      height: 50,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                          5,
+                                        )),
+                                        shadows: const [
+                                          BoxShadow(
+                                            color: Color(0x21000000),
+                                            blurRadius: 10,
+                                            offset: Offset(3, 2),
+                                            spreadRadius: 0,
+                                          )
+                                        ],
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'Transaction Details',
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 20,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w900,
+                                            letterSpacing: 0.50,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    content: SizedBox(
+                                      height: 230,
+                                      child: Column(
+                                        children: [
+                                          //row for transaction date
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Date : ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "$dateFinal $timeListTile",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          //row for status
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Status : ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${data["status"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          //row for user uid
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "User ID: ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${data["userId"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "User : ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${data["userRole"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+
+                                          //row for first and last name
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Name: ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "${data["firstname"]} " +
+                                                      "${data["lastname"]} ",
+                                                  style: Poppins.adminName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          //row for address
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Address: ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "${data["address"]} ",
+                                                  style: Poppins.adminName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          //row for amount
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Swap coins : ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "${data["swapcoins"]} ",
+                                                  style: Poppins.adminName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+
+                                          //if the status is failed therefore this row will display kauban sa uban na row
+                                          if (statusType == "FAILED")
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  "Reason: ",
+                                                  style: Poppins.adminName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    "Insufficient Balance.",
+                                                    style: Poppins.adminName
+                                                        .copyWith(
+                                                      color: const Color(
+                                                          0xFF09041B),
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text("Close"),
+                                        onPressed: () async {
+                                          Navigator.of(context)
+                                              .pop(); // Close the AlertDialog
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          icon: const Icon(
+                            Icons.info,
+                            color: Colors.green,
+                          )),
+                    ],
                   ),
                 ),
               ],
@@ -810,18 +1151,326 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                   ],
                 ),
               ),
-              //this holds the swapcoins amount purchased
+
+              //this holds the status purchased
               Expanded(
                 flex: 2,
-                child: Text(
-                  "${data["swapcoins"]}",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${data["status"]}",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Container(
+                                    height: 50,
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                        5,
+                                      )),
+                                      shadows: const [
+                                        BoxShadow(
+                                          color: Color(0x21000000),
+                                          blurRadius: 10,
+                                          offset: Offset(3, 2),
+                                          spreadRadius: 0,
+                                        )
+                                      ],
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'Transaction Details',
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 20,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 0.50,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  content: SizedBox(
+                                    height: 230,
+                                    child: Column(
+                                      children: [
+                                        //row for transaction date
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Date : ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "$dateFinal $timeListTile",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        //row for status
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Status : ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${data["status"]} ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        //row for user uid
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "User ID: ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${data["userId"]} ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "User : ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${data["userRole"]} ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+
+                                        //row for first and last name
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Name: ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                "${data["firstname"]} " +
+                                                    "${data["lastname"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        //row for address
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Address: ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                "${data["address"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        //row for amount
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Swap coins : ",
+                                              style: Poppins.adminName.copyWith(
+                                                color: const Color(0xFF09041B),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                "${data["swapcoins"]} ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+
+                                        //if the status is failed therefore this row will display kauban sa uban na row
+                                        if (statusType == "FAILED")
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "Reason: ",
+                                                style:
+                                                    Poppins.adminName.copyWith(
+                                                  color:
+                                                      const Color(0xFF09041B),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "Insufficient Balance.",
+                                                  style: Poppins.adminName
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09041B),
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text("Close"),
+                                      onPressed: () async {
+                                        Navigator.of(context)
+                                            .pop(); // Close the AlertDialog
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        icon: const Icon(
+                          Icons.info,
+                          color: Colors.green,
+                        )),
+                  ],
                 ),
               ),
             ],

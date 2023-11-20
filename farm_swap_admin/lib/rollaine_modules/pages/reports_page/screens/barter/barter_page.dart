@@ -473,9 +473,14 @@ class _Barter extends State<Barter> {
 
     //checks if a searchValue variable is not empty
     if (searchValue.isNotEmpty) {
-      if (barter['listingname'] == searchValue ||
-          barter['farmerbarangay'] == searchValue ||
-          barter['farmermuicipality'] == searchValue) {
+      // Convert search value to lowercase
+      String searchValueLowerCase = searchValue.toLowerCase();
+      if (barter['listingname'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          barter['farmerbarangay'].toString().toLowerCase() ==
+              searchValueLowerCase ||
+          barter['farmermuicipality'].toString().toLowerCase() ==
+              searchValueLowerCase) {
         //Extracts a timestamp called 'Activity Date' from the document.
         Timestamp dateTimestamp = document['transactionDate'];
 
