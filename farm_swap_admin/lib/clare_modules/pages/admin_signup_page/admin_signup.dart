@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/widgets/admin_signup_textfield_widgets/farmswap_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
@@ -9,6 +10,7 @@ import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:regexed_validator/regexed_validator.dart';
 import '../../../karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'authentication/sign_up_auth.dart';
 import 'controllers/sign_up_controller.dart';
@@ -304,6 +306,21 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 //print(pickedDate);
                                 String formattedDate =
                                     DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                                // Check if the user is below 18 years old
+                                if (isBelow18(pickedDate)) {
+                                  // Display a message that the user is below 18 and cannot sign up
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          'Sorry, you must be 18 years or older to sign up.'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                  return; // Exit the onTap function to prevent further processing
+                                }
+
                                 //print(formattedDate);
                                 setState(() {
                                   bdate.text =
@@ -480,6 +497,15 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     );
   }
 
+  // Function to check if the user is below 18 years old
+  bool isBelow18(DateTime birthdate) {
+    DateTime currentDate = DateTime.now();
+    DateTime eighteenYearsAgo =
+        currentDate.subtract(const Duration(days: 18 * 365));
+
+    return birthdate.isAfter(eighteenYearsAgo);
+  }
+
   //Object for the admin logs model used to save admin logs to db
   AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
 
@@ -487,8 +513,77 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
   void register() async {
     String email = mycontroller.email.text.trim();
     String password = mycontroller.password.text;
+    String contactNumber = mycontroller.contactnum.text.trim();
+    String registerDate = regdate.text.trim();
+    String firstName = mycontroller.fname.text.trim();
+    String lastName = mycontroller.lname.text.trim();
+    String address = mycontroller.address.text.trim();
+    String birthDate = bdate.text.trim();
+    String birthPlace = mycontroller.birthplace.text.trim();
+
+    // Check if any field is empty
+    if (email.isEmpty ||
+        password.isEmpty ||
+        contactNumber.isEmpty ||
+        registerDate.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        address.isEmpty ||
+        birthDate.isEmpty ||
+        birthPlace.isEmpty) {
+      // Display a message that all fields are required
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('All fields are required.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return; // Exit the function to prevent further processing
+    }
+
+    // Check if the contact number has exactly 11 digits
+    if (contactNumber.length != 11) {
+      // Display a text indicating that the contact number should have 11 digits
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Contact number should have exactly 11 digits.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return; // Exit the function to prevent further processing
+    }
+
+    // Check if the email is in the right format
+    if (!validator.email(email)) {
+      // Display a text indicating that the email is not in the right format
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('Invalid email format. Please enter a valid email address.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return; // Exit the function to prevent further processing
+    }
 
     try {
+      // Check if the email already exists
+      bool emailExists = await checkEmailExists(email);
+
+      if (emailExists) {
+        // Display a text indicating that the email already exists
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content:
+                Text('Email already exists. Please use a different email.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return; // Exit the function to prevent further processing
+      }
+
       User? user = await adminAuth.signUpWithEmailAndPassword(
         email,
         password,
@@ -511,6 +606,19 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     } catch (e) {
       print("Some error happened");
     }
+  }
+
+  Future<bool> checkEmailExists(String email) async {
+    // Reference to the users collection in Firestore
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('AdminUsers');
+
+    // Query for the user with the given email
+    QuerySnapshot querySnapshot =
+        await users.where('Email Address', isEqualTo: email).get();
+
+    // If there is at least one document with the given email, it exists
+    return querySnapshot.docs.isNotEmpty;
   }
 
   /// This function stores the UID as a field in that document.

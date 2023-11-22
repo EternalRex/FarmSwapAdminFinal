@@ -228,7 +228,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                       width: 300,
                                       height: 50,
                                       decoration: ShapeDecoration(
-                                          color: Colors.white,
+                                          color: greenNormal,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15),
@@ -248,7 +248,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                               'Overall Revenue',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Color(0xFF53E78B),
+                                                color: Colors.white,
                                                 fontSize: 18,
                                                 fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w600,
@@ -297,8 +297,8 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                                   // Format the sum as a string with 2 decimal places
                                                   '₱ ${sum.toStringAsFixed(2)}',
                                                   textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: greenDark,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
                                                     fontSize: 20,
                                                     fontFamily: 'Poppins',
                                                     fontWeight: FontWeight.w700,

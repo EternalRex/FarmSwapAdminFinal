@@ -201,7 +201,8 @@ class UpdateConsumerWallet {
 sample_farmer wallet
   */
   Future<void> updateStatus(String? updatedata, String userid) async {
-    /*Calling the getUpdateddocID function from the class UpdateRetrieve 
+    try{
+      /*Calling the getUpdateddocID function from the class UpdateRetrieve 
     reusing the class for retrieving doc id
     */
     await retrievewallet.getDocId(userid);
@@ -224,6 +225,13 @@ sample_farmer wallet
       await documentRef.update(updateData);
     } catch (e) {
       print("Error while updating document: $e");
+    }
+
+    }
+    catch(e)
+    {
+      print("Error updating status");
+
     }
   }
 
