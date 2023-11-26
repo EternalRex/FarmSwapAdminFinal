@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
@@ -511,6 +511,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                             TextButton(
                                               child: const Text("Ok"),
                                               onPressed: () async {
+                                                String documentId = document.id;
                                                 setState(() {
                                                   widget.selectedId =
                                                       "${document["userId"]}";
@@ -852,7 +853,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                               const SizedBox(
                                                                 height: 5,
                                                               ),
-                                                              //the profile photo for the cash in
+                                                              //the proof photo for the cash in
                                                               Column(
                                                                 children: [
                                                                   const SizedBox(
@@ -961,49 +962,89 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                 "Add Balance"),
                                                             onPressed:
                                                                 () async {
-                                                              /**
+                                                              String
+                                                                  documentId =
+                                                                  document.id;
+                                                              double
+                                                                  amountControl =
+                                                                  double.parse(
+                                                                      amountController
+                                                                          .text);
+                                                              double
+                                                                  amountdata =
+                                                                  data[
+                                                                      "amount"];
+                                                              print(amountdata);
+                                                              if (amountControl >
+                                                                  amountdata) {
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            "Warning!"),
+                                                                        content:
+                                                                            const Text("Please input the right amount."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Ok"),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                              Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    });
+                                                              } else {
+                                                                /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
                                                             */
 
-                                                              await wallet.updateBalance(
-                                                                  amountController
-                                                                      .text,
-                                                                  widget
-                                                                      .selectedId);
-                                                              await wallet
-                                                                  .updateStatus(
-                                                                      "Approved",
-                                                                      widget
-                                                                          .selectedId);
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(); // Close the AlertDialog Close
+                                                                await wallet.updateBalance(
+                                                                    amountController
+                                                                        .text,
+                                                                    widget
+                                                                        .selectedId);
+                                                                await wallet
+                                                                    .updateStatus(
+                                                                        "Approved",
+                                                                        documentId);
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(); // Close the AlertDialog Close
 
-                                                              showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return AlertDialog(
-                                                                      title: const Text(
-                                                                          "Succesful!"),
-                                                                      content: Text(
-                                                                          "Successfully added balance to ${document["firstname"]} ${document["lastname"]}"),
-                                                                      actions: <Widget>[
-                                                                        TextButton(
-                                                                          child:
-                                                                              const Text("Ok"),
-                                                                          onPressed:
-                                                                              () async {
-                                                                            Navigator.of(context).pop(); // Close the AlertDialog
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            "Succesful!"),
+                                                                        content:
+                                                                            Text("Successfully added balance to ${data["firstname"]} ${data["lastname"]}"),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            child:
+                                                                                const Text("Ok"),
+                                                                            onPressed:
+                                                                                () async {
+                                                                              Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                            Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
-                                                                          },
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  });
+                                                                              Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    });
+                                                              }
                                                             },
                                                           ),
                                                           TextButton(
@@ -1011,6 +1052,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                 "Decline Request"),
                                                             onPressed:
                                                                 () async {
+                                                              String
+                                                                  documentId =
+                                                                  document.id;
+                                                              setState(() {
+                                                                widget.selectedId =
+                                                                    "${document["userId"]}";
+                                                              });
                                                               showDialog(
                                                                   context:
                                                                       context,
@@ -1027,19 +1075,16 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                               const Text("Proceed"),
                                                                           onPressed:
                                                                               () async {
+                                                                            String
+                                                                                documentId =
+                                                                                document.id;
                                                                             setState(() {
                                                                               widget.selectedId = "${document["userId"]}";
                                                                             });
-                                                                            String
-                                                                                requestType =
-                                                                                document["request"];
-                                                                            if (requestType ==
-                                                                                "cash in") {
-                                                                              await wallet.updateStatus("DECLINED", widget.selectedId);
-                                                                            } else if (requestType ==
-                                                                                "cash out") {
-                                                                              await wallet.updateStatus1("DECLINED", widget.selectedId);
-                                                                            }
+
+                                                                            await wallet.updateStatus("DECLINED",
+                                                                                documentId);
+
                                                                             Navigator.of(context).pop(); // Close the AlertDialog Close
 
                                                                             showDialog(
@@ -1092,6 +1137,12 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                 //else if the request is cash out this dialog box will show
                                                 else if (requestType ==
                                                     "cash out") {
+                                                  String documentId =
+                                                      document.id;
+                                                  setState(() {
+                                                    widget.selectedId =
+                                                        "${document["userId"]}";
+                                                  });
                                                   showDialog(
                                                     context: context,
                                                     builder: (context) {
@@ -1485,13 +1536,15 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             TextButton(
                                                                               child: const Text("Confirm"),
                                                                               onPressed: () async {
+                                                                                String documentId = document.id;
                                                                                 setState(() {
                                                                                   widget.selectedId = "${document["userId"]}";
                                                                                 });
+
                                                                                 String cashOutAmount = "${document["amount"]} ";
                                                                                 //this will decrement the balance of the user
                                                                                 await wallet.updateBalance1(cashOutAmount, widget.selectedId);
-                                                                                await wallet.updateStatus1("Approved", widget.selectedId);
+                                                                                await wallet.updateStatus("Approved", documentId);
                                                                                 Navigator.of(context).pop(); // Close the  AlertDialog
 
                                                                                 showDialog(
@@ -1540,6 +1593,81 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                             ],
                                                           ),
                                                         ),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text(
+                                                                "Decline Request"),
+                                                            onPressed:
+                                                                () async {
+                                                              String
+                                                                  documentId =
+                                                                  document.id;
+                                                              setState(() {
+                                                                widget.selectedId =
+                                                                    "${document["userId"]}";
+                                                              });
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return AlertDialog(
+                                                                      title: const Text(
+                                                                          "Confirmation!"),
+                                                                      content: Text(
+                                                                          "Are you sure you want to decline ${data["request"]}  request of ${data["firstname"]} ${data["lastname"]}?  \n Click Proceed to decline successfully."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text("Proceed"),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            String
+                                                                                documentId =
+                                                                                document.id;
+                                                                            setState(() {
+                                                                              widget.selectedId = "${document["userId"]}";
+                                                                            });
+
+                                                                            await wallet.updateStatus("DECLINED",
+                                                                                documentId);
+
+                                                                            Navigator.of(context).pop(); // Close the AlertDialog Close
+
+                                                                            showDialog(
+                                                                                context: context,
+                                                                                builder: (context) {
+                                                                                  return AlertDialog(
+                                                                                    title: const Text("Succesful!"),
+                                                                                    content: Text("Successfully declined ${data["request"]} request of ${data["firstname"]} ${data["lastname"]}."),
+                                                                                    actions: <Widget>[
+                                                                                      TextButton(
+                                                                                        child: const Text("Ok"),
+                                                                                        onPressed: () async {
+                                                                                          Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                                          Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
+                                                                                        },
+                                                                                      ),
+                                                                                    ],
+                                                                                  );
+                                                                                });
+                                                                          },
+                                                                        ),
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text("Close"),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop(); // Close the  AlertDialog
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  });
+                                                            },
+                                                          ),
+                                                        ],
                                                       );
                                                     },
                                                   );
@@ -1736,6 +1864,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                           TextButton(
                                             child: const Text("Ok"),
                                             onPressed: () async {
+                                              String documentId = document.id;
                                               setState(() {
                                                 widget.selectedId =
                                                     "${document["userId"]}";
@@ -2187,57 +2316,99 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           child: const Text(
                                                               "Add Balance"),
                                                           onPressed: () async {
-                                                            /**
+                                                            String documentId =
+                                                                document.id;
+                                                            double
+                                                                amountControl =
+                                                                double.parse(
+                                                                    amountController
+                                                                        .text);
+                                                            double amountdata =
+                                                                data["amount"];
+                                                            print(amountdata);
+                                                            if (amountControl >
+                                                                amountdata) {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return AlertDialog(
+                                                                      title: const Text(
+                                                                          "Warning!"),
+                                                                      content:
+                                                                          const Text(
+                                                                              "Please input the right amount."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text("Ok"),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                            Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  });
+                                                            } else {
+                                                              /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
                                                             */
 
-                                                            await wallet.updateBalance(
-                                                                amountController
-                                                                    .text,
-                                                                widget
-                                                                    .selectedId);
-                                                            await wallet
-                                                                .updateStatus(
-                                                                    "Approved",
-                                                                    widget
-                                                                        .selectedId);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the AlertDialog Close
+                                                              await wallet.updateBalance(
+                                                                  amountController
+                                                                      .text,
+                                                                  widget
+                                                                      .selectedId);
+                                                              await wallet
+                                                                  .updateStatus(
+                                                                      "Approved",
+                                                                      documentId);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(); // Close the AlertDialog Close
 
-                                                            showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text(
-                                                                        "Succesful!"),
-                                                                    content: Text(
-                                                                        "Successfully added balance to ${document["firstname"]} ${document["lastname"]}"),
-                                                                    actions: <Widget>[
-                                                                      TextButton(
-                                                                        child: const Text(
-                                                                            "Ok"),
-                                                                        onPressed:
-                                                                            () async {
-                                                                          Navigator.of(context)
-                                                                              .pop(); // Close the AlertDialog
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return AlertDialog(
+                                                                      title: const Text(
+                                                                          "Succesful!"),
+                                                                      content: Text(
+                                                                          "Successfully added balance to ${data["firstname"]} ${data["lastname"]}"),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text("Ok"),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                          Navigator.of(context)
-                                                                              .pushNamed(RoutesManager.requestwalletpage);
-                                                                        },
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                });
+                                                                            Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  });
+                                                            }
                                                           },
                                                         ),
                                                         TextButton(
                                                           child: const Text(
                                                               "Decline Request"),
                                                           onPressed: () async {
+                                                            String documentId =
+                                                                document.id;
+                                                            setState(() {
+                                                              widget.selectedId =
+                                                                  "${document["userId"]}";
+                                                            });
                                                             showDialog(
                                                                 context:
                                                                     context,
@@ -2254,23 +2425,19 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             "Proceed"),
                                                                         onPressed:
                                                                             () async {
+                                                                          String
+                                                                              documentId =
+                                                                              document.id;
                                                                           setState(
                                                                               () {
                                                                             widget.selectedId =
                                                                                 "${document["userId"]}";
                                                                           });
-                                                                          String
-                                                                              requestType =
-                                                                              document["request"];
-                                                                          if (requestType ==
-                                                                              "cash in") {
-                                                                            await wallet.updateStatus("DECLINED",
-                                                                                widget.selectedId);
-                                                                          } else if (requestType ==
-                                                                              "cash out") {
-                                                                            await wallet.updateStatus1("DECLINED",
-                                                                                widget.selectedId);
-                                                                          }
+
+                                                                          await wallet.updateStatus(
+                                                                              "DECLINED",
+                                                                              documentId);
+
                                                                           Navigator.of(context)
                                                                               .pop(); // Close the AlertDialog Close
 
@@ -2325,6 +2492,11 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                               //else if the request is cash out this dialog box will show
                                               else if (requestType ==
                                                   "cash out") {
+                                                String documentId = document.id;
+                                                setState(() {
+                                                  widget.selectedId =
+                                                      "${document["userId"]}";
+                                                });
                                                 showDialog(
                                                   context: context,
                                                   builder: (context) {
@@ -2723,13 +2895,15 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                                 const Text("Confirm"),
                                                                             onPressed:
                                                                                 () async {
+                                                                              String documentId = document.id;
                                                                               setState(() {
                                                                                 widget.selectedId = "${document["userId"]}";
                                                                               });
+
                                                                               String cashOutAmount = "${document["amount"]} ";
                                                                               //this will decrement the balance of the user
                                                                               await wallet.updateBalance1(cashOutAmount, widget.selectedId);
-                                                                              await wallet.updateStatus1("Approved", widget.selectedId);
+                                                                              await wallet.updateStatus("Approved", documentId);
                                                                               Navigator.of(context).pop(); // Close the  AlertDialog
 
                                                                               showDialog(
@@ -2778,6 +2952,84 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                           ],
                                                         ),
                                                       ),
+                                                      actions: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                              "Decline Request"),
+                                                          onPressed: () async {
+                                                            String documentId =
+                                                                document.id;
+                                                            setState(() {
+                                                              widget.selectedId =
+                                                                  "${document["userId"]}";
+                                                            });
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        "Confirmation!"),
+                                                                    content: Text(
+                                                                        "Are you sure you want to decline ${data["request"]}  request of ${data["firstname"]} ${data["lastname"]}?  \n Click Proceed to decline successfully."),
+                                                                    actions: <Widget>[
+                                                                      TextButton(
+                                                                        child: const Text(
+                                                                            "Proceed"),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          String
+                                                                              documentId =
+                                                                              document.id;
+                                                                          setState(
+                                                                              () {
+                                                                            widget.selectedId =
+                                                                                "${document["userId"]}";
+                                                                          });
+
+                                                                          await wallet.updateStatus(
+                                                                              "DECLINED",
+                                                                              documentId);
+
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the AlertDialog Close
+
+                                                                          showDialog(
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return AlertDialog(
+                                                                                  title: const Text("Succesful!"),
+                                                                                  content: Text("Successfully declined ${data["request"]} request of ${data["firstname"]} ${data["lastname"]}."),
+                                                                                  actions: <Widget>[
+                                                                                    TextButton(
+                                                                                      child: const Text("Ok"),
+                                                                                      onPressed: () async {
+                                                                                        Navigator.of(context).pop(); // Close the AlertDialog
+
+                                                                                        Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
+                                                                                      },
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              });
+                                                                        },
+                                                                      ),
+                                                                      TextButton(
+                                                                        child: const Text(
+                                                                            "Close"),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.of(context)
+                                                                              .pop(); // Close the  AlertDialog
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                });
+                                                          },
+                                                        ),
+                                                      ],
                                                     );
                                                   },
                                                 );
