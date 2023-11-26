@@ -7,7 +7,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
@@ -848,14 +847,14 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                       height: 80,
                     ),
 
-                    //Platform icon and label
-                    ReportsRevenueOptionsBtn(),
+                    //Number of users icon and label
+                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    ReportsPlatformOptionsBtn(),
+                    ReportsRevenueOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
@@ -868,12 +867,6 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
 
                     //Selling icon and label
                     ReportsSellingOptionsBtn(),
-                    SizedBox(
-                      height: 25,
-                    ),
-
-                    //Number of users icon and label
-                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),

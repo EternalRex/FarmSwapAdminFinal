@@ -315,7 +315,7 @@ class RoutesManager {
         );
       case monthlyrevenue:
         return MaterialPageRoute(
-          builder: (context) => MonthlyRevenueReportPage(),
+          builder: (context) => const MonthlyRevenueReportPage(),
         );
 
       case specificwalletfarmerdetails:

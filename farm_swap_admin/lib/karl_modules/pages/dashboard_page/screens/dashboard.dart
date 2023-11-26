@@ -225,28 +225,6 @@ class _DashboardState extends State<Dashboard> {
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-                  /*IN THE  APPBAR, WE USED THE ACTIONS PROPERTY SO THAT WE CAN PUT
-                  A LOT OF WIDGETS IN THE APPBAR, IN HERE IT IS USED SO THAT WE CAN PUT 
-                  A TEXT FIELD WIDGET FOR SEARCHING*/
-                  actions: const [
-                    /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
-                    HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
-                      HEIGH AND WIDTH OF THE TEXT FIELD */
-                      child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                        IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-                        child: DashBSearchBar(),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
                 ),
 /*START OF THE SECOND EXPANDEDS BODY */
                 body: SingleChildScrollView(
@@ -425,7 +403,6 @@ class _DashboardState extends State<Dashboard> {
                           ],
                         ),
 
-                        //Row for Admin Archived
                         Row(
                           children: [
                             Expanded(
@@ -434,7 +411,7 @@ class _DashboardState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(
                                     left: 5, right: 5, bottom: 15),
                                 child: Container(
-                                  height: 500,
+                                  height: 535,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.all(
@@ -449,302 +426,301 @@ class _DashboardState extends State<Dashboard> {
                                       ),
                                     ],
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                left: 5,
-                                                right: 5,
-                                                bottom: 10),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        width: 760,
-                                                        height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: greenNormal,
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .all(
-                                                            Radius.circular(10),
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: shadow,
-                                                              blurRadius: 2,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0, 1),
-                                                            ),
-                                                          ],
+                                  child: DefaultTabController(
+                                    length: 3,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 20,
+                                            left: 10,
+                                            right: 10,
+                                            bottom: 15,
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              gradient: const LinearGradient(
+                                                begin: Alignment(0.99, -0.15),
+                                                end: Alignment(-0.99, 0.15),
+                                                colors: [
+                                                  Color(0xFF53E78B),
+                                                  Color(0xFF14BE77)
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(5),
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: shadow,
+                                                  blurRadius: 2,
+                                                  offset: const Offset(1, 5),
+                                                ),
+                                              ],
+                                            ),
+                                            constraints:
+                                                const BoxConstraints.expand(
+                                                    height: 45),
+                                            child: TabBar(
+                                                isScrollable: true,
+                                                labelColor: Colors.black,
+                                                unselectedLabelColor:
+                                                    Colors.grey,
+                                                indicator: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(5),
+                                                  ),
+                                                ),
+                                                //mao ni ang tab button which is nag contain sa 12 months
+                                                tabs: [
+                                                  Tab(
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      constraints:
+                                                          const BoxConstraints
+                                                              .expand(
+                                                              width: 150,
+                                                              height: 45),
+                                                      child: const Text(
+                                                        "Admin",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontFamily: poppins,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w700,
                                                         ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'ADMINS',
-                                                            style: Poppins
-                                                                .adminName
-                                                                .copyWith(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 15,
-                                                              letterSpacing:
-                                                                  1.5,
-                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Tab(
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      constraints:
+                                                          const BoxConstraints
+                                                              .expand(
+                                                              width: 150,
+                                                              height: 45),
+                                                      child: const Text(
+                                                        "Farmer",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontFamily: poppins,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Tab(
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      constraints:
+                                                          const BoxConstraints
+                                                              .expand(
+                                                              width: 150,
+                                                              height: 45),
+                                                      child: const Text(
+                                                        "Consumer",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontFamily: poppins,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: SizedBox(
+                                            //this will show the different tab bar view of the different tabs
+                                            child: TabBarView(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 5,
+                                                                right: 5,
+                                                                bottom: 15),
+                                                        child: Container(
+                                                          height: 500,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Column(
+                                                                children: <Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        top: 10,
+                                                                        left: 5,
+                                                                        right:
+                                                                            5,
+                                                                        bottom:
+                                                                            10),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        SingleChildScrollView(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            height:
+                                                                                420,
+                                                                            width:
+                                                                                760,
+                                                                            child:
+                                                                                _buildAdminArchiveList(),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                const SizedBox(
-                                                  height: 3,
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 5,
+                                                                right: 5,
+                                                                bottom: 15),
+                                                        child: Container(
+                                                          height: 500,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Column(
+                                                                children: <Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        top: 10,
+                                                                        left: 5,
+                                                                        right:
+                                                                            5,
+                                                                        bottom:
+                                                                            10),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        SingleChildScrollView(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            height:
+                                                                                420,
+                                                                            width:
+                                                                                760,
+                                                                            child:
+                                                                                _buildFarmerArchiveList(),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                SingleChildScrollView(
-                                                  child: SizedBox(
-                                                    height: 420,
-                                                    width: 760,
-                                                    child:
-                                                        _buildAdminArchiveList(),
-                                                  ),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 5,
+                                                                right: 5,
+                                                                bottom: 15),
+                                                        child: Container(
+                                                          height: 500,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Column(
+                                                                children: <Widget>[
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        top: 10,
+                                                                        left: 5,
+                                                                        right:
+                                                                            5,
+                                                                        bottom:
+                                                                            10),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        SingleChildScrollView(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            height:
+                                                                                420,
+                                                                            width:
+                                                                                760,
+                                                                            child:
+                                                                                _buildConsumerArchiveList(),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-
-                        //Row for Farmers Archived
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5, right: 5, bottom: 15),
-                                child: Container(
-                                  height: 500,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(5),
+                                        )
+                                      ],
                                     ),
-                                    //Box shadow of container
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: shadow,
-                                        blurRadius: 2,
-                                        offset: const Offset(1, 5),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                left: 5,
-                                                right: 5,
-                                                bottom: 10),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        width: 760,
-                                                        height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: greenNormal,
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .all(
-                                                            Radius.circular(10),
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: shadow,
-                                                              blurRadius: 2,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0, 1),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'FARMERS',
-                                                            style: Poppins
-                                                                .adminName
-                                                                .copyWith(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 15,
-                                                              letterSpacing:
-                                                                  1.5,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 3,
-                                                ),
-                                                SingleChildScrollView(
-                                                  child: SizedBox(
-                                                    height: 420,
-                                                    width: 760,
-                                                    child:
-                                                        _buildFarmerArchiveList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-
-                        //Row for Consumers Archived
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5, right: 5, bottom: 15),
-                                child: Container(
-                                  height: 500,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(5),
-                                    ),
-                                    //Box shadow of container
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: shadow,
-                                        blurRadius: 2,
-                                        offset: const Offset(1, 5),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10,
-                                                left: 5,
-                                                right: 5,
-                                                bottom: 10),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        width: 760,
-                                                        height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: greenNormal,
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .all(
-                                                            Radius.circular(10),
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: shadow,
-                                                              blurRadius: 2,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0, 1),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        child: Center(
-                                                          child: Text(
-                                                            'CONSUMERS',
-                                                            style: Poppins
-                                                                .adminName
-                                                                .copyWith(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 15,
-                                                              letterSpacing:
-                                                                  1.5,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 3,
-                                                ),
-                                                SingleChildScrollView(
-                                                  child: SizedBox(
-                                                    height: 420,
-                                                    width: 760,
-                                                    child:
-                                                        _buildConsumerArchiveList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
                                   ),
                                 ),
                               ),

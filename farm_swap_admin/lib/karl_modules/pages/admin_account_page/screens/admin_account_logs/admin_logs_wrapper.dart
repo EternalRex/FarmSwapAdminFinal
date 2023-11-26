@@ -377,7 +377,7 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                                                                 //Container for search bar
                                                                 child: SizedBox(
                                                                   width: 250,
-                                                                  height: 28,
+                                                                  height: 35,
                                                                   child:
                                                                       TextField(
                                                                     controller:

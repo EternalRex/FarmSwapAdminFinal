@@ -96,25 +96,25 @@ class _UsersPieChartState extends State<UsersPieChart> {
           ),
         ),
         //for active users
-        const SizedBox(
+        SizedBox(
           height: 50,
           width: 380,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Indicator(
-                color: Color(0xFF76BA1B),
-                textColor: Color(0xFF09051B),
+                color: greenNormal,
+                textColor: const Color(0xFF09051B),
                 text: 'Active Users',
                 isSquare: true,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               //for active users
               Indicator(
-                color: Color(0xFF4C9C2A),
-                textColor: Color(0xFF09051B),
+                color: greenLightActive,
+                textColor: const Color(0xFF09051B),
                 text: 'Archived Users',
                 isSquare: true,
               ),
@@ -135,7 +135,7 @@ class _UsersPieChartState extends State<UsersPieChart> {
         switch (i) {
           case 0:
             return PieChartSectionData(
-              color: const Color(0xFF76BA1B),
+              color: greenNormal,
               value: activeUsers,
               title: '${activeUsers.toStringAsFixed(2)}%',
               radius: radius,
@@ -146,7 +146,7 @@ class _UsersPieChartState extends State<UsersPieChart> {
             );
           case 1:
             return PieChartSectionData(
-              color: const Color(0xFF4C9A2A),
+              color: greenLightActive,
               value: archivedUsers,
               title: '${archivedUsers.toStringAsFixed(2)}%',
               radius: radius,

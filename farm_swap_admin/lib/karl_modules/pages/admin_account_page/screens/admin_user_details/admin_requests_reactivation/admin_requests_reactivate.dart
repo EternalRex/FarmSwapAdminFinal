@@ -75,7 +75,7 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
 
           /*SECOND EXPANDED THAT WILL HOLD THE MAIN CONTENT */
           Expanded(
-            flex: 4,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Scaffold(
@@ -141,138 +141,83 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                     ),
                   ],
                 ),
-                body: SingleChildScrollView(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
-                          child: Container(
-                            height: 700,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: shadow,
-                                  blurRadius: 2,
-                                  offset: const Offset(1, 5),
-                                ),
-                              ],
+                body: Row(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 15),
+                        child: Container(
+                          height: 510,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
                             ),
-                            child: Column(
-                              children: [
-                                Column(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadow,
+                                blurRadius: 2,
+                                offset: const Offset(1, 5),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15,
+                                        left: 15,
+                                        right: 15,
+                                        bottom: 5),
 
-                                      //this padding holds the content title
+                                    //this padding holds the content title
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: greenLight,
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(5),
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: shadow,
+                                              blurRadius: 2,
+                                              offset: const Offset(0, 1),
+                                            )
+                                          ]),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 35, top: 25),
+                                        padding: const EdgeInsets.all(15.0),
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
                                           children: [
+                                            /*Farmers Title */
                                             Text(
                                               'Admin Requests',
                                               style:
                                                   Poppins.contentTitle.copyWith(
-                                                color: const Color(0xFF09041B),
+                                                color: const Color(0xFF09051C),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 600,
-                                  child: _buildUserList(),
-                                ),
-                              ],
-                            ),
+                                  ),
+                                  SingleChildScrollView(
+                                    child: SizedBox(
+                                      height: 400,
+                                      child: _buildUserList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          /*THIRD EXPANDED THAT WILL HOLD THE EDIT PROFILE */
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  /*PUTTING BOX SHADOW ON THE CONTAINER */
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadow,
-                      blurRadius: 2,
-                      offset: const Offset(1, 5),
                     ),
-                  ],
-                ),
-                /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
-                child: Column(
-                  children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          /*PROFILE TEXT */
-                          const SizedBox(
-                            width: 82,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 150,
-                    ),
-                    const AdminRequestsListBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const FarmerRequestsListBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const ConsumerRequestsListBtn(),
                   ],
                 ),
               ),
