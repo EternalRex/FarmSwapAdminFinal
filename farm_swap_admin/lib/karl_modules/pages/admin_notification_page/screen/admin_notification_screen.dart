@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_notification_page/database/admin_notif_querry.dart';
-import 'package:farm_swap_admin/karl_modules/pages/admin_notification_page/widgets/notification_searchbar.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +15,8 @@ class AdminNotificationScreen extends StatefulWidget {
   const AdminNotificationScreen({super.key});
 
   @override
-  State<AdminNotificationScreen> createState() => _AdminNotificationScreenState();
+  State<AdminNotificationScreen> createState() =>
+      _AdminNotificationScreenState();
 }
 
 class _AdminNotificationScreenState extends State<AdminNotificationScreen> {
@@ -94,37 +94,50 @@ class _AdminNotificationScreenState extends State<AdminNotificationScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 400,
-                        ),
-                        /*App bar contains search bar */
-                        Expanded(
-                          child: NotificationSearchBar(controller: notifSearchController),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        /*Search button */
-                        IconButton(
-                          onPressed: () {
-                            setState(
-                              () {
-                                /*Setting the state of search value variable becoz this will
-                                 be used as a condition in displaying the searcheditem */
-                                searchValue = notifSearchController.text;
-                              },
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
                       ],
                     ),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+
+                        //Container for search bar
+                        child: SizedBox(
+                          width: 250,
+                          height: 80,
+                          child: TextField(
+                            controller: notifSearchController,
+                            style: GoogleFonts.poppins(
+                                color: greenDark, height: 1.5),
+                            onSubmitted: (String query) {
+                              setState(
+                                () {
+                                  searchValue = query;
+                                },
+                              );
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(5),
+                              filled: true,
+                              fillColor:
+                                  Colors.white,
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintText: 'Search',
+                              prefixIcon: const Icon(Icons.search_rounded),
+                              prefixIconColor: greenDark,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                     leading: IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RoutesManager.dashboard);
+                        Navigator.of(context)
+                            .pushNamed(RoutesManager.dashboard);
                       },
                       icon: const Icon(Icons.arrow_back_ios),
                     ),
@@ -154,11 +167,14 @@ class _AdminNotificationScreenState extends State<AdminNotificationScreen> {
 contentts in a list view */
   Widget _buildNotificationLists() {
     return StreamBuilder<QuerySnapshot>(
-      stream: notification.getAdminNotifications(FirebaseAuth.instance.currentUser!.uid),
+      stream: notification
+          .getAdminNotifications(FirebaseAuth.instance.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           return ListView(
-            children: snapshot.data!.docs.map((document) => _accessItemList(document)).toList(),
+            children: snapshot.data!.docs
+                .map((document) => _accessItemList(document))
+                .toList(),
           );
         }
         return const Center(
