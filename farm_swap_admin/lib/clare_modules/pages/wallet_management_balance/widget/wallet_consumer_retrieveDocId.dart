@@ -200,16 +200,10 @@ class UpdateConsumerWallet {
 /*this function is to update the field status of the collection 
 sample_farmer wallet
   */
-  Future<void> updateStatus(String? updatedata, String userid) async {
-    try{
-      /*Calling the getUpdateddocID function from the class UpdateRetrieve 
-    reusing the class for retrieving doc id
-    */
-    await retrievewallet.getDocId(userid);
-
+  Future<void> updateStatus(String? updatedata, String docId) async {
     final documentRef = FirebaseFirestore.instance
         .collection('sample_ConsumerWallet')
-        .doc(retrievewallet.docid);
+        .doc(docId);
 
     // Define the data to update which is the account status
     final updateData = {
@@ -225,13 +219,6 @@ sample_farmer wallet
       await documentRef.update(updateData);
     } catch (e) {
       print("Error while updating document: $e");
-    }
-
-    }
-    catch(e)
-    {
-      print("Error updating status");
-
     }
   }
 
@@ -256,35 +243,5 @@ sample_farmer wallet
       throw ("Failed id retrieval");
     }
     return mydocid;
-  }
-
-  /*this function is to update the field status of the collection 
-sample_farmer wallet for cash out
-  */
-  Future<void> updateStatus1(String? updatedata, String userid) async {
-    /*Calling the getUpdateddocID function from the class UpdateRetrieve 
-    reusing the class for retrieving doc id
-    */
-    await retrievewallet.getConsumerRequestCashOut(userid);
-
-    final documentRef = FirebaseFirestore.instance
-        .collection('sample_ConsumerWallet')
-        .doc(retrievewallet.docid);
-
-    // Define the data to update which is the account status
-    final updateData = {
-      'status': updatedata,
-    };
-
-    // Create an admin log with a activity reactivation admin account
-    // adminLogs.createAdminLogs(
-    //   email, userID, "Accept_Reactivation_Request", DateTime.now());
-
-    try {
-      // Update the Firestore document with the new data
-      await documentRef.update(updateData);
-    } catch (e) {
-      print("Error while updating document: $e");
-    }
   }
 }

@@ -169,7 +169,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   //Object for the admin logs model used to save admin logs to db
   AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
 
-  final email = FirebaseAuth.instance.currentUser!.email;
+  final email = FirebaseAuth.instance.currentUser?.email ?? '';
 
   //this calls the function doesEmailExist
   //and if email exist it shows the dialog box

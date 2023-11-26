@@ -212,15 +212,9 @@ then dili siya mo perform sa update*/
 /*this function is to update the field status of the collection 
 sample_farmer wallet for cash in
   */
-  Future<void> updateStatus(String? updatedata, String userid) async {
-    /*Calling the getUpdateddocID function from the class UpdateRetrieve 
-    reusing the class for retrieving doc id
-    */
-    await retrievewallet.getDocId(userid);
-
-    final documentRef = FirebaseFirestore.instance
-        .collection('sample_FarmerWallet')
-        .doc(retrievewallet.mydocid);
+  Future<void> updateStatus(String? updatedata, String docId) async {
+    final documentRef =
+        FirebaseFirestore.instance.collection('sample_FarmerWallet').doc(docId);
 
     // Define the data to update which is the account status
     final updateData = {
@@ -260,35 +254,5 @@ sample_farmer wallet for cash in
       throw ("Failed id retrieval");
     }
     return mydocid;
-  }
-
-  /*this function is to update the field status of the collection 
-sample_farmer wallet for CASH OUT
-  */
-  Future<void> updateStatus1(String? updatedata, String userid) async {
-    /*Calling the getUpdateddocID function from the class UpdateRetrieve 
-    reusing the class for retrieving doc id
-    */
-    await retrievewallet.getDocIdRequestCashOut(userid);
-
-    final documentRef = FirebaseFirestore.instance
-        .collection('sample_FarmerWallet')
-        .doc(retrievewallet.mydocid);
-
-    // Define the data to update which is the account status
-    final updateData = {
-      'status': updatedata,
-    };
-
-    // Create an admin log with a activity reactivation admin account
-    // adminLogs.createAdminLogs(
-    //   email, userID, "Accept_Reactivation_Request", DateTime.now());
-
-    try {
-      // Update the Firestore document with the new data
-      await documentRef.update(updateData);
-    } catch (e) {
-      print("Error while updating document: $e");
-    }
   }
 }
