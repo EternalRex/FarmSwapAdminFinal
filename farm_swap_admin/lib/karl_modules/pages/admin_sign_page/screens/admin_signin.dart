@@ -169,18 +169,6 @@ class _SignInAdminState extends State<SignInAdmin> {
                       ],
                     ),
                   ),
-                  /*LABEL ON CHOOSING TO CONTINUE WITH GOOGLE */
-                  Text(
-                    "Or continue with",
-                    style: TextStyle(
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
                   /**
                    * this row holds the google icon, textbutton for forgotten password and sign up
                    */
@@ -189,30 +177,6 @@ class _SignInAdminState extends State<SignInAdmin> {
                     children: [
                       Column(
                         children: [
-                          //elevatedbutton icon for sign in using google account
-                          ElevatedButton.icon(
-                            onPressed: () async {},
-                            icon: SvgPicture.asset(
-                              "assets/clare_assets/svg/google.svg",
-                            ),
-                            label: const Text('Google'),
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(10),
-                              fixedSize: const Size(160, 45),
-                              textStyle: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w900),
-                              backgroundColor: Colors.white,
-                              foregroundColor:
-                                  const Color.fromARGB(255, 85, 84, 84),
-                              elevation: 15,
-                              shadowColor: shadow,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                              ),
-                            ),
-                          ),
 
                           Row(
                             children: [
@@ -268,7 +232,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   //this padding contains the log in button where in it calls the log in method to authenticate
                   Padding(

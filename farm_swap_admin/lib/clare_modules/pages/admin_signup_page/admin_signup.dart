@@ -118,270 +118,306 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                     child: Column(
                       children: <Widget>[
                         const SizedBox(
-                          height: 15,
+                          height: 30,
                         ),
                         //a sizedbox for the registration date textfield
-                        SizedBox(
-                          width: 300,
-                          child: TextField(
-                            controller: regdate,
-                            cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle:
-                                BoxHeightStyle.includeLineSpacingBottom,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: "Register Date",
-                              //border designs
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Color(0xFFF4F4F4)),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50,
-                                    color: Color.fromARGB(255, 50, 202, 108)),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              prefixIcon: const Image(
-                                image: AssetImage(
-                                  "assets/clare_assets/images/Calendar.png",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              width: 319,
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: TextField(
+                                controller: regdate,
+                                cursorColor: FarmSwapGreen.normalGreen,
+                                selectionHeightStyle:
+                                    BoxHeightStyle.includeLineSpacingBottom,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 20, horizontal: 30),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  labelText: "Register Date",
+                                  //border designs
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Color(0xFFF4F4F4)),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50,
+                                        color:
+                                            Color.fromARGB(255, 50, 202, 108)),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Colors.red),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Colors.red),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  prefixIcon: const Image(
+                                    image: AssetImage(
+                                      "assets/clare_assets/images/Calendar.png",
+                                    ),
+                                    height: 9,
+                                    width: 9,
+                                  ),
                                 ),
-                                height: 9,
-                                width: 9,
+                                readOnly: true,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime(2050),
+                                  );
+
+                                  if (pickedDate != null) {
+                                    //print(pickedDate);
+                                    String formattedDate =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(pickedDate);
+                                    //print(formattedDate);
+                                    setState(() {
+                                      regdate.text =
+                                          formattedDate; // Update the text in the controller
+                                    });
+                                  } else {
+                                    print("Date is not selected");
+                                  }
+                                },
                               ),
                             ),
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2050),
-                              );
-
-                              if (pickedDate != null) {
-                                //print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                                //print(formattedDate);
-                                setState(() {
-                                  regdate.text =
-                                      formattedDate; // Update the text in the controller
-                                });
-                              } else {
-                                print("Date is not selected");
-                              }
-                            },
-                          ),
+                          ],
                         ),
                         SizedBox(height: height * 0.024),
 
                         //a textfield for the first name
-                        FarmSwapTextField(
-                          controller: mycontroller.fname,
-                          label: mylabel.fname,
-                          isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Profile.svg",
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
-                        //a textfield for the last name
-                        FarmSwapTextField(
-                          controller: mycontroller.lname,
-                          label: mylabel.lname,
-                          isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/profile.svg",
-                            height: 9,
-                            width: 9,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FarmSwapTextField(
+                              controller: mycontroller.fname,
+                              label: mylabel.fname,
+                              isPassword: false,
+                              prefixIcon: SvgPicture.asset(
+                                "assets/clare_assets/svg/Profile.svg",
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            //a textfield for the last name
+                            FarmSwapTextField(
+                              controller: mycontroller.lname,
+                              label: mylabel.lname,
+                              isPassword: false,
+                              prefixIcon: SvgPicture.asset(
+                                "assets/clare_assets/svg/profile.svg",
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: height * 0.024),
 
                         //address textfield
-                        FarmSwapTextField(
-                          controller: mycontroller.address,
-                          label: mylabel.address,
-                          isPassword: false,
-                          prefixIcon: const Image(
-                            image: AssetImage(
-                              "assets/clare_assets/images/location.png",
-                            ),
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
-                        //a texfield for the contact number
-                        FarmSwapTextField(
-                          controller: mycontroller.contactnum,
-                          label: mylabel.contactnumber,
-                          isPassword: false,
-                          prefixIcon: const Image(
-                            image: AssetImage(
-                              "assets/clare_assets/images/contact.png",
-                            ),
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
-                        //a sizedbox for the birth date textfield
-                        SizedBox(
-                          width: 300,
-                          child: TextField(
-                            controller: bdate,
-                            cursorColor: FarmSwapGreen.normalGreen,
-                            selectionHeightStyle:
-                                BoxHeightStyle.includeLineSpacingBottom,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
-                              filled: true,
-                              fillColor: Colors.white,
-
-                              labelText: "Birth Date",
-
-                              //border designs
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Color(0xFFF4F4F4)),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50,
-                                    color: Color.fromARGB(255, 50, 202, 108)),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 0.50, color: Colors.red),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FarmSwapTextField(
+                              controller: mycontroller.address,
+                              label: mylabel.address,
+                              isPassword: false,
                               prefixIcon: const Image(
                                 image: AssetImage(
-                                  "assets/clare_assets/images/Calendar.png",
+                                  "assets/clare_assets/images/location.png",
                                 ),
                                 height: 9,
                                 width: 9,
                               ),
                             ),
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2050),
-                              );
-
-                              if (pickedDate != null) {
-                                //print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-
-                                // Check if the user is below 18 years old
-                                if (isBelow18(pickedDate)) {
-                                  // Display a message that the user is below 18 and cannot sign up
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Sorry, you must be 18 years or older to sign up.'),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                  return; // Exit the onTap function to prevent further processing
-                                }
-
-                                //print(formattedDate);
-                                setState(() {
-                                  bdate.text =
-                                      formattedDate; // Update the text in the controller
-                                });
-                              } else {
-                                print("Date is not selected");
-                              }
-                            },
-                          ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            //a texfield for the contact number
+                            FarmSwapTextField(
+                              controller: mycontroller.contactnum,
+                              label: mylabel.contactnumber,
+                              isPassword: false,
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/contact.png",
+                                ),
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //birthplace textfield
-                        FarmSwapTextField(
-                          controller: mycontroller.birthplace,
-                          label: mylabel.birthplace,
-                          isPassword: false,
-                          prefixIcon: const Image(
-                            image: AssetImage(
-                              "assets/clare_assets/images/location.png",
-                            ),
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
+                        //a sizedbox for the birth date textfield
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 300,
+                              child: TextField(
+                                controller: bdate,
+                                cursorColor: FarmSwapGreen.normalGreen,
+                                selectionHeightStyle:
+                                    BoxHeightStyle.includeLineSpacingBottom,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 20, horizontal: 30),
+                                  filled: true,
+                                  fillColor: Colors.white,
 
+                                  labelText: "Birth Date",
+
+                                  //border designs
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Color(0xFFF4F4F4)),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50,
+                                        color:
+                                            Color.fromARGB(255, 50, 202, 108)),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Colors.red),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0.50, color: Colors.red),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+
+                                  prefixIcon: const Image(
+                                    image: AssetImage(
+                                      "assets/clare_assets/images/Calendar.png",
+                                    ),
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                ),
+                                readOnly: true,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime(2050),
+                                  );
+
+                                  if (pickedDate != null) {
+                                    //print(pickedDate);
+                                    String formattedDate =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(pickedDate);
+
+                                    // Check if the user is below 18 years old
+                                    if (isBelow18(pickedDate)) {
+                                      // Display a message that the user is below 18 and cannot sign up
+                                      // ignore: use_build_context_synchronously
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Sorry, you must be 18 years or older to sign up.'),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                      return; // Exit the onTap function to prevent further processing
+                                    }
+
+                                    //print(formattedDate);
+                                    setState(() {
+                                      bdate.text =
+                                          formattedDate; // Update the text in the controller
+                                    });
+                                  } else {
+                                    print("Date is not selected");
+                                  }
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            //birthplace textfield
+                            FarmSwapTextField(
+                              controller: mycontroller.birthplace,
+                              label: mylabel.birthplace,
+                              isPassword: false,
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/location.png",
+                                ),
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(height: height * 0.024),
 
                         //a textfield for the email
-                        FarmSwapTextField(
-                          controller: mycontroller.email,
-                          label: mylabel.email,
-                          isPassword: false,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Message.svg",
-                            height: 9,
-                            width: 9,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.024),
-
-                        //a textfield for the password
-                        FarmSwapTextField(
-                          controller: mycontroller.password,
-                          label: mylabel.password,
-                          isPassword: _isPasswordVisible,
-                          prefixIcon: SvgPicture.asset(
-                            "assets/clare_assets/svg/Lock.svg",
-                            height: 9,
-                            width: 9,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isPasswordVisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: const Color.fromARGB(255, 46, 184, 76),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FarmSwapTextField(
+                              controller: mycontroller.email,
+                              label: mylabel.email,
+                              isPassword: false,
+                              prefixIcon: SvgPicture.asset(
+                                "assets/clare_assets/svg/Message.svg",
+                                height: 9,
+                                width: 9,
+                              ),
                             ),
-                            onPressed: _togglePasswordVisibility,
-                          ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            //a textfield for the password
+                            FarmSwapTextField(
+                              controller: mycontroller.password,
+                              label: mylabel.password,
+                              isPassword: _isPasswordVisible,
+                              prefixIcon: SvgPicture.asset(
+                                "assets/clare_assets/svg/Lock.svg",
+                                height: 9,
+                                width: 9,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: const Color.fromARGB(255, 46, 184, 76),
+                                ),
+                                onPressed: _togglePasswordVisibility,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: height * 0.024),
 
