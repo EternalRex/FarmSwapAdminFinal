@@ -5,7 +5,10 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_quer
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_bell_btn/dhsb_notif.dart.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_bartertranschart.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_linechart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_piechart.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_selltrans.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -263,13 +266,9 @@ class _DashboardState extends State<Dashboard> {
                                         ),
                                       ],
                                       color: Colors.white),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: DashboardLineChart(
-                                      points: pricePoints,
-                                      points2: pricePoints2,
-                                      points3: pricePoints3,
-                                    ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: RevenueLineChart(),
                                   ),
                                 ),
                               ],
@@ -340,7 +339,7 @@ class _DashboardState extends State<Dashboard> {
                                       color: Colors.white),
                                   child: const Padding(
                                     padding: EdgeInsets.only(left: 0),
-                                    child: DashBoardBarChart(),
+                                    child: BarterTransChart(),
                                   ),
                                 ),
                               ],
@@ -373,7 +372,7 @@ class _DashboardState extends State<Dashboard> {
                                       color: Colors.white),
                                   child: const Padding(
                                     padding: EdgeInsets.only(left: 0),
-                                    child: SellingBarGraph(),
+                                    child: SellTransChart(),
                                   ),
                                 ),
                               ],
