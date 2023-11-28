@@ -34,29 +34,33 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Color(0xFFDA6317),
-          ),
-          splashColor: const Color(0xFFF9A84D),
-          onPressed: () {
-            Navigator.of(context).pushNamed(RoutesManager.signInPage);
-          },
-        ),
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-      ),
       body: Stack(
         children: [
           SvgPicture.asset(
             "assets/karl_assets/images/admin_signIn_pattern.svg",
             // ignore: deprecated_member_use
             colorBlendMode: BlendMode.screen,
-            height: 500,
+            height: 450,
             width: MediaQuery.of(context).size.width,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color(0xFFDA6317),
+                  ),
+                  splashColor: const Color(0xFFF9A84D),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(RoutesManager.signInPage);
+                  },
+                ),
+              ),
+            ],
           ),
           Center(
             child: Column(
@@ -77,11 +81,11 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                     myText: "Enter your email to reset password.",
                   ),
                 ),
-
+          
                 const SizedBox(
                   height: 20,
                 ),
-
+          
                 //this textfield holds the email text
                 ForgotPassTextfield(
                   controller: emailController,
@@ -93,9 +97,9 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                     width: 15,
                   ),
                 ),
-
-                SizedBox(height: height * 0.024),
-
+          
+                SizedBox(height: height * 0.035),
+          
                 //check email button
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),

@@ -10,7 +10,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
@@ -148,38 +147,6 @@ class _NumberUsers extends State<NumberUsers> {
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                   automaticallyImplyLeading: false,
-
-                  /*actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-
-                      //Container for search bar
-                      child: SizedBox(
-                        width: 250,
-                        height: 15,
-                        child: TextField(
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFFDA6317), height: 1.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(5),
-                            filled: true,
-                            fillColor:
-                                const Color(0xFFF9A84D).withOpacity(0.10),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: 'Search',
-                            prefixIcon: const Icon(Icons.search_rounded),
-                            prefixIconColor: const Color(0xFFDA6317),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                */
                 ),
                 body: Row(
                   children: [
@@ -307,14 +274,14 @@ class _NumberUsers extends State<NumberUsers> {
                       height: 80,
                     ),
 
-                    //Platform icon and label
-                    ReportsRevenueOptionsBtn(),
+                    //Number of users icon and label
+                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    ReportsPlatformOptionsBtn(),
+                    ReportsRevenueOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
@@ -327,12 +294,6 @@ class _NumberUsers extends State<NumberUsers> {
 
                     //Selling icon and label
                     ReportsSellingOptionsBtn(),
-                    SizedBox(
-                      height: 25,
-                    ),
-
-                    //Number of users icon and label
-                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),

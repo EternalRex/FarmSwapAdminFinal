@@ -211,6 +211,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                             ),
                           ),
                           */
+
                           Row(
                             children: [
                               //this padding will navigate to forgot password page to reset password if forgotten
@@ -265,7 +266,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   //this padding contains the log in button where in it calls the log in method to authenticate
                   Padding(

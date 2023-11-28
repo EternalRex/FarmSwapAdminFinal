@@ -1,18 +1,15 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_interface.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_suggestions.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_usability.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentExpanded/reports_user_satisfaction.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_comments.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_description.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsContentSection/reports_content_suggestions.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_consumers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_farmers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_newusers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentExpanded/number_overallusers.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/NumberContentSection/number_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_platform_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
@@ -214,85 +211,49 @@ class _ReportsState extends State<Reports> {
                             ],
                           ),
 
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                //Report content description title
-                                const ReportsContentDescription(),
+                          child: const Column(
+                            children: [
+                              NumberContentTitle(),
+                              SizedBox(
+                                height: 20,
+                              ),
 
-                                //Row for 2 expanded container
-                                //Row1
-                                const Row(
-                                  children: [
-                                    //Expanded container 1
-                                    ReportsUserSatisfaction(),
-                                    SizedBox(
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                    //Expanded container 2
-                                    ReportsUsability(),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                              //Row for 2 expanded container
+                              //Row1
+                              Row(
+                                children: [
+                                  //Expanded container 1
+                                  NumberOverallUsers(),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                  ),
 
-                                //Row for 2 expanded container
-                                //Row 2
-                                const Row(
-                                  children: [
-                                    //Expanded container 3
-                                    ReportsInterface(),
-                                    SizedBox(
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                    //Expanded container 4
-                                    ReportsSuggestions(),
-                                  ],
-                                ),
+                                  //Expanded container 2
+                                  NumberNewUsers(),
+                                ],
+                              ),
 
-                                //Suggestions
-                                const ReportsContentSuggestions(),
+                              SizedBox(
+                                height: 10,
+                              ),
 
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.amber,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 14),
-                                        child: Container(
-                                          height: 750,
-                                          color: Colors.blue,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              //Row for 2 expanded container
+                              //Row 2
+                              Row(
+                                children: [
+                                  //Expanded container 3
+                                  NumberFarmers(),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                  ),
 
-                                //First comment
-                                const ReportsComments(),
-                              ],
-                            ),
+                                  //Expanded container 4
+                                  NumberConsumers(),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -354,14 +315,14 @@ class _ReportsState extends State<Reports> {
                       height: 80,
                     ),
 
-                    //Platform icon and label
-                    ReportsRevenueOptionsBtn(),
+                    //Number of users icon and label
+                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    ReportsPlatformOptionsBtn(),
+                    ReportsRevenueOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),
@@ -374,12 +335,6 @@ class _ReportsState extends State<Reports> {
 
                     //Selling icon and label
                     ReportsSellingOptionsBtn(),
-                    SizedBox(
-                      height: 25,
-                    ),
-
-                    //Number of users icon and label
-                    ReportsNumberOptionsBtn(),
                     SizedBox(
                       height: 25,
                     ),

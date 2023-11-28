@@ -241,6 +241,16 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                               if (snapshot.hasData) {
                                                 final pendingFarmers =
                                                     snapshot.data!.docs;
+                                                if (pendingFarmers.isEmpty) {
+                                                  Text(
+                                                    'No pending farmers accounts',
+                                                    style: Poppins.contentTitle
+                                                        .copyWith(
+                                                      color: const Color(
+                                                          0xFF09051C),
+                                                    ),
+                                                  );
+                                                }
                                                 return ListView.builder(
                                                   itemCount:
                                                       pendingFarmers.length,
@@ -543,15 +553,27 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                 if (snapshot.connectionState ==
                                                     ConnectionState.active) {
                                                   if (snapshot.hasData) {
-                                                    final pendingFarmers =
+                                                    final pendingConsumer =
                                                         snapshot.data!.docs;
+                                                    if (pendingConsumer
+                                                        .isEmpty) {
+                                                      Text(
+                                                        'No pending consumer accounts',
+                                                        style: Poppins
+                                                            .contentTitle
+                                                            .copyWith(
+                                                          color: const Color(
+                                                              0xFF09051C),
+                                                        ),
+                                                      );
+                                                    }
                                                     return ListView.builder(
-                                                      itemCount:
-                                                          pendingFarmers.length,
+                                                      itemCount: pendingConsumer
+                                                          .length,
                                                       itemBuilder:
                                                           (context, index) {
                                                         final consumer =
-                                                            pendingFarmers[
+                                                            pendingConsumer[
                                                                 index];
                                                         return ListTile(
                                                           title: Container(

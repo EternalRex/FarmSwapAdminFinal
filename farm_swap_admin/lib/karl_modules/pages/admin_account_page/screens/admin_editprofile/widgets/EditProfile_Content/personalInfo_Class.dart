@@ -92,7 +92,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -138,7 +138,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -193,7 +193,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -239,7 +239,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -294,7 +294,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -340,7 +340,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -394,7 +394,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -444,7 +444,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -500,7 +500,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),
@@ -549,7 +549,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                               Container(
                                 height: 50,
-                                width: 325,
+                                width: 315,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(5),

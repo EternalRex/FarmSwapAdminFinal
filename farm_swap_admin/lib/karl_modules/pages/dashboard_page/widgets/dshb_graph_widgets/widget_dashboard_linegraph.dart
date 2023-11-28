@@ -87,7 +87,7 @@ class DashboardLineChart extends StatelessWidget {
         color: Colors.purple,
         barWidth: 5,
         isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
       );
 
   LineChartBarData get lineChartData3 => LineChartBarData(

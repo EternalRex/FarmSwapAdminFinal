@@ -125,22 +125,6 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                     SizedBox(
                       width: 100,
                       child: Text(
-                        'User',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    SizedBox(
-                      width: 100,
-                      child: Text(
                         'Name',
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -298,20 +282,6 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                 const SizedBox(
                   width: 25,
                 ),
-                //this expanded holding the userRole of the user in each tile
-                Text(
-                  "${data["userRole"]}",
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                const SizedBox(
-                  width: 35,
-                ),
                 //this expanded holding the profilepic, firstname, last name and address of the user
                 SizedBox(
                   width: 230,
@@ -340,6 +310,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                       //this column holds the admin users info
                       //like firstname, lastname and address
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //first column that holds the admin user firstname and username
@@ -416,7 +387,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                         icon: const Icon(
                           Icons.add_circle,
                           size: 20,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                         onPressed: () {
                           setState(() {
@@ -702,20 +673,6 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
               const SizedBox(
                 width: 25,
               ),
-              //this expanded holding the userRole of the user in each tile
-              Text(
-                "${data["userRole"]}",
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              const SizedBox(
-                width: 35,
-              ),
               //this expanded holding the profilepic, firstname, last name and address of the user
               SizedBox(
                 width: 230,
@@ -743,6 +700,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                     //this column holds the admin users info
                     //like firstname, lastname and address
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //first column that holds the admin user firstname and username
@@ -819,7 +777,7 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                       icon: const Icon(
                         Icons.add_circle,
                         size: 20,
-                        color: Colors.green,
+                        color: Colors.blue,
                       ),
                       onPressed: () {
                         setState(() {

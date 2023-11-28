@@ -29,7 +29,7 @@ class ForgotPassTextfield extends StatelessWidget {
         ),
       ),
       child: SizedBox(
-        width: 300,
+        width: 261,
         child: TextField(
           controller: controller,
           obscureText: isPassword,
