@@ -9,12 +9,14 @@ import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/wi
 import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/widget/wallet_textfield.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard_epxanded1_items.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -980,6 +982,25 @@ class _RequestBalanceConsumerListState
                                                                             );
                                                                           });
                                                                     } else {
+                                                                      AdminLogsInsertDataDb
+                                                                          adminLogs =
+                                                                          AdminLogsInsertDataDb();
+                                                                      //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                      final email = FirebaseAuth
+                                                                          .instance
+                                                                          .currentUser!
+                                                                          .email;
+                                                                      final userId = FirebaseAuth
+                                                                          .instance
+                                                                          .currentUser!
+                                                                          .uid;
+                                                                      /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                      adminLogs.createAdminLogs(
+                                                                          email,
+                                                                          userId,
+                                                                          "Accept_Consumer_CashIn_Request",
+                                                                          DateTime
+                                                                              .now());
                                                                       /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
@@ -1042,6 +1063,12 @@ class _RequestBalanceConsumerListState
                                                                                 setState(() {
                                                                                   widget.selectedId = "${document["userId"]}";
                                                                                 });
+                                                                                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                                adminLogs.createAdminLogs(email, userId, "Decline_Consumer_CashIn_Request", DateTime.now());
 
                                                                                 await wallet.updateStatus("DECLINED", documentId);
 
@@ -1496,6 +1523,13 @@ class _RequestBalanceConsumerListState
                                                                                         widget.selectedId = "${document["userId"]}";
                                                                                       });
                                                                                       String cashOutAmount = "${document["amount"]} ";
+
+                                                                                      AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                      //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                      final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                      final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                      /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                                      adminLogs.createAdminLogs(email, userId, "Accept_Consumer_Cashout_Request", DateTime.now());
                                                                                       //this will decrement the balance of the user
                                                                                       await wallet.updateBalance1(cashOutAmount, widget.selectedId);
                                                                                       await wallet.updateStatus("Approved", documentId);
@@ -1570,6 +1604,12 @@ class _RequestBalanceConsumerListState
                                                                                 setState(() {
                                                                                   widget.selectedId = "${document["userId"]}";
                                                                                 });
+                                                                                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                                adminLogs.createAdminLogs(email, userId, "Decline_Consumer_Cashout_Request", DateTime.now());
 
                                                                                 await wallet.updateStatus("DECLINED", documentId);
 
@@ -1785,11 +1825,10 @@ class _RequestBalanceConsumerListState
                                     onPressed: () async {
                                       String documentId = document.id;
                                       setState(() {
-                                        widget.selectedId =
-                                            "${document["userId"]}";
+                                        widget.selectedId = "${data["userId"]}";
                                       });
 
-                                      String requestType = document["request"];
+                                      String requestType = data["request"];
 
                                       showDialog(
                                         context: context,
@@ -1797,14 +1836,14 @@ class _RequestBalanceConsumerListState
                                           return AlertDialog(
                                             title: const Text("Note!"),
                                             content: Text(
-                                                "This account is requesting for ${document["request"]}"),
+                                                "This account is requesting for ${data["request"]}"),
                                             actions: <Widget>[
                                               TextButton(
                                                   child: const Text("Ok"),
                                                   onPressed: () async {
                                                     setState(() {
                                                       widget.selectedId =
-                                                          "${document["userId"]}";
+                                                          "${data["userId"]}";
                                                     });
                                                     Navigator.of(context)
                                                         .pop(); // this will close the dialog box
@@ -1927,7 +1966,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["request"]} ",
+                                                                        "${data["request"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -1966,7 +2005,7 @@ class _RequestBalanceConsumerListState
                                                                         ),
                                                                       ),
                                                                       Text(
-                                                                        "${document["userId"]} ",
+                                                                        "${data["userId"]} ",
                                                                         style: Poppins
                                                                             .adminName
                                                                             .copyWith(
@@ -2007,8 +2046,8 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["firstname"]} " +
-                                                                              "${document["lastname"]} ",
+                                                                          "${data["firstname"]} " +
+                                                                              "${data["lastname"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2050,7 +2089,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["contactnum"]} ",
+                                                                          "${data["contactnum"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2092,7 +2131,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["address"]} ",
+                                                                          "${data["address"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2134,7 +2173,7 @@ class _RequestBalanceConsumerListState
                                                                         flex: 1,
                                                                         child:
                                                                             Text(
-                                                                          "${document["amount"]} ",
+                                                                          "${data["amount"]} ",
                                                                           style: Poppins
                                                                               .adminName
                                                                               .copyWith(
@@ -2199,7 +2238,7 @@ class _RequestBalanceConsumerListState
                                                                         child:
                                                                             CachedNetworkImage(
                                                                           imageUrl:
-                                                                              document["proofPhoto"],
+                                                                              data["proofPhoto"],
                                                                           width:
                                                                               230,
                                                                           height:
@@ -2243,7 +2282,7 @@ class _RequestBalanceConsumerListState
                                                                         enabled:
                                                                             true,
                                                                         label: Text(
-                                                                            "${document["amount"]}"),
+                                                                            "${data["amount"]}"),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -2297,6 +2336,25 @@ class _RequestBalanceConsumerListState
                                                                           );
                                                                         });
                                                                   } else {
+                                                                    AdminLogsInsertDataDb
+                                                                        adminLogs =
+                                                                        AdminLogsInsertDataDb();
+                                                                    //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                    final email = FirebaseAuth
+                                                                        .instance
+                                                                        .currentUser!
+                                                                        .email;
+                                                                    final userId = FirebaseAuth
+                                                                        .instance
+                                                                        .currentUser!
+                                                                        .uid;
+                                                                    /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                    adminLogs.createAdminLogs(
+                                                                        email,
+                                                                        userId,
+                                                                        "Accept_Consumer_CashIn_Request",
+                                                                        DateTime
+                                                                            .now());
                                                                     /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
@@ -2363,6 +2421,12 @@ class _RequestBalanceConsumerListState
                                                                               setState(() {
                                                                                 widget.selectedId = "${document["userId"]}";
                                                                               });
+                                                                              AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                              //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                              final email = FirebaseAuth.instance.currentUser!.email;
+                                                                              final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                              /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                              adminLogs.createAdminLogs(email, userId, "Decline_Consumer_CashIn_Request", DateTime.now());
 
                                                                               await wallet.updateStatus("DECLINED", documentId);
 
@@ -2833,6 +2897,13 @@ class _RequestBalanceConsumerListState
                                                                                       widget.selectedId = "${document["userId"]}";
                                                                                     });
                                                                                     String cashOutAmount = "${document["amount"]} ";
+
+                                                                                    AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                    //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                    final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                    final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                    /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                                    adminLogs.createAdminLogs(email, userId, "Accept_Consumer_Cashout_Request", DateTime.now());
                                                                                     //this will decrement the balance of the user
                                                                                     await wallet.updateBalance1(cashOutAmount, widget.selectedId);
                                                                                     await wallet.updateStatus("Approved", documentId);
@@ -2909,6 +2980,12 @@ class _RequestBalanceConsumerListState
                                                                               setState(() {
                                                                                 widget.selectedId = "${document["userId"]}";
                                                                               });
+                                                                              AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                              //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                              final email = FirebaseAuth.instance.currentUser!.email;
+                                                                              final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                              /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                              adminLogs.createAdminLogs(email, userId, "Decline_Consumer_Cashout_Request", DateTime.now());
 
                                                                               await wallet.updateStatus("DECLINED", documentId);
 

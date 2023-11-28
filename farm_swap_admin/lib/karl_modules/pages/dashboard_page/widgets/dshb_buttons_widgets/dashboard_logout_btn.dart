@@ -29,12 +29,12 @@ class DashLogoutOptionBtn extends StatelessWidget {
             TextButton(
               onPressed: () {
                 /*So mag kuha ni siya sa admin logs nya iyang description kay ni login */
-                /*adminLogs.createAdminLogs(
+                adminLogs.createAdminLogs(
                     email,
                     FirebaseAuth.instance.currentUser!.uid,
-                    "Account_LogOut",
+                    "Admin_LogOut",
                     DateTime.now());
-                    */
+
                 /*Changes the login status of the user into false */
                 onlineStatus.updateOnlineStatus(
                     FirebaseAuth.instance.currentUser!.uid, active);

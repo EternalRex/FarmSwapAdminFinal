@@ -21,7 +21,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -541,7 +540,7 @@ class _AdminLogs extends State<AdminLogs> {
       }
     }
     //certain actions or access is restricted for users whose email doesn't match the email associated with the farmer's data
-    else if (FirebaseAuth.instance.currentUser!.email != admin['Admin Email']) {
+    else {
       //Extracts a timestamp called 'Activity Date' from the document.
       Timestamp dateTimestamp = document['Activity Date'];
 

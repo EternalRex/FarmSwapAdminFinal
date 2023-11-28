@@ -3,6 +3,7 @@ import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/poppins_text.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/database/archive_reactivate.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsLogo/listings_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_admin_account_btn.dart';
@@ -17,6 +18,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Lis
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/ListingsSideMenu_btns/listings_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -782,6 +784,14 @@ class _ArchivedBarterDetailsState extends State<ArchivedBarterDetails> {
           actions: [
             TextButton(
               onPressed: () {
+                //An instance for logging admin actions.
+                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                final email = FirebaseAuth.instance.currentUser!.email;
+                final userId = FirebaseAuth.instance.currentUser!.uid;
+                /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+                adminLogs.createAdminLogs(
+                    email, userId, "Reactivate_Barter_Listing", DateTime.now());
                 archiveReactivateListing();
                 successReactivate();
               },

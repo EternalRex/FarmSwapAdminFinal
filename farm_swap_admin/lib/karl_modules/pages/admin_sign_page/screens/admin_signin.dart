@@ -163,13 +163,10 @@ class _SignInAdminState extends State<SignInAdmin> {
                             onPressed: _togglePasswordVisibility,
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                       ],
                     ),
                   ),
-                  /*LABEL ON CHOOSING TO CONTINUE WITH GOOGLE */
+                  /*LABEL ON CHOOSING TO CONTINUE WITH GOOGLE
                   Text(
                     "Or continue with",
                     style: TextStyle(
@@ -177,9 +174,9 @@ class _SignInAdminState extends State<SignInAdmin> {
                       fontSize: 12,
                       fontWeight: FontWeight.w900,
                     ),
-                  ),
+                  ), */
                   const SizedBox(
-                    height: 25,
+                    height: 10,
                   ),
                   /**
                    * this row holds the google icon, textbutton for forgotten password and sign up
@@ -190,7 +187,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                       Column(
                         children: [
                           //elevatedbutton icon for sign in using google account
-                          ElevatedButton.icon(
+                          /*ElevatedButton.icon(
                             onPressed: () async {},
                             icon: SvgPicture.asset(
                               "assets/clare_assets/svg/google.svg",
@@ -213,7 +210,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                               ),
                             ),
                           ),
-
+                          */
                           Row(
                             children: [
                               //this padding will navigate to forgot password page to reset password if forgotten
@@ -367,6 +364,12 @@ class _SignInAdminState extends State<SignInAdmin> {
             Navigator.of(context)
                 .pushNamed(RoutesManager.deactivateaccountpage);
           } else {
+            /*So mag kuha ni siya sa admin logs nya iyang description kay ni password reset */
+            adminLogs.createAdminLogs(
+                email,
+                FirebaseAuth.instance.currentUser!.uid,
+                "Admin_Login",
+                DateTime.now());
             // Update online status and navigate to the dashboard
             onlineStatus.updateOnlineStatus(user.uid, true);
             // ignore: use_build_context_synchronously
