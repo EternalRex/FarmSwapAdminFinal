@@ -81,32 +81,31 @@ class _RevenueLineChartState extends State<RevenueLineChart> {
         ),
         SizedBox(
           height: 200,
-          child: Expanded(
-            child: LineChart(
-              LineChartData(
-                titlesData: titlesData,
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: List.generate(
-                      monthlyTotals.length,
-                      (index) => FlSpot(index.toDouble(), monthlyTotals[index]),
-                    ),
-                    isCurved: true,
-                    color: greenNormal,
-                    belowBarData: BarAreaData(
-                      show: false,
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color.fromARGB(255, 0, 255, 174),
-                          Color.fromARGB(255, 0, 255, 115),
-                        ],
-                      ),
+          width: 365,
+          child: LineChart(
+            LineChartData(
+              titlesData: titlesData,
+              lineBarsData: [
+                LineChartBarData(
+                  spots: List.generate(
+                    monthlyTotals.length,
+                    (index) => FlSpot(index.toDouble(), monthlyTotals[index]),
+                  ),
+                  isCurved: true,
+                  color: greenNormal,
+                  belowBarData: BarAreaData(
+                    show: false,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 0, 255, 174),
+                        Color.fromARGB(255, 0, 255, 115),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         )

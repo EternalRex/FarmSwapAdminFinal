@@ -84,33 +84,32 @@ class _BarterTransChartState extends State<BarterTransChart> {
           ),
           SizedBox(
             height: 200,
-            child: Expanded(
-              child: BarChart(
-                BarChartData(
-                  alignment: BarChartAlignment.spaceAround,
-                  maxY: monthlyTotals
-                          .reduce((max, value) => max > value ? max : value) +
-                      5,
-                  titlesData: barTitlesData,
-                  borderData: barBordersData,
-                  barTouchData: barTouchedData,
-                  barGroups: List.generate(
-                    monthlyTotals.length,
-                    (index) => BarChartGroupData(
-                      x: index,
-                      barRods: [
-                        BarChartRodData(
-                          toY: monthlyTotals[index],
-                          color: greenNormal,
-                          width: 16,
-                          borderRadius: const BorderRadius.all(Radius.zero),
-                        ),
-                      ],
-                      showingTooltipIndicators: [0],
-                    ),
+            width: 370,
+            child: BarChart(
+              BarChartData(
+                alignment: BarChartAlignment.spaceAround,
+                maxY: monthlyTotals
+                        .reduce((max, value) => max > value ? max : value) +
+                    5,
+                titlesData: barTitlesData,
+                borderData: barBordersData,
+                barTouchData: barTouchedData,
+                barGroups: List.generate(
+                  monthlyTotals.length,
+                  (index) => BarChartGroupData(
+                    x: index,
+                    barRods: [
+                      BarChartRodData(
+                        toY: monthlyTotals[index],
+                        color: greenNormal,
+                        width: 16,
+                        borderRadius: const BorderRadius.all(Radius.zero),
+                      ),
+                    ],
+                    showingTooltipIndicators: [0],
                   ),
-                  gridData: const FlGridData(show: false),
                 ),
+                gridData: const FlGridData(show: false),
               ),
             ),
           ),
