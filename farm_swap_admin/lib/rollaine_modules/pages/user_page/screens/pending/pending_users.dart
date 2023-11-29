@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
@@ -15,6 +16,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_wallet_btn.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -388,6 +390,21 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                                           ),
                                                                           onPressed:
                                                                               () {
+                                                                            //An instance for logging admin actions.
+                                                                            AdminLogsInsertDataDb
+                                                                                adminLogs =
+                                                                                AdminLogsInsertDataDb();
+                                                                            //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                            final email =
+                                                                                FirebaseAuth.instance.currentUser!.email;
+                                                                            final userId =
+                                                                                FirebaseAuth.instance.currentUser!.uid;
+                                                                            /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+                                                                            adminLogs.createAdminLogs(
+                                                                                email,
+                                                                                userId,
+                                                                                "Accept_Farmer_Pending_Account",
+                                                                                DateTime.now());
                                                                             FirebaseFirestore.instance.collection('sample_FarmerUsers').doc(farmers.id).update({
                                                                               'accountStatus': 'Active'
                                                                             }).then(
@@ -676,6 +693,13 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                                                 shadowColor: Colors.transparent,
                                                                               ),
                                                                               onPressed: () {
+                                                                                //An instance for logging admin actions.
+                                                                                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+                                                                                adminLogs.createAdminLogs(email, userId, "Accept_Pending_Consumer_Account", DateTime.now());
                                                                                 FirebaseFirestore.instance.collection('sample_ConsumerUsers').doc(consumer.id).update({
                                                                                   'accountStatus': 'Active'
                                                                                 }).then(

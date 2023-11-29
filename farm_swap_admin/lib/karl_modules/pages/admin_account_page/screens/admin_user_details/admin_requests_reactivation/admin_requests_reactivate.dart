@@ -704,9 +704,9 @@ class _RequestReactivationListsState extends State<RequestReactivationLists> {
                                             Navigator.of(context)
                                                 .pop(); // this will close the dialog box
                                             /**
-                                                                              * In this function when the button is clicked it will update the selected id
-                                                                              * the account status into active then it will also create admin logs
-                                                                              */
+                                            * In this function when the button is clicked it will update the selected id
+                                            * the account status into active then it will also create admin logs
+                                            */
                                             await updateField(
                                                 "Active", widget.selectedId);
 

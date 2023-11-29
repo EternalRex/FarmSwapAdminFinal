@@ -1282,7 +1282,7 @@ class _AdminSpecificDetailsWrapperState
 
     // Create an admin log with a activity archive admin account
     adminLogs.createAdminLogs(
-        email, userID, "Archive_Admin_Account", DateTime.now());
+        email, userID, "Archived_Admin_Account", DateTime.now());
 
     try {
       // Update the Firestore document with the new data

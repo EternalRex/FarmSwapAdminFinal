@@ -29,7 +29,7 @@ class RetrieveDeactivateDocId {
 
     //this will create a log of the user which is deactivate account
     adminLogs.createAdminLogs(
-        userEmail, userId, "Account_Deactivated", DateTime.now());
+        userEmail, userId, "Deactivate_Account", DateTime.now());
 
     // Update a field in the Firestore document using the retrieved document ID
     await db.collection('AdminUsers').doc(docId).update({

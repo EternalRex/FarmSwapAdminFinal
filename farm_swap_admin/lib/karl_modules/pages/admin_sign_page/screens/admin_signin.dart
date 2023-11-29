@@ -163,11 +163,20 @@ class _SignInAdminState extends State<SignInAdmin> {
                             onPressed: _togglePasswordVisibility,
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                       ],
                     ),
+                  ),
+                  /*LABEL ON CHOOSING TO CONTINUE WITH GOOGLE
+                  Text(
+                    "Or continue with",
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ), */
+                  const SizedBox(
+                    height: 10,
                   ),
                   /**
                    * this row holds the google icon, textbutton for forgotten password and sign up
@@ -177,6 +186,31 @@ class _SignInAdminState extends State<SignInAdmin> {
                     children: [
                       Column(
                         children: [
+                          //elevatedbutton icon for sign in using google account
+                          /*ElevatedButton.icon(
+                            onPressed: () async {},
+                            icon: SvgPicture.asset(
+                              "assets/clare_assets/svg/google.svg",
+                            ),
+                            label: const Text('Google'),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(10),
+                              fixedSize: const Size(160, 45),
+                              textStyle: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w900),
+                              backgroundColor: Colors.white,
+                              foregroundColor:
+                                  const Color.fromARGB(255, 85, 84, 84),
+                              elevation: 15,
+                              shadowColor: shadow,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
+                            ),
+                          ),
+                          */
 
                           Row(
                             children: [
@@ -331,6 +365,12 @@ class _SignInAdminState extends State<SignInAdmin> {
             Navigator.of(context)
                 .pushNamed(RoutesManager.deactivateaccountpage);
           } else {
+            /*So mag kuha ni siya sa admin logs nya iyang description kay ni password reset */
+            adminLogs.createAdminLogs(
+                email,
+                FirebaseAuth.instance.currentUser!.uid,
+                "Admin_Login",
+                DateTime.now());
             // Update online status and navigate to the dashboard
             onlineStatus.updateOnlineStatus(user.uid, true);
             // ignore: use_build_context_synchronously

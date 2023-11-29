@@ -947,7 +947,7 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
 
     //Log the admin's action.
     adminLogs.createAdminLogs(
-        email, userId, "Decline_Reactivation_Farmer", DateTime.now());
+        email, userId, "Decline_Reactivation_Consumer", DateTime.now());
 
     try {
       //Attempts to update the Firestore document using the update method.

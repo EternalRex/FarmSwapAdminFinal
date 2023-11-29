@@ -8,9 +8,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard_epxanded1_items.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
@@ -348,7 +350,14 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
     String dateFinal = DateFormat('yyyy-MM-dd').format(dateTime);
 
     UpdateWallet wallet = UpdateWallet();
+    AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+    //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+    final email = FirebaseAuth.instance.currentUser!.email;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
 
+    /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+    adminLogs.createAdminLogs(
+        email, userId, "Accept_Farmer_Cashout_Request", DateTime.now());
     //the searched transaction will display here
     if (searchValue.isNotEmpty) {
       // Convert search value to lowercase
@@ -995,13 +1004,20 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                                 () async {
                                                                               Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                              Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                              Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
                                                                             },
                                                                           ),
                                                                         ],
                                                                       );
                                                                     });
                                                               } else {
+                                                                /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                adminLogs.createAdminLogs(
+                                                                    email,
+                                                                    userId,
+                                                                    "Accept_Farmer_CashIn_Request",
+                                                                    DateTime
+                                                                        .now());
                                                                 /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
@@ -1038,7 +1054,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                                 () async {
                                                                               Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                              Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                              Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
                                                                             },
                                                                           ),
                                                                         ],
@@ -1081,6 +1097,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             setState(() {
                                                                               widget.selectedId = "${document["userId"]}";
                                                                             });
+
+                                                                            /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                            adminLogs.createAdminLogs(
+                                                                                email,
+                                                                                userId,
+                                                                                "Decline_Farmer_CashIn_Request",
+                                                                                DateTime.now());
 
                                                                             await wallet.updateStatus("DECLINED",
                                                                                 documentId);
@@ -1541,6 +1564,9 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                                   widget.selectedId = "${document["userId"]}";
                                                                                 });
 
+                                                                                /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                                adminLogs.createAdminLogs(email, userId, "Accept_Farmer_Cashout_Request", DateTime.now());
+
                                                                                 String cashOutAmount = "${document["amount"]} ";
                                                                                 //this will decrement the balance of the user
                                                                                 await wallet.updateBalance1(cashOutAmount, widget.selectedId);
@@ -1628,6 +1654,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             setState(() {
                                                                               widget.selectedId = "${document["userId"]}";
                                                                             });
+
+                                                                            /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                            adminLogs.createAdminLogs(
+                                                                                email,
+                                                                                userId,
+                                                                                "Decline_Farmer_Cashout_Request",
+                                                                                DateTime.now());
 
                                                                             await wallet.updateStatus("DECLINED",
                                                                                 documentId);
@@ -2347,13 +2380,20 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                               () async {
                                                                             Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                            Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                            Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
                                                                           },
                                                                         ),
                                                                       ],
                                                                     );
                                                                   });
                                                             } else {
+                                                              /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                              adminLogs.createAdminLogs(
+                                                                  email,
+                                                                  userId,
+                                                                  "Accept_Farmer_CashIn_Request",
+                                                                  DateTime
+                                                                      .now());
                                                               /**
                                                             * In this function when the button is clicked it will update the selected id
                                                             * the balance and the status then it will also create admin logs
@@ -2390,7 +2430,7 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                               () async {
                                                                             Navigator.of(context).pop(); // Close the AlertDialog
 
-                                                                            Navigator.of(context).pushNamed(RoutesManager.walletPage);
+                                                                            Navigator.of(context).pushNamed(RoutesManager.requestwalletpage);
                                                                           },
                                                                         ),
                                                                       ],
@@ -2433,6 +2473,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             widget.selectedId =
                                                                                 "${document["userId"]}";
                                                                           });
+
+                                                                          /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                          adminLogs.createAdminLogs(
+                                                                              email,
+                                                                              userId,
+                                                                              "Decline_Farmer_CashIn_Request",
+                                                                              DateTime.now());
 
                                                                           await wallet.updateStatus(
                                                                               "DECLINED",
@@ -2900,6 +2947,9 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                                 widget.selectedId = "${document["userId"]}";
                                                                               });
 
+                                                                              /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                              adminLogs.createAdminLogs(email, userId, "Accept_Farmer_Cashout_Request", DateTime.now());
+
                                                                               String cashOutAmount = "${document["amount"]} ";
                                                                               //this will decrement the balance of the user
                                                                               await wallet.updateBalance1(cashOutAmount, widget.selectedId);
@@ -2987,6 +3037,13 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                                                                             widget.selectedId =
                                                                                 "${document["userId"]}";
                                                                           });
+
+                                                                          /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                                                          adminLogs.createAdminLogs(
+                                                                              email,
+                                                                              userId,
+                                                                              "Decline_Farmer_Cashout_Request",
+                                                                              DateTime.now());
 
                                                                           await wallet.updateStatus(
                                                                               "DECLINED",

@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/provider/Specific_walletUser_details_Provider.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_logs/database/admin_logs_insert.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -422,6 +424,19 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                                     TextButton(
                                       child: const Text("Add"),
                                       onPressed: () async {
+                                        AdminLogsInsertDataDb adminLogs =
+                                            AdminLogsInsertDataDb();
+                                        //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                        final email = FirebaseAuth
+                                            .instance.currentUser!.email;
+                                        final userId = FirebaseAuth
+                                            .instance.currentUser!.uid;
+                                        /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                        adminLogs.createAdminLogs(
+                                            email,
+                                            userId,
+                                            "Add_Farmer_Balance",
+                                            DateTime.now());
                                         /*
                                       In this function when the ADD button is clicked 
                                       it will update the selected id the balance 
@@ -518,6 +533,19 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                                         final deductAmount =
                                             double.parse(amountController.text);
                                         if (balance >= deductAmount) {
+                                          AdminLogsInsertDataDb adminLogs =
+                                              AdminLogsInsertDataDb();
+                                          //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                          final email = FirebaseAuth
+                                              .instance.currentUser!.email;
+                                          final userId = FirebaseAuth
+                                              .instance.currentUser!.uid;
+                                          /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                          adminLogs.createAdminLogs(
+                                              email,
+                                              userId,
+                                              "Deduct_Farmer_Balance",
+                                              DateTime.now());
                                           /*
                                       In this function when the DEDUCT button is clicked 
                                       it will update the selected id the balance 
@@ -787,6 +815,16 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                                   TextButton(
                                     child: const Text("Add"),
                                     onPressed: () async {
+                                      AdminLogsInsertDataDb adminLogs =
+                                          AdminLogsInsertDataDb();
+                                      //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                      final email = FirebaseAuth
+                                          .instance.currentUser!.email;
+                                      final userId = FirebaseAuth
+                                          .instance.currentUser!.uid;
+                                      /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                      adminLogs.createAdminLogs(email, userId,
+                                          "Add_Farmer_Balance", DateTime.now());
                                       /*
                                       In this function when the ADD button is clicked 
                                       it will update the selected id the balance 
@@ -881,6 +919,19 @@ class _FarmerWalletTabBarViewState extends State<FarmerWalletTabBarView> {
                                       final deductAmount =
                                           double.parse(amountController.text);
                                       if (balance >= deductAmount) {
+                                        AdminLogsInsertDataDb adminLogs =
+                                            AdminLogsInsertDataDb();
+                                        //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                        final email = FirebaseAuth
+                                            .instance.currentUser!.email;
+                                        final userId = FirebaseAuth
+                                            .instance.currentUser!.uid;
+                                        /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                        adminLogs.createAdminLogs(
+                                            email,
+                                            userId,
+                                            "Deduct_Farmer_Balance",
+                                            DateTime.now());
                                         /*
                                       In this function when the DEDUCT button is clicked 
                                       it will update the selected id the balance 
