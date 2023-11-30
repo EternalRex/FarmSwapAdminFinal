@@ -1,24 +1,25 @@
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/consumer_dispute/consumer_dispute_display.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/farmer_dispute/farmer_dispute_display.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_adminaccount_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_commu_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dashboard_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dispute_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_history_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_listings_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_logout_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_options_header_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_reports_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_request_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_transaction_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_useraccout_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_wallet_btn.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/dispute_history_title.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/dispute_text.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_search.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_txt.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
-import '../../../../constants/Colors/colors.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../../constants/Colors/colors.dart';
 
 class Dispute extends StatefulWidget {
   const Dispute({super.key});
@@ -28,6 +29,10 @@ class Dispute extends StatefulWidget {
 }
 
 class _DisputeState extends State<Dispute> {
+/*Variable na ma ilis ilisan ang value, nya depende sa value ani na variable ang screen na mo
+display sa center page */
+  String screenType = "FARMER";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,8 +148,12 @@ class _DisputeState extends State<Dispute> {
                   appBar: AppBar(
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
-                    title: const DisputeTitleText(
-                      myText: "Dispute",
+                    title: DisputeTitleText(
+                      myText: (screenType == "RESOLVED")
+                          ? "Resolved Disputes"
+                          : (screenType == "FARMER")
+                              ? "Farmer Disputes"
+                              : "Consumer Disputes",
                       myColor: Color(0xFF09041B),
                     ),
                     backgroundColor: Colors.transparent,
@@ -176,8 +185,7 @@ class _DisputeState extends State<Dispute> {
                       Expanded(
                         child: Padding(
                           //Decorate the expanded area for the main content
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
+                          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                           child: Container(
                             //Design of the container
                             decoration: BoxDecoration(
@@ -198,80 +206,14 @@ class _DisputeState extends State<Dispute> {
 
                             //Column for main content
                             child: SingleChildScrollView(
+                              /*Mao ni screen na mag ilis ilis depended sa value sa variable */
                               child: Column(
                                 children: [
-                                  //Name
-                                  const DisputeHistoryTitle(),
-
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 80,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-
-                                          //Box shadow of the container
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: shadow,
-                                              blurRadius: 2,
-                                              offset: const Offset(1, 5),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 10),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Overall Users',
-                                                    style: Poppins.contentText
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 9,
-                                                  ),
-                                                  Text(
-                                                    '75',
-                                                    style:
-                                                        Poppins.digits.copyWith(
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            const LinearGradient(
-                                                          colors: <Color>[
-                                                            Color(0xFF53E78B),
-                                                            Color(0xFF14BE77),
-                                                          ],
-                                                        ).createShader(
-                                                          const Rect.fromLTWH(
-                                                              0.0,
-                                                              0.0,
-                                                              200.0,
-                                                              70.0),
-                                                        ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
+                                  (screenType == "RESOLVED")
+                                      ? const Text('Hi')
+                                      : (screenType == "FARMER")
+                                          ? const FarmerDisputeDisplay()
+                                          : const ConsumerDisputeDisplay(),
                                 ],
                               ),
                             ),
@@ -310,8 +252,7 @@ class _DisputeState extends State<Dispute> {
                     /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
                     AND THE NOTIFICATION ICON*/
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                       child: Row(
                         children: [
                           /*PROFILE TEXT */
@@ -340,11 +281,95 @@ class _DisputeState extends State<Dispute> {
                     const SizedBox(
                       height: 180,
                     ),
-                    const DisputeHistoryOptionsBtn(),
+                    /*Redirecting to Consumer Display */
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                screenType = "CONSUMER";
+                              });
+                            },
+                            child: const Row(
+                              children: [
+                                DisputeText(myText: "Consumer Dispute", myColor: Colors.black),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.gavel,
+                                  size: 13,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
-                    const DisputeRequestOptionsBtn(),
+                    /*Redirecting to Farmer Dispute Displays */
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                screenType = "FARMER";
+                              });
+                            },
+                            child: const Row(
+                              children: [
+                                DisputeText(myText: "Farmer Dispute", myColor: Colors.black),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.gavel,
+                                  size: 13,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                screenType = "RESOLVED";
+                              });
+                            },
+                            child: const Row(
+                              children: [
+                                DisputeText(myText: "Resolved Dispute", myColor: Colors.black),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.gavel,
+                                  size: 13,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
