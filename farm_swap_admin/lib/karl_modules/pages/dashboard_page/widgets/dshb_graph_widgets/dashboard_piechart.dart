@@ -14,10 +14,6 @@ class UsersPieChart extends StatefulWidget {
 
 class _UsersPieChartState extends State<UsersPieChart> {
 
-  /*This variable is used to keep track of the index of the section in 
-  the pie chart that is currently being touched or interacted with.*/
-  int touchedIndex = -1;
-
   //store the percentage of active users
   late double activeUsers = 0.0;
 
@@ -74,20 +70,6 @@ class _UsersPieChartState extends State<UsersPieChart> {
           width: 380,
           child: PieChart(
             PieChartData(
-              pieTouchData: PieTouchData(
-                touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                  setState(() {
-                    if (!event.isInterestedForInteractions ||
-                        pieTouchResponse == null ||
-                        pieTouchResponse.touchedSection == null) {
-                      touchedIndex = -1;
-                      return;
-                    }
-                    touchedIndex =
-                        pieTouchResponse.touchedSection!.touchedSectionIndex;
-                  });
-                },
-              ),
               centerSpaceRadius: 10,
               borderData: FlBorderData(show: false),
               sectionsSpace: 5,
@@ -129,8 +111,7 @@ class _UsersPieChartState extends State<UsersPieChart> {
     return List.generate(
       2,
       (i) {
-        final isTouched = i == touchedIndex;
-        final radius = isTouched ? 90.0 : 80.0;
+        const radius = 80.0;
         final shadows = [Shadow(color: shadow, blurRadius: 2)];
         switch (i) {
           case 0:

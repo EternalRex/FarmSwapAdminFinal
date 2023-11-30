@@ -268,34 +268,43 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                                           child: Row(
                                             children: [
                                               /*Farmers Title */
-                                              Text(
-                                                'Consumers',
-                                                style: Poppins.contentTitle
-                                                    .copyWith(
-                                                  color:
-                                                      const Color(0xFF09051C),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Consumers',
+                                                  style: Poppins.contentTitle
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
-                                                width: 480,
+                                                width: 5,
                                               ),
-                                              Text(
-                                                'Status',
-                                                style: Poppins.contentTitle
-                                                    .copyWith(
-                                                  color:
-                                                      const Color(0xFF09051C),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Status',
+                                                  style: Poppins.contentTitle
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
-                                                width: 80,
+                                                width: 10,
                                               ),
-                                              Text(
-                                                'Approval',
-                                                style: Poppins.contentTitle
-                                                    .copyWith(
-                                                  color:
-                                                      const Color(0xFF09051C),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Approval',
+                                                  style: Poppins.contentTitle
+                                                      .copyWith(
+                                                    color:
+                                                        const Color(0xFF09051C),
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -410,225 +419,240 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
                 Row(
                   children: [
                     //this padding holds the profile image of the consumer
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: //this will display the users profile picture in each listtile
-                          CachedNetworkImage(
-                        imageUrl: customer["profilePhoto"] ??
-                            "", // Provide a default empty string if it's null
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundImage: imageProvider,
-                          radius: 20,
-                        ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) {
-                          return const Icon(Icons.error);
-                        },
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: //this will display the users profile picture in each listtile
+                                CachedNetworkImage(
+                              imageUrl: customer["profilePhoto"] ??
+                                  "", // Provide a default empty string if it's null
+                              imageBuilder: (context, imageProvider) =>
+                                  CircleAvatar(
+                                backgroundImage: imageProvider,
+                                radius: 20,
+                              ),
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) {
+                                return const Icon(Icons.error);
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          //First name of farmer
+                          Text(
+                            "${customer["firstname"]}",
+                            style: Poppins.farmerName.copyWith(
+                              color: const Color(0xFF09051B),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          //Last name of farmer
+                          Text(
+                            "${customer["lastname"]}",
+                            style: Poppins.farmerName.copyWith(
+                              color: const Color(0xFF09051B),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    //First name of farmer
-                    Text(
-                      "${customer["firstname"]}",
-                      style: Poppins.farmerName.copyWith(
-                        color: const Color(0xFF09051B),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    //Last name of farmer
-                    Text(
-                      "${customer["lastname"]}",
-                      style: Poppins.farmerName.copyWith(
-                        color: const Color(0xFF09051B),
-                      ),
-                    ),
-                    //Status
-                    const SizedBox(
-                      width: 458,
                     ),
                     //Button for details where you will be redirected to farmer details
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //Details button
-                          SizedBox(
-                            height: 27,
-                            width: 60,
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color.fromARGB(255, 255, 196, 0),
-                                    Color.fromARGB(255, 255, 153, 0),
-                                  ],
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            //Details button
+                            SizedBox(
+                              height: 27,
+                              width: 60,
+                              child: DecoratedBox(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color.fromARGB(255, 255, 196, 0),
+                                      Color.fromARGB(255, 255, 153, 0),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'REQUESTING',
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 0.50,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'REQUESTING',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.50,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                    //Accept button
-                    const SizedBox(
-                      width: 66,
-                    ),
                     //Button for details where you will be redirected to farmer details
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    Expanded(
+                      flex: 1,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color(0xFF53E78B),
-                                  Color(0xFF14BE77),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(17.50),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
-                                shadowColor: Colors.transparent,
-                              ),
-                              onPressed: () async {
-                                //Update the state of the widget with the selected user's ID
-                                setState(() {
-                                  widget.selectedId = "${document["userId"]}";
-                                });
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                //Details button
+                                DecoratedBox(
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF53E78B),
+                                        Color(0xFF14BE77),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(17.50),
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      disabledForegroundColor:
+                                          Colors.transparent.withOpacity(0.38),
+                                      disabledBackgroundColor:
+                                          Colors.transparent.withOpacity(0.12),
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    onPressed: () async {
+                                      //Update the state of the widget with the selected user's ID
+                                      setState(() {
+                                        widget.selectedId =
+                                            "${document["userId"]}";
+                                      });
 
-                                //Uses the Provider package to set the user ID in a state management provider
-                                Provider.of<CustomerUserIdProvider>(context,
-                                        listen: false)
-                                    .setcustomerUserId(widget.selectedId);
+                                      //Uses the Provider package to set the user ID in a state management provider
+                                      Provider.of<CustomerUserIdProvider>(
+                                              context,
+                                              listen: false)
+                                          .setcustomerUserId(widget.selectedId);
 
-                                await updateField('ACTIVE', widget.selectedId);
+                                      await updateField(
+                                          'ACTIVE', widget.selectedId);
 
-                                //Navigates to a different screen
-                                // ignore: use_build_context_synchronously
-                                Navigator.of(context)
-                                    .pushNamed(RoutesManager.userAccountPage);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(
-                                  'Accept',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
+                                      //Navigates to a different screen
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.userAccountPage);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        'Accept',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: 0.50,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    //Decline button
-                    const SizedBox(width: 10),
-                    //Button for details where you will be redirected to farmer details
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //Details button
-                          DecoratedBox(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color(0xFF53E78B),
-                                  Color(0xFF14BE77),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(17.50),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                disabledForegroundColor:
-                                    Colors.transparent.withOpacity(0.38),
-                                disabledBackgroundColor:
-                                    Colors.transparent.withOpacity(0.12),
-                                shadowColor: Colors.transparent,
-                              ),
-                              onPressed: () async {
-                                //Update the state of the widget with the selected user's ID
-                                setState(() {
-                                  widget.selectedId = "${customer["userId"]}";
-                                });
+                          //Decline button
+                          const SizedBox(width: 10),
+                          //Button for details where you will be redirected to farmer details
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                //Details button
+                                DecoratedBox(
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF53E78B),
+                                        Color(0xFF14BE77),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(17.50),
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      disabledForegroundColor:
+                                          Colors.transparent.withOpacity(0.38),
+                                      disabledBackgroundColor:
+                                          Colors.transparent.withOpacity(0.12),
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    onPressed: () async {
+                                      //Update the state of the widget with the selected user's ID
+                                      setState(() {
+                                        widget.selectedId =
+                                            "${customer["userId"]}";
+                                      });
 
-                                //Uses the Provider package to set the user ID in a state management provider
-                                Provider.of<CustomerUserIdProvider>(context,
-                                        listen: false)
-                                    .setcustomerUserId(widget.selectedId);
+                                      //Uses the Provider package to set the user ID in a state management provider
+                                      Provider.of<CustomerUserIdProvider>(
+                                              context,
+                                              listen: false)
+                                          .setcustomerUserId(widget.selectedId);
 
-                                //Navigates to a different screen
-                                Navigator.of(context).pushNamed(
-                                    RoutesManager.detailsCustomerPage);
+                                      //Navigates to a different screen
+                                      Navigator.of(context).pushNamed(
+                                          RoutesManager.detailsCustomerPage);
 
-                                await updateField2(
-                                    'DEACTIVATED', widget.selectedId);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(
-                                  'Decline',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.50,
+                                      await updateField2(
+                                          'DEACTIVATED', widget.selectedId);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        'Decline',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: 0.50,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ],

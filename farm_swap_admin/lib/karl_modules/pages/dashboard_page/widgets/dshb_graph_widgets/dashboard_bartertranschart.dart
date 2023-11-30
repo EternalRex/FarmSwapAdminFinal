@@ -67,7 +67,7 @@ class _BarterTransChartState extends State<BarterTransChart> {
                   3, // You can customize the range of years displayed in the dropdown
                   (index) => DropdownMenuItem<int>(
                     value: DateTime.now().year - index,
-                    child: Text((DateTime.now().year - index).toString()),
+                    child: Text((DateTime.now().year + index).toString()),
                   ),
                 ),
                 onChanged: (value) {
