@@ -13,7 +13,7 @@ import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/ad
 import 'package:farm_swap_admin/karl_modules/pages/admin_sign_page/screens/admin_signin.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/main_%20chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dispute_page/dispute.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/dispute.dart';
 import 'package:farm_swap_admin/karl_modules/pages/intro_page/intro_page.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/communication_page/communication.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/listings_page/archived_listings.dart';

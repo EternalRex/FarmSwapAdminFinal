@@ -17,18 +17,17 @@ class DisputeRequestOptionsBtn extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: const DisputeText(
-                myText: 'Dispute Requests',
+                myText: 'Resolved Disputes',
                 myColor: Color(0xFF09041B),
               ),
             ),
             const SizedBox(
               width: 5,
             ),
-            const Image(
-              image: AssetImage(
-                  'assets/karl_assets/images/deactivate.png'),
-              height: 23,
-              width: 23,
+            const Icon(
+              Icons.check_box,
+              color: Colors.red,
+              size: 13,
             ),
           ],
         ),
