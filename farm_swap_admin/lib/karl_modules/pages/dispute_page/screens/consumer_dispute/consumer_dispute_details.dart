@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
+import 'package:farm_swap_admin/constants/poppins_text.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_adminaccount_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_commu_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dashboard_btn.dart';
@@ -272,10 +275,511 @@ class _ConsumerDisputeBarterDetailsState extends State<ConsumerDisputeBarterDeta
                             ),
 
                             //Column for main content
-                            child: const SingleChildScrollView(
+                            child: SingleChildScrollView(
                               /*Mao ni screen na mag ilis ilis depended sa value sa variable */
                               child: Column(
-                                children: [Text("Hi")],
+                                children: [
+                                  Center(
+                                    child: Row(
+                                      children: [
+                                        /*This container is for the farmer and listing details */
+                                        Container(
+                                          height: 280,
+                                          width: 480,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                          ),
+                                          /*Column that will hold the details of this row vertically */
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                /*Row of the image and its discription*/
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    /*Container of the image */
+                                                    Container(
+                                                      width: 190,
+                                                      height: 190,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: CachedNetworkImageProvider(
+                                                              widget.listingUrl),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        poppinsText2(
+                                                          "Listing Name: ${widget.listingName}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                        poppinsText2(
+                                                          "Equivalent Value: ${widget.listingPrice}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                        poppinsText(
+                                                          "Farmer: ${widget.farmerUname}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 1,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                        /*This container is for the item  details and consumer */
+                                        Container(
+                                          height: 280,
+                                          width: 480,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                          ),
+                                          /*Column that will hold the details of this row vertically */
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                /*Row of the image and its discription*/
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    /*Container of the image */
+                                                    Container(
+                                                      width: 190,
+                                                      height: 190,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(widget.itemUrl),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        poppinsText2(
+                                                          "Listing Name: ${widget.itemName}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                        poppinsText2(
+                                                          "Equivalent Value: ${widget.itemValue}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                        poppinsText(
+                                                          "Consumer: ${widget.consumerName}",
+                                                          Colors.black,
+                                                          17,
+                                                          FontWeight.bold,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  /*Container na magunit sa transaction */
+                                  Container(
+                                    height: 300,
+                                    width: 1000,
+                                    decoration: const BoxDecoration(color: Colors.white),
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                          child: poppinsText(
+                                            "Transaction Details",
+                                            Colors.black,
+                                            20,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                        /*Row for transaction value */
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Transaction Value",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  widget.valueRange.toString(),
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*For transaction percentage Fee */
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Percentage Fee",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  widget.percentageFee.toString(),
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*Farmer Deducted Swap Coins*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Farmer SwapCoins Deduction",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  widget.deductedFSwapCoins.toString(),
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*Consumer deducted swap coins */
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Consumer SwapCoins Deduction",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  widget.deductedConsumerCoins.toString(),
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Transaction Date",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  widget.transactionDateString,
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  /*Container na mugunit sa gi report na details */
+                                  Container(
+                                    height: 300,
+                                    width: 1000,
+                                    decoration: const BoxDecoration(color: Colors.white),
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                          child: poppinsText(
+                                            "Reported User Details",
+                                            Colors.black,
+                                            20,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                        /*Row for farmername*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Farmer Name",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "${widget.farmerName} ${widget.farmerLname} (${widget.farmerUname})",
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*Farmer Barangay Location*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Baranggay",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Baranggay ${widget.farmerBarangay}",
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*Farmer Municipality*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Farmer Municipality",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Muncipality of ${widget.farmerMunicipal}",
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  /*For the  actual report Details */
+                                  Container(
+                                    height: 700,
+                                    width: 1000,
+                                    decoration: const BoxDecoration(color: Colors.white),
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                          child: poppinsText(
+                                            "Report Details",
+                                            Colors.black,
+                                            20,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                        /*Row for report content*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "Report Content",
+                                                  FarmSwapGreen.darkGreen,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                                child: poppinsText(
+                                                    ":", Colors.black, 20, FontWeight.normal),
+                                              ),
+                                              SizedBox(
+                                                child: poppinsText2(
+                                                  "${widget.consumerDisputeText}",
+                                                  Colors.black,
+                                                  20,
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        /*Row for the dispute picture proof*/
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height: 500,
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.blue,
+                                                  image: DecorationImage(
+                                                      image:
+                                                          NetworkImage(widget.consumerDisputeUrl)),
+                                                ),
+                                              ),
+                                              poppinsText("Photo Proof", Colors.black54, 20,
+                                                  FontWeight.w500),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

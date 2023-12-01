@@ -1,22 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/admin_actual_chat.dart';
-import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/admin_chat_searchBar.dart';
+import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/consumer_chat/consumer_actual_chat.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/chat_display_text.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/consumer_chat_searchbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../constants/Colors/colors_rollaine.dart';
 
-class AdminChatScreen extends StatefulWidget {
-  const AdminChatScreen({super.key});
+import '../../../dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
+
+class ConsumerChatScreen extends StatefulWidget {
+  const ConsumerChatScreen({super.key});
 
   @override
-  State<AdminChatScreen> createState() => _AdminChatScreenState();
+  State<ConsumerChatScreen> createState() => _ConsumerChatScreenState();
 }
 
-class _AdminChatScreenState extends State<AdminChatScreen> {
+class _ConsumerChatScreenState extends State<ConsumerChatScreen> {
   /*Search functionality properties */
   TextEditingController searchController = TextEditingController();
   String searchValue = "";
@@ -29,46 +30,25 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
         shadowColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: const DashBoardTitleText(
-          myText: "Admin Chat",
+          myText: "Consumer Chat",
           myColor: Colors.black,
         ),
-        actions: [
+        actions: const [
           /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
                     HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
                       HEIGH AND WIDTH OF THE TEXT FIELD */
             child: SizedBox(
               width: 250,
               height: 15,
-              /*Contains the search bar*/
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 200,
-                    height: 100,
-                    child: AdminChatSearchBar(
-                      controller: searchController,
-                    ),
-                  ),
-                  /*Search functionality */
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        searchValue = searchController.text;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.search,
-                      color: Color(0xFFDA6317),
-                    ),
-                  )
-                ],
-              ),
+              /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
+                        IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
+              child: ConsumerChatSearchBar(),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             width: 30,
           ),
         ],
@@ -80,10 +60,9 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
     );
   }
 
-/* */
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('AdminUsers').snapshots(),
+      stream: FirebaseFirestore.instance.collection('sample_ConsumerUsers').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           return Padding(
@@ -107,17 +86,22 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
     /*We are accessing a document that was passed here one by one, and map it into 
     String and dynamic, to look the same in the firebase strcuture */
     Map<String, dynamic> users = document.data() as Map<String, dynamic>;
-    bool isOnline = users["Online"];
+    bool isOnline = users["isOnline"];
+    String consumerName = users['firstname'];
+    String consumerLname = users['lastname'];
+    String consumerEmail = users['email'];
+    String consumerUname = users['userName'];
+    String consumerID = users['userId'];
+    String profilePhoto = users['profilePhoto'];
 /*Only the specific account searched will display*/
     if (searchValue.isNotEmpty) {
       // Convert search value to lowercase
       String searchValueLowerCase = searchValue.toLowerCase();
 
-      if (users["First Name"].toString().toLowerCase() ==
-              searchValueLowerCase ||
-          users["Last Name"].toString().toLowerCase() == searchValueLowerCase ||
-          users["Email Address"].toString().toLowerCase() ==
-              searchValueLowerCase) {
+      if (users["firstname"].toString().toLowerCase() == searchValueLowerCase ||
+          users["lastname"].toString().toLowerCase() == searchValueLowerCase ||
+          users["email"].toString().toLowerCase() == searchValueLowerCase ||
+          users["userName"].toString().toLowerCase() == searchValueLowerCase) {
         return ListTile(
           title: Container(
             decoration: BoxDecoration(
@@ -137,8 +121,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage:
-                      CachedNetworkImageProvider("${users["profileUrl"]}"),
+                  backgroundImage: CachedNetworkImageProvider("${users["profilePhoto"]}"),
                   radius: 30,
                 ),
                 const SizedBox(
@@ -146,23 +129,21 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                 ),
                 SizedBox(
                   width: 100,
-                  child:
-                      ChatAllDisplayUserTexts(text: "${users["First Name"]}"),
+                  child: ChatAllDisplayUserTexts(text: "${users["firstname"]}"),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 SizedBox(
                   width: 130,
-                  child: ChatAllDisplayUserTexts(text: "${users["Last Name"]}"),
+                  child: ChatAllDisplayUserTexts(text: "${users["lastname"]}"),
                 ),
                 const SizedBox(
                   width: 13,
                 ),
                 SizedBox(
                   width: 250,
-                  child: ChatAllDisplayUserTexts(
-                      text: "${users["Email Address"]}"),
+                  child: ChatAllDisplayUserTexts(text: "${users["email"]}"),
                 ),
                 const SizedBox(
                   width: 30,
@@ -189,29 +170,13 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           ),
           /*When tapping that particular row of user we will send that users id and email
         address to the next screen which is the AsminActual Screen */
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return AdminActualChat(
-                    receiverId: users["User Id"],
-                    receiverFname: users["First Name"],
-                    receiverLname: users["Last Name"],
-                    receiverImage: users["profileUrl"],
-                    isOnline: users["Online"],
-                    receiverEmail: users["Email Address"],
-                  );
-                },
-              ),
-            );
-          },
+          onTap: () {},
         );
       }
     }
     /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
     because we will not display the current user here only those other users*/
-    else if (FirebaseAuth.instance.currentUser!.email !=
-        users['Email Address']) {
+    else if (FirebaseAuth.instance.currentUser!.email != users['Email Address']) {
       /*The actual display and styling is done here inside the listile */
       return ListTile(
         /*Pull outing the data from the firestore document and designing how it will look in the ui*/
@@ -233,8 +198,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage:
-                    CachedNetworkImageProvider("${users["profileUrl"]}"),
+                backgroundImage: CachedNetworkImageProvider("${users["profilePhoto"]}"),
                 radius: 30,
               ),
               const SizedBox(
@@ -242,22 +206,21 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
               ),
               SizedBox(
                 width: 100,
-                child: ChatAllDisplayUserTexts(text: "${users["First Name"]}"),
+                child: ChatAllDisplayUserTexts(text: "${users["firstname"]}"),
               ),
               const SizedBox(
                 width: 5,
               ),
               SizedBox(
                 width: 130,
-                child: ChatAllDisplayUserTexts(text: "${users["Last Name"]}"),
+                child: ChatAllDisplayUserTexts(text: "${users["lastname"]}"),
               ),
               const SizedBox(
                 width: 13,
               ),
               SizedBox(
                 width: 250,
-                child:
-                    ChatAllDisplayUserTexts(text: "${users["Email Address"]}"),
+                child: ChatAllDisplayUserTexts(text: "${users["email"]}"),
               ),
               const SizedBox(
                 width: 30,
@@ -288,13 +251,14 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return AdminActualChat(
-                  receiverId: users["User Id"],
-                  receiverFname: users["First Name"],
-                  receiverLname: users["Last Name"],
-                  receiverImage: users["profileUrl"],
-                  isOnline: users["Online"],
-                  receiverEmail: users["Email Address"],
+                return ConsumerActualChat(
+                  consumerId: consumerID,
+                  consumerName: consumerName,
+                  consumerLname: consumerLname,
+                  consumerUname: consumerUname,
+                  profilePhoto: profilePhoto,
+                  isOnline: isOnline,
+                  consumerEmail: consumerEmail,
                 );
               },
             ),

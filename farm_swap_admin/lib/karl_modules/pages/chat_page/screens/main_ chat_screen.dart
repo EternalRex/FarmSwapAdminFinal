@@ -1,6 +1,6 @@
-import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/admin_chat_screen.dart';
-import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/consumer_chat_screen.dart';
-import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/farmer_chat_screen.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/admin_chat/admin_chat_screen.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/consumer_chat/consumer_chat_screen.dart';
+import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/farmer_chat/farmer_chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/chat_side_text_widget.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard_epxanded1_items.dart';
 import 'package:flutter/material.dart';
