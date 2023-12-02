@@ -333,12 +333,12 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                   child: const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Expanded(
                                           flex: 2,
                                           child: Text(
                                             'Name',
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -351,7 +351,6 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                           flex: 2,
                                           child: Text(
                                             "Date and Time",
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -361,10 +360,9 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                           ),
                                         ),
                                         Expanded(
-                                          flex: 2,
+                                          flex: 1,
                                           child: Text(
                                             "SwapCoins",
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -420,39 +418,9 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                 /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
                 child: Column(
                   children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          const SizedBox(
-                            width: 90,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
+                    const SizedBox(
+                      height: 180,
                     ),
-                    const Spacer(),
                     //this container is for the farmswaps wallet balance
                     Container(
                       width: 190,
@@ -693,131 +661,125 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                 ),
               ],
             ),
-            child: Row(
-              children: [
-                //this expanded holding the profilepic, firstname, last name and address of the user
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      CachedNetworkImage(
-                        imageUrl: data["profile"] ??
-                            "", // Provide a default empty string if it's null
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundImage: imageProvider,
-                          radius: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                children: [
+                  //this expanded holding the profilepic, firstname, last name and address of the user
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
                         ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) {
-                          print("Error loading image: $error");
-                          return const Icon(Icons.error);
-                        },
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${data["firstname"]}",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                              Text(
-                                " ${data["lastname"]}",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
+                        CachedNetworkImage(
+                          imageUrl: data["profile"] ??
+                              "", // Provide a default empty string if it's null
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                            backgroundImage: imageProvider,
+                            radius: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                " ${data["address"]}",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.normal,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) {
+                            print("Error loading image: $error");
+                            return const Icon(Icons.error);
+                          },
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                //this holds the date and time
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        dateFinal,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.normal,
+                                Text(
+                                  "${data["firstname"]}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                Text(
+                                  " ${data["lastname"]}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  " ${data["address"]}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        timeListTile,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                //this holds the swapcoins amount purchased
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    "${data["swapcoins"]}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.normal,
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  //this holds the date and time
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Text(
+                          dateFinal,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          timeListTile,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //this holds the swapcoins amount purchased
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      "${data["swapcoins"]}",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -843,133 +805,127 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
               ),
             ],
           ),
-          child: Row(
-            children: [
-              //this expanded holding the profilepic, firstname, last name and address of the user
-              Expanded(
-                flex: 2,
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 30,
-                    ),
-
-                    //this will display the users profile picture in each listtile
-                    CachedNetworkImage(
-                      imageUrl: data["profile"] ??
-                          "", // Provide a default empty string if it's null
-                      imageBuilder: (context, imageProvider) => CircleAvatar(
-                        backgroundImage: imageProvider,
-                        radius: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              children: [
+                //this expanded holding the profilepic, firstname, last name and address of the user
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
                       ),
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) {
-                        print("Error loading image: $error");
-                        return const Icon(Icons.error);
-                      },
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "${data["firstname"]}",
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            Text(
-                              " ${data["lastname"]}",
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
+          
+                      //this will display the users profile picture in each listtile
+                      CachedNetworkImage(
+                        imageUrl: data["profile"] ??
+                            "", // Provide a default empty string if it's null
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              " ${data["address"]}",
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.normal,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) {
+                          print("Error loading image: $error");
+                          return const Icon(Icons.error);
+                        },
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              //this holds the date and time
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateFinal,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.normal,
+                              Text(
+                                "${data["firstname"]}",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              Text(
+                                " ${data["lastname"]}",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                " ${data["address"]}",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      timeListTile,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              //this holds the swapcoins amount purchased
-              Expanded(
-                flex: 2,
-                child: Text(
-                  "${data["swapcoins"]}",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
+                    ],
                   ),
                 ),
-              ),
-            ],
+                //this holds the date and time
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      Text(
+                        dateFinal,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        timeListTile,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                //this holds the swapcoins amount purchased
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "${data["swapcoins"]}",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

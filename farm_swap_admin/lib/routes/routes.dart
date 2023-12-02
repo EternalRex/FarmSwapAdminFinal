@@ -200,7 +200,7 @@ class RoutesManager {
 
       case pendingAccountPage:
         return MaterialPageRoute(
-          builder: (context) => const PendingUserAccounts(),
+          builder: (context) => PendingUserAccounts(),
         );
 
       case detailsFarmerPage:

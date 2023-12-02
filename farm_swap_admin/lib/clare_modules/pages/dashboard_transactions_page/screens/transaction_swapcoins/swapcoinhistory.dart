@@ -227,12 +227,12 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                                   child: const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           flex: 2,
                                           child: Text(
                                             'Name',
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -245,7 +245,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                                           flex: 2,
                                           child: Text(
                                             "Date and Time",
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -255,10 +254,9 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                                           ),
                                         ),
                                         Expanded(
-                                          flex: 2,
+                                          flex: 1,
                                           child: Text(
                                             "Status",
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -312,39 +310,13 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/message.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/notification.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const SizedBox(
-                            height: 10,
+                            height: 25,
                           ),
                           const SizedBox(
                             height: 150,
@@ -562,7 +534,7 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                   child: Row(
                     children: [
                       const SizedBox(
-                        width: 30,
+                        width: 10,
                       ),
 
                       //this will display the users profile picture in each listtile
@@ -581,17 +553,15 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                         },
                       ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const SizedBox(
                                 width: 10,
                               ),
                               Text(
                                 "${data["firstname"]}",
-                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -601,7 +571,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                               ),
                               Text(
                                 " ${data["lastname"]}",
-                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -612,14 +581,12 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                             ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const SizedBox(
                                 width: 10,
                               ),
                               Text(
                                 " ${data["address"]}",
-                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 12,
@@ -638,11 +605,9 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                 Expanded(
                   flex: 2,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         dateFinal,
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -655,7 +620,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                       ),
                       Text(
                         timeListTile,
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -669,13 +633,11 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
 
                 //this holds the swapcoins amount purchased
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "${data["status"]}",
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -1066,17 +1028,15 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                       },
                     ),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
                               "${data["firstname"]}",
-                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
@@ -1086,7 +1046,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                             ),
                             Text(
                               " ${data["lastname"]}",
-                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
@@ -1097,14 +1056,12 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                           ],
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
                               " ${data["address"]}",
-                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -1123,11 +1080,9 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
               Expanded(
                 flex: 2,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       dateFinal,
-                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -1140,7 +1095,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                     ),
                     Text(
                       timeListTile,
-                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -1154,13 +1108,11 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
 
               //this holds the status purchased
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "${data["status"]}",
-                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,

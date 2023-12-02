@@ -823,28 +823,8 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                 //Column for the chat and notification buttons
                 child: const Column(
                   children: [
-                    //Row for the buttons
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5, vertical: 14),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 75, top: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            //Chat button
-                            ReportsChatOptionsBtn(),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            //Notification button
-                            ReportsNotificationOptionsBtn(),
-                          ],
-                        ),
-                      ),
-                    ),
                     SizedBox(
-                      height: 80,
+                      height: 150,
                     ),
 
                     //Number of users icon and label

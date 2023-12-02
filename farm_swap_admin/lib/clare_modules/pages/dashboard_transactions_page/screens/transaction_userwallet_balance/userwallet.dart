@@ -266,39 +266,13 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/message.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/clare_assets/images/notification.png"),
-                            height: 20,
-                            width: 20,
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const SizedBox(
-                            height: 10,
+                            height: 25,
                           ),
                           const SizedBox(
                             height: 150,

@@ -15,13 +15,26 @@ import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSid
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_transactions_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_wallet_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/customer_userId_provider.dart';
+import 'package:farm_swap_admin/rollaine_modules/provider/farmer_userId_provider.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class PendingUserAccounts extends StatefulWidget {
-  const PendingUserAccounts({super.key});
+  PendingUserAccounts({super.key});
+
+  //Variable na document id nga String
+  String documentId = '';
+
+  //Variable na selected id nga String
+  String selectedId = '';
+
+  //Variable na chosen id nga String
+  String chosenId = '';
 
   @override
   State<PendingUserAccounts> createState() => _PendingUserAccountsState();
@@ -345,93 +358,137 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                                 ),
                                                                 const Spacer(),
                                                                 //Button for details where you will be redirected to farmer details
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                Row(
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      //Details button
-                                                                      DecoratedBox(
-                                                                        decoration:
-                                                                            const BoxDecoration(
-                                                                          gradient:
-                                                                              LinearGradient(
-                                                                            begin:
-                                                                                Alignment.topLeft,
-                                                                            end:
-                                                                                Alignment.bottomRight,
-                                                                            colors: [
-                                                                              Color(0xFF53E78B),
-                                                                              Color(0xFF14BE77),
-                                                                            ],
-                                                                          ),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(
-                                                                            Radius.circular(17.50),
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            ElevatedButton(
-                                                                          style:
-                                                                              ElevatedButton.styleFrom(
-                                                                            backgroundColor:
-                                                                                Colors.transparent,
-                                                                            disabledForegroundColor:
-                                                                                Colors.transparent.withOpacity(0.38),
-                                                                            disabledBackgroundColor:
-                                                                                Colors.transparent.withOpacity(0.12),
-                                                                            shadowColor:
-                                                                                Colors.transparent,
-                                                                          ),
-                                                                          onPressed:
-                                                                              () {
-                                                                            //An instance for logging admin actions.
-                                                                            AdminLogsInsertDataDb
-                                                                                adminLogs =
-                                                                                AdminLogsInsertDataDb();
-                                                                            //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
-                                                                            final email =
-                                                                                FirebaseAuth.instance.currentUser!.email;
-                                                                            final userId =
-                                                                                FirebaseAuth.instance.currentUser!.uid;
-                                                                            /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
-                                                                            adminLogs.createAdminLogs(
-                                                                                email,
-                                                                                userId,
-                                                                                "Accept_Farmer_Pending_Account",
-                                                                                DateTime.now());
-                                                                            FirebaseFirestore.instance.collection('sample_FarmerUsers').doc(farmers.id).update({
-                                                                              'accountStatus': 'Active'
-                                                                            }).then(
-                                                                              (value) {
-                                                                                Navigator.pushReplacementNamed(context, RoutesManager.userAccountPage);
-                                                                              },
-                                                                            );
-                                                                          },
-                                                                          child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(top: 5, bottom: 5),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        children: [
+                                                                          //Details button
+                                                                          DecoratedBox(
+                                                                            decoration:
+                                                                                const BoxDecoration(
+                                                                              gradient: LinearGradient(
+                                                                                begin: Alignment.topLeft,
+                                                                                end: Alignment.bottomRight,
+                                                                                colors: [
+                                                                                  Color(0xFF53E78B),
+                                                                                  Color(0xFF14BE77),
+                                                                                ],
+                                                                              ),
+                                                                              borderRadius: BorderRadius.all(
+                                                                                Radius.circular(17.50),
+                                                                              ),
+                                                                            ),
                                                                             child:
-                                                                                Text(
-                                                                              'Activate',
-                                                                              style: GoogleFonts.poppins(
-                                                                                color: Colors.white,
-                                                                                fontSize: 8,
-                                                                                fontWeight: FontWeight.w700,
-                                                                                letterSpacing: 0.50,
+                                                                                ElevatedButton(
+                                                                              style: ElevatedButton.styleFrom(
+                                                                                backgroundColor: Colors.transparent,
+                                                                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                                                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
+                                                                                shadowColor: Colors.transparent,
+                                                                              ),
+                                                                              onPressed: () {
+                                                                                //Update the state of the widget with the selected user's ID
+                                                                                setState(() {
+                                                                                  widget.selectedId = "${farmers["userId"]}";
+                                                                                });
+
+                                                                                //Uses the Provider package to set the user ID in a state management provider
+                                                                                Provider.of<FarmerUserIdProvider>(context, listen: false).setfarmerUserId(widget.selectedId);
+
+                                                                                //Navigates to a different screen
+                                                                                Navigator.of(context).pushNamed(RoutesManager.detailsFarmerPage);
+                                                                              },
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                                                                child: Text(
+                                                                                  'Details',
+                                                                                  style: GoogleFonts.poppins(
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 8,
+                                                                                    fontWeight: FontWeight.w700,
+                                                                                    letterSpacing: 0.50,
+                                                                                  ),
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                        ),
+                                                                        ],
                                                                       ),
-                                                                    ],
-                                                                  ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        children: [
+                                                                          //Details button
+                                                                          DecoratedBox(
+                                                                            decoration:
+                                                                                const BoxDecoration(
+                                                                              gradient: LinearGradient(
+                                                                                begin: Alignment.topLeft,
+                                                                                end: Alignment.bottomRight,
+                                                                                colors: [
+                                                                                  Color(0xFF53E78B),
+                                                                                  Color(0xFF14BE77),
+                                                                                ],
+                                                                              ),
+                                                                              borderRadius: BorderRadius.all(
+                                                                                Radius.circular(17.50),
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                ElevatedButton(
+                                                                              style: ElevatedButton.styleFrom(
+                                                                                backgroundColor: Colors.transparent,
+                                                                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                                                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
+                                                                                shadowColor: Colors.transparent,
+                                                                              ),
+                                                                              onPressed: () {
+                                                                                //An instance for logging admin actions.
+                                                                                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+                                                                                adminLogs.createAdminLogs(email, userId, "Accept_Farmer_Pending_Account", DateTime.now());
+                                                                                FirebaseFirestore.instance.collection('sample_FarmerUsers').doc(farmers.id).update({
+                                                                                  'accountStatus': 'Active'
+                                                                                }).then(
+                                                                                  (value) {
+                                                                                    Navigator.pushReplacementNamed(context, RoutesManager.userAccountPage);
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                                                                child: Text(
+                                                                                  'Activate',
+                                                                                  style: GoogleFonts.poppins(
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 8,
+                                                                                    fontWeight: FontWeight.w700,
+                                                                                    letterSpacing: 0.50,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ],
                                                             ),
@@ -659,71 +716,133 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                                                     ),
                                                                     const Spacer(),
                                                                     //Button for details where you will be redirected to farmer details
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
-                                                                          8.0),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.start,
-                                                                        children: [
-                                                                          //Details button
-                                                                          DecoratedBox(
-                                                                            decoration:
-                                                                                const BoxDecoration(
-                                                                              gradient: LinearGradient(
-                                                                                begin: Alignment.topLeft,
-                                                                                end: Alignment.bottomRight,
-                                                                                colors: [
-                                                                                  Color(0xFF53E78B),
-                                                                                  Color(0xFF14BE77),
-                                                                                ],
-                                                                              ),
-                                                                              borderRadius: BorderRadius.all(
-                                                                                Radius.circular(17.50),
-                                                                              ),
-                                                                            ),
-                                                                            child:
-                                                                                ElevatedButton(
-                                                                              style: ElevatedButton.styleFrom(
-                                                                                backgroundColor: Colors.transparent,
-                                                                                disabledForegroundColor: Colors.transparent.withOpacity(0.38),
-                                                                                disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
-                                                                                shadowColor: Colors.transparent,
-                                                                              ),
-                                                                              onPressed: () {
-                                                                                //An instance for logging admin actions.
-                                                                                AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
-                                                                                //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
-                                                                                final email = FirebaseAuth.instance.currentUser!.email;
-                                                                                final userId = FirebaseAuth.instance.currentUser!.uid;
-                                                                                /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
-                                                                                adminLogs.createAdminLogs(email, userId, "Accept_Pending_Consumer_Account", DateTime.now());
-                                                                                FirebaseFirestore.instance.collection('sample_ConsumerUsers').doc(consumer.id).update({
-                                                                                  'accountStatus': 'Active'
-                                                                                }).then(
-                                                                                  (value) {
-                                                                                    Navigator.pushReplacementNamed(context, RoutesManager.userAccountPage);
+                                                                    Row(
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            children: [
+                                                                              //Details button
+                                                                              DecoratedBox(
+                                                                                decoration: const BoxDecoration(
+                                                                                  gradient: LinearGradient(
+                                                                                    begin: Alignment.topLeft,
+                                                                                    end: Alignment.bottomRight,
+                                                                                    colors: [
+                                                                                      Color(0xFF53E78B),
+                                                                                      Color(0xFF14BE77),
+                                                                                    ],
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.all(
+                                                                                    Radius.circular(17.50),
+                                                                                  ),
+                                                                                ),
+                                                                                child: ElevatedButton(
+                                                                                  style: ElevatedButton.styleFrom(
+                                                                                    backgroundColor: Colors.transparent,
+                                                                                    disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                                                                    disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
+                                                                                    shadowColor: Colors.transparent,
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    //Update the state of the widget with the selected user's ID
+                                                                                    setState(() {
+                                                                                      widget.chosenId = "${consumer["userId"]}";
+                                                                                    });
+
+                                                                                    //Uses the Provider package to set the user ID in a state management provider
+                                                                                    Provider.of<CustomerUserIdProvider>(context, listen: false).setcustomerUserId(widget.chosenId);
+
+                                                                                    //Navigates to a different screen
+                                                                                    Navigator.of(context).pushNamed(RoutesManager.detailsCustomerPage);
                                                                                   },
-                                                                                );
-                                                                              },
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                                                                child: Text(
-                                                                                  'Activate',
-                                                                                  style: GoogleFonts.poppins(
-                                                                                    color: Colors.white,
-                                                                                    fontSize: 8,
-                                                                                    fontWeight: FontWeight.w700,
-                                                                                    letterSpacing: 0.50,
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                                                                    child: Text(
+                                                                                      'Details',
+                                                                                      style: GoogleFonts.poppins(
+                                                                                        color: Colors.white,
+                                                                                        fontSize: 9,
+                                                                                        fontWeight: FontWeight.w700,
+                                                                                        letterSpacing: 0.50,
+                                                                                      ),
+                                                                                    ),
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                            ),
+                                                                            ],
                                                                           ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            children: [
+                                                                              //Details button
+                                                                              DecoratedBox(
+                                                                                decoration: const BoxDecoration(
+                                                                                  gradient: LinearGradient(
+                                                                                    begin: Alignment.topLeft,
+                                                                                    end: Alignment.bottomRight,
+                                                                                    colors: [
+                                                                                      Color(0xFF53E78B),
+                                                                                      Color(0xFF14BE77),
+                                                                                    ],
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.all(
+                                                                                    Radius.circular(17.50),
+                                                                                  ),
+                                                                                ),
+                                                                                child: ElevatedButton(
+                                                                                  style: ElevatedButton.styleFrom(
+                                                                                    backgroundColor: Colors.transparent,
+                                                                                    disabledForegroundColor: Colors.transparent.withOpacity(0.38),
+                                                                                    disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
+                                                                                    shadowColor: Colors.transparent,
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    //An instance for logging admin actions.
+                                                                                    AdminLogsInsertDataDb adminLogs = AdminLogsInsertDataDb();
+                                                                                    //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                                                                    final email = FirebaseAuth.instance.currentUser!.email;
+                                                                                    final userId = FirebaseAuth.instance.currentUser!.uid;
+                                                                                    /*So mag kuha ni siya sa admin logs nya iyang description kay ni first name */
+                                                                                    adminLogs.createAdminLogs(email, userId, "Accept_Pending_Consumer_Account", DateTime.now());
+                                                                                    FirebaseFirestore.instance.collection('sample_ConsumerUsers').doc(consumer.id).update({
+                                                                                      'accountStatus': 'Active'
+                                                                                    }).then(
+                                                                                      (value) {
+                                                                                        Navigator.pushReplacementNamed(context, RoutesManager.userAccountPage);
+                                                                                      },
+                                                                                    );
+                                                                                  },
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                                                                    child: Text(
+                                                                                      'Activate',
+                                                                                      style: GoogleFonts.poppins(
+                                                                                        color: Colors.white,
+                                                                                        fontSize: 8,
+                                                                                        fontWeight: FontWeight.w700,
+                                                                                        letterSpacing: 0.50,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ],
                                                                 ),

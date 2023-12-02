@@ -3,6 +3,7 @@ import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/consumer_ch
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/screens/farmer_chat/farmer_chat_screen.dart';
 import 'package:farm_swap_admin/karl_modules/pages/chat_page/widgets/chat_side_text_widget.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/screens/dashboard_epxanded1_items.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/right_user_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/Colors/colors_rollaine.dart';
@@ -53,9 +54,11 @@ class _ChatPageState extends State<ChatPage> {
               child: Scaffold(
                 /*This is a condition that means if the user clicks the admin sidebar option
                 it will show the admin screen, same goes to the farmer and consumer screen */
-                body: (selectedChatScreen != "FARMER" && selectedChatScreen != "CONSUMER")
+                body: (selectedChatScreen != "FARMER" &&
+                        selectedChatScreen != "CONSUMER")
                     ? const AdminChatScreen()
-                    : (selectedChatScreen != "ADMIN" && selectedChatScreen != "CONSUMER")
+                    : (selectedChatScreen != "ADMIN" &&
+                            selectedChatScreen != "CONSUMER")
                         ? const FarmerChatScreen()
                         : const ConsumerChatScreen(),
               ),
@@ -93,43 +96,83 @@ class _ChatPageState extends State<ChatPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         /*Admin Chat Option */
-                        GestureDetector(
-                          onTap: () {
+                        TextButton(
+                          onPressed: () {
                             setState(() {
                               selectedChatScreen = "ADMIN";
                             });
                           },
-                          child: const ChatSideBarOptions(
-                              text: "Admin", image: "assets/rollaine_assets/icons/admin.png"),
+                          child: const Row(
+                            children: [
+                              RightUserText(
+                                myText: 'Admin',
+                                myColor: Color(0xFF09041B),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Image(
+                                image: AssetImage(
+                                    'assets/rollaine_assets/icons/admin.png'),
+                                height: 23,
+                                width: 23,
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
-                        /*Farmer Chat Options */
-                        GestureDetector(
-                          onTap: () {
+                        TextButton(
+                          onPressed: () {
                             setState(() {
                               selectedChatScreen = "FARMER";
                             });
                           },
-                          child: const ChatSideBarOptions(
-                              text: "Farmers", image: "assets/rollaine_assets/icons/user.png"),
+                          child: const Row(
+                            children: [
+                              RightUserText(
+                                myText: 'Farmer',
+                                myColor: Color(0xFF09041B),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Image(
+                                image: AssetImage(
+                                    'assets/rollaine_assets/icons/user.png'),
+                                height: 23,
+                                width: 23,
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
-                        /*Consumer chat options */
-                        GestureDetector(
-                          onTap: () {
+                        TextButton(
+                          onPressed: () {
                             setState(() {
                               selectedChatScreen = "CONSUMER";
                             });
                           },
-                          child: const ChatSideBarOptions(
-                              text: "Consumers", image: "assets/rollaine_assets/icons/user.png"),
-                        ),
-                        const SizedBox(
-                          height: 10,
+                          child: const Row(
+                            children: [
+                              RightUserText(
+                                myText: 'Consumer',
+                                myColor: Color(0xFF09041B),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Image(
+                                image: AssetImage(
+                                    'assets/rollaine_assets/icons/user.png'),
+                                height: 23,
+                                width: 23,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

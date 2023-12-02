@@ -631,25 +631,6 @@ class _AdminLogsSpecificWrapperState extends State<AdminLogsSpecificWrapper> {
                             myFont: GoogleFonts.poppins().fontFamily,
                             myWeight: FontWeight.w800,
                           ),
-                          const SizedBox(
-                            width: 34,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
                         ],
                       ),
                     ),
