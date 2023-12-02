@@ -21,98 +21,77 @@ import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class ConsumerDisputeBarterDetails extends StatefulWidget {
-  const ConsumerDisputeBarterDetails({
+class ConsumerDisputeSellDetails extends StatefulWidget {
+  const ConsumerDisputeSellDetails({
     super.key,
-    /*Getting farmer data */
-    required this.farmerName,
-    required this.farmerId,
-    required this.farmerLname,
-    required this.farmerUname,
-    required this.farmerBarangay,
-    required this.farmerMunicipal,
-    /*Getting the consumer Data */
-    required this.consumerName,
-    required this.consumerId,
-    required this.consumerUname,
-    required this.consumerLname,
-    required this.consumerBarangay,
-    required this.consumerMunicipal,
-    /*Item details */
-    required this.itemName,
-    required this.itemValue,
-    required this.itemUrl,
-    /*This is suppose to be consumerDisputed status the naming was just a mistake*/
-    required this.consumerDisputedStatus,
-    required this.isResolved,
-    required this.consumerDisputeText,
-    required this.consumerDisputeUrl,
-    /*Listing details */
-    required this.listingId,
-    required this.listingName,
-    required this.listingPrice,
-    required this.listingUrl,
-    /*Transaction details*/
-    required this.deductedFSwapCoins,
-    required this.deductedConsumerCoins,
-    required this.valueRange,
-    required this.percentageFee,
-
-    /*Converting timestamps to datetime and String*/
-    required this.transacDateTime,
-    required this.transactionDateString,
+    required this.consBarangay,
+    required this.consId,
+    required this.consLname,
+    required this.consMunicipal,
+    required this.consName,
+    required this.consUname,
+    required this.consUrl,
     required this.disputeDate,
-    required this.disputeDateString,
+    required this.disputeText,
+    required this.disputeStatus,
+    required this.disputeUrl,
+    required this.fBarangay,
+    required this.fId,
+    required this.fLname,
+    required this.fMunicipal,
+    required this.fName,
+    required this.fUname,
+    required this.fUrl,
+    required this.isDisputed,
+    required this.isResolved,
+    required this.lId,
+    required this.lName,
+    required this.lPrice,
+    required this.lQuan,
+    required this.lUrl,
+    required this.pPrice,
+    required this.pQuan,
+    required this.pSwapC,
+    required this.transactDate,
   });
 
-  /*Getting farmer data */
-  final String farmerName;
-  final String farmerId;
-  final String farmerLname;
-  final String farmerUname;
-  final String farmerBarangay;
-  final String farmerMunicipal;
-  /*Getting the consumer Data */
-  final String consumerName;
-  final String consumerId;
-  final String consumerUname;
-  final String consumerLname;
-  final String consumerBarangay;
-  final String consumerMunicipal;
-  /*Item details */
-  final String itemName;
-  final double itemValue;
-  final String itemUrl;
-  /*This is suppose to be consumerDisputed status the naming was just a mistake*/
-  final String consumerDisputedStatus;
-  final bool isResolved;
-  final String consumerDisputeText;
-  final String consumerDisputeUrl;
-  /*Listing details */
-  final String listingId;
-  final String listingName;
-  final String listingPrice;
-  final String listingUrl;
-  /*Transaction details*/
-  final double deductedFSwapCoins;
-  final double deductedConsumerCoins;
-  final double valueRange;
-  final String percentageFee;
-
-  /*Converting timestamps to datetime and String*/
-  final DateTime transacDateTime;
-  final String transactionDateString;
-
+  final String consBarangay;
+  final String consId;
+  final String consLname;
+  final String consMunicipal;
+  final String consName;
+  final String consUname;
+  final String consUrl;
   final DateTime disputeDate;
-  final String disputeDateString;
+  final String disputeText;
+  final String disputeStatus;
+  final String disputeUrl;
+  final String fBarangay;
+  final String fId;
+  final String fLname;
+  final String fMunicipal;
+  final String fName;
+  final String fUname;
+  final String fUrl;
+  final bool isDisputed;
+  final bool isResolved;
+  final String lId;
+  final String lName;
+  final double lPrice;
+  final double lQuan;
+  final String lUrl;
+  final double pPrice;
+  final double pQuan;
+  final double pSwapC;
+  final String transactDate;
 
   @override
-  State<ConsumerDisputeBarterDetails> createState() =>
-      _ConsumerDisputeBarterDetailsState();
+  State<ConsumerDisputeSellDetails> createState() =>
+      _ConsumerDisputeSellDetailsState();
 }
 
-class _ConsumerDisputeBarterDetailsState
-    extends State<ConsumerDisputeBarterDetails> {
+class _ConsumerDisputeSellDetailsState
+    extends State<ConsumerDisputeSellDetails> {
   late String selectedValue;
 
   @override
@@ -255,7 +234,7 @@ class _ConsumerDisputeBarterDetailsState
                     /*PUTTING AND STYLING THE DASHBOARD TITLE. I USED THE TEXT CLASS THAT I CREATED IN
                   THIS TITLE, THAT CLASS CAN BE FOUND IN WIDGET_DASHBOARD_TXT.DART*/
                     title: const DisputeTitleText(
-                      myText: "Barter Dispute Details",
+                      myText: "Sold Dispute Details",
                       myColor: Color(0xFF09041B),
                     ),
                     backgroundColor: Colors.transparent,
@@ -344,9 +323,9 @@ class _ConsumerDisputeBarterDetailsState
                                                             BorderRadius
                                                                 .circular(10),
                                                         image: DecorationImage(
-                                                          image: CachedNetworkImageProvider(
-                                                              widget
-                                                                  .listingUrl),
+                                                          image:
+                                                              CachedNetworkImageProvider(
+                                                                  widget.lUrl),
                                                           fit: BoxFit.fill,
                                                         ),
                                                       ),
@@ -357,19 +336,19 @@ class _ConsumerDisputeBarterDetailsState
                                                     Column(
                                                       children: [
                                                         poppinsText2(
-                                                          "Listing Name: ${widget.listingName}",
+                                                          "Listing Name: ${widget.lName}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
                                                         ),
                                                         poppinsText2(
-                                                          "Equivalent Value: ₱ ${widget.listingPrice}",
+                                                          "Equivalent Value: ₱ ${widget.lPrice}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
                                                         ),
                                                         poppinsText(
-                                                          "Farmer: ${widget.farmerUname}",
+                                                          "Quantity: ${widget.lQuan}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
@@ -414,14 +393,24 @@ class _ConsumerDisputeBarterDetailsState
                                                       width: 190,
                                                       height: 190,
                                                       decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        border: Border.all(
+                                                          width: 1,
+                                                          color: greenDark,
+                                                        ),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10),
-                                                        image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              widget.itemUrl),
-                                                          fit: BoxFit.fill,
-                                                        ),
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .person_rounded,
+                                                            size: 185,
+                                                            color: greenNormal,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -430,19 +419,19 @@ class _ConsumerDisputeBarterDetailsState
                                                     Column(
                                                       children: [
                                                         poppinsText2(
-                                                          "Listing Name: ${widget.itemName}",
+                                                          "Farmer Name: ${widget.fName} ${widget.fLname}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
                                                         ),
                                                         poppinsText2(
-                                                          "Equivalent Value: ₱ ${widget.itemValue}",
+                                                          "Barangay: ${widget.fBarangay}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
                                                         ),
                                                         poppinsText(
-                                                          "Consumer: ${widget.consumerName}",
+                                                          "Municipality: ${widget.fMunicipal}",
                                                           Colors.black,
                                                           17,
                                                           FontWeight.bold,
@@ -459,339 +448,61 @@ class _ConsumerDisputeBarterDetailsState
                                     ),
                                   ),
                                   /*Container na magunit sa transaction */
-                                  Container(
-                                    height: 300,
-                                    width: 1000,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white),
-                                    child: Column(
-                                      children: [
-                                        Center(
-                                          child: poppinsText(
-                                            "Transaction Details",
-                                            Colors.black,
-                                            20,
-                                            FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      height: 150,
+                                      width: 1000,
+                                      decoration: const BoxDecoration(
+                                          color: Colors.white),
+                                      child: Column(
+                                        children: [
+                                          Center(
+                                            child: poppinsText(
+                                              "Transaction Details",
+                                              Colors.black,
+                                              20,
+                                              FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        /*Row for transaction value */
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Transaction Value",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
+                                          Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(
+                                                  width: 15,
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
+                                                SizedBox(
+                                                  child: poppinsText2(
+                                                    "Transaction Date",
+                                                    FarmSwapGreen.darkGreen,
+                                                    20,
+                                                    FontWeight.normal,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                  child: poppinsText(
+                                                      ":",
+                                                      Colors.black,
+                                                      20,
+                                                      FontWeight.normal),
+                                                ),
+                                                SizedBox(
+                                                  child: poppinsText2(
+                                                    widget.transactDate,
                                                     Colors.black,
                                                     20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  widget.valueRange.toString(),
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
+                                                    FontWeight.normal,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        /*For transaction percentage Fee */
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Percentage Fee",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  widget.percentageFee
-                                                      .toString(),
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        /*Farmer Deducted Swap Coins*/
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Farmer SwapCoins Deduction",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  widget.deductedFSwapCoins
-                                                      .toString(),
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        /*Consumer deducted swap coins */
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Consumer SwapCoins Deduction",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  widget.deductedConsumerCoins
-                                                      .toString(),
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Transaction Date",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  widget.transactionDateString,
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  /*Container na mugunit sa gi report na details */
-                                  Container(
-                                    height: 300,
-                                    width: 1000,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white),
-                                    child: Column(
-                                      children: [
-                                        Center(
-                                          child: poppinsText(
-                                            "Reported User Details",
-                                            Colors.black,
-                                            20,
-                                            FontWeight.bold,
-                                          ),
-                                        ),
-                                        /*Row for farmername*/
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Farmer Name",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "${widget.farmerName} ${widget.farmerLname} (${widget.farmerUname})",
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        /*Farmer Barangay Location*/
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Baranggay",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Baranggay ${widget.farmerBarangay}",
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        /*Farmer Municipality*/
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Farmer Municipality",
-                                                  FarmSwapGreen.darkGreen,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                                child: poppinsText(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
-                                              ),
-                                              SizedBox(
-                                                child: poppinsText2(
-                                                  "Muncipality of ${widget.farmerMunicipal}",
-                                                  Colors.black,
-                                                  20,
-                                                  FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   /*For the  actual report Details */
@@ -810,12 +521,11 @@ class _ConsumerDisputeBarterDetailsState
                                             FontWeight.bold,
                                           ),
                                         ),
-                                        /*Row for report content*/
                                         Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               const SizedBox(
                                                 width: 15,
@@ -830,7 +540,7 @@ class _ConsumerDisputeBarterDetailsState
                                               ),
                                               SizedBox(
                                                 width: 20,
-                                                child: poppinsText(
+                                                child: poppinsText2(
                                                     ":",
                                                     Colors.black,
                                                     20,
@@ -838,8 +548,7 @@ class _ConsumerDisputeBarterDetailsState
                                               ),
                                               SizedBox(
                                                 child: poppinsText2(
-                                                  // ignore: unnecessary_string_interpolations
-                                                  "${widget.consumerDisputeText}",
+                                                  widget.disputeText,
                                                   Colors.black,
                                                   20,
                                                   FontWeight.normal,
@@ -848,6 +557,7 @@ class _ConsumerDisputeBarterDetailsState
                                             ],
                                           ),
                                         ),
+
                                         /*Row for the dispute picture proof*/
                                         Padding(
                                           padding:

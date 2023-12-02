@@ -199,7 +199,7 @@ display sa center page */
                                 BoxShadow(
                                   color: shadow,
                                   blurRadius: 2,
-                                  offset: const Offset(1, 5),
+                                  offset: const Offset(0, 1),
                                 ),
                               ],
                             ),
