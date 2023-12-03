@@ -515,7 +515,7 @@ class _ListingsState extends State<Listings> {
 
   Widget _buildBarterProductList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('barter').snapshots(),
+      stream: firestore.collectionGroup('barter').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
@@ -833,7 +833,7 @@ class _ListingsState extends State<Listings> {
 
   Widget _buildSellProductList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('sell').snapshots(),
+      stream: firestore.collectionGroup('sell').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {

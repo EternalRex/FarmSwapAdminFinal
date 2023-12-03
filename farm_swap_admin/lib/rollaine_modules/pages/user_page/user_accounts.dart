@@ -508,7 +508,7 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_FarmerUsers')
+          .collection('sample_FarmerUsers').orderBy('registrationDate')
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
@@ -522,7 +522,7 @@ class _UserAccount extends State<UserAccount> {
               by one, the documents will passed to the _buildUserListItems */
               children: snapshot.data!.docs
                   .where((document) =>
-                      document['accountStatus'] != 'Pending' &&
+                      document['accountStatus'] != 'PENDING' &&
                       document['accountStatus'] != 'Deactivate' &&
                       document['accountStatus'] != 'Requesting')
                   .map<Widget>((document) => _buildFarmerListItems(document))
@@ -836,7 +836,7 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_ConsumerUsers')
+          .collection('sample_ConsumerUsers').orderBy('registrationDate')
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {

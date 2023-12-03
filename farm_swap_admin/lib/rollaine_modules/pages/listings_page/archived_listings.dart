@@ -475,7 +475,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
 
   Widget _buildArchivedBarterList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('barter').snapshots(),
+      stream: firestore.collectionGroup('barter').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
@@ -793,7 +793,7 @@ class _ArchivedListingsState extends State<ArchivedListings> {
 
   Widget _buildArchivedSellList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('sell').snapshots(),
+      stream: firestore.collectionGroup('sell').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
