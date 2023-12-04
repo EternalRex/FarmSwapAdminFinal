@@ -2,6 +2,7 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/consumer_dispute/consumer_dispute_display.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/farmer_dispute/farmer_dispute_display.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/resolved%20dispute/resolved_disputes.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_adminaccount_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_commu_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dashboard_btn.dart';
@@ -210,7 +211,7 @@ display sa center page */
                               child: Column(
                                 children: [
                                   (screenType == "RESOLVED")
-                                      ? const Text('Hi')
+                                      ? const GetAdminFarmerSaleResolutions()
                                       : (screenType == "FARMER")
                                           ? const FarmerDisputeDisplay()
                                           : const ConsumerDisputeDisplay(),

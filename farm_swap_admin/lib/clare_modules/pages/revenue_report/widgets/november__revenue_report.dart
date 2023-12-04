@@ -112,7 +112,7 @@ class _NovemberRevenueTabBarViewState extends State<NovemberRevenueTabBarView> {
                                   DateTime timestamp =
                                       document['dateTime'].toDate();
                                   return timestamp.month ==
-                                      1; // 1 represents January
+                                      11; // 1 represents January
                                 }).toList();
 
                                 // Calculate the sum of swapcoins for specific month using fold
@@ -303,7 +303,8 @@ class _NovemberRevenueTabBarViewState extends State<NovemberRevenueTabBarView> {
           ],
         ),
       ),
-    );}
+    );
+  }
 
   Widget _buildRevenueList(String selectedYear) {
     return StreamBuilder<QuerySnapshot>(

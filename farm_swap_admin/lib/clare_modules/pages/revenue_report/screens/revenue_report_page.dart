@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:farm_swap_admin/constants/Colors/colors.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -333,7 +331,8 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                   child: const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Expanded(
                                           flex: 2,
@@ -676,7 +675,8 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                         CachedNetworkImage(
                           imageUrl: data["profile"] ??
                               "", // Provide a default empty string if it's null
-                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
                             backgroundImage: imageProvider,
                             radius: 20,
                           ),
@@ -817,7 +817,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                       const SizedBox(
                         width: 10,
                       ),
-          
+
                       //this will display the users profile picture in each listtile
                       CachedNetworkImage(
                         imageUrl: data["profile"] ??

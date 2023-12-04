@@ -4,7 +4,7 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
 import 'package:farm_swap_admin/constants/poppins_text.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/consumer_dispute/consumer_dispute_display.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/database/farmer_sale_save_resolution.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_adminaccount_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_commu_btn.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_buttons/dispute_dashboard_btn.dart';
@@ -19,7 +19,9 @@ import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_search.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_txt.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FarmerDisputeSellDetails extends StatefulWidget {
   const FarmerDisputeSellDetails({
@@ -84,8 +86,7 @@ class FarmerDisputeSellDetails extends StatefulWidget {
   final String transactDate;
 
   @override
-  State<FarmerDisputeSellDetails> createState() =>
-      _ConsumerDisputeSellDetailsState();
+  State<FarmerDisputeSellDetails> createState() => _ConsumerDisputeSellDetailsState();
 }
 
 class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
@@ -98,6 +99,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
   }
 
   TextEditingController textController = TextEditingController();
+  FarmerSaveSellResolution farmerSaveSell = FarmerSaveSellResolution();
 
   @override
   void dispose() {
@@ -263,8 +265,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                       Expanded(
                         child: Padding(
                           //Decorate the expanded area for the main content
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
+                          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                           child: Container(
                             //Design of the container
                             decoration: BoxDecoration(
@@ -300,29 +301,23 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                           ),
                                           /*Column that will hold the details of this row vertically */
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 /*Row of the image and its discription*/
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     /*Container of the image */
                                                     Container(
                                                       width: 190,
                                                       height: 190,
                                                       decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
+                                                        borderRadius: BorderRadius.circular(10),
                                                         image: DecorationImage(
-                                                          image:
-                                                              CachedNetworkImageProvider(
-                                                                  widget.lUrl),
+                                                          image: CachedNetworkImageProvider(
+                                                              widget.lUrl),
                                                           fit: BoxFit.fill,
                                                         ),
                                                       ),
@@ -374,16 +369,13 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                           ),
                                           /*Column that will hold the details of this row vertically */
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 /*Row of the image and its discription*/
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     /*Container of the image */
                                                     Container(
@@ -395,15 +387,12 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                           width: 1,
                                                           color: greenDark,
                                                         ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
+                                                        borderRadius: BorderRadius.circular(10),
                                                       ),
                                                       child: Column(
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .person_rounded,
+                                                            Icons.person_rounded,
                                                             size: 185,
                                                             color: greenNormal,
                                                           ),
@@ -450,8 +439,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                     child: Container(
                                       height: 150,
                                       width: 1000,
-                                      decoration: const BoxDecoration(
-                                          color: Colors.white),
+                                      decoration: const BoxDecoration(color: Colors.white),
                                       child: Column(
                                         children: [
                                           Center(
@@ -465,8 +453,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                           Padding(
                                             padding: const EdgeInsets.all(10),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 const SizedBox(
                                                   width: 15,
@@ -482,10 +469,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                 SizedBox(
                                                   width: 20,
                                                   child: poppinsText(
-                                                      ":",
-                                                      Colors.black,
-                                                      20,
-                                                      FontWeight.normal),
+                                                      ":", Colors.black, 20, FontWeight.normal),
                                                 ),
                                                 SizedBox(
                                                   child: poppinsText2(
@@ -506,8 +490,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                   Container(
                                     height: 700,
                                     width: 1000,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white),
+                                    decoration: const BoxDecoration(color: Colors.white),
                                     child: Column(
                                       children: [
                                         Center(
@@ -521,8 +504,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                         Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               const SizedBox(
                                                 width: 15,
@@ -538,10 +520,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                               SizedBox(
                                                 width: 20,
                                                 child: poppinsText2(
-                                                    ":",
-                                                    Colors.black,
-                                                    20,
-                                                    FontWeight.normal),
+                                                    ":", Colors.black, 20, FontWeight.normal),
                                               ),
                                               SizedBox(
                                                 child: poppinsText2(
@@ -557,8 +536,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
 
                                         /*Row for the dispute picture proof*/
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 50),
+                                          padding: const EdgeInsets.only(top: 50),
                                           child: Column(
                                             children: [
                                               Container(
@@ -570,14 +548,11 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                     width: 1,
                                                     color: greenDark,
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
+                                                  borderRadius: BorderRadius.circular(10),
                                                 ),
                                                 child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                   children: [
                                                     Icon(
                                                       Icons.photo_rounded,
@@ -587,10 +562,7 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                   ],
                                                 ),
                                               ),
-                                              poppinsText(
-                                                  "Photo Proof",
-                                                  Colors.black54,
-                                                  20,
+                                              poppinsText("Photo Proof", Colors.black54, 20,
                                                   FontWeight.w500),
                                             ],
                                           ),
@@ -601,16 +573,14 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                   Padding(
                                     padding: const EdgeInsets.all(15),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 300,
                                           width: 650,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(10),
                                             boxShadow: [
                                               BoxShadow(
                                                 blurRadius: 2,
@@ -622,25 +592,18 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                           child: Column(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 20, bottom: 20),
+                                                padding: const EdgeInsets.only(top: 20, bottom: 20),
                                                 child: Text(
                                                   'Write your resolution here about this transaction.',
-                                                  style:
-                                                      Poppins.discText.copyWith(
-                                                    color:
-                                                        const Color(0xFF09041B),
+                                                  style: Poppins.discText.copyWith(
+                                                    color: const Color(0xFF09041B),
                                                   ),
                                                 ),
                                               ),
                                               Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  textSelectionTheme:
-                                                      TextSelectionThemeData(
-                                                    selectionColor:
-                                                        FarmSwapGreen
-                                                            .lightGreenHover,
+                                                data: Theme.of(context).copyWith(
+                                                  textSelectionTheme: TextSelectionThemeData(
+                                                    selectionColor: FarmSwapGreen.lightGreenHover,
                                                   ),
                                                 ),
                                                 child: SizedBox(
@@ -653,39 +616,25 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                       enabled: true,
                                                       label: Text(
                                                         'Enter your resolution',
-                                                        style: Poppins.adminName
-                                                            .copyWith(
-                                                          color: const Color
-                                                              .fromARGB(
-                                                              206, 9, 4, 27),
+                                                        style: Poppins.adminName.copyWith(
+                                                          color:
+                                                              const Color.fromARGB(206, 9, 4, 27),
                                                         ),
                                                       ),
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              vertical: 10,
-                                                              horizontal: 10),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                farmSwapSmoothGreen),
+                                                      contentPadding: const EdgeInsets.symmetric(
+                                                          vertical: 10, horizontal: 10),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderSide:
+                                                            BorderSide(color: farmSwapSmoothGreen),
                                                       ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                farmSwapSmoothGreen),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderSide:
+                                                            BorderSide(color: farmSwapSmoothGreen),
                                                       ),
                                                     ),
-                                                    cursorColor: FarmSwapGreen
-                                                        .normalGreen,
+                                                    cursorColor: FarmSwapGreen.normalGreen,
                                                     style: const TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.black,
@@ -694,147 +643,172 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 20),
+                                                padding: const EdgeInsets.only(top: 20),
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     SizedBox(
                                                       height: 50,
                                                       width: 210,
-                                                      child:
-                                                          DropdownButtonFormField<
-                                                              String>(
+                                                      child: DropdownButtonFormField<String>(
                                                         value: selectedValue,
                                                         onChanged: (value) {
                                                           setState(() {
-                                                            selectedValue =
-                                                                value!;
+                                                            selectedValue = value!;
                                                           });
                                                         },
                                                         items: [
                                                           DropdownMenuItem(
-                                                            value:
-                                                                'Send Warning',
+                                                            value: 'Send Warning',
                                                             child: Row(
                                                               children: [
                                                                 const Icon(
-                                                                  Icons
-                                                                      .warning_amber_rounded,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          255,
-                                                                          153,
-                                                                          0),
+                                                                  Icons.warning_amber_rounded,
+                                                                  color: Color.fromARGB(
+                                                                      255, 255, 153, 0),
                                                                 ),
                                                                 const SizedBox(
                                                                   width: 5,
                                                                 ),
                                                                 Text(
                                                                   'Send Warning',
-                                                                  style: Poppins
-                                                                      .detailsText
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
+                                                                  style:
+                                                                      Poppins.detailsText.copyWith(
+                                                                    color: const Color(0xFF09041B),
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
                                                           DropdownMenuItem(
-                                                            value:
-                                                                'Deduct Swapcoins',
+                                                            value: 'Deduct Swapcoins',
                                                             child: Row(
                                                               children: [
                                                                 const Icon(
-                                                                  Icons
-                                                                      .remove_rounded,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          255,
-                                                                          206,
-                                                                          60),
+                                                                  Icons.remove_rounded,
+                                                                  color: Color.fromARGB(
+                                                                      255, 255, 206, 60),
                                                                 ),
                                                                 const SizedBox(
                                                                   width: 5,
                                                                 ),
                                                                 Text(
                                                                   'Deduct Swapcoins',
-                                                                  style: Poppins
-                                                                      .detailsText
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
+                                                                  style:
+                                                                      Poppins.detailsText.copyWith(
+                                                                    color: const Color(0xFF09041B),
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
                                                           DropdownMenuItem(
-                                                            value:
-                                                                'Deactivate Account',
+                                                            value: 'Wallet Deduction',
                                                             child: Row(
                                                               children: [
                                                                 const Icon(
-                                                                  Icons
-                                                                      .no_accounts_rounded,
-                                                                  color: Colors
-                                                                      .red,
+                                                                  Icons.remove_rounded,
+                                                                  color: Colors.blue,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  'Wallet Deduction',
+                                                                  style:
+                                                                      Poppins.detailsText.copyWith(
+                                                                    color: const Color(0xFF09041B),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          DropdownMenuItem(
+                                                            value: 'Deactivate Account',
+                                                            child: Row(
+                                                              children: [
+                                                                const Icon(
+                                                                  Icons.no_accounts_rounded,
+                                                                  color: Colors.red,
                                                                 ),
                                                                 const SizedBox(
                                                                   width: 5,
                                                                 ),
                                                                 Text(
                                                                   'Deactivate Account',
-                                                                  style: Poppins
-                                                                      .detailsText
-                                                                      .copyWith(
-                                                                    color: const Color(
-                                                                        0xFF09041B),
+                                                                  style:
+                                                                      Poppins.detailsText.copyWith(
+                                                                    color: const Color(0xFF09041B),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          DropdownMenuItem(
+                                                            value: 'Rejected Dispute',
+                                                            child: Row(
+                                                              children: [
+                                                                const Icon(
+                                                                  FontAwesomeIcons.ban,
+                                                                  color: Colors.red,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  'Rejected Dispute',
+                                                                  style:
+                                                                      Poppins.detailsText.copyWith(
+                                                                    color: const Color(0xFF09041B),
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
                                                         ],
-                                                        decoration:
-                                                            InputDecoration(
-                                                          enabledBorder:
-                                                              UnderlineInputBorder(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: UnderlineInputBorder(
                                                             borderSide: BorderSide(
                                                                 width: 2,
-                                                                color:
-                                                                    farmSwapSmoothGreen),
+                                                                color: farmSwapSmoothGreen),
                                                           ),
-                                                          fillColor:
-                                                              greenNormal,
-                                                          focusedBorder:
-                                                              UnderlineInputBorder(
+                                                          fillColor: greenNormal,
+                                                          focusedBorder: UnderlineInputBorder(
                                                             borderSide: BorderSide(
                                                                 width: 2,
-                                                                color:
-                                                                    farmSwapSmoothGreen),
+                                                                color: farmSwapSmoothGreen),
                                                           ),
                                                         ),
                                                         style: const TextStyle(
-                                                            color: Color(
-                                                                0xFF09041B)),
+                                                            color: Color(0xFF09041B)),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 40),
+                                                padding: const EdgeInsets.only(top: 40),
                                                 child: ElevatedButton(
-                                                  onPressed: () {},
-                                                  style:
-                                                      ElevatedButton.styleFrom(
+                                                  onPressed: () {
+                                                    /*udpating dispute status in the database */
+                                                    farmerSaveSell.updateFarmerDisputeResolved(
+                                                        widget.disputeUrl, widget.fId);
+                                                    /*Saving the resolution to the database */
+                                                    farmerSaveSell.farmerSellResolution(
+                                                      widget.lUrl,
+                                                      FirebaseAuth.instance.currentUser!.email
+                                                          .toString(),
+                                                      textController.text,
+                                                      selectedValue,
+                                                      DateTime.now(),
+                                                      widget.fId,
+                                                      widget.consId,
+                                                      widget.fUname,
+                                                      widget.consUname,
+                                                    );
+                                                    showSuccessMessage();
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
                                                     backgroundColor:
                                                         greenNormal, // Set the background color
                                                   ),
@@ -866,6 +840,23 @@ class _ConsumerDisputeSellDetailsState extends State<FarmerDisputeSellDetails> {
           ),
         ],
       ),
+    );
+  }
+
+  void showSuccessMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: poppinsText("Success!", farmSwapTitlegreen, 20, FontWeight.bold),
+          content: poppinsText2(
+            "Your resolution was successfully sent to ${widget.consUname} and ${widget.fUname}",
+            Colors.black,
+            13,
+            FontWeight.normal,
+          ),
+        );
+      },
     );
   }
 }
