@@ -3,7 +3,7 @@ import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/ad
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/admin_signup.dart';
 import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/admin_verification_screen/admin_verification.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_promotion_page/promotion.dart';
-import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_swapcoins/swapcoinhistory.dart';
+import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_swapcoins/swapcoins.dart';
 import 'package:farm_swap_admin/clare_modules/pages/dashboard_transactions_page/screens/transaction_userwallet_balance/userwallet.dart';
 import 'package:farm_swap_admin/clare_modules/pages/forgot_password_page/forgotpassword.dart';
 import 'package:farm_swap_admin/clare_modules/pages/wallet_management_balance/consumer_request_wallet.dart';
@@ -255,7 +255,7 @@ class RoutesManager {
 
       case adminTransactionsSwapCoins:
         return MaterialPageRoute(
-          builder: (context) => const SwapCoinHistory(),
+          builder: (context) => SwapCoinHistory(),
         );
 
       case adminTransactionsUserWallet:
