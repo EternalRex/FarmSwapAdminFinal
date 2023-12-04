@@ -130,13 +130,6 @@ class _ListingsState extends State<Listings> {
 
                     //Wallet icon and label
                     ListingsWalletOptionsBtn(),
-                    //15 height spacing
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ListingsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

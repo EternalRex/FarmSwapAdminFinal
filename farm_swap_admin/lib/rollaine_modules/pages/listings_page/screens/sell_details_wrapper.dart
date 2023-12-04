@@ -158,13 +158,6 @@ class _SellDetailsState extends State<SellDetails> {
 
                     //Wallet icon and label
                     ListingsWalletOptionsBtn(),
-                    //15 height spacing
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ListingsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

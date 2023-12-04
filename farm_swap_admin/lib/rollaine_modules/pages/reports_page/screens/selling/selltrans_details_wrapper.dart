@@ -161,12 +161,6 @@ class _SellTransDetailsState extends State<SellTransDetails> {
 
                     //Wallet icon and label
                     ReportsWalletOptionsBtn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ReportsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

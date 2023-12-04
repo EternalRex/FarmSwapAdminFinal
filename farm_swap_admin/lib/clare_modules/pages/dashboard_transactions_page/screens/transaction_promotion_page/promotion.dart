@@ -81,10 +81,6 @@ class _TransactionPromotionState extends State<TransactionPromotion> {
                       height: 15,
                     ),
                     WalletBttn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    CommunicationBttn(),
                     Spacer(),
                     LogoutBttn(),
                   ],

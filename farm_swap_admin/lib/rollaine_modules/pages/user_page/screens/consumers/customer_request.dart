@@ -133,13 +133,6 @@ class _CustomerRequestPageState extends State<CustomerRequestPage> {
 
                     //Wallet icon and label
                     UserWalletOptionsBtn(),
-                    //15 height spacing
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    UserCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

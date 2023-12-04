@@ -73,12 +73,6 @@ class _DashBoardExpanded1ItemState extends State<DashBoardExpanded1Item> {
         ),
         /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
         const DashWalletOptions(),
-        /*30 SPACE BEFORE NEXT OPTION*/
-        const SizedBox(
-          height: 15,
-        ),
-        /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-        const DashCommunicationOptionsBtn(),
         const Spacer(),
         /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
         DashLogoutOptionBtn(),

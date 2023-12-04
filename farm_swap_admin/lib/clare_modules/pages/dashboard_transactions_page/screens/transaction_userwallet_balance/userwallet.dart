@@ -80,10 +80,6 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                       height: 15,
                     ),
                     WalletBttn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    CommunicationBttn(),
                     Spacer(),
                     LogoutBttn(),
                   ],

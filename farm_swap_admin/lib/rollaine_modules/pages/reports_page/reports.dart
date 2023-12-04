@@ -125,13 +125,6 @@ class _ReportsState extends State<Reports> {
 
                     //Wallet icon and label
                     ReportsWalletOptionsBtn(),
-                    //15 height spacing
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ReportsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

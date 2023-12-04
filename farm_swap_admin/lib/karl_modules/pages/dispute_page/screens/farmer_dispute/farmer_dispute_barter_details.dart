@@ -214,12 +214,6 @@ class _FarmerDisputeBarterDetailsState extends State<FarmerDisputeBarterDetails>
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
                     DisputeWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    DisputeCommunicationOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
                     Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DisputeLogoutOptionBtn(),

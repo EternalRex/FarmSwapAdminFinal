@@ -80,10 +80,6 @@ class _SwapCoinHistoryState extends State<SwapCoinHistory> {
                       height: 15,
                     ),
                     WalletBttn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    CommunicationBttn(),
                     Spacer(),
                     LogoutBttn(),
                   ],

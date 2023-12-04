@@ -154,12 +154,6 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
 
                     //Wallet icon and label
                     ReportsWalletOptionsBtn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ReportsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

@@ -123,12 +123,6 @@ class _AdminLogs extends State<AdminLogs> {
 
                     //Wallet icon and label
                     ReportsWalletOptionsBtn(),
-                    SizedBox(
-                      height: 15,
-                    ),
-
-                    //Communication icon and label
-                    ReportsCommunicationOptionsBtn(),
                     Spacer(),
 
                     //Logout icon and label

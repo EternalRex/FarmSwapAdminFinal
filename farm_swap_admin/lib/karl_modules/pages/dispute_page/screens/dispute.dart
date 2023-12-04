@@ -116,12 +116,6 @@ display sa center page */
                     /*THIS ROW WILL CONTAIN THE WALLET ICON AND LABEL */
                     DisputeWalletOptions(),
                     /*30 SPACE BEFORE NEXT OPTION*/
-                    SizedBox(
-                      height: 15,
-                    ),
-                    /*THIS ROW WILL CONTAIN THE COMMUNICATIONS ICON AND LABEL */
-                    DisputeCommunicationOptionsBtn(),
-                    /*30 SPACE BEFORE NEXT OPTION*/
                     Spacer(),
                     /*THIS ROW WILL CONTAIN THE lOGOUT ICON AND LABEL */
                     DisputeLogoutOptionBtn(),
@@ -160,25 +154,6 @@ display sa center page */
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
                     automaticallyImplyLeading: false,
-                    /*IN THE  APPBAR, WE USED THE ACTIONS PROPERTY SO THAT WE CAN PUT
-                    A LOT OF WIDGETS IN THE APPBAR, IN HERE IT IS USED SO THAT WE CAN PUT 
-                    A TEXT FIELD WIDGET FOR SEARCHING*/
-                    actions: const [
-                      /*WRAPPING THE SEARCH TEXT FIEL WITH A PADDING SO THAT WE CAN
-                    HAVE SPACES ARROUND THE BORDER OF THIS SEARCH BAR */
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        /*PUTTING THE TEXT WIDGET IN A SIZEBOX SO THAT WE  CAN CONTROL THE
-                        HEIGH AND WIDTH OF THE TEXT FIELD */
-                        child: SizedBox(
-                          width: 250,
-                          height: 15,
-                          /*THE ACTUAL SEARCH BAR WHICH IS A TEXT FIELD, THIS IS A CLASS I CREATED 
-                          IN A SEPRATE FILE, CHECK THAT IN WIDGET_DASHBOARD_SEARCH.DART */
-                          child: DisputeSearchBar(),
-                        ),
-                      ),
-                    ],
                   ),
 /*START OF THE SECOND EXPANDEDS BODY */
                   body: Row(
