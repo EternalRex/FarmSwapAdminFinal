@@ -317,7 +317,7 @@ class _ArchivedSellDetailsState extends State<ArchivedSellDetails> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            height: 100,
+                                            height: 150,
                                             width: 900,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -404,7 +404,7 @@ class _ArchivedSellDetailsState extends State<ArchivedSellDetails> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 100, top: 15),
+                                                          left: 20, top: 15),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
@@ -528,7 +528,7 @@ class _ArchivedSellDetailsState extends State<ArchivedSellDetails> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 100, top: 15),
+                                                          left: 20, top: 15),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,

@@ -280,43 +280,8 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                 /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
                 child: Column(
                   children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 14),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 75, top: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            /*MESSAGE BUTTON */
-                            SizedBox(
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                    'assets/rollaine_assets/icons/chat.png'),
-                                iconSize: 23,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            /*NOTIFICATIOIN BUTTON */
-                            SizedBox(
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                    'assets/rollaine_assets/icons/notification.png'),
-                                iconSize: 23,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     const SizedBox(
-                      height: 150,
+                      height: 175,
                     ),
 
                     //Archive button
@@ -326,8 +291,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-
-                            //This code essentially updates the selectedId property of the widget to the value of farmerUserId when the TextButton is pressed. 
+                            //This code essentially updates the selectedId property of the widget to the value of farmerUserId when the TextButton is pressed.
                             TextButton(
                               onPressed: () async {
                                 setState(() {
@@ -340,7 +304,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                   context: context,
                                   //build the content of the dialog.
                                   builder: (BuildContext context) {
-                                    //designed for displaying a pop-up dialog box 
+                                    //designed for displaying a pop-up dialog box
                                     return AlertDialog(
                                       //sets the title of the dialog
                                       title: const Text('Confirmation!'),
@@ -364,7 +328,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                             await updateField2(
                                                 'Archived', widget.selectedId);
 
-                                            //Moving the farmer's data to an archived collection based on the widget.selectedId. 
+                                            //Moving the farmer's data to an archived collection based on the widget.selectedId.
                                             await moveFarmerToArchivedCollection(
                                                 widget.selectedId);
 
@@ -416,19 +380,23 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                   },
                                 );
                               },
-                              child: const RightUserText(
-                                myText: 'Archive',
-                                myColor: Color(0xFF09041B),
+                              child: const Row(
+                                children: [
+                                  RightUserText(
+                                    myText: 'Archive',
+                                    myColor: Color(0xFF09041B),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                        'assets/rollaine_assets/icons/delete.png'),
+                                    height: 23,
+                                    width: 23,
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage(
-                                  'assets/rollaine_assets/icons/delete.png'),
-                              height: 23,
-                              width: 23,
                             ),
                           ],
                         ),
@@ -465,28 +433,28 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
                                 Navigator.of(context)
                                     .pushNamed(RoutesManager.detailsFarmerPage);
                               },
-                              child: const RightUserText(
-                                myText: 'Deactivate',
-                                myColor: Color(0xFF09041B),
+                              child: const Row(
+                                children: [
+                                  RightUserText(
+                                    myText: 'Deactivate',
+                                    myColor: Color(0xFF09041B),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                        'assets/rollaine_assets/icons/block.png'),
+                                    height: 23,
+                                    width: 23,
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Image(
-                              image: AssetImage(
-                                  'assets/rollaine_assets/icons/block.png'),
-                              height: 23,
-                              width: 23,
                             ),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    const UserDeductOptionsBtn(),
                   ],
                 ),
               ),

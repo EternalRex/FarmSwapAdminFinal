@@ -118,31 +118,27 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 50,
-                    ),
-                    SizedBox(
-                      width: 100,
-                      child: Text(
-                        'Name',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        width: 100,
+                        child: Text(
+                          'Name',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 50,
                     ),
                     Expanded(
                       flex: 1,
                       child: Text(
                         "Registration Date",
-                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -155,7 +151,6 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                       flex: 1,
                       child: Text(
                         "Wallet Balance",
-                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -277,80 +272,486 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                 ),
               ],
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  //this expanded holding the profilepic, firstname, last name and address of the user
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      width: 230,
+                      child: Row(
+                        children: [
+                          //this padding holds the profile image of the admin
+                          CachedNetworkImage(
+                              imageUrl: data["profilePhoto"] ??
+                            "", // Provide a default empty string if it's null
+                              imageBuilder: (context, imageProvider) =>
+                            CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                              ),
+                              placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                              },
+                            ),
+                              
+                          //this column holds the admin users info
+                          //like firstname, lastname and address
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //first column that holds the admin user firstname and username
+                              SizedBox(
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "${data["firstname"]} ",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${data["lastname"]}",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //second column that holds the admin user address
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "${data["baranggay"]}, ${data["city_municipality"]}",
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+            
+                  //this holds the date
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      dateFinal,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+            
+                  //this holds the wallet balance  of the user
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                          child: Text(
+                            "${data["balance"]}",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.add_circle,
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.selectedId = "${data["userId"]}";
+                            });
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        "Additional Balance to ${data["firstname"]} ${data["lastname"]} wallet."),
+                                    content: Container(
+                                      width: 400,
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                              "Enter additional balance : "),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          WalletTextField(
+                                            controller: amountController,
+                                            enabled: true,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text("Add"),
+                                        onPressed: () async {
+                                          AdminLogsInsertDataDb adminLogs =
+                                              AdminLogsInsertDataDb();
+                                          //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                          final email = FirebaseAuth
+                                              .instance.currentUser!.email;
+                                          final userId = FirebaseAuth
+                                              .instance.currentUser!.uid;
+                                          /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                          adminLogs.createAdminLogs(
+                                              email,
+                                              userId,
+                                              "Add_Consumer_Balance",
+                                              DateTime.now());
+                                          /*
+                                        In this function when the ADD button is clicked 
+                                        it will update the selected id the balance 
+                                        */
+            
+                                          await updateBalance.updateBalance(
+                                              amountController.text,
+                                              widget.selectedId);
+                                          // ignore: use_build_context_synchronously
+                                          Navigator.of(context)
+                                              .pop(); // Close the AlertDialog
+            
+                                          // ignore: use_build_context_synchronously
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text('Successful'),
+                                                content: const Text(
+                                                    'You successfully add balance to this account!'),
+                                                actions: [
+                                                  TextButton(
+                                                    child: const Text("Ok"),
+                                                    onPressed: () async {
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the AlertDialog
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ConsumerWalletTabBarView(),
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: const Text("Close"),
+                                        onPressed: () async {
+                                          Navigator.of(context)
+                                              .pop(); // Close the AlertDialog
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.selectedId = "${data["userId"]}";
+                            });
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        "Deduct Balance to ${data["firstname"]} ${data["lastname"]} wallet."),
+                                    content: Container(
+                                      width: 400,
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                              "Enter deduction balance : "),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          WalletTextField(
+                                            controller: amountController,
+                                            enabled: true,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text("Deduct"),
+                                        onPressed: () async {
+                                          CheckBalance checkBalance =
+                                              CheckBalance();
+                                          final balance = await checkBalance
+                                              .getBalanceFromFirestore(
+                                                  widget.selectedId);
+                                          // Parsing the amountController.text into double
+                                          final deductAmount =
+                                              double.parse(amountController.text);
+                                          if (balance >= deductAmount) {
+                                            AdminLogsInsertDataDb adminLogs =
+                                                AdminLogsInsertDataDb();
+                                            //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
+                                            final email = FirebaseAuth
+                                                .instance.currentUser!.email;
+                                            final userId = FirebaseAuth
+                                                .instance.currentUser!.uid;
+                                            /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
+                                            adminLogs.createAdminLogs(
+                                                email,
+                                                userId,
+                                                "Deduct_Consumer_Balance",
+                                                DateTime.now());
+                                            /*
+                                        In this function when the DEDUCT button is clicked 
+                                        it will update the selected id the balance 
+                                        */
+            
+                                            await updateBalance
+                                                .updateBalanceDeduct(
+                                                    amountController.text,
+                                                    widget.selectedId);
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.of(context)
+                                                .pop(); // Close the AlertDialog
+                                            // ignore: use_build_context_synchronously
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text('Successful'),
+                                                  content: const Text(
+                                                      'You successfully deduct balance to this account!'),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: const Text("Ok"),
+                                                      onPressed: () async {
+                                                        Navigator.of(context)
+                                                            .pop(); // Close the AlertDialog
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ConsumerWalletTabBarView(),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            // ignore: use_build_context_synchronously
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text('Warning!'),
+                                                  content: const Text(
+                                                      'This account has lower balance in the wallet. Please try again!'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pop(),
+                                                      child: const Text('OK'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: const Text("Close"),
+                                        onPressed: () async {
+                                          Navigator.of(context)
+                                              .pop(); // Close the AlertDialog
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          icon: const Icon(
+                            Icons.remove_circle,
+                            size: 20,
+                            color: Colors.red,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.selectedId = "${data["userId"]}";
+                              });
+                              //assign the widget.selectedId to setAdminUserId
+                              //to bring in other class
+                              Provider.of<SpecificWalletDetailsProvider>(context,
+                                      listen: false)
+                                  .setUserId(widget.selectedId);
+                              //this will navigate to specific admin activity page
+                              Navigator.of(context).pushNamed(
+                                  RoutesManager.specificwalletconsumerdetails);
+                            },
+                            icon: const Icon(
+                              Icons.info,
+                              color: Colors.green,
+                            )),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    }
+
+    //if search bar is empty this one will display
+    else {
+      return ListTile(
+        title: Container(
+          width: 780,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: shadow,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
             child: Row(
               children: [
                 const SizedBox(
-                  width: 25,
+                  width: 10,
                 ),
                 //this expanded holding the profilepic, firstname, last name and address of the user
-                SizedBox(
-                  width: 230,
-                  child: Row(
-                    children: [
-                      //this padding holds the profile image of the admin
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: //this will display the users profile picture in each listtile
-                            CachedNetworkImage(
-                          imageUrl: data["profilePhoto"] ??
-                              "", // Provide a default empty string if it's null
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                            backgroundImage: imageProvider,
-                            radius: 20,
+                Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    width: 230,
+                    child: Row(
+                      children: [
+                        //this padding holds the profile image of the admin
+                        CachedNetworkImage(
+                            imageUrl: data["profilePhoto"] ??
+                          "", // Provide a default empty string if it's null
+                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                        backgroundImage: imageProvider,
+                        radius: 20,
+                            ),
+                            placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                            },
                           ),
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) {
-                            return const Icon(Icons.error);
-                          },
-                        ),
-                      ),
-
-                      //this column holds the admin users info
-                      //like firstname, lastname and address
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //first column that holds the admin user firstname and username
-                          SizedBox(
-                            child: Row(
-                              children: [
-                                Text(
-                                  "${data["firstname"]} ",
-                                  style: const TextStyle(
-                                    fontSize: 15,
+                          
+                        //this column holds the admin users info
+                        //like firstname, lastname and address
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //first column that holds the admin user firstname and username
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
                                   ),
-                                ),
+                                  Text(
+                                    "${data["firstname"]} ",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${data["lastname"]}",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //second column that holds the admin user address
+                            Row(
+                              children: [
+                                const SizedBox(
+                                    width: 10,
+                                  ),
                                 Text(
-                                  "${data["lastname"]}",
+                                  "${data["baranggay"]}, ${data["city_municipality"]}",
                                   style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 10,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          //second column that holds the admin user address
-                          Text(
-                            "${data["baranggay"]}, ${data["city_municipality"]}",
-                            style: const TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-
+          
                 //this holds the date
                 Expanded(
                   flex: 1,
                   child: Text(
                     dateFinal,
-                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -359,19 +760,16 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 50,
-                ),
-
+          
                 //this holds the wallet balance  of the user
                 Expanded(
+                  flex: 1,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                         child: Text(
                           "${data["balance"]}",
-                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 14,
@@ -403,13 +801,11 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                                     width: 400,
                                     color: Colors.white,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                            "Enter additional balance : "),
+                                        const Text("Enter additional balance : "),
                                         const SizedBox(
                                           width: 10,
                                         ),
@@ -438,17 +834,17 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                                             "Add_Consumer_Balance",
                                             DateTime.now());
                                         /*
-                                      In this function when the ADD button is clicked 
-                                      it will update the selected id the balance 
-                                      */
-
+                                        In this function when the ADD button is clicked 
+                                        it will update the selected id the balance 
+                                        */
+          
                                         await updateBalance.updateBalance(
                                             amountController.text,
                                             widget.selectedId);
                                         // ignore: use_build_context_synchronously
                                         Navigator.of(context)
                                             .pop(); // Close the AlertDialog
-
+          
                                         // ignore: use_build_context_synchronously
                                         showDialog(
                                           context: context,
@@ -502,13 +898,11 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                                     width: 400,
                                     color: Colors.white,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                            "Enter deduction balance : "),
+                                        const Text("Enter deduction balance : "),
                                         const SizedBox(
                                           width: 10,
                                         ),
@@ -546,14 +940,13 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                                               "Deduct_Consumer_Balance",
                                               DateTime.now());
                                           /*
-                                      In this function when the DEDUCT button is clicked 
-                                      it will update the selected id the balance 
-                                      */
-
-                                          await updateBalance
-                                              .updateBalanceDeduct(
-                                                  amountController.text,
-                                                  widget.selectedId);
+                                        In this function when the DEDUCT button is clicked 
+                                        it will update the selected id the balance 
+                                        */
+          
+                                          await updateBalance.updateBalanceDeduct(
+                                              amountController.text,
+                                              widget.selectedId);
                                           // ignore: use_build_context_synchronously
                                           Navigator.of(context)
                                               .pop(); // Close the AlertDialog
@@ -644,390 +1037,6 @@ class _ConsumerWalletTabBarViewState extends State<ConsumerWalletTabBarView> {
                 ),
               ],
             ),
-          ),
-        );
-      }
-    }
-
-    //if search bar is empty this one will display
-    else {
-      return ListTile(
-        title: Container(
-          width: 780,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: shadow,
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              //this expanded holding the profilepic, firstname, last name and address of the user
-              SizedBox(
-                width: 230,
-                child: Row(
-                  children: [
-                    //this padding holds the profile image of the admin
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: //this will display the users profile picture in each listtile
-                          CachedNetworkImage(
-                        imageUrl: data["profilePhoto"] ??
-                            "", // Provide a default empty string if it's null
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundImage: imageProvider,
-                          radius: 20,
-                        ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) {
-                          return const Icon(Icons.error);
-                        },
-                      ),
-                    ),
-
-                    //this column holds the admin users info
-                    //like firstname, lastname and address
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //first column that holds the admin user firstname and username
-                        SizedBox(
-                          child: Row(
-                            children: [
-                              Text(
-                                "${data["firstname"]} ",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                "${data["lastname"]}",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //second column that holds the admin user address
-                        Text(
-                          "${data["baranggay"]}, ${data["city_municipality"]}",
-                          style: const TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              //this holds the date
-              Expanded(
-                flex: 1,
-                child: Text(
-                  dateFinal,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-
-              //this holds the wallet balance  of the user
-              Expanded(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 50,
-                      child: Text(
-                        "${data["balance"]}",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.add_circle,
-                        size: 20,
-                        color: Colors.blue,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          widget.selectedId = "${data["userId"]}";
-                        });
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                    "Additional Balance to ${data["firstname"]} ${data["lastname"]} wallet."),
-                                content: Container(
-                                  width: 400,
-                                  color: Colors.white,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const Text("Enter additional balance : "),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      WalletTextField(
-                                        controller: amountController,
-                                        enabled: true,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text("Add"),
-                                    onPressed: () async {
-                                      AdminLogsInsertDataDb adminLogs =
-                                          AdminLogsInsertDataDb();
-                                      //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
-                                      final email = FirebaseAuth
-                                          .instance.currentUser!.email;
-                                      final userId = FirebaseAuth
-                                          .instance.currentUser!.uid;
-                                      /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
-                                      adminLogs.createAdminLogs(
-                                          email,
-                                          userId,
-                                          "Add_Consumer_Balance",
-                                          DateTime.now());
-                                      /*
-                                      In this function when the ADD button is clicked 
-                                      it will update the selected id the balance 
-                                      */
-
-                                      await updateBalance.updateBalance(
-                                          amountController.text,
-                                          widget.selectedId);
-                                      // ignore: use_build_context_synchronously
-                                      Navigator.of(context)
-                                          .pop(); // Close the AlertDialog
-
-                                      // ignore: use_build_context_synchronously
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text('Successful'),
-                                            content: const Text(
-                                                'You successfully add balance to this account!'),
-                                            actions: [
-                                              TextButton(
-                                                child: const Text("Ok"),
-                                                onPressed: () async {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the AlertDialog
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ConsumerWalletTabBarView(),
-                                                  );
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: const Text("Close"),
-                                    onPressed: () async {
-                                      Navigator.of(context)
-                                          .pop(); // Close the AlertDialog
-                                    },
-                                  ),
-                                ],
-                              );
-                            });
-                      },
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.selectedId = "${data["userId"]}";
-                        });
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                    "Deduct Balance to ${data["firstname"]} ${data["lastname"]} wallet."),
-                                content: Container(
-                                  width: 400,
-                                  color: Colors.white,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const Text("Enter deduction balance : "),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      WalletTextField(
-                                        controller: amountController,
-                                        enabled: true,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text("Deduct"),
-                                    onPressed: () async {
-                                      CheckBalance checkBalance =
-                                          CheckBalance();
-                                      final balance = await checkBalance
-                                          .getBalanceFromFirestore(
-                                              widget.selectedId);
-                                      // Parsing the amountController.text into double
-                                      final deductAmount =
-                                          double.parse(amountController.text);
-                                      if (balance >= deductAmount) {
-                                        AdminLogsInsertDataDb adminLogs =
-                                            AdminLogsInsertDataDb();
-                                        //These lines fetch the email and user ID of the currently authenticated user using Firebase Authentication.
-                                        final email = FirebaseAuth
-                                            .instance.currentUser!.email;
-                                        final userId = FirebaseAuth
-                                            .instance.currentUser!.uid;
-                                        /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
-                                        adminLogs.createAdminLogs(
-                                            email,
-                                            userId,
-                                            "Deduct_Consumer_Balance",
-                                            DateTime.now());
-                                        /*
-                                      In this function when the DEDUCT button is clicked 
-                                      it will update the selected id the balance 
-                                      */
-
-                                        await updateBalance.updateBalanceDeduct(
-                                            amountController.text,
-                                            widget.selectedId);
-                                        // ignore: use_build_context_synchronously
-                                        Navigator.of(context)
-                                            .pop(); // Close the AlertDialog
-                                        // ignore: use_build_context_synchronously
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text('Successful'),
-                                              content: const Text(
-                                                  'You successfully deduct balance to this account!'),
-                                              actions: [
-                                                TextButton(
-                                                  child: const Text("Ok"),
-                                                  onPressed: () async {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the AlertDialog
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ConsumerWalletTabBarView(),
-                                                    );
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      } else {
-                                        // ignore: use_build_context_synchronously
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text('Warning!'),
-                                              content: const Text(
-                                                  'This account has lower balance in the wallet. Please try again!'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(),
-                                                  child: const Text('OK'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: const Text("Close"),
-                                    onPressed: () async {
-                                      Navigator.of(context)
-                                          .pop(); // Close the AlertDialog
-                                    },
-                                  ),
-                                ],
-                              );
-                            });
-                      },
-                      icon: const Icon(
-                        Icons.remove_circle,
-                        size: 20,
-                        color: Colors.red,
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.selectedId = "${data["userId"]}";
-                          });
-                          //assign the widget.selectedId to setAdminUserId
-                          //to bring in other class
-                          Provider.of<SpecificWalletDetailsProvider>(context,
-                                  listen: false)
-                              .setUserId(widget.selectedId);
-                          //this will navigate to specific admin activity page
-                          Navigator.of(context).pushNamed(
-                              RoutesManager.specificwalletconsumerdetails);
-                        },
-                        icon: const Icon(
-                          Icons.info,
-                          color: Colors.green,
-                        )),
-                  ],
-                ),
-              ),
-            ],
           ),
         ),
       );

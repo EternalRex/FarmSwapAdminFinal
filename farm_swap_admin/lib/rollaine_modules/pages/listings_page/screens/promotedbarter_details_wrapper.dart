@@ -314,7 +314,7 @@ class _BarterPromotedDetailsState extends State<BarterPromotedDetails> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            height: 100,
+                                            height: 150,
                                             width: 900,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -401,7 +401,7 @@ class _BarterPromotedDetailsState extends State<BarterPromotedDetails> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 100, top: 15),
+                                                          left: 20, top: 15),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
@@ -551,7 +551,7 @@ class _BarterPromotedDetailsState extends State<BarterPromotedDetails> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 100, top: 15),
+                                                          left: 20, top: 15),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,

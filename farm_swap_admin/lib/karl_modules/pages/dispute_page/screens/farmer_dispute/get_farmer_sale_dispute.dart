@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/poppins_text.dart';
+import 'package:farm_swap_admin/karl_modules/pages/dispute_page/screens/farmer_dispute/farmer_dispute_sale_details.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -32,7 +33,8 @@ class _GetFarmerSaleDisputeState extends State<GetFarmerSaleDispute> {
             return ListView(
               scrollDirection: Axis.vertical,
               children: snapshot.data!.docs
-                  .map<Widget>((document) => _buildCCompleteBarterListItems(document))
+                  .map<Widget>(
+                      (document) => _buildCCompleteBarterListItems(document))
                   .toList(),
             );
           }
@@ -73,7 +75,8 @@ class _GetFarmerSaleDisputeState extends State<GetFarmerSaleDispute> {
     String listingUrl = sale['listingUrl'];
     double purchasePrice = (sale['purchasePrice'] as num).toDouble();
     double purchaseQuantity = (sale['purchaseQuantity'] as num).toDouble();
-    double purchaseSwapCoinsPay = (sale['purchaseSwapCoinsPay'] as num).toDouble();
+    double purchaseSwapCoinsPay =
+        (sale['purchaseSwapCoinsPay'] as num).toDouble();
     Timestamp transactionDate = sale['transactionDate'];
 
     /*Converting the time into datetime and datetime string */
@@ -82,7 +85,8 @@ class _GetFarmerSaleDisputeState extends State<GetFarmerSaleDispute> {
 
     /*Transaction date*/
     DateTime transactinDateTime = transactionDate.toDate();
-    String transactionDateString = DateFormat('dd-MM-yyyy').format(transactinDateTime);
+    String transactionDateString =
+        DateFormat('dd-MM-yyyy').format(transactinDateTime);
 
     if (disputeStatus == "PENDING") {
       return Padding(
@@ -120,17 +124,56 @@ class _GetFarmerSaleDisputeState extends State<GetFarmerSaleDispute> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   poppinsText(farmerName, Colors.black, 20, FontWeight.normal),
-                  poppinsText("Reporting User", Colors.black54, 15, FontWeight.normal),
-                  poppinsText(disputeDateString, Colors.black54, 15, FontWeight.normal),
+                  poppinsText(
+                      "Reporting User", Colors.black54, 15, FontWeight.normal),
+                  poppinsText(
+                      disputeDateString, Colors.black54, 15, FontWeight.normal),
                 ],
               ),
               const SizedBox(
                 width: 70,
               ),
-              Icon(
-                FontAwesomeIcons.pencil,
-                color: greenNormal,
-                size: 20,
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FarmerDisputeSellDetails(
+                          consBarangay: conusmerBarangay,
+                          consId: consumerId,
+                          consLname: consumerLname,
+                          consMunicipal: consumerMuniciplaity,
+                          consName: consumerName,
+                          consUname: consumerUname,
+                          consUrl: consumerUrl,
+                          disputeDate: disputeDateTime,
+                          disputeText: disputeText,
+                          disputeStatus: disputeStatus,
+                          disputeUrl: disputeUrl,
+                          fBarangay: farmerBarangay,
+                          fId: farmerId,
+                          fLname: farmerLName,
+                          fMunicipal: farmerMuniciplaity,
+                          fName: farmerName,
+                          fUname: farmerUname,
+                          fUrl: farmerUrl,
+                          isDisputed: isDisputed,
+                          lId: listingId,
+                          lName: listingName,
+                          lPrice: listingPrice,
+                          lQuan: listingQuan,
+                          lUrl: listingUrl,
+                          pPrice: purchasePrice,
+                          pQuan: purchaseQuantity,
+                          pSwapC: purchaseSwapCoinsPay,
+                          transactDate: transactionDateString),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  FontAwesomeIcons.pencil,
+                  color: greenNormal,
+                  size: 20,
+                ),
               ),
             ],
           ),

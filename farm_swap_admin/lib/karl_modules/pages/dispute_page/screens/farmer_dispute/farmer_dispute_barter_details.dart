@@ -20,9 +20,10 @@ import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_
 import 'package:farm_swap_admin/karl_modules/pages/dispute_page/widgets/dispute_text/widget_dispute_txt.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ConsumerDisputeBarterDetails extends StatefulWidget {
-  const ConsumerDisputeBarterDetails({
+class FarmerDisputeBarterDetails extends StatefulWidget {
+  const FarmerDisputeBarterDetails({
     super.key,
     /*Getting farmer data */
     required this.farmerName,
@@ -43,10 +44,10 @@ class ConsumerDisputeBarterDetails extends StatefulWidget {
     required this.itemValue,
     required this.itemUrl,
     /*This is suppose to be consumerDisputed status the naming was just a mistake*/
-    required this.consumerDisputedStatus,
+    required this.farmerDisputedStatus,
     required this.isResolved,
-    required this.consumerDisputeText,
-    required this.consumerDisputeUrl,
+    required this.farmerDisputeText,
+    required this.farmerDisputeUrl,
     /*Listing details */
     required this.listingId,
     required this.listingName,
@@ -84,10 +85,10 @@ class ConsumerDisputeBarterDetails extends StatefulWidget {
   final double itemValue;
   final String itemUrl;
   /*This is suppose to be consumerDisputed status the naming was just a mistake*/
-  final String consumerDisputedStatus;
+  final String farmerDisputedStatus;
   final bool isResolved;
-  final String consumerDisputeText;
-  final String consumerDisputeUrl;
+  final String farmerDisputeText;
+  final String farmerDisputeUrl;
   /*Listing details */
   final String listingId;
   final String listingName;
@@ -107,12 +108,12 @@ class ConsumerDisputeBarterDetails extends StatefulWidget {
   final String disputeDateString;
 
   @override
-  State<ConsumerDisputeBarterDetails> createState() =>
-      _ConsumerDisputeBarterDetailsState();
+  State<FarmerDisputeBarterDetails> createState() =>
+      _FarmerDisputeBarterDetailsState();
 }
 
-class _ConsumerDisputeBarterDetailsState
-    extends State<ConsumerDisputeBarterDetails> {
+class _FarmerDisputeBarterDetailsState
+    extends State<FarmerDisputeBarterDetails> {
   late String selectedValue;
 
   @override
@@ -288,7 +289,7 @@ class _ConsumerDisputeBarterDetailsState
                         child: Padding(
                           //Decorate the expanded area for the main content
                           padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 15),
+                              left: 10, right: 10, bottom: 20),
                           child: Container(
                             //Design of the container
                             decoration: BoxDecoration(
@@ -666,8 +667,8 @@ class _ConsumerDisputeBarterDetailsState
                                   ),
                                   /*Container na mugunit sa gi report na details */
                                   Container(
-                                    height: 300,
-                                    width: 1000,
+                                    height: 200,
+                                    width: 850,
                                     decoration: const BoxDecoration(
                                         color: Colors.white),
                                     child: Column(
@@ -839,7 +840,7 @@ class _ConsumerDisputeBarterDetailsState
                                               SizedBox(
                                                 child: poppinsText2(
                                                   // ignore: unnecessary_string_interpolations
-                                                  "${widget.consumerDisputeText}",
+                                                  "${widget.farmerDisputeText}",
                                                   Colors.black,
                                                   20,
                                                   FontWeight.normal,

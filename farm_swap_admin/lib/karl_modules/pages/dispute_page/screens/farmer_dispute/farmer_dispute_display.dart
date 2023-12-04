@@ -36,7 +36,7 @@ class _FarmerDisputeDisplayState extends State<FarmerDisputeDisplay> {
                         BoxShadow(
                           color: shadow,
                           blurRadius: 2,
-                          offset: const Offset(5, 1),
+                          offset: const Offset(0, 1),
                         ),
                       ],
                     ),
@@ -81,7 +81,7 @@ class _FarmerDisputeDisplayState extends State<FarmerDisputeDisplay> {
                         BoxShadow(
                           color: shadow,
                           blurRadius: 2,
-                          offset: const Offset(5, 1),
+                          offset: const Offset(0, 1),
                         ),
                       ],
                     ),

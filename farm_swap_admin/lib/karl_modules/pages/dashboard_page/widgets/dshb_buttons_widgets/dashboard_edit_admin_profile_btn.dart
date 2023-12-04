@@ -15,41 +15,47 @@ class AdminEditProfileBtn extends StatefulWidget {
 class _AdminEditProfileBtnState extends State<AdminEditProfileBtn> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      width: 130,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFF53E78B),
-            Color(0xFF14BE77),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(17.50),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: shadow,
-            blurRadius: 5,
-            offset: const Offset(1, 1),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context)
+                      .pushNamed(RoutesManager.adminProfile);
+      },
+      child: Container(
+        height: 40,
+        width: 130,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFF53E78B),
+              Color(0xFF14BE77),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-        ],
-      ),
-      child: Center(
-        child: TextButton(
-          onPressed: () {
-            Navigator.of(context)
-                    .pushNamed(RoutesManager.adminProfile);
-          },
-          child: DashBoardTxt(
-            myText: "Edit Profile",
-            myColor: Colors.white,
-            mySize: 15,
-            myFont: GoogleFonts.poppins().fontFamily,
-            myWeight: FontWeight.w900,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(17.50),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: shadow,
+              blurRadius: 5,
+              offset: const Offset(1, 1),
+            ),
+          ],
+        ),
+        child: Center(
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                      .pushNamed(RoutesManager.adminProfile);
+            },
+            child: DashBoardTxt(
+              myText: "Edit Profile",
+              myColor: Colors.white,
+              mySize: 15,
+              myFont: GoogleFonts.poppins().fontFamily,
+              myWeight: FontWeight.w900,
+            ),
           ),
         ),
       ),

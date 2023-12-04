@@ -231,49 +231,16 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
                   ],
                 ),
                 /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
-                child: Column(
+                child: const Column(
                   children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          /*PROFILE TEXT */
-                          const SizedBox(
-                            width: 82,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(
+                      height: 225,
                     ),
-                    const SizedBox(
-                      height: 150,
-                    ),
-                    const SizedBox(
+                    FarmerWalletRequestsListBtn(),
+                    SizedBox(
                       height: 15,
                     ),
-                    const FarmerWalletRequestsListBtn(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const ConsumerWalletRequestsListBtn(),
+                    ConsumerWalletRequestsListBtn(),
                   ],
                 ),
               ),

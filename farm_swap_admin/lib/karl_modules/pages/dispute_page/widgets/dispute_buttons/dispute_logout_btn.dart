@@ -10,7 +10,7 @@ class DisputeLogoutOptionBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20, bottom: 20),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -199,7 +199,7 @@ display sa center page */
                                 BoxShadow(
                                   color: shadow,
                                   blurRadius: 2,
-                                  offset: const Offset(1, 5),
+                                  offset: const Offset(0, 1),
                                 ),
                               ],
                             ),
@@ -249,37 +249,8 @@ display sa center page */
                 /*COLUMN THAT WILL CONTAIN EVERY ITEM OF THIS EXPANDED */
                 child: Column(
                   children: [
-                    /*FIRST ROW OF THE COLUMN THAT WILL HOLD THE PROFILE LABEL, THE MESSAGE 
-                    AND THE NOTIFICATION ICON*/
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
-                      child: Row(
-                        children: [
-                          /*PROFILE TEXT */
-                          const SizedBox(
-                            width: 82,
-                          ),
-                          /*MESSAGE BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.envelope,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                          /*NOTIFICATIOIN BUTTON */
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.bell,
-                              color: farmSwapTitlegreen,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(
-                      height: 180,
+                      height: 200,
                     ),
                     /*Redirecting to Consumer Display */
                     Center(

@@ -581,7 +581,7 @@ class EditPersonalInfo extends StatelessWidget {
 
                     //a sizedbox a way two seprate the personal info class and the sizedbox
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
 
                     //sizedbox for update details and archive account buttons
