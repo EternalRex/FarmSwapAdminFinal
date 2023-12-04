@@ -147,7 +147,7 @@ class ReadCustomerDetails extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "${data["swapcoins"]}",
+                                double.parse(data["swapcoins"].toString()).toStringAsFixed(2),
                                 style: Poppins.farmerName.copyWith(
                                   color: greenNormalHover,
                                 ),

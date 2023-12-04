@@ -508,7 +508,7 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_FarmerUsers').orderBy('registrationDate')
+          .collection('sample_FarmerUsers').orderBy('registrationDate', descending: true)
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
@@ -836,7 +836,7 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_ConsumerUsers').orderBy('registrationDate')
+          .collection('sample_ConsumerUsers').orderBy('registrationDate', descending: true)
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {

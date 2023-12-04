@@ -475,6 +475,9 @@ class _PromotedListingsState extends State<PromotedListings> {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('barter').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print (snapshot.error);
+        }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             return Padding(
@@ -791,6 +794,9 @@ class _PromotedListingsState extends State<PromotedListings> {
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collectionGroup('sell').orderBy('listingStartTime', descending: true).snapshots(),
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print (snapshot.error);
+        }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             return Padding(

@@ -245,24 +245,23 @@ class _PendingUserAccountsState extends State<PendingUserAccounts> {
                                         child: StreamBuilder<QuerySnapshot>(
                                           stream: FirebaseFirestore.instance
                                               .collection('sample_FarmerUsers')
+                                              .orderBy('registrationDate',
+                                                  descending: true)
                                               .where('accountStatus',
                                                   isEqualTo: 'PENDING')
                                               .snapshots(),
                                           builder: (context, snapshot) {
+                                            if (snapshot.hasError) {
+                                              print(snapshot.error);
+                                            }
                                             if (snapshot.connectionState ==
                                                 ConnectionState.active) {
                                               if (snapshot.hasData) {
                                                 final pendingFarmers =
                                                     snapshot.data!.docs;
                                                 if (pendingFarmers.isEmpty) {
-                                                  Text(
-                                                    'No pending farmers accounts',
-                                                    style: Poppins.contentTitle
-                                                        .copyWith(
-                                                      color: const Color(
-                                                          0xFF09051C),
-                                                    ),
-                                                  );
+                                                  const Text(
+                                                      'No pending farmers accounts');
                                                 }
                                                 return ListView.builder(
                                                   itemCount:

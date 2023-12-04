@@ -390,6 +390,9 @@ class _Barter extends State<Barter> {
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print (snapshot.error);
+        }
         //It ensures that the stream is active and data is available.
         if (snapshot.connectionState == ConnectionState.active) {
           return Padding(
