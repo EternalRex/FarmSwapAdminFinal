@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import '../../../../constants/Colors/colors_rollaine.dart';
 import '../../../../karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
@@ -153,7 +152,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                       //Container for search bar
                       child: SizedBox(
                         width: 250,
-                        height: 15,
+                        height: 20,
                         child: TextField(
                           controller: searchController,
                           style: GoogleFonts.poppins(
@@ -511,7 +510,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                       ),
                       child: Center(
                         child: Container(
-                          width: 170,
+                          width: 160,
                           height: 40,
                           decoration: ShapeDecoration(
                             color: Colors.white,
@@ -532,7 +531,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.green,
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                   ),

@@ -1,16 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
@@ -21,6 +19,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -80,6 +79,51 @@ class SellTransDetails extends StatefulWidget {
 }
 
 class _SellTransDetailsState extends State<SellTransDetails> {
+  late String currAdminId;
+  late String currAdminRole = "";
+  late String currDocId;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
+  }
+
+  Future<void> initializeData() async {
+    await getUserDocumentId();
+    await fetchUserRole();
+  }
+
+  Future<void> getUserDocumentId() async {
+    currAdminId = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot adminUsersQuery = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .where('User Id', isEqualTo: currAdminId)
+        .get();
+
+    if (adminUsersQuery.docs.isNotEmpty) {
+      currDocId = adminUsersQuery.docs[0].id;
+      await fetchUserRole();
+    } else {
+      print('No matching document found for the current user');
+    }
+  }
+
+  Future<void> fetchUserRole() async {
+    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(currDocId)
+        .get();
+
+    if (userSnapshot.exists) {
+      setState(() {
+        currAdminRole = userSnapshot['User Role'];
+      });
+      // Do other things as needed
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -275,7 +319,8 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                                 CachedNetworkImageProvider(
                                                                     widget
                                                                         .listurl),
-                                                            fit: BoxFit.cover,                                                         ),
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -365,7 +410,9 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.listquan}' ' ' 'kg/s',
+                                                            '${widget.listquan}'
+                                                            ' '
+                                                            'kg/s',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -487,7 +534,9 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.deductfarm}' ' ' 'sc/s',
+                                                            '${widget.deductfarm}'
+                                                            ' '
+                                                            'sc/s',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -592,7 +641,8 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                       child: Column(
                                         children: [
                                           Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -628,7 +678,8 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(15.0),
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
                                                 child: Column(
                                                   children: [
                                                     Padding(
@@ -649,8 +700,10 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.cname}' ' '
-                                                            '${widget.clname}' '  '
+                                                            '${widget.cname}'
+                                                            ' '
+                                                            '${widget.clname}'
+                                                            '  '
                                                             '(${widget.cuname})',
                                                             style: Poppins
                                                                 .contentText
@@ -680,7 +733,8 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.cbarangay},' '  '
+                                                            '${widget.cbarangay},'
+                                                            '  '
                                                             '${widget.cmunicipal}',
                                                             style: Poppins
                                                                 .contentText
@@ -739,7 +793,9 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '₱' ' ' '${widget.price}',
+                                                            '₱'
+                                                            ' '
+                                                            '${widget.price}',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -761,16 +817,14 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                                                             style: Poppins
                                                                 .discText
                                                                 .copyWith(
-                                                              color:
-                                                                  greenDark,
+                                                              color: greenDark,
                                                             ),
                                                           ),
                                                           const SizedBox(
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            widget
-                                                                .time,
+                                                            widget.time,
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -856,38 +910,41 @@ class _SellTransDetailsState extends State<SellTransDetails> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: const Column(
+                child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 150,
                     ),
 
                     //Number of users icon and label
-                    ReportsNumberOptionsBtn(),
-                    SizedBox(
+                    const ReportsNumberOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    ReportsRevenueOptionsBtn(),
-                    SizedBox(
+                    const ReportsRevenueOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Barter icon and label
-                    ReportsBarterOptionsBtn(),
-                    SizedBox(
+                    const ReportsBarterOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Selling icon and label
-                    ReportsSellingOptionsBtn(),
-                    SizedBox(
+                    const ReportsSellingOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
-                    //Admin logs icon and label
-                    ReportsAdminLogsOptionsBtn(),
+                    /**if currAdminRole is true then this button 
+                     * will show but if it is false it wont show */
+                    if (currAdminRole == "superadmin")
+                      //Admin logs icon and label
+                      const ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),

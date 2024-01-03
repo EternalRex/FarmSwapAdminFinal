@@ -13,5 +13,6 @@ class SignUpController {
   TextEditingController birthplace = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
   TextEditingController profile = TextEditingController();
 }
