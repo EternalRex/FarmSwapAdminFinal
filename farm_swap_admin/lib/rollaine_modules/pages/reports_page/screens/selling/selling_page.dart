@@ -598,7 +598,7 @@ class _Selling extends State<Selling> {
                                   ),
                                 ),
                                 Text(
-                                  sell['listingPrice'],
+                                  '₱ ${sell['listingPrice']}',
                                   style: Poppins.contentText
                                       .copyWith(color: const Color(0xFF09051B)),
                                 ),
@@ -808,7 +808,7 @@ class _Selling extends State<Selling> {
                                 ),
                               ),
                               Text(
-                                sell['listingPrice'],
+                                '₱ ${sell['listingPrice']}',
                                 style: Poppins.contentText
                                     .copyWith(color: const Color(0xFF09051B)),
                               ),

@@ -35,7 +35,7 @@ class Indicator extends StatelessWidget {
             ),
             Text(
               text,
-              style: Poppins.farmerName.copyWith(
+              style: Poppins.detailsText.copyWith(
                 color: textColor,
               ),
             ),

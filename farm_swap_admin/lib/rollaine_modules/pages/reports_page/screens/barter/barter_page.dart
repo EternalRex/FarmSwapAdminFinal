@@ -588,7 +588,7 @@ class _Barter extends State<Barter> {
                                   ),
                                 ),
                                 Text(
-                                  barter['listingvalue'].toString(),
+                                  '₱ ${barter['listingvalue'].toString()}',
                                   style: Poppins.contentText
                                       .copyWith(color: const Color(0xFF09051B)),
                                 ),
@@ -785,7 +785,7 @@ class _Barter extends State<Barter> {
                                 ),
                               ),
                               Text(
-                                barter['listingvalue'].toString(),
+                                '₱ ${barter['listingvalue'].toString()}',
                                 style: Poppins.contentText
                                     .copyWith(color: const Color(0xFF09051B)),
                               ),

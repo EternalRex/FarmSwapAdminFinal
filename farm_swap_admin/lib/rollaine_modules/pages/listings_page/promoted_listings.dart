@@ -39,6 +39,14 @@ class _PromotedListingsState extends State<PromotedListings> {
   //store the search query entered by the user for searching farmers.
   String searchSellValue = '';
 
+  late DateTime now;
+
+  @override
+  void initState() {
+    super.initState();
+    now = DateTime.now();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -466,10 +474,13 @@ class _PromotedListingsState extends State<PromotedListings> {
 
   Widget _buildBarterPromotedList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('barter').orderBy('listingStartTime', descending: true).snapshots(),
+      stream: firestore
+          .collectionGroup('barter')
+          .orderBy('listingStartTime', descending: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print (snapshot.error);
+          print(snapshot.error);
         }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
@@ -479,6 +490,12 @@ class _PromotedListingsState extends State<PromotedListings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) => document['promoted'] == true)
+                    .where((document) {
+                      // Check if listingEndTime is after the current time
+                      Timestamp timestamp = document['listingEndTime'];
+                      DateTime listingEndTime = timestamp.toDate();
+                      return listingEndTime.isAfter(now);
+                    })
                     .map<Widget>(
                         (document) => _buildBarterPromotedListItems(document))
                     .toList(),
@@ -785,10 +802,13 @@ class _PromotedListingsState extends State<PromotedListings> {
 
   Widget _buildSellPromotedList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collectionGroup('sell').orderBy('listingStartTime', descending: true).snapshots(),
+      stream: firestore
+          .collectionGroup('sell')
+          .orderBy('listingStartTime', descending: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print (snapshot.error);
+          print(snapshot.error);
         }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
@@ -798,6 +818,12 @@ class _PromotedListingsState extends State<PromotedListings> {
                 scrollDirection: Axis.vertical,
                 children: snapshot.data!.docs
                     .where((document) => document['promoted'] == true)
+                    .where((document) {
+                      // Check if listingEndTime is after the current time
+                      Timestamp timestamp = document['listingEndTime'];
+                      DateTime listingEndTime = timestamp.toDate();
+                      return listingEndTime.isAfter(now);
+                    })
                     .map<Widget>(
                         (document) => _buildSellPromotedListItems(document))
                     .toList(),
