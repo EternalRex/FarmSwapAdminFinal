@@ -13,7 +13,6 @@ class NumberFarmers extends StatefulWidget {
 }
 
 class _NumberFarmersState extends State<NumberFarmers> {
-
   int totalFarmerUsers = 0;
 
   //Use the fetchFarmerUsers method to fetch the document snapshots in the 'FarmerUsers' collection and calculate the farmer users
@@ -72,8 +71,7 @@ class _NumberFarmersState extends State<NumberFarmers> {
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
