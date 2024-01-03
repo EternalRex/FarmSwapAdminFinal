@@ -13,53 +13,44 @@ class NumberNewUsers extends StatefulWidget {
 }
 
 class _NumberNewUsersState extends State<NumberNewUsers> {
-
   //Initializes a variable totalNewUsers to keep track of the total number of newly registered users
   int totalNewUsers = 0;
+  int totalNewFarmerUsers = 0;
+  int totalNewConsumerUsers = 0;
 
   Future<void> fetchNewUsers() async {
     try {
-
       //Initializes the Firestore instance
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-      //Initialize references to two Firestore collections: 'FarmerUsers' and 'CustomerUsers'. 
-      final CollectionReference collection1 = firestore.collection('sample_FarmerUsers');
-      final CollectionReference collection2 = firestore.collection('sample_ConsumerUsers');
+      //Initialize references to two Firestore collections: 'FarmerUsers' and 'CustomerUsers'.
+      final CollectionReference collection1 =
+          firestore.collection('sample_FarmerUsers');
+      final CollectionReference collection2 =
+          firestore.collection('sample_ConsumerUsers');
 
       //Gets the current date and time and assigns it to a DateTime variable named today.
       final DateTime today = DateTime.now();
 
-      //Used to keep track of the count of newly registered users
-      int newUsers = 0;
-
-      /*fetchAndCountNewUsers function for the first collection ('collection1') and 
-      waiting for the result. After the function completes, it uses a .then() callback 
-      to add the count returned by fetchAndCountNewUsers to the newUsers variable*/
-      await fetchAndCountNewUsers(collection1, today).then((count) {
-        newUsers += count;
-      });
-
-      /*fetchAndCountNewUsers function for the second collection ('collection2') and 
-      waiting for the result. After the function completes, it uses a .then() callback 
-      to add the count returned by fetchAndCountNewUsers to the newUsers variable*/
-      await fetchAndCountNewUsers(collection2, today).then((count) {
-        newUsers += count;
-      });
+      int farmerNewUsers = await fetchAndCountNewUsers(collection1, today);
+      int consumerNewUsers = await fetchAndCountNewUsers(collection2, today);
 
       //Update the Flutter widget's state
       setState(() {
-        totalNewUsers = newUsers;
+        totalNewFarmerUsers = farmerNewUsers;
+        totalNewConsumerUsers = consumerNewUsers;
+        totalNewUsers = totalNewFarmerUsers + totalNewConsumerUsers;
       });
     } catch (e) {
       print('Error fetching new users count: $e');
     }
   }
 
-  Future<int> fetchAndCountNewUsers(CollectionReference collection, DateTime today) async {
-
+  Future<int> fetchAndCountNewUsers(
+      CollectionReference collection, DateTime today) async {
     //Fetches the documents from the specified Firestore collection (collection) using the get method.
-    final QuerySnapshot collectionSnapshot = await collection.get();
+    final QuerySnapshot collectionSnapshot = await collection
+        .where('accountStatus', whereIn: ['Active', 'ACTIVE']).get();
 
     //Used to keep track of the count of newly registered users within the collection
     int newUsers = 0;
@@ -67,7 +58,6 @@ class _NumberNewUsersState extends State<NumberNewUsers> {
     /*Each iteration processes one Firestore document, and doc 
     represents the current document being processed.*/
     for (QueryDocumentSnapshot doc in collectionSnapshot.docs) {
-
       //Extracts the data from the Firestore document
       final data = doc.data() as dynamic;
 
@@ -75,7 +65,7 @@ class _NumberNewUsersState extends State<NumberNewUsers> {
       final Timestamp timestamp = data["registrationDate"];
 
       //This DateTime object represents the registration date of the user stored in Firestore.
-      final DateTime registrationDate =timestamp.toDate();
+      final DateTime registrationDate = timestamp.toDate();
 
       /*The code calculates the duration between the current date (today) and the user's 
       registration date (registrationDate). */
@@ -83,7 +73,6 @@ class _NumberNewUsersState extends State<NumberNewUsers> {
 
       //It's determining if the user's registration occurred within the last 7 days.
       if (difference.inDays <= 7) {
-
         //Increments the newUsers count by 1.
         newUsers++;
       }
@@ -106,78 +95,118 @@ class _NumberNewUsersState extends State<NumberNewUsers> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(
-            right: 45, top: 10),
-        child: Container(
-          height: 190,
-          //Designing the container
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius:
-                const BorderRadius.all(
-              Radius.circular(15),
-            ),
-
-            //Box shadow of the container
-            boxShadow: [
-              BoxShadow(
-                color: shadow,
-                blurRadius: 2,
-                offset: const Offset(1, 5),
-              ),
-            ],
-          ),
-
-          //Content of container 2
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(
-                        horizontal: 5,
-                        vertical: 5),
-                child: Column(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'New Users',
-                      style: Poppins.commuTitle
-                          .copyWith(
-                        color: const Color(
-                            0xFF09051C),
-                      ),
-                    ),
-                    Text(
-                      '$totalNewUsers',
-                      style: Poppins.number
-                          .copyWith(
-                        foreground: Paint()
-                          ..shader =
-                              const LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF53E78B),
-                              Color(0xFF14BE77),
-                            ],
-                          ).createShader(
-                            const Rect.fromLTWH(
-                                0.0,
-                                0.0,
-                                200.0,
-                                70.0),
-                          ),
-                      ),
-                    ),
-                  ],
+        padding: const EdgeInsets.only(right: 45, top: 10),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: showUserCountsDialog,
+            child: Container(
+              height: 190,
+              //Designing the container
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(15),
                 ),
+          
+                //Box shadow of the container
+                boxShadow: [
+                  BoxShadow(
+                    color: shadow,
+                    blurRadius: 2,
+                    offset: const Offset(1, 5),
+                  ),
+                ],
               ),
-            ],
+          
+              //Content of container 2
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'New Users',
+                          style: Poppins.commuTitle.copyWith(
+                            color: const Color(0xFF09051C),
+                          ),
+                        ),
+                        Text(
+                          '$totalNewUsers',
+                          style: Poppins.number.copyWith(
+                            foreground: Paint()
+                              ..shader = const LinearGradient(
+                                colors: <Color>[
+                                  Color(0xFF53E78B),
+                                  Color(0xFF14BE77),
+                                ],
+                              ).createShader(
+                                const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                              ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  // Function to show the user count dialog
+  void showUserCountsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'New User Counts',
+            style: Poppins.discText.copyWith(
+              color: greenNormal,
+            ),
+          ),
+          content: SizedBox(
+            height: 70,
+            child: SizedBox(
+              height: 70,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Farmer Users: $totalNewFarmerUsers'),
+                  Text('Consumer Users: $totalNewConsumerUsers'),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.transparent),
+                elevation: MaterialStateProperty.all(0),
+              ),
+              child: Text(
+                'Close',
+                style: Poppins.farmerName.copyWith(
+                  color: greenNormal,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

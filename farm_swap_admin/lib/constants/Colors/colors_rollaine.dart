@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Color greenLight = const Color(0xFFe8f9f1);
-Color greenLightHover = const Color(0xFFdcf5eb);
+Color greenLightHover = const Color.fromARGB(255, 111, 244, 193);
 Color greenLightActive = const Color.fromARGB(255, 86, 225, 167);
 Color greenNormal = const Color(0xFF15be77);
 Color greenNormalHover = const Color(0xFF13ab6b);

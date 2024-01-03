@@ -420,7 +420,7 @@ class _DetailsFarmerPageState extends State<DetailsFarmerPage> {
 
                                 //An updateField function is called with the parameters 'Deactivate' and widget.selectedId.
                                 await updateField(
-                                    'Deactivate', widget.selectedId);
+                                    'Deactivated', widget.selectedId);
 
                                 //The code navigates to a new page.
                                 Navigator.of(context)

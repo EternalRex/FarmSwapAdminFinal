@@ -420,35 +420,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           ],
                         ),
                         SizedBox(height: height * 0.024),
-
-                        //tick the checkbox for the terms and condition
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 470.0,
-                          ),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                checkColor: Colors.white,
-                                value: isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
-                                activeColor: Colors.green,
-                              ),
-                              Opacity(
-                                opacity: 0.50,
-                                child: signupTermsConditionFont(),
-                              ),
-                            ],
-                          ),
-                        ),
-
+                        
                         const SizedBox(
                           height: 30,
                         ),
