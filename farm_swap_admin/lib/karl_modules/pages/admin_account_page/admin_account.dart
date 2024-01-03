@@ -5,12 +5,12 @@ import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_account_wrapper/read_admin_users.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../../constants/Colors/colors.dart';
 import '../dashboard_page/dashboard_query/dashboard_profileInfo.dart';
 import '../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../dashboard_page/screens/dashboard_epxanded1_items.dart';
@@ -38,8 +38,6 @@ class _AdminAccount extends State<AdminAccount> {
 
   TextEditingController searchController = TextEditingController();
   String searchValue = "";
-
-  String? email = FirebaseAuth.instance.currentUser?.email;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +94,7 @@ class _AdminAccount extends State<AdminAccount> {
                       //Container for search bar
                       child: SizedBox(
                         width: 250,
-                        height: 20,
+                        height: 15,
                         child: TextField(
                           controller: searchController,
                           style: GoogleFonts.poppins(
@@ -360,10 +358,7 @@ class _AdminAccount extends State<AdminAccount> {
 
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('AdminUsers')
-          .where('User Role', isEqualTo: 'Admin')
-          .snapshots(),
+      stream: FirebaseFirestore.instance.collection('AdminUsers').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -382,7 +377,7 @@ class _AdminAccount extends State<AdminAccount> {
 
           if (logs.isEmpty) {
             return const Center(
-              child: Text('No user available!'),
+              child: Text('No farmer wallet request available!'),
             );
           }
 
@@ -517,7 +512,6 @@ class _AdminAccount extends State<AdminAccount> {
                     const SizedBox(
                       width: 240,
                     ),
-
                     //sizedbox for the activity button of admin user
                     SizedBox(
                       child: Padding(
@@ -637,7 +631,7 @@ class _AdminAccount extends State<AdminAccount> {
                                   }
                                   /*if the status is equal to deactivate it will 
                                     also pass data to the next page*/
-                                  else if (accountStatus == "Deactivated") {
+                                  else if (accountStatus == "Deactivate") {
                                     Provider.of<AdminDetailsProvider>(context,
                                             listen: false)
                                         .setadminUserId(widget.selectedId);
@@ -688,7 +682,7 @@ class _AdminAccount extends State<AdminAccount> {
                                      * if the status is decline after the admin user decline the request
                                      * the admin can request again and it will navigate to deactivate page
                                      */
-                                  else if (accountStatus == "Declined") {
+                                  else if (accountStatus == "Decline") {
                                     Provider.of<AdminDetailsProvider>(context,
                                             listen: false)
                                         .setadminUserId(widget.selectedId);
@@ -758,8 +752,7 @@ class _AdminAccount extends State<AdminAccount> {
     /* else if search bar is empty Check if the documents that we accessed has an eamil that is not simillar to the current users email
     because we will not display the current user here only those other users*/
 
-    else if (FirebaseAuth.instance.currentUser!.email !=
-        data['Email Address']) {
+    else {
       return ListTile(
         title: Container(
           decoration: BoxDecoration(
@@ -842,7 +835,6 @@ class _AdminAccount extends State<AdminAccount> {
                   const SizedBox(
                     width: 240,
                   ),
-
                   //sizedbox for the activity button of admin user
                   SizedBox(
                     child: Padding(
@@ -962,7 +954,7 @@ class _AdminAccount extends State<AdminAccount> {
                                 }
                                 /*if the status is equal to deactivate it will 
                                     also pass data to the next page*/
-                                else if (accountStatus == "Deactivated") {
+                                else if (accountStatus == "Deactivate") {
                                   Provider.of<AdminDetailsProvider>(context,
                                           listen: false)
                                       .setadminUserId(widget.selectedId);

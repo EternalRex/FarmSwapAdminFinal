@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../constants/Colors/colors_rollaine.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
@@ -37,6 +38,7 @@ class MonthlyRevenueReportPage extends StatefulWidget {
 }
 
 class _MonthlyRevenueReportPageState extends State<MonthlyRevenueReportPage> {
+
   TextEditingController searchController = TextEditingController();
   String searchValue = "";
 
@@ -161,7 +163,7 @@ class _MonthlyRevenueReportPageState extends State<MonthlyRevenueReportPage> {
                       //Container for search bar
                       child: SizedBox(
                         width: 250,
-                        height: 20,
+                        height: 15,
                         child: TextField(
                           controller: searchController,
                           style: GoogleFonts.poppins(

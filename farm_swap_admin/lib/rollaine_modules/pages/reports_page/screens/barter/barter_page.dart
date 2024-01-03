@@ -7,9 +7,12 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Bart
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
@@ -19,7 +22,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_user_account_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -34,51 +36,6 @@ class Barter extends StatefulWidget {
 }
 
 class _Barter extends State<Barter> {
-  late String currAdminId;
-  late String currAdminRole = "";
-  late String currDocId;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeData();
-  }
-
-  Future<void> initializeData() async {
-    await getUserDocumentId();
-    await fetchUserRole();
-  }
-
-  Future<void> getUserDocumentId() async {
-    currAdminId = FirebaseAuth.instance.currentUser!.uid;
-
-    QuerySnapshot adminUsersQuery = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .where('User Id', isEqualTo: currAdminId)
-        .get();
-
-    if (adminUsersQuery.docs.isNotEmpty) {
-      currDocId = adminUsersQuery.docs[0].id;
-      await fetchUserRole();
-    } else {
-      print('No matching document found for the current user');
-    }
-  }
-
-  Future<void> fetchUserRole() async {
-    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(currDocId)
-        .get();
-
-    if (userSnapshot.exists) {
-      setState(() {
-        currAdminRole = userSnapshot['User Role'];
-      });
-      // Do other things as needed
-    }
-  }
-
   //creates an instance of TextEditingController named searchFarmerController.
   TextEditingController searchController = TextEditingController();
   //store the search query entered by the user for searching farmers.
@@ -198,7 +155,7 @@ class _Barter extends State<Barter> {
                       //Container for search bar
                       child: SizedBox(
                         width: 250,
-                        height: 20,
+                        height: 15,
                         child: TextField(
                           controller: searchController,
                           style: GoogleFonts.poppins(
@@ -371,41 +328,38 @@ class _Barter extends State<Barter> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: Column(
+                child: const Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 150,
                     ),
 
                     //Number of users icon and label
-                    const ReportsNumberOptionsBtn(),
-                    const SizedBox(
+                    ReportsNumberOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    const ReportsRevenueOptionsBtn(),
-                    const SizedBox(
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Barter icon and label
-                    const ReportsBarterOptionsBtn(),
-                    const SizedBox(
+                    ReportsBarterOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Selling icon and label
-                    const ReportsSellingOptionsBtn(),
-                    const SizedBox(
+                    ReportsSellingOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
-                    /**if currAdminRole is true then this button 
-                     * will show but if it is false it wont show */
-                    if (currAdminRole == "superadmin")
-                      //Admin logs icon and label
-                      const ReportsAdminLogsOptionsBtn(),
+                    //Admin logs icon and label
+                    ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),
@@ -431,7 +385,7 @@ class _Barter extends State<Barter> {
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print(snapshot.error);
+          print (snapshot.error);
         }
         //It ensures that the stream is active and data is available.
         if (snapshot.connectionState == ConnectionState.active) {

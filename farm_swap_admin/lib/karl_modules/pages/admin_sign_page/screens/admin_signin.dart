@@ -355,12 +355,12 @@ class _SignInAdminState extends State<SignInAdmin> {
           if (accountStatus == "Requesting") {
             // ignore: use_build_context_synchronously
             Navigator.of(context)
-                .pushNamed(RoutesManager.requestreactivatepage);
-          } else if (accountStatus == "Deactivated") {
+                .pushNamed(RoutesManager.deactivateaccountpage);
+          } else if (accountStatus == "Deactivate") {
             // ignore: use_build_context_synchronously
             Navigator.of(context)
                 .pushNamed(RoutesManager.deactivateaccountpage);
-          } else if (accountStatus == "Declined") {
+          } else if (accountStatus == "Decline") {
             // ignore: use_build_context_synchronously
             Navigator.of(context)
                 .pushNamed(RoutesManager.deactivateaccountpage);

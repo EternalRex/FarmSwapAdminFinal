@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
+import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
@@ -19,7 +21,6 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class BarterTransDetails extends StatefulWidget {
@@ -72,51 +73,6 @@ class BarterTransDetails extends StatefulWidget {
 }
 
 class _BarterTransDetailsState extends State<BarterTransDetails> {
-  late String currAdminId;
-  late String currAdminRole = "";
-  late String currDocId;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeData();
-  }
-
-  Future<void> initializeData() async {
-    await getUserDocumentId();
-    await fetchUserRole();
-  }
-
-  Future<void> getUserDocumentId() async {
-    currAdminId = FirebaseAuth.instance.currentUser!.uid;
-
-    QuerySnapshot adminUsersQuery = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .where('User Id', isEqualTo: currAdminId)
-        .get();
-
-    if (adminUsersQuery.docs.isNotEmpty) {
-      currDocId = adminUsersQuery.docs[0].id;
-      await fetchUserRole();
-    } else {
-      print('No matching document found for the current user');
-    }
-  }
-
-  Future<void> fetchUserRole() async {
-    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(currDocId)
-        .get();
-
-    if (userSnapshot.exists) {
-      setState(() {
-        currAdminRole = userSnapshot['User Role'];
-      });
-      // Do other things as needed
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,7 +178,8 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                     ),
                     splashColor: const Color(0xFFF9A84D),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(RoutesManager.barterPage);
+                      Navigator.of(context)
+                          .pushNamed(RoutesManager.barterPage);
                     },
                   ),
                   //Design the page title
@@ -285,8 +242,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                       child: Column(
                                         children: [
                                           Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -322,8 +278,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15.0),
+                                                padding: const EdgeInsets.all(15.0),
                                                 child: Column(
                                                   children: [
                                                     Padding(
@@ -373,9 +328,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '₱'
-                                                            ' '
-                                                            '${widget.listVal}',
+                                                            '₱' ' ' '${widget.listVal}',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -404,10 +357,8 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.fName}'
-                                                            ' '
-                                                            '${widget.fLname}'
-                                                            '  '
+                                                            '${widget.fName}' ' '
+                                                            '${widget.fLname}' '  '
                                                             '(${widget.fUname})',
                                                             style: Poppins
                                                                 .contentText
@@ -437,8 +388,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.fBarangay},'
-                                                            '  '
+                                                            '${widget.fBarangay},' '  ' 
                                                             '${widget.fMunicipality}',
                                                             style: Poppins
                                                                 .contentText
@@ -461,14 +411,16 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             style: Poppins
                                                                 .discText
                                                                 .copyWith(
-                                                              color: greenDark,
+                                                              color:
+                                                                  greenDark,
                                                             ),
                                                           ),
                                                           const SizedBox(
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            widget.percent,
+                                                            widget
+                                                                .percent,
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -480,36 +432,34 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              bottom: 10),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            'Transaction Fee:',
-                                                            style: Poppins
-                                                                .discText
-                                                                .copyWith(
-                                                              color: greenDark,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            '₱'
-                                                            ' '
-                                                            '${widget.deductFarm}',
-                                                            style: Poppins
-                                                                .contentText
-                                                                .copyWith(
-                                                              color: const Color(
-                                                                  0xFF09041B),
-                                                            ),
-                                                          ),
-                                                        ],
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Transaction Fee:',
+                                                        style: Poppins
+                                                            .discText
+                                                            .copyWith(
+                                                          color: greenDark,
+                                                        ),
                                                       ),
-                                                    ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        '₱' ' ' '${widget.deductFarm}',
+                                                        style: Poppins
+                                                            .contentText
+                                                            .copyWith(
+                                                          color: const Color(
+                                                              0xFF09041B),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -573,8 +523,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                       child: Column(
                                         children: [
                                           Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -610,8 +559,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15.0),
+                                                padding: const EdgeInsets.all(15.0),
                                                 child: Column(
                                                   children: [
                                                     Padding(
@@ -661,9 +609,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '₱'
-                                                            ' '
-                                                            '${widget.itemVal}',
+                                                            '₱' ' ' '${widget.itemVal}',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -692,10 +638,8 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.cName}'
-                                                            ' '
-                                                            '${widget.cLname}'
-                                                            '  '
+                                                            '${widget.cName}' ' '
+                                                            '${widget.cLname}' '  '
                                                             '(${widget.cUname})',
                                                             style: Poppins
                                                                 .contentText
@@ -725,8 +669,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '${widget.cBarangay},'
-                                                            '  '
+                                                            '${widget.cBarangay},' '  '
                                                             '${widget.cMunicipality}',
                                                             style: Poppins
                                                                 .contentText
@@ -749,14 +692,16 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             style: Poppins
                                                                 .discText
                                                                 .copyWith(
-                                                              color: greenDark,
+                                                              color:
+                                                                  greenDark,
                                                             ),
                                                           ),
                                                           const SizedBox(
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            widget.percent,
+                                                            widget
+                                                                .percent,
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -785,9 +730,7 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            '₱'
-                                                            ' '
-                                                            '${widget.deductConsu}',
+                                                            '₱' ' ' '${widget.deductConsu}',
                                                             style: Poppins
                                                                 .contentText
                                                                 .copyWith(
@@ -872,41 +815,38 @@ class _BarterTransDetailsState extends State<BarterTransDetails> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: Column(
+                child: const Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 150,
                     ),
 
                     //Number of users icon and label
-                    const ReportsNumberOptionsBtn(),
-                    const SizedBox(
+                    ReportsNumberOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    const ReportsRevenueOptionsBtn(),
-                    const SizedBox(
+                    ReportsRevenueOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Barter icon and label
-                    const ReportsBarterOptionsBtn(),
-                    const SizedBox(
+                    ReportsBarterOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
                     //Selling icon and label
-                    const ReportsSellingOptionsBtn(),
-                    const SizedBox(
+                    ReportsSellingOptionsBtn(),
+                    SizedBox(
                       height: 25,
                     ),
 
-                    /**if currAdminRole is true then this button 
-                     * will show but if it is false it wont show */
-                    if (currAdminRole == "superadmin")
-                      //Admin logs icon and label
-                      const ReportsAdminLogsOptionsBtn(),
+                    //Admin logs icon and label
+                    ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),

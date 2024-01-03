@@ -17,7 +17,7 @@ class ReportsReportsOptionsBtn extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(RoutesManager.numberPage);
+                Navigator.of(context).pushNamed(RoutesManager.reportsPage);
               },
               child: const Row(
                 children: [

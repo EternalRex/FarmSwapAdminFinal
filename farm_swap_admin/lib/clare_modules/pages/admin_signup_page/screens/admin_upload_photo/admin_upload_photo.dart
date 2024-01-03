@@ -9,6 +9,7 @@ import 'package:farm_swap_admin/clare_modules/pages/admin_signup_page/screens/ad
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AdminUploadPhoto extends StatefulWidget {
@@ -22,6 +23,21 @@ class _AdminUploadPhotoState extends State<AdminUploadPhoto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Color(0xFFDA6317),
+          ),
+          splashColor: const Color(0xFFF9A84D),
+          onPressed: () {
+            Navigator.of(context).pushNamed(RoutesManager.adminSignup);
+          },
+        ),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+      ),
       body: Stack(
         children: [
           SvgPicture.asset(

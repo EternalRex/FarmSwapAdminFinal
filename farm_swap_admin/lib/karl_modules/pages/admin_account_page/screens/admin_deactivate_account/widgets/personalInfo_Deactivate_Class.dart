@@ -579,7 +579,7 @@ class EditPersonalInfoDeact extends StatelessWidget {
                       height: 20,
                     ),
 
-                    //This padding is for request reactivation account
+                    //This padding is for unarchived account
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 15,
@@ -626,10 +626,10 @@ class EditPersonalInfoDeact extends StatelessWidget {
 
                                     // then it will navigate to deactivate page
                                     Navigator.of(context).pushNamed(
-                                        RoutesManager.requestreactivatepage);
+                                        RoutesManager.deactivateaccountpage);
                                   },
                                   child: Text(
-                                    "Request Reactivation",
+                                    "Reactivate Account",
                                     style: TextStyle(
                                       fontFamily:
                                           GoogleFonts.poppins().fontFamily,

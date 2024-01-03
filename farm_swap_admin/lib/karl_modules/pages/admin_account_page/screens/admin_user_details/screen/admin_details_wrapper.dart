@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../../dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
+import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
 import '../../../../dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
@@ -47,57 +48,11 @@ class _AdminSpecificDetailsWrapperState
   final GetAllAdminAccs getAllAdminAccs = GetAllAdminAccs();
   DashboardRetrieveSpecificID id = DashboardRetrieveSpecificID();
 
-  late String currAdminId;
-  late String currAdminRole = "";
-  late String currDocId;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeData();
-  }
-
-  Future<void> initializeData() async {
-    await getUserDocumentId();
-    await fetchUserRole();
-  }
-
-  Future<void> getUserDocumentId() async {
-    currAdminId = FirebaseAuth.instance.currentUser!.uid;
-
-    QuerySnapshot adminUsersQuery = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .where('User Id', isEqualTo: currAdminId)
-        .get();
-
-    if (adminUsersQuery.docs.isNotEmpty) {
-      currDocId = adminUsersQuery.docs[0].id;
-      await fetchUserRole();
-    } else {
-      print('No matching document found for the current user');
-    }
-  }
-
-  Future<void> fetchUserRole() async {
-    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-        .collection('AdminUsers')
-        .doc(currDocId)
-        .get();
-
-    if (userSnapshot.exists) {
-      setState(() {
-        currAdminRole = userSnapshot['User Role'];
-      });
-      // Do other things as needed
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     //creates a reference to our database firestore
     CollectionReference adminRef =
         FirebaseFirestore.instance.collection("AdminUsers");
-
     return Scaffold(
       body: Row(
         children: [
@@ -966,7 +921,6 @@ class _AdminSpecificDetailsWrapperState
                                                                 const SizedBox(
                                                                   height: 3,
                                                                 ),
-                                                                /** 
                                                                 //update details button
                                                                 Padding(
                                                                   padding:
@@ -1032,216 +986,214 @@ class _AdminSpecificDetailsWrapperState
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                */
-                                                                const SizedBox(
-                                                                    width: 5),
 
-                                                                /*condition if the user role is equ l to super admin this 
-                                                                buttons will show*/
-                                                                if (currAdminRole ==
-                                                                    "superadmin")
-                                                                  //deactivate account button
-                                                                  Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      bottom:
-                                                                          15,
-                                                                    ),
-                                                                    child:
-                                                                        Center(
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          // ignore: sized_box_for_whitespace
-                                                                          Container(
-                                                                            height:
-                                                                                50,
-                                                                            width:
-                                                                                190,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              gradient: const LinearGradient(
-                                                                                begin: Alignment(0.99, -0.15),
-                                                                                end: Alignment(-0.99, 0.15),
-                                                                                colors: [
-                                                                                  Color.fromARGB(255, 233, 43, 43),
-                                                                                  Color.fromARGB(237, 255, 113, 18),
-                                                                                ],
-                                                                              ),
-                                                                              borderRadius: const BorderRadius.all(
-                                                                                Radius.circular(15),
-                                                                              ),
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: shadow,
-                                                                                  blurRadius: 5,
-                                                                                  offset: const Offset(1, 5),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                            child:
-                                                                                Center(
-                                                                              child: TextButton(
-                                                                                onPressed: () async {
-                                                                                  setState(() {
-                                                                                    widget.selectedId = "${data["User Id"]}";
-                                                                                  });
-
-                                                                                  //assign the widget.selectedId to setAdminUserId
-                                                                                  //to bring in other class
-                                                                                  Provider.of<AdminSpecificDeactivateProvider>(context, listen: false).setadminUserId(widget.selectedId);
-
-                                                                                  //create logs here where the account status filed will be set to deactivated
-                                                                                  await updateField("Deactivated", widget.selectedId);
-
-                                                                                  //this will navigate to specific admin deactivate page
-                                                                                  Navigator.of(context).pushNamed(RoutesManager.specificadmindeact);
-                                                                                },
-                                                                                child: Text(
-                                                                                  "Deactivate Account",
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: GoogleFonts.poppins().fontFamily,
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.w900,
-                                                                                    color: Colors.white,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
                                                                 const SizedBox(
                                                                   width: 3,
                                                                 ),
                                                                 const SizedBox(
                                                                     width: 5),
-                                                                if (currAdminRole ==
-                                                                    "superadmin")
-                                                                  //archived account button
-                                                                  Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      bottom:
-                                                                          15,
-                                                                    ),
-                                                                    child:
-                                                                        Center(
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          // ignore: sized_box_for_whitespace
-                                                                          Container(
-                                                                            height:
-                                                                                50,
-                                                                            width:
-                                                                                190,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              gradient: const LinearGradient(
-                                                                                begin: Alignment(0.99, -0.15),
-                                                                                end: Alignment(-0.99, 0.15),
-                                                                                colors: [
-                                                                                  Color.fromARGB(255, 241, 173, 24),
-                                                                                  Color(0xEEFF9012),
-                                                                                ],
-                                                                              ),
-                                                                              borderRadius: const BorderRadius.all(
-                                                                                Radius.circular(15),
-                                                                              ),
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: shadow,
-                                                                                  blurRadius: 5,
-                                                                                  offset: const Offset(1, 5),
-                                                                                ),
+                                                                //deactivate account button
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                    bottom: 15,
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        // ignore: sized_box_for_whitespace
+                                                                        Container(
+                                                                          height:
+                                                                              50,
+                                                                          width:
+                                                                              190,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            gradient:
+                                                                                const LinearGradient(
+                                                                              begin: Alignment(0.99, -0.15),
+                                                                              end: Alignment(-0.99, 0.15),
+                                                                              colors: [
+                                                                                Color(0xFFE21B1B),
+                                                                                Color(0xEEFF9012),
                                                                               ],
                                                                             ),
+                                                                            borderRadius:
+                                                                                const BorderRadius.all(
+                                                                              Radius.circular(15),
+                                                                            ),
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: shadow,
+                                                                                blurRadius: 5,
+                                                                                offset: const Offset(1, 5),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          child:
+                                                                              Center(
                                                                             child:
-                                                                                Center(
-                                                                              child: TextButton(
-                                                                                onPressed: () async {
-                                                                                  setState(() {
-                                                                                    widget.selectedId = "${data["User Id"]}";
-                                                                                  });
-                                                                                  showDialog(
-                                                                                    context: context,
-                                                                                    builder: (BuildContext context) {
-                                                                                      return AlertDialog(
-                                                                                        title: const Text("Confirmation!"),
-                                                                                        content: const Text("Do you want to archived this account permanently?\nClick proceed to acrhive account."),
-                                                                                        actions: <Widget>[
-                                                                                          TextButton(
-                                                                                            child: const Text("Proceed"),
-                                                                                            onPressed: () async {
-                                                                                              //assign the widget.selectedId to setAdminUserId
-                                                                                              //to bring in other class
-                                                                                              Provider.of<AdminSpecificDeactivateProvider>(context, listen: false).setadminUserId(widget.selectedId);
+                                                                                TextButton(
+                                                                              onPressed: () async {
+                                                                                setState(() {
+                                                                                  widget.selectedId = "${data["User Id"]}";
+                                                                                });
 
-                                                                                              //create logs here and the account status field will be set to archived
-                                                                                              await updateField1("Archived", widget.selectedId);
+                                                                                //assign the widget.selectedId to setAdminUserId
+                                                                                //to bring in other class
+                                                                                Provider.of<AdminSpecificDeactivateProvider>(context, listen: false).setadminUserId(widget.selectedId);
 
-                                                                                              //this will move to other collection called admin archived users
-                                                                                              await moveUserToArchivedCollection(widget.selectedId);
+                                                                                //create logs here where the account status filed will be set to deactivated
+                                                                                await updateField("Deactivate", widget.selectedId);
 
-                                                                                              // ignore: use_build_context_synchronously
-                                                                                              showDialog(
-                                                                                                context: context,
-                                                                                                builder: (BuildContext context) {
-                                                                                                  return AlertDialog(
-                                                                                                    title: const Text("Successful!"),
-                                                                                                    content: const Text("Account successfuly archived!"),
-                                                                                                    actions: <Widget>[
-                                                                                                      TextButton(
-                                                                                                        child: const Text("Ok"),
-                                                                                                        onPressed: () {
-                                                                                                          Navigator.of(context).pop(); // Close the dialog box
-
-                                                                                                          //this will navigate to admin account page
-                                                                                                          Navigator.of(context).pushNamed(RoutesManager.adminAccount);
-                                                                                                        },
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  );
-                                                                                                },
-                                                                                              );
-                                                                                            },
-                                                                                          ),
-                                                                                          TextButton(
-                                                                                            child: const Text("Cancel"),
-                                                                                            onPressed: () {
-                                                                                              Navigator.of(context).pop(); // Close the dialog box
-                                                                                            },
-                                                                                          ),
-                                                                                        ],
-                                                                                      );
-                                                                                    },
-                                                                                  );
-                                                                                },
-                                                                                child: Text(
-                                                                                  "Archive Account",
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: GoogleFonts.poppins().fontFamily,
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.w900,
-                                                                                    color: Colors.white,
-                                                                                  ),
+                                                                                //this will navigate to specific admin deactivate page
+                                                                                Navigator.of(context).pushNamed(RoutesManager.specificadmindeact);
+                                                                              },
+                                                                              child: Text(
+                                                                                "Deactivate Account",
+                                                                                style: TextStyle(
+                                                                                  fontFamily: GoogleFonts.poppins().fontFamily,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w900,
+                                                                                  color: Colors.white,
                                                                                 ),
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 3,
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                //archived account button
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                    bottom: 15,
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        // ignore: sized_box_for_whitespace
+                                                                        Container(
+                                                                          height:
+                                                                              50,
+                                                                          width:
+                                                                              190,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            gradient:
+                                                                                const LinearGradient(
+                                                                              begin: Alignment(0.99, -0.15),
+                                                                              end: Alignment(-0.99, 0.15),
+                                                                              colors: [
+                                                                                Color(0xFFE21B1B),
+                                                                                Color(0xEEFF9012),
+                                                                              ],
+                                                                            ),
+                                                                            borderRadius:
+                                                                                const BorderRadius.all(
+                                                                              Radius.circular(15),
+                                                                            ),
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: shadow,
+                                                                                blurRadius: 5,
+                                                                                offset: const Offset(1, 5),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                TextButton(
+                                                                              onPressed: () async {
+                                                                                setState(() {
+                                                                                  widget.selectedId = "${data["User Id"]}";
+                                                                                });
+                                                                                showDialog(
+                                                                                  context: context,
+                                                                                  builder: (BuildContext context) {
+                                                                                    return AlertDialog(
+                                                                                      title: const Text("Confirmation!"),
+                                                                                      content: const Text("Do you want to archived this account permanently?\nClick proceed to acrhive account."),
+                                                                                      actions: <Widget>[
+                                                                                        TextButton(
+                                                                                          child: const Text("Proceed"),
+                                                                                          onPressed: () async {
+                                                                                            //assign the widget.selectedId to setAdminUserId
+                                                                                            //to bring in other class
+                                                                                            Provider.of<AdminSpecificDeactivateProvider>(context, listen: false).setadminUserId(widget.selectedId);
+
+                                                                                            //create logs here and the account status field will be set to archived
+                                                                                            await updateField1("Archived", widget.selectedId);
+
+                                                                                            //this will move to other collection called admin archived users
+                                                                                            await moveUserToArchivedCollection(widget.selectedId);
+
+                                                                                            // ignore: use_build_context_synchronously
+                                                                                            showDialog(
+                                                                                              context: context,
+                                                                                              builder: (BuildContext context) {
+                                                                                                return AlertDialog(
+                                                                                                  title: const Text("Successful!"),
+                                                                                                  content: const Text("Account successfuly archived!"),
+                                                                                                  actions: <Widget>[
+                                                                                                    TextButton(
+                                                                                                      child: const Text("Ok"),
+                                                                                                      onPressed: () {
+                                                                                                        Navigator.of(context).pop(); // Close the dialog box
+
+                                                                                                        //this will navigate to admin account page
+                                                                                                        Navigator.of(context).pushNamed(RoutesManager.adminAccount);
+                                                                                                      },
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                );
+                                                                                              },
+                                                                                            );
+                                                                                          },
+                                                                                        ),
+                                                                                        TextButton(
+                                                                                          child: const Text("Cancel"),
+                                                                                          onPressed: () {
+                                                                                            Navigator.of(context).pop(); // Close the dialog box
+                                                                                          },
+                                                                                        ),
+                                                                                      ],
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Text(
+                                                                                "Archived Account",
+                                                                                style: TextStyle(
+                                                                                  fontFamily: GoogleFonts.poppins().fontFamily,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w900,
+                                                                                  color: Colors.white,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),

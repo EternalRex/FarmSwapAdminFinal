@@ -669,8 +669,8 @@ class EditPersonalInfo extends StatelessWidget {
                                         begin: Alignment(0.99, -0.15),
                                         end: Alignment(-0.99, 0.15),
                                         colors: [
-                                          Color.fromARGB(255, 233, 43, 43),
-                                          Color.fromARGB(237, 255, 113, 18),
+                                          Color(0xFFE21B1B),
+                                          Color(0xEEFF9012),
                                         ],
                                       ),
                                       borderRadius: const BorderRadius.all(
@@ -741,7 +741,7 @@ class EditPersonalInfo extends StatelessWidget {
                                         begin: Alignment(0.99, -0.15),
                                         end: Alignment(-0.99, 0.15),
                                         colors: [
-                                          Color.fromARGB(255, 241, 173, 24),
+                                          Color(0xFFE21B1B),
                                           Color(0xEEFF9012),
                                         ],
                                       ),
@@ -832,7 +832,7 @@ class EditPersonalInfo extends StatelessWidget {
                                           );
                                         },
                                         child: Text(
-                                          "Archive Account",
+                                          "Archived Account",
                                           style: TextStyle(
                                             fontFamily: GoogleFonts.poppins()
                                                 .fontFamily,
