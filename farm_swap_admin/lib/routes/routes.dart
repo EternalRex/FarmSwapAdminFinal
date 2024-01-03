@@ -42,6 +42,7 @@ import '../karl_modules/pages/admin_account_page/screens/admin_deactivate_accoun
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/admin_requests_reactivation/admin_requests_reactivate.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/admin_specificDeactivate_Account/wrapper/SpecificAdmin_Deactivate.dart';
 import '../karl_modules/pages/admin_account_page/screens/admin_user_details/wrapper/admin_details.dart';
+import '../karl_modules/pages/admin_account_page/screens/requests_reactivation/screens/request_reactivate.dart';
 import '../karl_modules/pages/admin_notification_page/screen/admin_notification_screen.dart';
 
 class RoutesManager {
@@ -54,6 +55,7 @@ class RoutesManager {
   static const archivedaccountlists = "/archivedaccountlists";
   static const admindetailspage = "/admindetailspage";
   static const deactivateaccountpage = "/deactivateaccountpage";
+  static const requestreactivatepage = "/requestreactivatepage";
   static const specificadmindeact = "/specificadmindeact";
   static const requestreactivation = "/requestreactivation";
   static const adminactivityspage = "/adminactivityspage";
@@ -150,6 +152,11 @@ class RoutesManager {
       case deactivateaccountpage:
         return MaterialPageRoute(
           builder: (context) => const AdminDeactivateAccount(),
+        );
+
+      case requestreactivatepage:
+        return MaterialPageRoute(
+          builder: (context) => const AdminRequestReactivate(),
         );
 
       case requestreactivation:

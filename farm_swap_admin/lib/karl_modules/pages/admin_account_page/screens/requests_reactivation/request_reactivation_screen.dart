@@ -1,19 +1,19 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:farm_swap_admin/constants/Colors/colors_rollaine.dart";
-import 'package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_deactivate_account/widgets/Reactivate_DocID.dart';
+import "package:farm_swap_admin/karl_modules/pages/admin_account_page/screens/admin_user_details/drop_down_update/update_retrieve_docID.dart";
 import "package:farm_swap_admin/routes/routes.dart";
 import "package:flutter/material.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import '../../../../../../constants/typography/typography.dart';
-import "../../admin_user_details/drop_down_update/update_retrieve_docID.dart";
 
 /*This is the class for displaying the user NAME, its ways are simillar to the above class
 only that it does not use the widget word to access the document id because this class is 
 a stateless widget and that it can directly access the constructor varibales */
 // ignore: must_be_immutable
-class EditPersonalInfoDeact extends StatelessWidget {
-  EditPersonalInfoDeact({
+class RequestReactivateScreen extends StatelessWidget {
+  RequestReactivateScreen({
     super.key,
     required this.documentId,
   });
@@ -574,12 +574,10 @@ class EditPersonalInfoDeact extends StatelessWidget {
                       ],
                     ),
 
-                    //a sizedbox a way two seprate the personal info class and the sizedbox
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
 
-                    //This padding is for request reactivation account
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 15,
@@ -594,12 +592,12 @@ class EditPersonalInfoDeact extends StatelessWidget {
                               width: 230,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
-                                  begin: Alignment(0.99, -0.15),
-                                  end: Alignment(-0.99, 0.15),
                                   colors: [
-                                    Color(0xFFE21B1B),
-                                    Color(0xEEFF9012),
+                                    Color(0xFF53E78B),
+                                    Color(0xFF14BE77)
                                   ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
                                 ),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(15),
@@ -613,33 +611,26 @@ class EditPersonalInfoDeact extends StatelessWidget {
                                 ],
                               ),
                               child: Center(
-                                child: TextButton(
-                                  onPressed: () async {
-                                    // Create an instance of RetrieveReactivateDocId
-                                    RetrieveReactivateDocId retriever =
-                                        RetrieveReactivateDocId();
-
-                                    /**
-                                     * when text button clicked it will update the field into requesting
-                                     */
-                                    await retriever.updateFieldReactivate();
-
-                                    // then it will navigate to deactivate page
-                                    Navigator.of(context).pushNamed(
-                                        RoutesManager.requestreactivatepage);
-                                  },
-                                  child: Text(
-                                    "Request Reactivation",
-                                    style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.poppins().fontFamily,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w200,
-                                      color: Colors.white,
-                                    ),
+                                  child: TextButton.icon(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RoutesManager.signInPage);
+                                },
+                                icon: const Icon(
+                                  FontAwesomeIcons.signIn,
+                                  color: Colors.black,
+                                ),
+                                label: Text(
+                                  "Go back to Log In Page",
+                                  style: TextStyle(
+                                    fontFamily:
+                                        GoogleFonts.poppins().fontFamily,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black,
                                   ),
                                 ),
-                              ),
+                              )),
                             ),
                           ],
                         ),

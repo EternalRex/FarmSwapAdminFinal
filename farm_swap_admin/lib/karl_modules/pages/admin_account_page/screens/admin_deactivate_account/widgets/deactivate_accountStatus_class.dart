@@ -40,7 +40,7 @@ class DeactivateAccountStatusDisplay extends StatelessWidget {
                               horizontal: 10, vertical: 10),
                           child: Container(
                             height: 50,
-                            width: 200,
+                            width: 220,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: const BorderRadius.all(
