@@ -5,7 +5,6 @@ import 'package:farm_swap_admin/constants/typography/typography.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/Text/title_text.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserLogo/user_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_admin_account_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/user_page/widgets/UserSideMenu_btns/user_listings_btn.dart';
@@ -501,7 +500,8 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_FarmerUsers').orderBy('registrationDate', descending: true)
+          .collection('sample_FarmerUsers')
+          .orderBy('registrationDate', descending: true)
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
@@ -829,7 +829,8 @@ class _UserAccount extends State<UserAccount> {
     return StreamBuilder<QuerySnapshot>(
       //listens for changes in the collection and update the UI accordingly.
       stream: FirebaseFirestore.instance
-          .collection('sample_ConsumerUsers').orderBy('registrationDate', descending: true)
+          .collection('sample_ConsumerUsers')
+          .orderBy('registrationDate', descending: true)
           .snapshots(),
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {

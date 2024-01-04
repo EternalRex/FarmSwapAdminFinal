@@ -9,18 +9,13 @@ import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_g
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_linechart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_piechart.dart';
 import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/dashboard_selltrans.dart';
-import 'package:farm_swap_admin/karl_modules/pages/dashboard_page/widgets/dshb_graph_widgets/widget_dashboard_linegraph.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter/cupertino.dart';
 import '../../../../constants/Colors/colors.dart';
-import '../data/testData/DashboardLineGraph/price_point.dart';
-import '../data/testData/DashboardLineGraph/price_point2.dart';
-import '../data/testData/DashboardLineGraph/price_point3.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_edit_admin_profile_btn.dart';
@@ -32,9 +27,6 @@ import '../widgets/dshb_buttons_widgets/dashboard_reports_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_transactions_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_user_account_btn.dart';
 import '../widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
-import '../widgets/dshb_graph_widgets/widget_dashboard_barter_bargraph.dart';
-import '../widgets/dshb_textfield_widgets/widget_dashboard_search.dart';
-import '../widgets/dshb_graph_widgets/widget_dashboard_selling_bargraph.dart';
 import '../widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 
 // ignore: must_be_immutable
@@ -395,7 +387,6 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ],
                         ),
-
                         Row(
                           children: [
                             Expanded(
