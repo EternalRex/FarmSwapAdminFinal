@@ -6,13 +6,10 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/screens/sell
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsLogo/reports_logo.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_adminlogs_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_barter_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_chat_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_notification_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_number_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_revenue_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsRightMenu_btns/reports_selling_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_admin_account_btn.dart';
-import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_communication_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dashboard_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_dispute_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_listings_btn.dart';
@@ -23,6 +20,7 @@ import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Repo
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/ReportsSideMenu_btns/reports_wallet_btn.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/SellingContentSection/selling_content_title.dart';
 import 'package:farm_swap_admin/rollaine_modules/pages/reports_page/widgets/Text/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -35,6 +33,51 @@ class Selling extends StatefulWidget {
 }
 
 class _Selling extends State<Selling> {
+  late String currAdminId;
+  late String currAdminRole = "";
+  late String currDocId;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
+  }
+
+  Future<void> initializeData() async {
+    await getUserDocumentId();
+    await fetchUserRole();
+  }
+
+  Future<void> getUserDocumentId() async {
+    currAdminId = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot adminUsersQuery = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .where('User Id', isEqualTo: currAdminId)
+        .get();
+
+    if (adminUsersQuery.docs.isNotEmpty) {
+      currDocId = adminUsersQuery.docs[0].id;
+      await fetchUserRole();
+    } else {
+      print('No matching document found for the current user');
+    }
+  }
+
+  Future<void> fetchUserRole() async {
+    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(currDocId)
+        .get();
+
+    if (userSnapshot.exists) {
+      setState(() {
+        currAdminRole = userSnapshot['User Role'];
+      });
+      // Do other things as needed
+    }
+  }
+
   //creates an instance of TextEditingController named searchFarmerController.
   TextEditingController searchController = TextEditingController();
   //store the search query entered by the user for searching farmers.
@@ -154,7 +197,7 @@ class _Selling extends State<Selling> {
                       //Container for search bar
                       child: SizedBox(
                         width: 250,
-                        height: 15,
+                        height: 20,
                         child: TextField(
                           controller: searchController,
                           style: GoogleFonts.poppins(
@@ -327,38 +370,41 @@ class _Selling extends State<Selling> {
                 ),
 
                 //Column for the chat and notification buttons
-                child: const Column(
+                child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 150,
                     ),
 
                     //Number of users icon and label
-                    ReportsNumberOptionsBtn(),
-                    SizedBox(
+                    const ReportsNumberOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Platform icon and label
-                    ReportsRevenueOptionsBtn(),
-                    SizedBox(
+                    const ReportsRevenueOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Barter icon and label
-                    ReportsBarterOptionsBtn(),
-                    SizedBox(
+                    const ReportsBarterOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
                     //Selling icon and label
-                    ReportsSellingOptionsBtn(),
-                    SizedBox(
+                    const ReportsSellingOptionsBtn(),
+                    const SizedBox(
                       height: 25,
                     ),
 
-                    //Admin logs icon and label
-                    ReportsAdminLogsOptionsBtn(),
+                    /**if currAdminRole is true then this button 
+                     * will show but if it is false it wont show */
+                    if (currAdminRole == "superadmin")
+                      //Admin logs icon and label
+                      const ReportsAdminLogsOptionsBtn(),
                   ],
                 ),
               ),
@@ -384,7 +430,7 @@ class _Selling extends State<Selling> {
       //defines what should be displayed based on the data from the stream.
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print (snapshot.error);
+          print(snapshot.error);
         }
         //It ensures that the stream is active and data is available.
         if (snapshot.connectionState == ConnectionState.active) {
@@ -552,7 +598,7 @@ class _Selling extends State<Selling> {
                                   ),
                                 ),
                                 Text(
-                                  '₱ ${sell['listingPrice']}',
+                                  sell['listingPrice'],
                                   style: Poppins.contentText
                                       .copyWith(color: const Color(0xFF09051B)),
                                 ),
@@ -762,7 +808,7 @@ class _Selling extends State<Selling> {
                                 ),
                               ),
                               Text(
-                                '₱ ${sell['listingPrice']}',
+                                sell['listingPrice'],
                                 style: Poppins.contentText
                                     .copyWith(color: const Color(0xFF09051B)),
                               ),

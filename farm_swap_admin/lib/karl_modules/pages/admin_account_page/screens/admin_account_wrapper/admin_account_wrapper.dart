@@ -238,7 +238,7 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                                     }
                                     /*if the status is equal to deactivate it will 
                                     also pass data to the next page*/
-                                    else if (accountStatus == "Deactivate") {
+                                    else if (accountStatus == "Deactivated") {
                                       Provider.of<AdminDetailsProvider>(context,
                                               listen: false)
                                           .setadminUserId(widget.selectedId);
@@ -289,7 +289,7 @@ class _ReadAdminAccountState extends State<ReadAdminAccount> {
                                      * if the status is decline after the admin user decline the request
                                      * the admin can request again and it will navigate to deactivate page
                                      */
-                                    else if (accountStatus == "Decline") {
+                                    else if (accountStatus == "Declined") {
                                       Provider.of<AdminDetailsProvider>(context,
                                               listen: false)
                                           .setadminUserId(widget.selectedId);

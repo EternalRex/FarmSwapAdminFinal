@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import '../../../../constants/Colors/colors_rollaine.dart';
 import '../../../../karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_admin_account_btn.dart';
-import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_communications_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dashboard_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_dispute_btn.dart';
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_listings_btn.dart';
@@ -20,7 +19,7 @@ import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widge
 import '../../../../karl_modules/pages/dashboard_page/widgets/dshb_buttons_widgets/dashboard_wallet_btn.dart';
 
 class RevenueReportPage extends StatefulWidget {
-  RevenueReportPage({super.key, this.documentID});
+  const RevenueReportPage({super.key, this.documentID});
   final String? documentID;
 
   @override
@@ -532,7 +531,7 @@ class _RevenueReportPageState extends State<RevenueReportPage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.green,
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                   ),

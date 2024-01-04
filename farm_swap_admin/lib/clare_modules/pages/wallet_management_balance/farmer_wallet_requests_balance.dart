@@ -3,7 +3,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 import 'dart:typed_data';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_swap_admin/constants/Colors/colors_rollaine.dart';
@@ -18,7 +17,6 @@ import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import '../../../../../../constants/Colors/colors.dart';
 import '../../../karl_modules/pages/dashboard_page/dashboard_query/dashboard_query.dart';
 import '../../../karl_modules/pages/dashboard_page/widgets/dshb_textfield_widgets/widget_dashboard_txt.dart';
 import 'widget/wallet_farmer_retrieveDocId.dart';
@@ -322,9 +320,6 @@ class _RequestBalanceFarmerListsState extends State<RequestBalanceFarmerLists> {
     final email = FirebaseAuth.instance.currentUser!.email;
     final userId = FirebaseAuth.instance.currentUser!.uid;
 
-    /*So mag kuha ni siya sa admin logs nya mao ni descriptions*/
-    adminLogs.createAdminLogs(
-        email, userId, "Accept_Farmer_Cashout_Request", DateTime.now());
     //the searched transaction will display here
     if (searchValue.isNotEmpty) {
       // Convert search value to lowercase

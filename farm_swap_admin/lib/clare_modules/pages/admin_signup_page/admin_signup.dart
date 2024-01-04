@@ -7,6 +7,7 @@ import 'package:farm_swap_admin/constants/Colors/farmswap_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:farm_swap_admin/routes/routes.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +56,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     mycontroller.birthplace.dispose();
     mycontroller.email.dispose();
     mycontroller.password.dispose();
+    mycontroller.confirmpassword.dispose();
     mycontroller.profile.dispose();
     super.dispose();
   }
@@ -64,17 +66,34 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
   @override
   void initState() {
+    mycontroller = SignUpController(); // Initialize the controller here
     regdate.text = "";
     super.initState();
   }
 
-  bool _isPasswordVisible = true; // Initialize it as false initially.
-
+  // Initialize it as false initially.
+  bool _isPasswordVisible = true;
+  bool _isPasswordVisible1 = true;
   void _togglePasswordVisibility() {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible;
     });
   }
+
+  void _togglePasswordVisibility1() {
+    setState(() {
+      _isPasswordVisible1 = !_isPasswordVisible1;
+    });
+  }
+
+  // Define a boolean variable to track if the password field has been focused
+  bool isPasswordFocused = false;
+  bool isEmailAvailable = true;
+  bool isEmailInvalid = false;
+// Track the validity of the contact number
+  bool isContactNumberValid = true;
+  // Track if the user has inputted a contact number
+  bool hasContactNumberInput = false;
 
   @override
   Widget build(BuildContext context) {
@@ -117,90 +136,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                   SizedBox(
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        //a sizedbox for the registration date textfield
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 319,
-                            ),
-                            SizedBox(
-                              width: 300,
-                              child: TextField(
-                                controller: regdate,
-                                cursorColor: FarmSwapGreen.normalGreen,
-                                selectionHeightStyle:
-                                    BoxHeightStyle.includeLineSpacingBottom,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 30),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: "Register Date",
-                                  //border designs
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 0.50, color: Color(0xFFF4F4F4)),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 0.50,
-                                        color:
-                                            Color.fromARGB(255, 50, 202, 108)),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 0.50, color: Colors.red),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 0.50, color: Colors.red),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  prefixIcon: const Image(
-                                    image: AssetImage(
-                                      "assets/clare_assets/images/Calendar.png",
-                                    ),
-                                    height: 9,
-                                    width: 9,
-                                  ),
-                                ),
-                                readOnly: true,
-                                onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2050),
-                                  );
-
-                                  if (pickedDate != null) {
-                                    //print(pickedDate);
-                                    String formattedDate =
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(pickedDate);
-                                    //print(formattedDate);
-                                    setState(() {
-                                      regdate.text =
-                                          formattedDate; // Update the text in the controller
-                                    });
-                                  } else {
-                                    print("Date is not selected");
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
                         SizedBox(height: height * 0.024),
 
-                        //a textfield for the first name
+                        //a textfield for the first name, lastname, contact number
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -228,11 +166,62 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 width: 9,
                               ),
                             ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+
+                            Column(
+                              children: [
+                                //a texfield for the contact number
+                                FarmSwapTextField(
+                                  controller: mycontroller.contactnum,
+                                  label: mylabel.contactnumber,
+                                  isPassword: false,
+                                  prefixIcon: const Image(
+                                    image: AssetImage(
+                                      "assets/clare_assets/images/contact.png",
+                                    ),
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')), // Allow only digits
+                                    LengthLimitingTextInputFormatter(11),
+                                  ],
+                                  onChanged: (contactNumberController) {
+                                    setState(() {
+                                      hasContactNumberInput =
+                                          contactNumberController.isNotEmpty;
+                                      isContactNumberValid =
+                                          contactNumberController.length ==
+                                                  11 &&
+                                              RegExp(r'^[0-9]+$').hasMatch(
+                                                  contactNumberController);
+                                    });
+                                  },
+                                ),
+                                // Display a message based on the contact number validity and user input
+                                Text(
+                                  hasContactNumberInput
+                                      ? (isContactNumberValid
+                                          ? ''
+                                          : 'Please enter only numbers and exactly 11 digits.')
+                                      : '', // Display nothing if no user input
+                                  style: TextStyle(
+                                    color: isContactNumberValid
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //address textfield
+                        //a sizedbox for the address, birth date and birthplace
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -251,27 +240,23 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                             const SizedBox(
                               width: 40,
                             ),
-                            //a texfield for the contact number
+                            //birthplace textfield
                             FarmSwapTextField(
-                              controller: mycontroller.contactnum,
-                              label: mylabel.contactnumber,
+                              controller: mycontroller.birthplace,
+                              label: mylabel.birthplace,
                               isPassword: false,
                               prefixIcon: const Image(
                                 image: AssetImage(
-                                  "assets/clare_assets/images/contact.png",
+                                  "assets/clare_assets/images/location.png",
                                 ),
                                 height: 9,
                                 width: 9,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: height * 0.024),
 
-                        //a sizedbox for the birth date textfield
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                            const SizedBox(
+                              width: 40,
+                            ),
                             SizedBox(
                               width: 300,
                               child: TextField(
@@ -360,97 +345,152 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 },
                               ),
                             ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            //birthplace textfield
-                            FarmSwapTextField(
-                              controller: mycontroller.birthplace,
-                              label: mylabel.birthplace,
-                              isPassword: false,
-                              prefixIcon: const Image(
-                                image: AssetImage(
-                                  "assets/clare_assets/images/location.png",
-                                ),
-                                height: 9,
-                                width: 9,
-                              ),
-                            ),
                           ],
                         ),
                         SizedBox(height: height * 0.024),
 
-                        //a textfield for the email
+                        //a textfield for the email, pass and confirm pass
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            FarmSwapTextField(
-                              controller: mycontroller.email,
-                              label: mylabel.email,
-                              isPassword: false,
-                              prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Message.svg",
-                                height: 9,
-                                width: 9,
-                              ),
+                            Column(
+                              children: [
+                                FarmSwapTextField(
+                                  controller: mycontroller.email,
+                                  label: mylabel.email,
+                                  isPassword: false,
+                                  prefixIcon: SvgPicture.asset(
+                                    "assets/clare_assets/svg/Message.svg",
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  onChanged: (email) async {
+                                    setState(() {
+                                      isEmailAvailable = false;
+                                      isEmailInvalid = email.isNotEmpty
+                                          ? !isValidEmail(email)
+                                          : false;
+                                    });
+
+                                    // Call the function to check email availability
+                                    bool isAvailable =
+                                        await checkEmailExistsField(email);
+
+                                    // Update the UI based on the availability status
+                                    setState(() {
+                                      isEmailAvailable = isAvailable;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  isEmailInvalid
+                                      ? 'Invalid email format. \nPlease enter a valid email address.'
+                                      : (isEmailAvailable
+                                          ? ''
+                                          : 'Email already exists!'),
+                                  style: TextStyle(
+                                    color: isEmailInvalid
+                                        ? Colors.red
+                                        : (isEmailAvailable
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               width: 40,
                             ),
-                            //a textfield for the password
-                            FarmSwapTextField(
-                              controller: mycontroller.password,
-                              label: mylabel.password,
-                              isPassword: _isPasswordVisible,
-                              prefixIcon: SvgPicture.asset(
-                                "assets/clare_assets/svg/Lock.svg",
-                                height: 9,
-                                width: 9,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isPasswordVisible
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: const Color.fromARGB(255, 46, 184, 76),
+                            Column(
+                              children: [
+                                //a textfield for the password
+                                FarmSwapTextField(
+                                  controller: mycontroller.password,
+                                  label: mylabel.password,
+                                  isPassword: _isPasswordVisible,
+                                  prefixIcon: SvgPicture.asset(
+                                    "assets/clare_assets/svg/Lock.svg",
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: const Color.fromARGB(
+                                          255, 46, 184, 76),
+                                    ),
+                                    onPressed: _togglePasswordVisibility,
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // Set the flag to true when the user types
+                                      isPasswordFocused = true;
+                                    });
+                                  },
                                 ),
-                                onPressed: _togglePasswordVisibility,
-                              ),
+                                // Display error message below the password field only if it has been focused and password is not empty
+                                if (isPasswordFocused &&
+                                    mycontroller.password.text.isNotEmpty)
+                                  Text(
+                                    !isPasswordValid(mycontroller.password.text)
+                                        ? "Password is weak! password must contain at least  \none number, one letter, and one special character."
+                                        : "",
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                              ],
                             ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            Column(
+                              children: [
+                                //a textfield for the confirm password
+                                FarmSwapTextField(
+                                  controller: mycontroller.confirmpassword,
+                                  label: const Text("Confirm password"),
+                                  isPassword: _isPasswordVisible1,
+                                  prefixIcon: SvgPicture.asset(
+                                    "assets/clare_assets/svg/Lock.svg",
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible1
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: const Color.fromARGB(
+                                          255, 46, 184, 76),
+                                    ),
+                                    onPressed: _togglePasswordVisibility1,
+                                  ),
+                                  onChanged: (value) {
+                                    setState(
+                                        () {}); // Trigger a rebuild when the user types
+                                  },
+                                ),
+                                // Display error message below the confirm password field
+                                Text(
+                                  !doPasswordsMatch(mycontroller.password.text,
+                                          mycontroller.confirmpassword.text)
+                                      ? "Your password and confirm password must match."
+                                      : "",
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                        SizedBox(height: height * 0.024),
-
-                        //tick the checkbox for the terms and condition
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 470.0,
-                          ),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                checkColor: Colors.white,
-                                value: isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
-                                activeColor: Colors.green,
-                              ),
-                              Opacity(
-                                opacity: 0.50,
-                                child: signupTermsConditionFont(),
-                              ),
-                            ],
-                          ),
-                        ),
-
                         const SizedBox(
-                          height: 30,
+                          height: 40,
                         ),
                       ],
                     ),
@@ -474,7 +514,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                           // ignore: sized_box_for_whitespace
                           Container(
                             height: 50,
-                            width: 141,
+                            width: 145,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 colors: [Color(0xFF53E78B), Color(0xFF14BE77)],
@@ -495,9 +535,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                             child: Center(
                               child: TextButton(
                                 onPressed: () {
+                                  // Call the register function when the button is pressed
                                   register();
-                                  //Navigator.of(context).pushNamed(
-                                  // RoutesManager.adminUploadPhoto);
                                 },
                                 child: Text(
                                   "Create Account",
@@ -533,6 +572,61 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     );
   }
 
+  bool isValidEmail(String email) {
+    // Use a regular expression to check if the email is in the correct format
+    final emailRegExp = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegExp.hasMatch(email);
+  }
+
+  // Validate password function
+  bool isPasswordValid(String password) {
+    String pattern = r'^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(password);
+  }
+
+  // Validate password match function
+  bool doPasswordsMatch(String password, String confirmPassword) {
+    return password == confirmPassword;
+  }
+
+  // Validate form function
+  bool isFormValid(String password, String confirmPassword) {
+    bool isValidPassword = isPasswordValid(password);
+    bool passwordsMatch = doPasswordsMatch(password, confirmPassword);
+    return isValidPassword && passwordsMatch;
+  }
+
+  //this function will validate the inputted password
+  bool validateForm() {
+    String password = mycontroller.password.text;
+    String confirmPassword = mycontroller.confirmpassword.text;
+
+    if (!isFormValid(password, confirmPassword)) {
+      // Form is not valid, show an error message or take appropriate action
+      if (!isPasswordValid(password)) {
+        print(
+            "Password must contain at least one number, one letter, and one special character.");
+      }
+      if (password.length < 8) {
+        // Password is too short, print an error message or show a SnackBar
+        print("Password must be at least 8 characters long.");
+      }
+
+      if (!doPasswordsMatch(password, confirmPassword)) {
+        print("Passwords do not match.");
+      }
+
+      return false;
+    } else {
+      // Form is valid, proceed with your logic
+      print("Password match");
+      return true;
+    }
+  }
+
   // Function to check if the user is below 18 years old
   bool isBelow18(DateTime birthdate) {
     DateTime currentDate = DateTime.now();
@@ -547,10 +641,12 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
 
   //when register is called it uploads the image url
   void register() async {
+    // Set the flag to indicate that registration is in progress
+
     String email = mycontroller.email.text.trim();
     String password = mycontroller.password.text;
+    String confirmpass = mycontroller.confirmpassword.text;
     String contactNumber = mycontroller.contactnum.text.trim();
-    String registerDate = regdate.text.trim();
     String firstName = mycontroller.fname.text.trim();
     String lastName = mycontroller.lname.text.trim();
     String address = mycontroller.address.text.trim();
@@ -561,7 +657,6 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     if (email.isEmpty ||
         password.isEmpty ||
         contactNumber.isEmpty ||
-        registerDate.isEmpty ||
         firstName.isEmpty ||
         lastName.isEmpty ||
         address.isEmpty ||
@@ -579,11 +674,20 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     }
 
     // Check if the contact number has exactly 11 digits
-    if (contactNumber.length != 11) {
+    if (mycontroller.contactnum.text.length != 11) {
       // Display a text indicating that the contact number should have 11 digits
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Contact number should have exactly 11 digits.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return; // Exit the function to prevent further processing
+    } else if (!isContactNumberValid && hasContactNumberInput) {
+      // Display a text indicating that the contact number should contain only numbers
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Contact number should contain only numbers.'),
           backgroundColor: Colors.red,
         ),
       );
@@ -620,28 +724,62 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
         return; // Exit the function to prevent further processing
       }
 
-      User? user = await adminAuth.signUpWithEmailAndPassword(
-        email,
-        password,
-      );
-      user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        String uid = user.uid;
+      if (doPasswordsMatch(password, confirmpass)) {
+        User? user = await adminAuth.signUpWithEmailAndPassword(
+          email,
+          password,
+        );
+        user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          String uid = user.uid;
+          // Show loading dialog
+          // ignore: use_build_context_synchronously
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const AlertDialog(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 8),
+                    Text("Creating account..."),
+                  ],
+                ),
+              );
+            },
+          );
 
-        // Store the User UID in Firestore
-        // await uploadImage(uid);
-        await storeUidInFirestore(uid);
+          // Store the User UID in Firestore
+          // await uploadImage(uid);
+          await storeUidInFirestore(uid);
 
-        /*So mag kuha ni siya sa admin logs nya iyang description kay ni create account */
-        adminLogs.createAdminLogs(email, FirebaseAuth.instance.currentUser!.uid,
-            "Create_Account", DateTime.now());
+          /*So mag kuha ni siya sa admin logs nya iyang description kay ni create account */
+          adminLogs.createAdminLogs(
+              email,
+              FirebaseAuth.instance.currentUser!.uid,
+              "Create_Account",
+              DateTime.now());
 
-        print("User is successfully created");
-        Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
+          print("User is successfully created");
+
+          // Close the loading dialog
+          Navigator.of(context, rootNavigator: true).pop();
+
+          Navigator.of(context).pushNamed(RoutesManager.adminUploadPhoto);
+        }
+      } else if (!doPasswordsMatch(password, confirmpass)) {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please check your password!'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } catch (e) {
       print("Some error happened");
-    }
+    } finally {}
   }
 
   Future<bool> checkEmailExists(String email) async {
@@ -657,6 +795,24 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
     return querySnapshot.docs.isNotEmpty;
   }
 
+  //this will check if the email exists, this is case sensitive
+  Future<bool> checkEmailExistsField(
+    String email,
+  ) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('AdminUsers')
+          .where('Email Address', isEqualTo: email)
+          .get();
+
+      return querySnapshot.docs.isEmpty;
+    } catch (e) {
+      // Handle errors, e.g., connection issues, etc.
+      print('Error checking email availability: $e');
+      return false;
+    }
+  }
+
   /// This function stores the UID as a field in that document.
   Future<void> storeUidInFirestore(String uid) async {
     try {
@@ -664,8 +820,7 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
       String status = mycontroller.accountstatus.text;
       String profile = mycontroller.profile.text;
       String role = mycontroller.role.text;
-      String register = regdate.text;
-      DateTime registerdate = DateTime.parse(register);
+      DateTime registerdate = DateTime.now();
 
       String fname = mycontroller.fname.text;
       String lname = mycontroller.lname.text;
