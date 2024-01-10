@@ -155,6 +155,78 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                             const SizedBox(
                               width: 40,
                             ),
+                            //address
+                            FarmSwapTextField(
+                              controller: mycontroller.address,
+                              label: mylabel.address,
+                              isPassword: false,
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/location.png",
+                                ),
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              width: 40,
+                            ),
+
+                            //email
+                            Column(
+                              children: [
+                                FarmSwapTextField(
+                                  controller: mycontroller.email,
+                                  label: mylabel.email,
+                                  isPassword: false,
+                                  prefixIcon: SvgPicture.asset(
+                                    "assets/clare_assets/svg/Message.svg",
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  onChanged: (email) async {
+                                    setState(() {
+                                      isEmailAvailable = false;
+                                      isEmailInvalid = email.isNotEmpty
+                                          ? !isValidEmail(email)
+                                          : false;
+                                    });
+
+                                    // Call the function to check email availability
+                                    bool isAvailable =
+                                        await checkEmailExistsField(email);
+
+                                    // Update the UI based on the availability status
+                                    setState(() {
+                                      isEmailAvailable = isAvailable;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  isEmailInvalid
+                                      ? 'Invalid email format. \nPlease enter a valid email address.'
+                                      : (isEmailAvailable
+                                          ? ''
+                                          : 'Email already exists!'),
+                                  style: TextStyle(
+                                    color: isEmailInvalid
+                                        ? Colors.red
+                                        : (isEmailAvailable
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height * 0.024),
+
+                        //a sizedbox for the address, birth date and birthplace
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             //a textfield for the last name
                             FarmSwapTextField(
                               controller: mycontroller.lname,
@@ -166,10 +238,79 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 width: 9,
                               ),
                             ),
+
                             const SizedBox(
                               width: 40,
                             ),
+                            //birthplace textfield
+                            FarmSwapTextField(
+                              controller: mycontroller.birthplace,
+                              label: mylabel.birthplace,
+                              isPassword: false,
+                              prefixIcon: const Image(
+                                image: AssetImage(
+                                  "assets/clare_assets/images/location.png",
+                                ),
+                                height: 9,
+                                width: 9,
+                              ),
+                            ),
 
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            //password
+                            Column(
+                              children: [
+                                //a textfield for the password
+                                FarmSwapTextField(
+                                  controller: mycontroller.password,
+                                  label: mylabel.password,
+                                  isPassword: _isPasswordVisible,
+                                  prefixIcon: SvgPicture.asset(
+                                    "assets/clare_assets/svg/Lock.svg",
+                                    height: 9,
+                                    width: 9,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: const Color.fromARGB(
+                                          255, 46, 184, 76),
+                                    ),
+                                    onPressed: _togglePasswordVisibility,
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // Set the flag to true when the user types
+                                      isPasswordFocused = true;
+                                    });
+                                  },
+                                ),
+                                // Display error message below the password field only if it has been focused and password is not empty
+                                if (isPasswordFocused &&
+                                    mycontroller.password.text.isNotEmpty)
+                                  Text(
+                                    !isPasswordValid(mycontroller.password.text)
+                                        ? "Password is weak! password must contain at least  \none number, one letter, and one special character."
+                                        : "",
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: height * 0.024),
+
+                        //a textfield for the email, pass and confirm pass
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             Column(
                               children: [
                                 //a texfield for the contact number
@@ -217,46 +358,11 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        SizedBox(height: height * 0.024),
-
-                        //a sizedbox for the address, birth date and birthplace
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FarmSwapTextField(
-                              controller: mycontroller.address,
-                              label: mylabel.address,
-                              isPassword: false,
-                              prefixIcon: const Image(
-                                image: AssetImage(
-                                  "assets/clare_assets/images/location.png",
-                                ),
-                                height: 9,
-                                width: 9,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            //birthplace textfield
-                            FarmSwapTextField(
-                              controller: mycontroller.birthplace,
-                              label: mylabel.birthplace,
-                              isPassword: false,
-                              prefixIcon: const Image(
-                                image: AssetImage(
-                                  "assets/clare_assets/images/location.png",
-                                ),
-                                height: 9,
-                                width: 9,
-                              ),
-                            ),
 
                             const SizedBox(
                               width: 40,
                             ),
+                            //birthdate field
                             SizedBox(
                               width: 300,
                               child: TextField(
@@ -345,108 +451,11 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen> {
                                 },
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: height * 0.024),
 
-                        //a textfield for the email, pass and confirm pass
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                FarmSwapTextField(
-                                  controller: mycontroller.email,
-                                  label: mylabel.email,
-                                  isPassword: false,
-                                  prefixIcon: SvgPicture.asset(
-                                    "assets/clare_assets/svg/Message.svg",
-                                    height: 9,
-                                    width: 9,
-                                  ),
-                                  onChanged: (email) async {
-                                    setState(() {
-                                      isEmailAvailable = false;
-                                      isEmailInvalid = email.isNotEmpty
-                                          ? !isValidEmail(email)
-                                          : false;
-                                    });
-
-                                    // Call the function to check email availability
-                                    bool isAvailable =
-                                        await checkEmailExistsField(email);
-
-                                    // Update the UI based on the availability status
-                                    setState(() {
-                                      isEmailAvailable = isAvailable;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  isEmailInvalid
-                                      ? 'Invalid email format. \nPlease enter a valid email address.'
-                                      : (isEmailAvailable
-                                          ? ''
-                                          : 'Email already exists!'),
-                                  style: TextStyle(
-                                    color: isEmailInvalid
-                                        ? Colors.red
-                                        : (isEmailAvailable
-                                            ? Colors.green
-                                            : Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
                             const SizedBox(
                               width: 40,
                             ),
-                            Column(
-                              children: [
-                                //a textfield for the password
-                                FarmSwapTextField(
-                                  controller: mycontroller.password,
-                                  label: mylabel.password,
-                                  isPassword: _isPasswordVisible,
-                                  prefixIcon: SvgPicture.asset(
-                                    "assets/clare_assets/svg/Lock.svg",
-                                    height: 9,
-                                    width: 9,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _isPasswordVisible
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: const Color.fromARGB(
-                                          255, 46, 184, 76),
-                                    ),
-                                    onPressed: _togglePasswordVisibility,
-                                  ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      // Set the flag to true when the user types
-                                      isPasswordFocused = true;
-                                    });
-                                  },
-                                ),
-                                // Display error message below the password field only if it has been focused and password is not empty
-                                if (isPasswordFocused &&
-                                    mycontroller.password.text.isNotEmpty)
-                                  Text(
-                                    !isPasswordValid(mycontroller.password.text)
-                                        ? "Password is weak! password must contain at least  \none number, one letter, and one special character."
-                                        : "",
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 40,
-                            ),
+                            //confirm password
                             Column(
                               children: [
                                 //a textfield for the confirm password

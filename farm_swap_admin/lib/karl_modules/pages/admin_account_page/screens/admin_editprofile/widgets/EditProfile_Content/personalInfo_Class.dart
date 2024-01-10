@@ -724,7 +724,7 @@ class EditPersonalInfo extends StatelessWidget {
                           ),
                           const SizedBox(width: 5),
                           //archived account button
-                          Padding(
+                          /**Padding(
                             padding: const EdgeInsets.only(
                               bottom: 15,
                             ),
@@ -832,7 +832,7 @@ class EditPersonalInfo extends StatelessWidget {
                                           );
                                         },
                                         child: Text(
-                                          "Archived Account",
+                                          "Archive Account",
                                           style: TextStyle(
                                             fontFamily: GoogleFonts.poppins()
                                                 .fontFamily,
@@ -848,6 +848,7 @@ class EditPersonalInfo extends StatelessWidget {
                               ),
                             ),
                           ),
+                         */
                         ],
                       ),
                     ),

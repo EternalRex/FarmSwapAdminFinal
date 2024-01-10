@@ -33,7 +33,7 @@ class RetrieveDeactivateDocId {
 
     // Update a field in the Firestore document using the retrieved document ID
     await db.collection('AdminUsers').doc(docId).update({
-      'Account Status': 'Deactivate',
+      'Account Status': 'Deactivated',
       // Add more fields to update as needed
     });
   }
