@@ -65,10 +65,10 @@ class DeactivateAccountStatusDisplay extends StatelessWidget {
                                         .copyWith(color: blackNormal),
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    width: 10,
                                   ),
                                   Text(
-                                    " ${data["Account Status"]}",
+                                    "${data["Account Status"]}",
                                     style: Poppins.farmerName.copyWith(
                                       color: const Color(0xFFFF9800),
                                     ),
