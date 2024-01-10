@@ -274,7 +274,7 @@ class _DetailsCustomerPageState extends State<DetailsCustomerPage> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 175,
+                      height: 250,
                     ),
 
                     //Archive button

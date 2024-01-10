@@ -61,10 +61,10 @@ class _RevenueLineChartState extends State<RevenueLineChart> {
             DropdownButton<int>(
               value: selectedYear,
               items: List.generate(
-                3, // You can customize the range of years displayed in the dropdown
+                5, // You can customize the range of years displayed in the dropdown
                 (index) => DropdownMenuItem<int>(
-                  value: DateTime.now().year - index,
-                  child: Text((DateTime.now().year + index).toString()),
+                  value: DateTime.now().year - 2 + index,
+                  child: Text((DateTime.now().year - 2 + index).toString()),
                 ),
               ),
               onChanged: (value) {
